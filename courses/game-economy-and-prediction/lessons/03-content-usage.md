@@ -4,6 +4,7 @@ course: gd-econ
 title: Telemetry shows where design effort goes unused
 order: 3
 status: draft
+checked: 2026-11-16
 sources:
   - cite: "Hullett, Nagappan, Schuh, Hopson (2012). Empirical analysis of user data in game software development. ESEM 2012, ACM-IEEE International Symposium on Empirical Software Engineering and Measurement. DOI 10.1145/2372251.2372265."
     url: https://doi.org/10.1145/2372251.2372265
@@ -27,13 +28,13 @@ Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. [Microsoft r
 
 ## The idea
 
-Players use a small part of what a game ships, and only telemetry tells you which part. Designers' guesses about use are not a substitute.
+In Project Gotham Racing 4, players used a small part of what shipped. The authors argue that collecting usage data over the long term is the only workable way to see which part.
 
-[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012). Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles. The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer and in career mode.
+[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012). Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles. The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer. On career mode the paper's figures point two ways. Within single-player races, regular players chose it more often (59.9% against 47.5%), and in their first ten races too (36.5% against 22.2%). Across all races it was 36.6% of regular players' races and 47.0% of infrequent players', although the paper's text says regular players favour career mode "both overall and in the first ten races".
 
 From this they recommend [fewer options in future games](https://doi.org/10.1145/2372251.2372265), since each car costs modelling, texturing, tuning and testing. They also argue against themselves: rarely used content can extend a game's life, lead to play nobody planned, and sell the game ("more than 100 vehicles" on the box). So they suggest a cut of about 20%, not a purge. That trade-off is their judgment; the paper did not test what players would lose.
 
-Two limits to keep. Telemetry shows what players did, not why: a car nobody picks may be slow, ugly, hard to unlock or buried in a menu. And the career-mode result is a correlation. The authors recommend steering new players into career mode because regular players used it more, but players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
+Two limits to keep, both my reasoning (grade C) and not the paper's. Telemetry shows what players did, not why: a car nobody picks may be slow, ugly, hard to unlock or buried in a menu. And the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more, but players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
 
 ## Why
 
@@ -54,7 +55,7 @@ You are planning the next content drop for a live mobile strategy game. The data
 
 <details>
 <summary>Explained answer</summary>
-Both, if you can, because they answer different questions. Unlock without use tells you players get the unit but don't choose it, which points at balance or appeal. Low unlocks point at the path to the unit. With only use logged, a rarely used unit could be either, which is the same gap in the Project Gotham Racing 4 study: the analysis used what players picked, not what they could pick. Decide what question you will ask of the data before you log it. That last point is common practice in game analytics, not a finding from this study, grade C.
+Both, if you can, because they answer different questions. Unlock without use tells you players get the unit but don't choose it, which points at balance or appeal. Low unlocks point at the path to the unit. With only use logged, a rarely used unit could be either, which is the same gap in the Project Gotham Racing 4 study: the fields the paper lists record what players picked, not what each player had unlocked. Decide what question you will ask of the data before you log it. That last point is common practice in game analytics, not a finding from this study, grade C.
 </details>
 
 ## Recall
@@ -89,5 +90,5 @@ Why players did or didn't use something: whether the content was unappealing, ha
 ## Sources and grades
 
 - [Hullett et al. 2012, ESEM](https://doi.org/10.1145/2372251.2372265), full text read from the authors' camera-ready copy hosted by Microsoft Research (the ACM page blocked automated access). Grade A, tier 1 (peer-reviewed). Every figure in this lesson was checked against that text.
-- The earlier version of this lesson took its figures from a SlideShare deck, which had different thresholds (0.5% and 0.25%). Those figures are cut; the paper's 1% figures replace them.
-- This lesson rests on one game, one team's study and players who opted in to telemetry. Published evidence on content usage in other games is thin; most studios keep these numbers private.
+- The earlier version of this lesson took its figures from a SlideShare deck. They are replaced with figures from the paper itself.
+- This lesson rests on one game, one team's study and players who opted in to telemetry. I found little published evidence on content usage in other games (my search, grade C).
