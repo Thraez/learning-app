@@ -25,6 +25,8 @@ export interface Source {
   cite: string;
   url?: string;
   grade?: string;
+  /** Credibility tier: 1 peer-reviewed, 2 preprint or report, 3 studio's own data report. */
+  tier: 1 | 2 | 3;
   note?: string;
 }
 
