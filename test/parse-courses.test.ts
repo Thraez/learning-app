@@ -110,4 +110,18 @@ describe('format errors fail the build', () => {
     expect(build(withSource('    tier: 4\n'))).toThrow(/tier/);
     expect(build(withSource('    tier: 1\n'))()).toBeTruthy();
   });
+  it('rejects a source without an https link', () => {
+    const withUrl = (urlLine: string) =>
+      `---\nid: t/a\ncourse: t\ntitle: A\norder: 1\nsources:\n  - cite: "X"\n${urlLine}    grade: A\n    tier: 1\n---\n## Recall\n`;
+    expect(build(withUrl(''))).toThrow(/https link/);
+    expect(build(withUrl('    url: http://example.org/x\n'))).toThrow(/https link/);
+    expect(build(withUrl('    url: doi.org/10.1/x\n'))).toThrow(/https link/);
+    expect(build(withUrl('    url: https://doi.org/10.1/x\n'))().courses[0].lessons[0].sources[0].url).toBe('https://doi.org/10.1/x');
+  });
+  it('reads a checked date and rejects a malformed one', () => {
+    const withChecked = (line: string) => `---\nid: t/a\ncourse: t\ntitle: A\norder: 1\n${line}---\n## Recall\n`;
+    expect(build(withChecked(''))().courses[0].lessons[0].checked).toBeUndefined();
+    expect(build(withChecked('checked: 2026-11-16\n'))().courses[0].lessons[0].checked).toBe('2026-11-16');
+    expect(build(withChecked('checked: yes\n'))).toThrow(/checked/);
+  });
 });

@@ -25,7 +25,9 @@ The app is a static phone web app (PWA) in this repo, hosted on GitHub Pages fro
      traced source.
    - **C**: Claude's inference, no direct study.
    Say plainly where the evidence is thin. Much game industry practice is unpublished; mark it as such instead of
-   filling the gap. Never invent a number.
+   filling the gap. Never invent a number. Write only what the text you opened says: a claim that needs the full text
+   when only the abstract was read is cut or worded as unverified. A grade is the writer's claim until the lesson has
+   passed the check in "Checking a lesson" below.
 4. **Only credible sources, linked at the claim** (the user's standard, 2026-11-16; decision 8 in the purpose note).
    The user's words: "I'm not learning some bullshit." Every source also gets a credibility tier, separate from the
    read grade above:
@@ -40,7 +42,9 @@ The app is a static phone web app (PWA) in this repo, hosted on GitHub Pages fro
    third-party mirror. Open the source before citing it; the PDF text beats a search summary. A number a paper states
    without its own data or reference gets grade B and says so. Where credible evidence is thin or mixed, the lesson
    says so in plain words. Each lesson opens on a real case or puzzle from a credible source, and scenarios name real
-   games where the source does.
+   games where the source does. Every source in the front matter has an `https` link in `url`; the build fails
+   without one. A number is checked against the paper's tables as well as its text; where the two disagree, the
+   lesson gives the paper's stated figure and says what the table implies.
 5. **Stable item IDs.** Every quiz item, opening question, "why" prompt, scenario and recall question has an ID of the
    form `<course-id>/<lesson-slug>/<item>` (for example `gd-econ/endowment/r2`). IDs never depend on lesson order,
    are never reused, and are never renumbered. A revision may add, retire or edit items; a retired ID stays retired.
@@ -48,6 +52,35 @@ The app is a static phone web app (PWA) in this repo, hosted on GitHub Pages fro
    `retired`). Change the version on every revision and log what changed in the course page.
 7. **Phone-readable Markdown.** Answers sit in `<details>` blocks. Inside a block, write plain sentences only (no
    lists, bold or tables), and put no blank lines inside the block, since Obsidian ends an HTML block at a blank line.
+
+## Checking a lesson
+
+Adopted 2026-11-16 after a pilot on lessons 02 and 05, where a fresh reader found seven wording and attribution
+errors that the writer's own source pass had missed. The steps, in order:
+
+1. **The writer and the checker are never the same context.** Whoever wrote or fixed a lesson cannot verify it, since
+   they read the source with the claim already in mind. A fresh checker opens every linked source and checks every
+   factual claim against the text. This is the one case where a worker is spawned to verify another's work.
+2. **A claim ledger per lesson**, at `courses/<course-folder>/ledgers/NN-<slug>.md`, next to `lessons/`. It opens
+   with a line saying how far each source was read (full text, abstract, which copy), then one table row per factual
+   claim: the section or item ID, the claim in a few words, where in the source, a verdict and a note. Rows are keyed
+   by section or item ID and never by line number, because line numbers go stale on the first edit. The verdicts are
+   `matches`, `differs`, `not in source`, `could not open` and `inference` (the lesson's own grade C reasoning,
+   labelled as such in the lesson).
+3. **"Could not open" blocks a pass.** The claim is cut, reworded to what a readable text supports, or the user opens
+   the paper and pastes the passage. A source read only at its abstract supports only what the abstract says.
+4. **Numbers are checked against tables.** Where a paper gives a coefficient and a standard error, the checker redoes
+   the arithmetic and says so in the note.
+5. **Fixes are rechecked.** Whoever fixes a lesson opens the source for each fix, and the rows it touched are checked
+   again by a context that did not make the fix.
+6. **The orchestrator samples each report** against the sources before accepting it: a few `matches` rows, every
+   finding it acts on, and one number redone from a table where the lesson has one.
+7. **A lesson shows its check state.** When every row is `matches` or `inference`, the lesson's front matter gets
+   `checked: YYYY-MM-DD`. A later edit to a factual sentence removes `checked` until its rows are rechecked. An edit
+   to wording that carries no claim leaves it.
+
+A ledger quotes papers, so it follows rule 1 like every other file: rewrite a range such as "5 to 9" in words.
+Not built: a dead-link check on pull requests. The build checks that a link is present and `https`, not that it opens.
 
 ## Folder layout
 
@@ -59,7 +92,8 @@ The app is a static phone web app (PWA) in this repo, hosted on GitHub Pages fro
 | `courses/<course-folder>/course.md` | one-page course draft: direction, questions, concept map, lesson list, sources, change log |
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
-| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `export.ts` |
+| `courses/<course-folder>/ledgers/NN-<slug>.md` | the claim ledger for the lesson of the same name; the app does not read it |
+| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `export.ts`, `restore.ts` |
 | `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
 | `src/sw-template.js` | service worker; the build fills in the file list |
 | `test/` | parser tests against the real course files, scheduler and export tests |
@@ -75,14 +109,16 @@ minutes; the phone picks it up the next time the app is opened online and shows 
 
 The parser reads every `courses/*/course.md`, `placement-quiz.md` and `lessons/*.md` at build time, so a new lesson
 needs no app change. It fails the build, with the file and the reason, on a broken item heading, an unknown type, an ID
-outside its lesson, a duplicate ID, a missing `<details>` answer, or an answer block with no item heading. Run
+outside its lesson, a duplicate ID, a missing `<details>` answer, an answer block with no item heading, a source
+without a tier or an `https` link, or a `checked` value that is not a date. Run
 `npm test` before committing course files. Placement answers end with "Lesson N." so the app can map each item to a
 lesson; the test checks that every placement item does. The app keys every stored answer by item ID, which is why rule
-4 matters: a renamed ID splits an item's history in two.
+5 matters: a renamed ID splits an item's history in two.
 
 ## Lesson file format
 
-Front matter: `id`, `course`, `title`, `order`, `status`, `sources` (each with `cite`, `url`, `grade`, `tier`; `tier` is 1, 2 or 3 and the build fails without it, and `note` is optional).
+Front matter: `id`, `course`, `title`, `order`, `status`, `sources` (each with `cite`, `url`, `grade`, `tier`; `tier` is 1, 2 or 3, `url` is an `https` link, the build fails without either, and `note` is optional), and
+`checked` (a date, present only once the lesson has passed "Checking a lesson").
 Then one `## ` heading per section, in this order: `Opening question`, `The idea`, `Why`, `Scenario`, `Recall`,
 `Sources and grades`. Each answerable item starts with a `### ` heading of the form `### <id> · <type>`, where type is
 `open`, `why`, `scenario` or `recall`, followed by the prompt and a `<details>` answer. The future app parses these

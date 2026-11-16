@@ -1,11 +1,11 @@
 // Builds the export file. The schema is documented in docs/export-schema.md; change both together
 // and raise EXPORT_SCHEMA_VERSION on any change that breaks a reader.
 
-import type { Attempt, Session } from './store';
+import type { Assignments, Attempt, Session, Settings } from './store';
 import type { CourseData } from './types';
 import { computeSchedules, stateName } from './scheduler';
 
-export const EXPORT_SCHEMA_VERSION = 1;
+export const EXPORT_SCHEMA_VERSION = 2;
 
 export function buildExport(
   data: CourseData,
@@ -13,6 +13,8 @@ export function buildExport(
   sessions: readonly Session[],
   appBuild: string,
   now = new Date(),
+  assignments: Assignments = {},
+  settings: Settings | null = null,
 ) {
   const known = new Map<string, { courseId: string; parentId: string; type: string }>();
   for (const c of data.courses) {
@@ -64,7 +66,9 @@ export function buildExport(
           text: a.text,
           confidence: a.confidence,
           mark: a.mark,
+          exposure: a.exposure ?? 'answered',
           variant: a.variant,
+          variants: a.variants ?? {},
           appBuild: a.appBuild,
         })),
       };
@@ -82,7 +86,11 @@ export function buildExport(
       lessons: c.lessons.map((l) => ({ lessonId: l.id, order: l.order, status: l.status, itemIds: l.itemIds })),
       placement: c.placement ? { placementId: c.placement.id, itemIds: c.placement.itemIds } : null,
     })),
-    sessions: [...sessions].sort((a, b) => a.startedAt.localeCompare(b.startedAt)),
+    sessions: sessions
+      .map((s) => ({ ...s, variants: s.variants ?? {}, appeal: s.appeal ?? null, appealAt: s.appealAt ?? null }))
+      .sort((a, b) => a.startedAt.localeCompare(b.startedAt)),
+    assignments,
+    settings,
     items,
   };
 }
