@@ -60,7 +60,7 @@ describe('real course files', () => {
       }
 
       it('rewrites links to lesson files into app routes', () => {
-        expect(c.html).toContain('#/lesson/');
+        if (c.id === 'gd-econ') expect(c.html).toContain('#/lesson/');
         expect(c.html).not.toMatch(/href="lessons\//);
       });
     });

@@ -7,7 +7,7 @@ import courseData from 'virtual:courses';
 import type { Course, Item, Lesson, Placement, Block } from './types';
 import {
   addAttempt, addSession, endSession, getAttempts, getSessions, newId, nowIso, requestPersistence,
-  VARIANT, type Confidence, type Mark, type Mode, type SessionKind,
+  VARIANT, type Attempt, type Confidence, type Mark, type Mode, type SessionKind,
 } from './store';
 import { computeSchedules, courseProgress, dueItems, nextDue, LATE_DAYS } from './scheduler';
 import { buildExport, deliverExport, downloadExport, exportFileName } from './export';
@@ -170,6 +170,17 @@ function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (
   return card;
 }
 
+/** An item already marked earlier in an unfinished session, shown as answered. */
+function answeredCard(item: Item, a: Attempt): HTMLElement {
+  const card = el('section', { class: `item item-${item.type}` });
+  card.append(el('div', { class: 'item-kind' }, esc(TYPE_LABEL[item.type])));
+  card.append(el('div', { class: 'prompt' }, item.promptHtml));
+  if (a.text) card.append(el('p', { class: 'muted' }, `You wrote: ${esc(a.text)}`));
+  card.append(el('div', { class: 'answer' }, `<div class="answer-label">${esc(item.answerLabel)}</div>${item.answerHtml}`));
+  card.append(el('div', { class: `marked marked-${a.mark}` }, `Marked ${a.mark}.`));
+  return card;
+}
+
 // ---------- screens ----------
 
 function home() {
@@ -240,6 +251,26 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
   const marks = new Map<string, { mark: Mark }>();
   let i = 0;
 
+  // Resume an unfinished session for this lesson (the phone may have reloaded the app mid-lesson),
+  // so marked items are not asked, and logged, a second time.
+  const open = getSessions().filter((s) => s.kind === kind && s.targetId === target.id && !s.endedAt).pop();
+  const prior = new Map<string, Attempt>();
+  if (open) {
+    run.sessionId = open.sessionId;
+    const retried = new Set<string>();
+    for (const a of getAttempts()) {
+      if (a.sessionId !== open.sessionId) continue;
+      if (a.mode === mode) prior.set(a.itemId, a);
+      if (a.mode === 'retry') retried.add(a.itemId);
+    }
+    for (const a of prior.values()) if (a.mark === 'wrong' && kind === 'lesson' && a.itemType !== 'open' && !retried.has(a.itemId)) {
+      const f = findItem(a.itemId);
+      if (f) run.missed.push(f.item);
+    }
+    run.marked = prior.size;
+    if (prior.size) main.append(el('p', { class: 'muted small' }, 'Picked up where you left off.'));
+  }
+
   const advance = () => {
     while (i < blocks.length) {
       const b = blocks[i++];
@@ -247,6 +278,8 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
       else if (b.kind === 'prose') main.append(el('div', { class: 'prose' }, b.html));
       else {
         const it = b.item;
+        const done = prior.get(it.id);
+        if (done) { marks.set(it.id, { mark: done.mark }); main.append(answeredCard(it, done)); continue; }
         main.append(itemCard(it, run, mode, '', (m) => {
           marks.set(it.id, { mark: m });
           if (m === 'wrong' && kind === 'lesson' && it.type !== 'open') run.missed.push(it);
@@ -486,10 +519,17 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if (!hadController) return; // first install, nothing to reload
     if (document.getElementById('update-bar')) return;
+    // A cold launch already loads the newest build; skip the bar if this page is that build.
+    void caches.keys().then((keys) => {
+      if (keys.length === 1 && keys[0] === `learning-app-${BUILD}`) return;
+      showUpdateBar();
+    });
+  });
+  const showUpdateBar = () => {
     const bar = el('div', { id: 'update-bar', role: 'status' }, 'A new version is ready. ');
     const b = el('button', { type: 'button' }, 'Reload');
     b.onclick = () => location.reload();
     bar.append(b);
     document.body.append(bar);
-  });
+  };
 }

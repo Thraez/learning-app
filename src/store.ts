@@ -59,13 +59,9 @@ function load<T>(key: string): T[] {
   }
 }
 
-let attempts: Attempt[] = load<Attempt>(KEY_ATTEMPTS);
-let sessions: Session[] = load<Session>(KEY_SESSIONS);
-
-function save() {
-  localStorage.setItem(KEY_ATTEMPTS, JSON.stringify(attempts));
-  localStorage.setItem(KEY_SESSIONS, JSON.stringify(sessions));
-}
+// Every read and write goes to localStorage directly, never to an in-memory copy: the browser tab
+// and the installed app can share this storage (Android), and writing back a stale copy would erase
+// answers given in the other one.
 
 export function newId(): string {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) return crypto.randomUUID();
@@ -75,26 +71,24 @@ export function newId(): string {
 export const nowIso = () => new Date().toISOString();
 
 export function getAttempts(): readonly Attempt[] {
-  return attempts;
+  return load<Attempt>(KEY_ATTEMPTS);
 }
 
 export function getSessions(): readonly Session[] {
-  return sessions;
+  return load<Session>(KEY_SESSIONS);
 }
 
 export function addAttempt(a: Attempt) {
-  attempts = [...attempts, a];
-  save();
+  localStorage.setItem(KEY_ATTEMPTS, JSON.stringify([...load<Attempt>(KEY_ATTEMPTS), a]));
 }
 
 export function addSession(s: Session) {
-  sessions = [...sessions, s];
-  save();
+  localStorage.setItem(KEY_SESSIONS, JSON.stringify([...load<Session>(KEY_SESSIONS), s]));
 }
 
 export function endSession(sessionId: string, completed: boolean) {
-  sessions = sessions.map((s) => (s.sessionId === sessionId ? { ...s, endedAt: nowIso(), completed } : s));
-  save();
+  const sessions = load<Session>(KEY_SESSIONS).map((s) => (s.sessionId === sessionId ? { ...s, endedAt: nowIso(), completed } : s));
+  localStorage.setItem(KEY_SESSIONS, JSON.stringify(sessions));
 }
 
 /** Asks the browser not to clear this site's storage under pressure. Installed apps usually get it. */
@@ -106,10 +100,4 @@ export async function requestPersistence(): Promise<boolean | null> {
     /* not supported */
   }
   return null;
-}
-
-/** For tests only. */
-export function _resetForTests() {
-  attempts = [];
-  sessions = [];
 }
