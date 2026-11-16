@@ -1,6 +1,6 @@
 // Variants: per-item experiments (an item gets one arm, once, for good) and whole-app settings
-// (a value that applies to the whole app for a period). Both are off or at their default until the
-// owner switches them on in Settings, so shipping this changes nothing by itself.
+// (a value that applies to the whole app for a period). Experiments are on unless the owner switched
+// them off in Settings; whole-app settings stay at their default until changed.
 
 import type { Item, Lesson } from './types';
 import {
@@ -45,7 +45,8 @@ export const REVIEW_SIZES: Record<ReviewSize, { label: string; cap: number }> = 
 };
 export const E6_DEFAULT: ReviewSize = 'standard';
 
-export const experimentOn = (s: Settings, id: string) => s.experiments[id] === true;
+/** On by default: a missing key means on, and only a stored `false` switches an experiment off. */
+export const experimentOn = (s: Settings, id: string) => s.experiments[id] !== false;
 
 /** Today's date as YYYY-MM-DD in local time, the format of an end date. */
 export function localDay(d: Date): string {

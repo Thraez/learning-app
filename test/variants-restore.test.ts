@@ -4,7 +4,7 @@ import { parseCourses } from '../src/build/parse-courses';
 import { computeSchedules, courseProgress } from '../src/scheduler';
 import { buildExport } from '../src/export';
 import { parseExportFile, restoreExport } from '../src/restore';
-import { drawArms, activeWhole, reviewCap, itemArms } from '../src/variants';
+import { drawArms, activeWhole, reviewCap, itemArms, experimentOn } from '../src/variants';
 import {
   getAssignments, getAttempts, getSessions, getSettings, saveAssignments, saveSettings, variantString,
   type Attempt, type Session,
@@ -193,8 +193,8 @@ describe('assignment draw', () => {
 
   it('only applies the arms of experiments that are on', () => {
     const assignments = { i1: { L1: { arm: 'reread', assignedAt: 't' }, L11: { arm: 'none', assignedAt: 't' } } };
-    expect(itemArms({ experiments: {}, whole: {} }, assignments, 'i1')).toEqual({});
-    expect(itemArms({ experiments: { L1: true }, whole: {} }, assignments, 'i1')).toEqual({ L1: 'reread' });
+    expect(itemArms({ experiments: { L1: false, L11: false }, whole: {} }, assignments, 'i1')).toEqual({});
+    expect(itemArms({ experiments: { L1: true, L11: false }, whole: {} }, assignments, 'i1')).toEqual({ L1: 'reread' });
     expect(variantString({ L11: 'ask', L1: 'reread' })).toBe('L1=reread;L11=ask');
     expect(variantString({})).toBe('default');
   });
@@ -242,5 +242,42 @@ describe('whole-app variant E6', () => {
     expect(reviewCap(s('short', '2026-11-19'), now)).toBe(10);
     expect(activeWhole(s('standard', null), now)).toEqual({});
     expect(activeWhole(s('short', null), now)).toEqual({ E6: 'short' });
+  });
+});
+
+describe('experiments are on by default', () => {
+  const both = (s: { experiments: Record<string, boolean> }) => [experimentOn(s as never, 'L1'), experimentOn(s as never, 'L11')];
+
+  it('a phone with no stored settings has both on', () => {
+    localStorage.clear();
+    expect(getSettings()).toEqual({ experiments: {}, whole: {} });
+    expect(both(getSettings())).toEqual([true, true]);
+  });
+
+  it('a phone that stored only a review length still has both on', () => {
+    localStorage.clear();
+    saveSettings({ experiments: {}, whole: { E6: { value: 'short', since: '2026-11-16T10:00:00.000Z', until: null } } });
+    expect(both(getSettings())).toEqual([true, true]);
+    expect(reviewCap(getSettings())).toBe(5);
+  });
+
+  it('a stored false wins over the default', () => {
+    localStorage.clear();
+    saveSettings({ experiments: { L1: false }, whole: {} });
+    expect(both(getSettings())).toEqual([false, true]);
+  });
+
+  it('settings stored before the change keep an explicit choice, and an untouched key is now on', () => {
+    localStorage.clear();
+    localStorage.setItem('learning-app:v1:settings', JSON.stringify({ experiments: { L1: true }, whole: {} }));
+    expect(both(getSettings())).toEqual([true, true]);
+    localStorage.setItem('learning-app:v1:settings', JSON.stringify({ experiments: { L1: true, L11: false }, whole: {} }));
+    expect(both(getSettings())).toEqual([true, false]);
+  });
+
+  it('switching the default on leaves stored arms alone', () => {
+    const assignments = { i1: { L1: { arm: 'reread', assignedAt: 't' } } };
+    expect(itemArms({ experiments: {}, whole: {} }, assignments, 'i1')).toEqual({ L1: 'reread' });
+    expect(drawArms(['i1'], { i1: 'reread' }, ['recall', 'reread'], () => 0.1)).toEqual({});
   });
 });
