@@ -58,7 +58,7 @@ You need to remember a set of facts for a test in one week. A friend needs the s
 
 <details>
 <summary>Model answer</summary>
-No. In a study of more than 1,350 people, the best gap grew as the final test moved further away, but shrank as a share of the delay: about 20 to 40% of a one-week delay, and about 5 to 10% of a one-year delay ([Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x)). Of the gaps the study tested, the best for recall was 1 day for the one-week delay and 21 days for the one-year delay; those figures are from the in-press manuscript, which may differ from the published text. So you review after a day or two, and your friend waits about three weeks. Lesson 3.
+No. In a study of more than 1,350 people, the best gap grew as the final test moved further away, but shrank as a share of the delay: about 20 to 40% of a one-week delay, and about 5 to 10% of a one-year delay ([Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x)). Of the gaps the study tested, the best for recall was [1 day for the one-week delay and 21 days for the one-year delay](https://doi.org/10.1111/j.1467-9280.2008.02209.x); those figures are from the in-press manuscript, which may differ from the published text. So you review after a day or two, and your friend waits about three weeks. Lesson 3.
 </details>
 
 ### learn/placement/p06 · why
