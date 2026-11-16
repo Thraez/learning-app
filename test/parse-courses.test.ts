@@ -58,7 +58,8 @@ describe('real course files', () => {
           const items = c.placement!.blocks.flatMap((b) => (b.kind === 'item' ? [b.item] : []));
           for (const it of items) {
             expect(it.targetLessonOrder, it.id).toBeDefined();
-            expect(orders.has(it.targetLessonOrder!), it.id).toBe(true);
+            // A draft course with no lesson files yet only has to name a planned lesson.
+            if (c.lessons.length) expect(orders.has(it.targetLessonOrder!), it.id).toBe(true);
           }
         });
       }
