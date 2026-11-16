@@ -10,8 +10,8 @@ every answer so Claude can revise the course.
 
 ## Where it stands
 
-- Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main` at 5ff4c52 (PRs #1
-  to #4 and #6 to #10 merged).
+- Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main` at 29c428c (PRs #1
+  to #10 merged).
 - App on `main`: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load,
   installable. Course list, lessons, placement quiz with a "where to start" summary, review sessions, self-marking,
   Progress (late recall at 14+ days), Export as JSON (`docs/export-schema.md`, schema 2), restore from an export that
@@ -22,16 +22,13 @@ every answer so Claude can revise the course.
 - Course 1 on `main`, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz,
   version 0.3.2. All 12 lessons are checked against their sources (PR #10, merged 2026-11-16): a ledger each under
   `ledgers/`, every row `matches` or `inference`, `checked: 2026-11-16` in each lesson. No item ID changed.
+- Course 2 on `main`, `status: draft` (PR #5, merged 2026-11-16): `courses/learning-how-to-learn/`, id `learn`,
+  version 0.2.0. Lessons 1 to 5 written and checked, 12 planned, a 14-item placement quiz. `course.md` declares
+  `lessons_planned: 12`, so the quiz points at lessons 6 to 11 before they exist; the app shows those as planned and
+  never recommends starting there. Lesson slugs, placement IDs and "Lesson N." numbers are now permanent.
 - Private learner state (interest profile, exports) lives in the private vault at `Workspace/Learning/`, never here.
   That folder is committed locally in the Workspace repo and not pushed.
 - Not checked on a real phone. The share-sheet export on iPhone is untested. No note shows the app has been used yet.
-
-## Open pull requests (a merge deploys)
-
-- **PR #5, course 2 (learning how to learn, id `learn`, 0.2.0).** Lessons 1 to 5 written and checked, 12 planned, a
-  14-item placement quiz. `course.md` declares `lessons_planned: 12`, so the quiz may point at lessons 6 to 11 before
-  they exist; the app shows those as planned and never recommends starting there. The user merges this one. Lesson
-  slugs, placement IDs and "Lesson N." numbers are permanent once it is merged and used.
 
 ## Decided for the user (2026-11-16, under "I trust you with these decisions")
 
@@ -49,8 +46,7 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 
 ## Waiting on the user
 
-1. Merge PR #5, or ask for changes.
-2. Install the app, take a placement quiz and lesson 1. Nothing can be judged until late-recall data exists.
+1. Install the app, take a placement quiz and lesson 1. Nothing can be judged until late-recall data exists.
 
 ## Next
 
