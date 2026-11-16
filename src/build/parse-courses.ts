@@ -171,6 +171,14 @@ function checkedDate(data: Record<string, unknown>, file: string): string | unde
   return s;
 }
 
+/** "lessons_planned" from course.md: a whole number of lessons, or undefined when the course does not declare one. */
+function plannedCount(data: Record<string, unknown>, file: string): number | undefined {
+  const v = data.lessons_planned;
+  if (v === undefined || v === null || v === '') return undefined;
+  if (typeof v !== 'number' || !Number.isInteger(v) || v < 1) fail(file, `"lessons_planned" must be a whole number of 1 or more (got ${JSON.stringify(v)})`);
+  return v;
+}
+
 export function parseCourseFolder(dir: string): Course {
   const folder = basename(dir);
   const courseFile = join(dir, 'course.md');
@@ -225,12 +233,32 @@ export function parseCourseFolder(dir: string): Course {
   });
   lessons.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
 
+  const lessonsPlanned = plannedCount(cfm.data, courseFile);
+  const orders = new Set(lessons.map((l) => l.order));
+  if (lessonsPlanned !== undefined) {
+    for (const l of lessons) {
+      if (l.order > lessonsPlanned) fail(courseFile, `"lessons_planned: ${lessonsPlanned}" is below lesson ${l.order} (${l.file})`);
+    }
+  }
+
   let placement: Placement | undefined;
   if (existsSync(placementFile)) {
     const { data, body } = splitFrontMatter(readFileSync(placementFile, 'utf8'), placementFile);
     const id = str(data, 'id', placementFile);
     if (id !== placementId) fail(placementFile, `placement id must be "${placementId}", found "${id}"`);
     const { blocks, items } = parseBody(body, placementFile, id, render);
+    // Each placement answer ends with "Lesson N." so the app can map the item to a lesson. N must be
+    // a lesson that exists, or a number up to "lessons_planned" when the course page declares one.
+    for (const it of items) {
+      const n = it.targetLessonOrder;
+      if (n === undefined) fail(placementFile, `item ${it.id}: the answer must end with "Lesson N."`);
+      const planned = lessonsPlanned !== undefined && n >= 1 && n <= lessonsPlanned;
+      if (!orders.has(n) && !planned) {
+        fail(placementFile, lessonsPlanned === undefined
+          ? `item ${it.id} points at lesson ${n}, which has no lesson file (add "lessons_planned" to course.md to allow planned lessons)`
+          : `item ${it.id} points at lesson ${n}, above "lessons_planned: ${lessonsPlanned}" in course.md`);
+      }
+    }
     placement = {
       id,
       file: 'placement-quiz.md',
@@ -249,6 +277,7 @@ export function parseCourseFolder(dir: string): Course {
     status: str(cfm.data, 'status', courseFile),
     html: render(cfm.body),
     lessons,
+    lessonsPlanned,
     placement,
   };
 }

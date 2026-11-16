@@ -93,7 +93,7 @@ Not built: a dead-link check on pull requests. The build checks that a link is p
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
 | `courses/<course-folder>/ledgers/NN-<slug>.md` | the claim ledger for the lesson of the same name; the app does not read it |
-| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `export.ts`, `restore.ts` |
+| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
 | `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
 | `src/sw-template.js` | service worker; the build fills in the file list |
 | `test/` | parser tests against the real course files, scheduler and export tests |
@@ -112,7 +112,9 @@ needs no app change. It fails the build, with the file and the reason, on a brok
 outside its lesson, a duplicate ID, a missing `<details>` answer, an answer block with no item heading, a source
 without a tier or an `https` link, or a `checked` value that is not a date. Run
 `npm test` before committing course files. Placement answers end with "Lesson N." so the app can map each item to a
-lesson; the test checks that every placement item does. The app keys every stored answer by item ID, which is why rule
+lesson, and the build fails on an item without one. N must be a lesson that has a file. A course whose later lessons
+are planned but not written adds `lessons_planned: <count>` to its `course.md` front matter; N may then be any lesson
+number up to that count, and the app shows such a lesson as planned and never recommends starting there. The app keys every stored answer by item ID, which is why rule
 5 matters: a renamed ID splits an item's history in two.
 
 ## Lesson file format
