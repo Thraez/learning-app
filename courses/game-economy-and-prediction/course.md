@@ -1,7 +1,7 @@
 ---
 id: gd-econ
 title: Game economies, telemetry and prediction models
-version: 0.1.0
+version: 0.2.0
 status: draft
 created: 2026-11-16
 topic: game design
@@ -10,7 +10,7 @@ audience: designer with a game design degree and three years in the industry
 
 # Game economies, telemetry and prediction models
 
-**Status: draft.** Written overnight without the usual approval step, so you could try it on waking. Read this page, take the placement quiz, try lesson 1, then approve the course or redirect it. Anything you say goes into version 0.2.
+**Status: draft.** Written overnight without the usual approval step, so you could try it on waking. Read this page, take the placement quiz, try lesson 1, then approve the course or redirect it. Anything you say goes into the next version.
 
 ## Start here
 
@@ -60,14 +60,12 @@ Assumed known from your degree and work: what F2P is, retention cohorts (D1, D7)
 | 4 | [Churn is a definition and a time, not a label](lessons/04-churn-time.md) | Periáñez et al. 2017; Hadiji et al. 2014 | A | full |
 | 5 | [Spend is mostly zero and very concentrated](lessons/05-spend-skew.md) | Sifa et al. 2015; Swrve 2014; Chen et al. 2018 | A and B | full |
 | 6 | [Predicting who leaves is not knowing what keeps them](lessons/06-predict-vs-act.md) | Runge et al. 2014 | A | full |
-| 7 | Segmentation: the algorithm shapes the segments | Drachen et al. 2012 | to verify | planned |
-| 8 | Experiments and uplift: measuring what an action causes | to find | | planned |
-| 9 | Survival models for churn and lifetime value | Periáñez et al. 2017; Chen et al. 2018 | to verify | planned |
-| 10 | Simulating an economy before launch | Adams and Dormans 2012 (book) | likely B | planned |
-| 11 | Matchmaking tuned for engagement | Chen et al. 2017 (EOMM), to verify | | planned |
-| 12 | Spend prediction and vulnerable players | loot box and problem gambling studies, to find | | planned |
-
-Lessons 7 to 12 are a plan, not written. Their sources still have to be opened and graded.
+| 7 | [The clustering method shapes the segments](lessons/07-segments.md) | Drachen et al. 2014 (arXiv); Drachen et al. 2012 | A; A abstract | full |
+| 8 | [Target the players an offer changes, not the ones most likely to leave](lessons/08-uplift.md) | Ascarza 2018; Gutierrez and Gérardy 2016; Wei et al. 2024 | A abstract; A; A (preprint) | full |
+| 9 | [Survival curves for churn and lifetime value](lessons/09-survival.md) | Viljanen et al. 2017; Periáñez et al. 2017; Chen et al. 2018 | A | full |
+| 10 | [Simulating an economy before it is built](lessons/10-simulation.md) | Dormans 2011 | A | full |
+| 11 | [Matchmaking tuned for engagement](lessons/11-eomm.md) | Chen et al. 2017 (EOMM) | A | full |
+| 12 | [Spend prediction and vulnerable players](lessons/12-vulnerable.md) | Zendle and Cairns 2018, 2019; Close et al. 2021 | A | full |
 
 ## For you to decide
 
@@ -77,4 +75,5 @@ Lessons 7 to 12 are a plan, not written. Their sources still have to be opened a
 
 ## Change log
 
+- 0.2.0 (2026-11-16): lessons 7 to 12 written, every source opened and graded. Lesson 7 uses the open 2014 arXiv comparison by Drachen and colleagues as its main source, with the 2012 CIG paper from its abstract only. Lesson 8 found one games uplift study (Wei et al. 2024, Tencent preprint) and leans on Ascarza 2018 (marketing, abstract) and a review. Lesson 9 adds Viljanen et al. 2017 on playtime survival analysis. Lesson 10 uses Dormans 2011, an open paper by the same author, instead of the Adams and Dormans book, which I did not try to get. Lesson 11 keeps EOMM; it is a simulation, not a live test. Lesson 12 uses three loot box surveys; the link to spend models is graded C. Thin spots: no published check of a pre-launch economy simulation against live data, and no published study of whale models and vulnerable players. No placement quiz items added.
 - 0.1.0 (2026-11-16): first draft. Course page, placement quiz, lessons 1 to 6. Same day: checked lesson 1 and 3 figures against the paper and slides, regraded the Hadiji 2014 source from its abstract, added two concept items to the quiz.
