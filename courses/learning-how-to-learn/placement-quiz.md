@@ -31,7 +31,7 @@ A survey of 472 university students asked why they test themselves. About what s
 
 <details>
 <summary>Answer</summary>
-About 18%. About 70% said they self-test to find out how well they have learned. This is a survey by Kornell and Bjork 2007, as reported in the review by [Bjork, Dunlosky and Kornell 2013](https://doi.org/10.1146/annurev-psych-113011-143823); I read the review, not the survey itself. Lesson 1.
+18%. Most, 68%, said they quiz themselves to figure out how well they have learned, and 9% said they usually don't quiz themselves. The students were in an introductory psychology class at UCLA ([Kornell and Bjork 2007](https://doi.org/10.3758/BF03194055)). Lesson 1.
 </details>
 
 ### learn/placement/p03 · why
@@ -85,7 +85,7 @@ You learn the definitions of ten design concepts on flashcards and can recall al
 
 <details>
 <summary>Model answer</summary>
-Recall practice carries over to new situations only under conditions. A meta-analysis found transfer at d = 0.40 overall, but after correcting for publication bias there was often none unless the later question needed the same kind of response, retrieval practice was elaborated, or the first test went well ([Pan and Rickard 2018](https://doi.org/10.1037/bul0000151)). Recalling a definition is a different response from applying it. Lesson 5.
+Recall practice does carry over, but under conditions. A meta-analysis found transfer at d = 0.40 overall, including to application and inference questions. Three things strongly raised the chance of it: the later test asking for the same or nearly the same answer, elaborated retrieval practice, and doing well on the first test. After correcting for publication bias, there was often no transfer when none of the three was present ([Pan and Rickard 2018](https://doi.org/10.1037/bul0000151)). A design decision rarely asks for the definition itself, so bare definition flashcards may not carry over; that last step is my inference. Lesson 5.
 </details>
 
 ### learn/placement/p09 · scenario
@@ -94,16 +94,16 @@ You are reading the method section of a paper and want to understand it, not jus
 
 <details>
 <summary>Model answer</summary>
-Explain to yourself why each step is done and how it connects to the rest. Prompts to self-explain gave g = 0.55 across 69 effect sizes, across a range of tasks and subjects ([Bisra et al. 2018](https://doi.org/10.1007/s10648-018-9434-x)). Lesson 6.
+Explain to yourself why each step is done and how it connects to the rest. Prompts to self-explain gave g = 0.55 across 69 effect sizes, and the authors call it a potentially powerful intervention across a range of instructional conditions ([Bisra et al. 2018](https://doi.org/10.1007/s10648-018-9434-x)). Lesson 6.
 </details>
 
 ### learn/placement/p10 · scenario
 
-You are studying two things: a set of easily confused retention metrics, and a list of vocabulary words. For which should you mix the items together rather than study them in blocks?
+You are learning two things from examples: telling apart the painting styles of six similar concept artists, and a list of words in a new language. For which should you mix the examples together rather than study them in blocks?
 
 <details>
 <summary>Model answer</summary>
-Mix the metrics, block the words. Interleaving helped overall (g = 0.42), more when categories were similar to each other, while for words blocking did better (g = -0.39) ([Brunmair and Richter 2019](https://doi.org/10.1037/bul0000209)). Lesson 7.
+Mix the paintings, block the words. In a meta-analysis, interleaving helped overall (g = 0.42) and most for paintings (g = 0.67), more when categories were similar to each other, while in studies using words blocking did better (g = -0.39). Results for expository texts were unclear, so the paper urges caution there ([Brunmair and Richter 2019](https://doi.org/10.1037/bul0000209)). Lesson 7.
 </details>
 
 ### learn/placement/p11 · why
@@ -121,7 +121,7 @@ Why might letting you choose which topic comes next help you remember it, and ho
 
 <details>
 <summary>Model answer</summary>
-In one fMRI study, people remembered information they were curious about better, both right away and a day later, and also remembered unrelated material shown to them while curious ([Gruber, Gelman and Ranganath 2014](https://doi.org/10.1016/j.neuron.2014.08.060)). It is one study, and the abstract does not give the sample size, so treating choice as a memory aid is a reasonable bet, not an established effect. Lesson 9.
+In one fMRI study, people remembered information they were curious about better, both right away and a day later, and also remembered incidental material shown to them while curious ([Gruber, Gelman and Ranganath 2014](https://doi.org/10.1016/j.neuron.2014.08.060)). It is one study, and the abstract does not give the sample size, so treating choice as a memory aid is a reasonable bet, not an established effect. Lesson 9.
 </details>
 
 ### learn/placement/p13 · scenario

@@ -35,7 +35,7 @@ This course also explains the app you are using. Its lesson shape (a question fi
 
 ## How strong the evidence is
 
-Stronger than in most fields, with clear limits. Most findings below come from meta-analyses that pool dozens to hundreds of effect sizes. But most of those studies test students on word lists, facts or short texts, over days or weeks, in a lab or classroom. Few test adults learning a professional skill over months, so applying them to your work is often an inference, and the lessons will say so. Two topics rest on thin evidence: curiosity (lesson 9) on one brain imaging study, and successive relearning (lesson 4) on a short review whose abstract gives no figures. Very little here is brain science; it is mostly measured by test scores.
+Good in places, thin in others. Seven of the lessons rest on meta-analyses, from 29 studies (spacing, lesson 3) to 8,776 effect sizes (prior knowledge, lesson 10). Several of those abstracts name the limits themselves: interleaving fails for words, transfer often vanishes after a bias correction, and deliberate practice explains little in professions. My reading, not checked study by study: most of this research measures test scores after hours to months, in labs and classrooms, so applying it to learning a professional skill over years is often an inference, and the lessons will say so. Two topics are thin: curiosity (lesson 9) rests on one brain imaging study, and successive relearning (lesson 4) on a short review whose abstract gives no figures.
 
 Each source carries two labels. The **grade** says how much of it I read: A read in the paper itself (abstract or full text), B a secondary summary or a figure the paper gives without its data, C my inference. The **tier** says what kind of source it is: 1 peer-reviewed paper or review, 2 a preprint or report by named researchers (always labelled not peer-reviewed), 3 a studio's own data report. Press releases, blogs, slide decks and trade-press write-ups are not used for facts. Every claim links to its source at the sentence.
 
@@ -58,7 +58,7 @@ Lessons 1 to 5 are the proposed first block. Lessons 6 to 12 are planned; their 
 
 | # | Lesson | Main source | Grade | Tier |
 |---|---|---|---|---|
-| 1 | What feels like learning and what is | Bjork, Dunlosky and Kornell 2013; Dunlosky et al. 2013 | A; A abstract | 1 |
+| 1 | What feels like learning and what is | Bjork, Dunlosky and Kornell 2013; Kornell and Bjork 2007; Dunlosky et al. 2013 | A; A; A abstract | 1 |
 | 2 | A practice test beats a second read, and the answer matters | Rowland 2014 | A | 1 |
 | 3 | The best gap depends on when you need it | Cepeda et al. 2008; Latimier et al. 2021 | A abstract | 1 |
 | 4 | Recall until right, then again another day | Rawson and Dunlosky 2022 | A abstract | 1 |
@@ -73,15 +73,15 @@ Lessons 1 to 5 are the proposed first block. Lessons 6 to 12 are planned; their 
 
 What each lesson rests on:
 
-1. A review concludes that people often hold a faulty model of how they learn, and that their judgments of their own learning are swayed by how fluent the material feels ([Bjork, Dunlosky and Kornell 2013](https://doi.org/10.1146/annurev-psych-113011-143823)). A large review rated practice testing and spaced practice high utility, and rereading and highlighting low ([Dunlosky et al. 2013](https://doi.org/10.1177/1529100612453266)).
+1. A review concludes that people often hold a faulty model of how they learn, and that their judgments of their own learning are swayed by how fluent the material feels ([Bjork, Dunlosky and Kornell 2013](https://doi.org/10.1146/annurev-psych-113011-143823)). In a survey of 472 students, 68% said they quiz themselves to check what they know and only 18% because they learn more that way ([Kornell and Bjork 2007](https://doi.org/10.3758/BF03194055)). A large review rated practice testing and spaced practice high utility, and rereading and highlighting low ([Dunlosky et al. 2013](https://doi.org/10.1177/1529100612453266)).
 2. Across 159 effect sizes, testing beat restudy at g = 0.50; with feedback g = 0.73, without g = 0.39 ([Rowland 2014](https://doi.org/10.1037/a0037559)).
 3. In a study of more than 1,350 people, the best gap between reviews grew as the final test moved further away, but shrank as a share of it ([Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x)). A meta-analysis of 29 studies found spaced retrieval beat massed retrieval (g = 0.74) and found no significant difference between expanding and even gaps ([Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8)).
 4. Successive relearning means practising until each item is right, then doing that again in later sessions ([Rawson and Dunlosky 2022](https://doi.org/10.1177/09637214221100484)). The abstract gives no effect sizes, so the lesson will teach the method and say the size of its benefit is not shown here.
-5. Recall practice transferred to new contexts at d = 0.40 across 192 effect sizes, but after correcting for publication bias there was often no transfer unless the later question needed the same response, retrieval was elaborated, or the first test went well ([Pan and Rickard 2018](https://doi.org/10.1037/bul0000151)).
+5. Recall practice transferred to new contexts at d = 0.40 across 192 effect sizes, including to application and inference questions. After correcting for publication bias there was often no transfer unless the later test asked for the same or nearly the same answer, retrieval practice was elaborated, or the first test went well ([Pan and Rickard 2018](https://doi.org/10.1037/bul0000151)).
 6. Self-explanation prompts gave g = 0.55 across 69 effect sizes ([Bisra et al. 2018](https://doi.org/10.1007/s10648-018-9434-x)).
 7. Interleaving gave g = 0.42 overall, more for similar categories, and blocking beat it for words (g = -0.39) ([Brunmair and Richter 2019](https://doi.org/10.1037/bul0000209)).
 8. Pretesting often helps ([Pan and Carpenter 2023](https://doi.org/10.1007/s10648-023-09814-5)), and in five experiments learners still believed reading worked better after trying both ([Pan and Rivers 2023](https://doi.org/10.3758/s13421-022-01392-1)).
-9. In one fMRI study, people remembered information they were curious about better, and also unrelated material shown while curious ([Gruber, Gelman and Ranganath 2014](https://doi.org/10.1016/j.neuron.2014.08.060)). One study; the abstract does not give the sample size.
+9. In one fMRI study, people remembered information they were curious about better, and also incidental material shown while curious ([Gruber, Gelman and Ranganath 2014](https://doi.org/10.1016/j.neuron.2014.08.060)). One study; the abstract does not give the sample size.
 10. Across 8,776 effect sizes, prior knowledge correlated with later knowledge at about .53 but with normalised learning gain at about -.06, with a prediction interval from -.69 to .62 ([Simonsmeier et al. 2022](https://doi.org/10.1080/00461520.2021.1939700)).
 11. Deliberate practice explained 26% of the variance in performance in games, 21% in music, 18% in sports, 4% in education and under 1% in professions ([Macnamara, Hambrick and Oswald 2014](https://doi.org/10.1177/0956797614535810)). That is about differences between people, not about whether practice helps you.
 12. A synthesis lesson: you plan the study of a subject you choose, using retrieval, spacing and self-explanation. No new source; grade C.
@@ -91,8 +91,9 @@ What each lesson rests on:
 | Source | Kind | What I read on 2026-11-16 | Grade | Tier |
 |---|---|---|---|---|
 | [Bjork, Dunlosky and Kornell 2013](https://doi.org/10.1146/annurev-psych-113011-143823), Annual Review of Psychology 64 | narrative review | abstract (Crossref record) and full text (copy hosted outside the publisher; publisher page blocked automated access) | A | 1 |
+| [Kornell and Bjork 2007](https://doi.org/10.3758/BF03194055), Psychonomic Bulletin and Review 14 | review of the authors' own studies, with a survey | full text PDF on the publisher site | A | 1 |
 | [Dunlosky, Rawson, Marsh, Nathan and Willingham 2013](https://doi.org/10.1177/1529100612453266), Psychological Science in the Public Interest 14 | narrative review monograph | abstract (Crossref record; publisher page blocked) | A abstract | 1 |
-| [Rowland 2014](https://doi.org/10.1037/a0037559), Psychological Bulletin 140 | meta-analysis | full text (author's online-first copy) | A | 1 |
+| [Rowland 2014](https://doi.org/10.1037/a0037559), Psychological Bulletin 140 | meta-analysis | full text (the author's upload of the online-first version, hosted by a university) | A | 1 |
 | [Cepeda, Vul, Rohrer, Wixted and Pashler 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x), Psychological Science 19 | experiment | abstract (Crossref record; publisher page blocked) | A abstract | 1 |
 | [Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8), Educational Psychology Review 33 (online 2020) | meta-analysis | abstract on the publisher page | A abstract | 1 |
 | [Rawson and Dunlosky 2022](https://doi.org/10.1177/09637214221100484), Current Directions in Psychological Science 31 | short review | abstract (Crossref record; publisher page blocked) | A abstract | 1 |
@@ -105,7 +106,7 @@ What each lesson rests on:
 | [Simonsmeier, Flaig, Deiglmayr, Schalk and Schneider 2022](https://doi.org/10.1080/00461520.2021.1939700), Educational Psychologist 57 (online 2021) | meta-analysis | abstract and results (accepted manuscript) | A | 1 |
 | [Macnamara, Hambrick and Oswald 2014](https://doi.org/10.1177/0956797614535810), Psychological Science 25 | meta-analysis | abstract (Crossref record; publisher page blocked) | A abstract | 1 |
 
-Three of these are narrative reviews rather than meta-analyses (Bjork 2013, Rawson and Dunlosky 2022, Pan and Carpenter 2023): the authors summarise studies they chose, without pooling numbers. The lessons will say so where they lean on one.
+Four of these are narrative reviews rather than meta-analyses (Bjork, Dunlosky and Kornell 2013; Dunlosky et al. 2013; Rawson and Dunlosky 2022; Pan and Carpenter 2023): the authors summarise studies they chose, without pooling numbers. The lessons will say so where they lean on one.
 
 Considered and not used: the Adesope 2017 practice-testing meta-analysis, whose effect sizes could not be read in an earlier pass and which was not reopened.
 
