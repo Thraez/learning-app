@@ -146,10 +146,14 @@ function parseSources(raw: unknown, file: string): Source[] {
   return raw.map((s, n) => {
     if (!s || typeof s !== 'object' || !('cite' in s)) fail(file, `source ${n + 1} has no "cite"`);
     const o = s as Record<string, unknown>;
+    // Credibility tier (AGENTS.md rule 4): 1 peer-reviewed, 2 preprint or report, 3 studio's own data.
+    const tier = Number(o.tier);
+    if (tier !== 1 && tier !== 2 && tier !== 3) fail(file, `source ${n + 1} needs "tier: 1", "tier: 2" or "tier: 3" (got ${o.tier === undefined ? 'nothing' : JSON.stringify(o.tier)})`);
     return {
       cite: String(o.cite),
       url: o.url ? String(o.url) : undefined,
       grade: o.grade ? String(o.grade) : undefined,
+      tier: tier as 1 | 2 | 3,
       note: o.note ? String(o.note) : undefined,
     };
   });

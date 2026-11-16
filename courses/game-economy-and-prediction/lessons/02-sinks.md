@@ -8,7 +8,8 @@ sources:
   - cite: "Hogan-Hennessy, Xenopoulos, Silva (2022). Market Interventions in a Large-Scale Virtual Economy. arXiv:2210.07970."
     url: https://arxiv.org/abs/2210.07970
     grade: A
-    note: preprint, peer review not confirmed
+    tier: 2
+    note: preprint, not peer-reviewed; no published version found
 ---
 
 # Lesson 2: Sinks move prices, not only remove value
@@ -17,7 +18,7 @@ sources:
 
 ### gd-econ/sinks/open · open
 
-In December 2021, Old School RuneScape added a 1% tax on sales in its player market (the Grand Exchange) and used the tax money to buy expensive high-level items from players and delete them. Guess: did the tax cut trading, and what happened to the prices of the deleted items?
+In December 2021, Old School RuneScape added a 1% tax on sales in its player market (the Grand Exchange) and used the tax money to buy expensive high-level items from players and delete them ([Hogan-Hennessy et al. 2022](https://arxiv.org/abs/2210.07970), a preprint). Guess: did the tax cut trading, and what happened to the prices of the deleted items?
 
 <details>
 <summary>Answer</summary>
@@ -28,11 +29,13 @@ The tax barely changed trading volume, and the prices of the targeted items went
 
 A sink does not just take value out of an economy. Where it takes it from decides whose prices move.
 
+The evidence here is one study, [Hogan-Hennessy, Xenopoulos and Silva 2022](https://arxiv.org/abs/2210.07970). It is a preprint on arXiv and has not been peer-reviewed, so treat it as a careful analysis that no journal has checked yet.
+
 Jagex's stated worry was that high-level items had become too common. Its two-part fix: a 1% tax on Grand Exchange sales above 100 GP, capped at 5 million GP per sale and paid out of the seller's proceeds; and an item sink that spends the tax money buying selected high-level items on the market and deleting them, up to a daily maximum Jagex sets. The first round targeted 34 items, the second, a week later, 27 more.
 
-The researchers compared the targeted items against a control group of similarly expensive items whose prices didn't move with them. Prices of the first 34 items jumped about 7% (95% interval 5.0 to 9.6%), the next 27 about 14.4% (11.9 to 16.9%). Trading volume of those items did not change meaningfully. The tax had no detectable effect on volume at the 100 GP threshold. Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%, but the interval runs from 1 to 13%, so that estimate is loose. Prices for illicit gold from real-money traders did not change either.
+The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) against a control group of similarly expensive items whose prices didn't move with them. Prices of the first 34 items jumped about 7% (95% interval 5.0 to 9.6%), the next 27 about 14.4% (11.9 to 16.9%). Trading volume of those items did not change meaningfully. The tax had no detectable effect on volume at the 100 GP threshold. Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%, but the interval runs from 1 to 13%, so that estimate is loose. Prices for illicit gold from real-money traders did not change either.
 
-So a buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices. If the goal was to make these items rarer and dearer, that worked. The authors note Jagex never stated its goal, so whether the change "succeeded" can't be judged.
+So a buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices. If the goal was to make these items rarer and dearer, that worked. The [authors note](https://arxiv.org/abs/2210.07970) Jagex never stated its goal, so whether the change "succeeded" can't be judged. Their data also has no player-level records, so the study can't say how individual players changed their behaviour.
 
 ## Why
 
@@ -87,5 +90,5 @@ Not detectably at the 100 GP threshold. Near the 500 million GP cap point the es
 
 ## Sources and grades
 
-- Hogan-Hennessy, Xenopoulos and Silva 2022, full text read on arXiv. Grade A for what the paper reports. It is a preprint; I did not confirm a peer-reviewed version. It is a natural experiment (difference-in-differences and regression discontinuity), not a randomized test, so its causal claims rest on the control group being a fair comparison.
+- [Hogan-Hennessy, Xenopoulos and Silva 2022, arXiv:2210.07970](https://arxiv.org/abs/2210.07970), full text read (arXiv PDF). Grade A for what the paper reports. Tier 2: a preprint by named university researchers, not peer-reviewed. A Crossref search found no published version. Every figure here was checked against the PDF. It is a natural experiment (difference-in-differences and regression discontinuity), not a randomized test, so its causal claims rest on the control group being a fair comparison.
 - The tabletop transfer in the scenario is my inference, grade C.

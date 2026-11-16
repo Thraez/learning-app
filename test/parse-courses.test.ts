@@ -45,6 +45,10 @@ describe('real course files', () => {
             expect(it.answerHtml).not.toMatch(/<\/?details|<summary/i);
           }
           expect(l.sources.length).toBeGreaterThanOrEqual(1);
+          for (const s of l.sources) {
+            expect([1, 2, 3]).toContain(s.tier);
+            expect(s.url).toMatch(/^https:\/\//);
+          }
         });
       }
 
@@ -97,5 +101,12 @@ describe('format errors fail the build', () => {
   });
   it('rejects an orphan answer block', () => {
     expect(build(lesson('Some prose.\n<details>\nA\n</details>\n'))).toThrow(/outside an item/);
+  });
+  it('rejects a source without a valid tier', () => {
+    const withSource = (extra: string) =>
+      `---\nid: t/a\ncourse: t\ntitle: A\norder: 1\nsources:\n  - cite: "X"\n    url: https://doi.org/10.1/x\n    grade: A\n${extra}---\n## Recall\n`;
+    expect(build(withSource(''))).toThrow(/tier/);
+    expect(build(withSource('    tier: 4\n'))).toThrow(/tier/);
+    expect(build(withSource('    tier: 1\n'))()).toBeTruthy();
   });
 });
