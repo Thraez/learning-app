@@ -10,8 +10,20 @@ export type Confidence = 'sure' | 'unsure' | 'guess';
 export type Mode = 'lesson' | 'placement' | 'review' | 'retry';
 export type SessionKind = 'lesson' | 'placement' | 'review';
 
-/** Fixed until variant support is built; recorded now so the export schema need not change. */
-export const VARIANT = 'default';
+export type Exposure = 'answered' | 'read';
+export type Appeal = 'liked' | 'neutral' | 'disliked';
+
+/** What the app applied to a record: variant id to value, for example { L1: 'reread' }. */
+export type VariantMap = Record<string, string>;
+
+/** The variant string when nothing applies. */
+export const DEFAULT_VARIANT = 'default';
+
+/** "default" for no variants, else the pairs sorted and joined, for example "L1=reread;L11=ask". */
+export function variantString(v: VariantMap): string {
+  const parts = Object.entries(v).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).map(([k, val]) => `${k}=${val}`);
+  return parts.length ? parts.join(';') : DEFAULT_VARIANT;
+}
 
 export interface Attempt {
   attemptId: string;
@@ -27,10 +39,17 @@ export interface Attempt {
   markedAt: string;
   text: string;
   confidence: Confidence | null;
-  mark: Mark;
+  /** Null only for a read exposure (L1 reread arm). */
+  mark: Mark | null;
   variant: string;
   appBuild: string;
+  /** Absent on records saved before variants existed; those count as "answered". */
+  exposure?: Exposure;
+  /** Absent on old records; read as {}. */
+  variants?: VariantMap;
 }
+
+export const isRead = (a: Pick<Attempt, 'exposure'>) => a.exposure === 'read';
 
 export interface Session {
   sessionId: string;
@@ -44,10 +63,26 @@ export interface Session {
   completed: boolean;
   variant: string;
   appBuild: string;
+  variants?: VariantMap;
+  appeal?: Appeal | null;
+  appealAt?: string | null;
+}
+
+/** itemId -> experimentId -> the arm the item was given, once, for good. */
+export type Assignments = Record<string, Record<string, { arm: string; assignedAt: string }>>;
+
+export type WholeAppValue = { value: string; since: string; until: string | null };
+export interface Settings {
+  /** Experiment id -> on. Missing means off. */
+  experiments: Record<string, boolean>;
+  /** Whole-app variant id -> its value, when it was switched on, and an optional last day (YYYY-MM-DD). */
+  whole: Record<string, WholeAppValue>;
 }
 
 const KEY_ATTEMPTS = 'learning-app:v1:attempts';
 const KEY_SESSIONS = 'learning-app:v1:sessions';
+const KEY_ASSIGNMENTS = 'learning-app:v1:assignments';
+const KEY_SETTINGS = 'learning-app:v1:settings';
 
 function load<T>(key: string): T[] {
   try {
@@ -89,6 +124,90 @@ export function addSession(s: Session) {
 export function endSession(sessionId: string, completed: boolean) {
   const sessions = load<Session>(KEY_SESSIONS).map((s) => (s.sessionId === sessionId ? { ...s, endedAt: nowIso(), completed } : s));
   localStorage.setItem(KEY_SESSIONS, JSON.stringify(sessions));
+}
+
+export function setAppeal(sessionId: string, appeal: Appeal | null) {
+  const sessions = load<Session>(KEY_SESSIONS).map((s) => (s.sessionId === sessionId ? { ...s, appeal, appealAt: nowIso() } : s));
+  localStorage.setItem(KEY_SESSIONS, JSON.stringify(sessions));
+}
+
+function loadObject<T extends object>(key: string): T | null {
+  try {
+    const raw = localStorage.getItem(key);
+    const v = raw ? JSON.parse(raw) : null;
+    return v && typeof v === 'object' && !Array.isArray(v) ? (v as T) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function getAssignments(): Assignments {
+  return loadObject<Assignments>(KEY_ASSIGNMENTS) ?? {};
+}
+
+export function saveAssignments(a: Assignments) {
+  localStorage.setItem(KEY_ASSIGNMENTS, JSON.stringify(a));
+}
+
+/** The stored settings, or null when the user never changed one. */
+export function getStoredSettings(): Settings | null {
+  const s = loadObject<Partial<Settings>>(KEY_SETTINGS);
+  return s ? { experiments: s.experiments ?? {}, whole: s.whole ?? {} } : null;
+}
+
+export function getSettings(): Settings {
+  return getStoredSettings() ?? { experiments: {}, whole: {} };
+}
+
+export function saveSettings(s: Settings) {
+  localStorage.setItem(KEY_SETTINGS, JSON.stringify(s));
+}
+
+// ---- merging records from an export file (restore): add what is missing, never overwrite or delete ----
+
+export function addMissingAttempts(list: readonly Attempt[]): number {
+  const have = load<Attempt>(KEY_ATTEMPTS);
+  const ids = new Set(have.map((a) => a.attemptId));
+  const add = list.filter((a) => !ids.has(a.attemptId) && ids.add(a.attemptId));
+  if (add.length) {
+    // Progress takes the latest answer by position, so keep the log in time order.
+    const all = [...have, ...add].sort((x, y) => x.markedAt.localeCompare(y.markedAt));
+    localStorage.setItem(KEY_ATTEMPTS, JSON.stringify(all));
+  }
+  return add.length;
+}
+
+export function addMissingSessions(list: readonly Session[]): number {
+  const have = load<Session>(KEY_SESSIONS);
+  const ids = new Set(have.map((s) => s.sessionId));
+  const add = list.filter((s) => !ids.has(s.sessionId) && ids.add(s.sessionId));
+  if (add.length) {
+    const all = [...have, ...add].sort((x, y) => x.startedAt.localeCompare(y.startedAt));
+    localStorage.setItem(KEY_SESSIONS, JSON.stringify(all));
+  }
+  return add.length;
+}
+
+/** A local assignment always wins over the file's. */
+export function addMissingAssignments(file: Assignments): number {
+  const have = getAssignments();
+  let n = 0;
+  for (const [itemId, exps] of Object.entries(file)) {
+    for (const [expId, v] of Object.entries(exps)) {
+      if (have[itemId]?.[expId]) continue;
+      (have[itemId] ??= {})[expId] = v;
+      n++;
+    }
+  }
+  if (n) saveAssignments(have);
+  return n;
+}
+
+/** Settings from a file are used only when this phone has none. */
+export function restoreSettingsIfNone(file: Settings): boolean {
+  if (getStoredSettings()) return false;
+  saveSettings(file);
+  return true;
 }
 
 /** Asks the browser not to clear this site's storage under pressure. Installed apps usually get it. */
