@@ -23,7 +23,8 @@ export type Block =
 
 export interface Source {
   cite: string;
-  url?: string;
+  /** Always an https link (the build fails otherwise). */
+  url: string;
   grade?: string;
   /** Credibility tier: 1 peer-reviewed, 2 preprint or report, 3 studio's own data report. */
   tier: 1 | 2 | 3;
@@ -37,6 +38,8 @@ export interface Lesson {
   title: string;
   order: number;
   status: string;
+  /** YYYY-MM-DD of the last passed source check (AGENTS.md, "Checking a lesson"); absent when unchecked. */
+  checked?: string;
   sources: Source[];
   blocks: Block[];
   itemIds: string[];

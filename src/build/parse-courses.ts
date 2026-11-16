@@ -149,14 +149,26 @@ function parseSources(raw: unknown, file: string): Source[] {
     // Credibility tier (AGENTS.md rule 4): 1 peer-reviewed, 2 preprint or report, 3 studio's own data.
     const tier = Number(o.tier);
     if (tier !== 1 && tier !== 2 && tier !== 3) fail(file, `source ${n + 1} needs "tier: 1", "tier: 2" or "tier: 3" (got ${o.tier === undefined ? 'nothing' : JSON.stringify(o.tier)})`);
+    // Every source links to the paper itself (AGENTS.md rule 4), so a reader can open it from the lesson.
+    const url = o.url === undefined || o.url === null ? '' : String(o.url).trim();
+    if (!/^https:\/\/\S+$/.test(url)) fail(file, `source ${n + 1} needs an https link in "url" (got ${url ? JSON.stringify(url) : 'nothing'})`);
     return {
       cite: String(o.cite),
-      url: o.url ? String(o.url) : undefined,
+      url,
       grade: o.grade ? String(o.grade) : undefined,
       tier: tier as 1 | 2 | 3,
       note: o.note ? String(o.note) : undefined,
     };
   });
+}
+
+/** The date of the last passed source check, as YYYY-MM-DD, or undefined when the lesson is unchecked. */
+function checkedDate(data: Record<string, unknown>, file: string): string | undefined {
+  const v = data.checked;
+  if (v === undefined || v === null || v === '') return undefined;
+  const s = v instanceof Date ? v.toISOString().slice(0, 10) : String(v);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(s) || Number.isNaN(Date.parse(s))) fail(file, `"checked" must be a date as YYYY-MM-DD (got ${JSON.stringify(s)})`);
+  return s;
 }
 
 export function parseCourseFolder(dir: string): Course {
@@ -205,6 +217,7 @@ export function parseCourseFolder(dir: string): Course {
       title: str(data, 'title', path),
       order,
       status: str(data, 'status', path, false) || 'draft',
+      checked: checkedDate(data, path),
       sources: parseSources(data.sources, path),
       blocks,
       itemIds: items.map((it) => it.id),
