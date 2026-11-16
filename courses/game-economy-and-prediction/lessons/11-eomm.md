@@ -29,7 +29,7 @@ Matchmaking usually aims for fair games. EOMM aims for something else: pick oppo
 
 Chen and colleagues (Northeastern University and EA, WWW 2017) treat the waiting pool as a graph. Every possible pair gets a weight: both players' predicted churn risk if they are matched. A standard algorithm then picks the set of pairs with the lowest total risk. Three parts make it work: a skill model (Glicko) that predicts win, loss or draw for each pair, a churn model that predicts each player's risk given their recent history and that outcome, and the matching algorithm. Here "churn" means no 1-vs-1 match in the next eight hours.
 
-The evidence is a simulation built on 36.9 million real matches by 1.68 million players from the first half of 2016. Bots were drawn from real player states and paired by four methods, 10,000 rounds per pool size. EOMM retained on average 0.7% more players per round than skill-based matching, and was not significantly better than random pairing at the smallest pool of 100. The authors extrapolate that over 20 rounds this compounds to about 15% more players retained. Skill-based matching did not consistently beat random pairing.
+The evidence is a simulation built on 36.9 million real matches by 1.68 million players from the first half of 2016. Bots were drawn from real player states and paired by four methods, 10,000 rounds per pool size. Averaged over pools of 200 to 500, EOMM retained 0.7% more players per round than skill-based matching. At the smallest pool of 100 it retained fewer than skill-based matching and was not significantly better than random pairing. The authors extrapolate that over 20 rounds this compounds to about 15% more players retained. Skill-based matching did not consistently beat random pairing.
 
 Read the limits closely. Nothing was tested on live players. The same churn model chose the pairs and then decided in the simulation who churned, so the result shows the method optimises its own model, not that real players would stay. And the paper says the objective can be swapped for playtime or spending. That last point is where the ethics start: a matchmaker can be tuned for a business metric, and players can't see what it optimises.
 
@@ -41,7 +41,7 @@ Why can matching unequal players sometimes keep more people playing than fair ma
 
 <details>
 <summary>Model answer</summary>
-Churn risk depends on the player's state, not only on skill. A player on a losing streak is much more likely to quit after another loss, while a player on a winning streak can absorb a loss. Pairing them so the fragile player is likely to win lowers total risk, even though the game is unfair. The paper shows the state-dependent churn rates and proves skill matching is optimal only under a simple assumption; this example is my illustration, grade C.
+Churn risk depends on the player's recent history, not only on skill, and the effect differs a lot between players. In the EA data, some recent histories were followed by almost twice the churn of others. If one player's risk jumps after a loss and another's barely moves, an uneven match that the fragile player is likely to win can lower the total risk, even though it is unfair. The paper shows that churn rates depend on recent results and proves skill matching is optimal only under a simple assumption; this example is my illustration, grade C.
 </details>
 
 ## Scenario
@@ -72,7 +72,7 @@ How was EOMM evaluated, and what was the average gain over skill-based matching?
 
 <details>
 <summary>Answer</summary>
-In a simulation built from real EA match data, not on live players. It retained about 0.7% more players per round.
+In a simulation built from real EA match data, not on live players. About 0.7% more players per round in pools of 200 to 500; at a pool of 100 it did worse than skill-based matching.
 </details>
 
 ### gd-econ/eomm/r3 · recall
@@ -86,5 +86,5 @@ No 1-vs-1 match within the next eight hours.
 
 ## Sources and grades
 
-- Chen et al. 2017, full text read on arXiv. Grade A for the method, the dataset size, the churn table and the simulation results. The paper doesn't name the game.
+- Chen et al. 2017, read on arXiv (introduction, method, case study, results, conclusion). Grade A for the method, the dataset size, the churn table and the simulation results. The paper doesn't name the game.
 - Whether EOMM or anything like it runs in a live game is not stated in the paper. Studio matchmaking practice is unpublished, so this lesson says nothing about current use.

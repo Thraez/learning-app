@@ -95,7 +95,7 @@ They often predicted no purchases for players who kept spending, and they consis
 
 ## Sources and grades
 
-- Viljanen et al., full text read on arXiv. Grade A for the dataset, the median, mean and hazard figures, the log-rank results and the cohort caveat. Publication venue not confirmed. One small in-development game.
-- Periáñez et al., full text read on arXiv. Grade A for the Brier scores. Chen et al. 2018 cites it as DSAA 2016.
-- Chen et al. 2018, full text read on arXiv. Grade A for the two weaknesses of the parametric models.
+- Viljanen et al., read on arXiv (introduction, data, metrics and log-rank sections). Grade A for the dataset, the median, mean and hazard figures, the log-rank results and the cohort caveat. Publication venue not confirmed. One small in-development game.
+- Periáñez et al., read on arXiv (method, results and tables). Grade A for the Brier scores. Chen et al. 2018 cites it as DSAA 2016.
+- Chen et al. 2018, read on arXiv (method, dataset and results). Grade A for the two weaknesses of the parametric models.
 - All three use confidential studio data.

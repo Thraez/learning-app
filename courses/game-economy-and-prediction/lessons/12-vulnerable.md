@@ -93,6 +93,6 @@ The direction of cause. Loot boxes may lead to problem gambling, problem gambler
 
 ## Sources and grades
 
-- Zendle and Cairns 2018 and 2019, full texts read (York repository copies of the PLOS ONE papers). Grade A for the samples, effect sizes and stated limits.
-- Close et al. 2021, accepted manuscript read (Wolverhampton repository). Grade A for its figures; the published version may differ slightly.
-- All three are self-report surveys of adults, mostly English-speaking. The link to spend prediction models is my inference, grade C. I found no published study of whale-detection models and vulnerable players.
+- Zendle and Cairns 2018 and 2019, abstracts, methods, results and limitations read (York repository copies of the PLOS ONE papers). Grade A for the samples, effect sizes and stated limits.
+- Close et al. 2021, abstract, introduction and methods of the accepted manuscript read (Wolverhampton repository). Grade A for the abstract's figures; the published version may differ slightly.
+- All three rest on self-report surveys. Zendle and Cairns surveyed adults in English; the pooled data in Close et al. also includes a 16 to 18 year old cohort. The link to spend prediction models is my inference, grade C. I found no published study of whale-detection models and vulnerable players.

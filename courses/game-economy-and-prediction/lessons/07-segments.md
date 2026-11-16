@@ -36,7 +36,7 @@ Drachen and colleagues compared common methods on playtime and levelling speed f
 
 Two more points from the paper. The number of groups is a judgment call, since unsupervised methods have no objective cutoff; here the authors picked eight by weighing variance explained against a usable number of profiles. And the paper uses only two variables from one game, so it shows that the choice matters, not which method is best in general.
 
-An earlier paper by the same group (CIG 2012) clustered 260,000 characters from Tera and Battlefield: Bad Company 2 with k-means and SIVM. Its abstract says the two algorithms gave different insights into the same players, and that the results are only useful when read together with the game's design.
+An earlier paper by the same group (CIG 2012) clustered 260,000 characters from Tera and Battlefield: Bad Company 2 with k-means and SIVM. Its abstract says the two algorithms gave different insights into the same players, and that the clustering was combined with considerations of each game's design to get actionable profiles.
 
 ## Why
 
@@ -91,6 +91,6 @@ The authors picked eight by weighing variance explained against a useful number 
 
 ## Sources and grades
 
-- Drachen et al., arXiv:1407.3950, full text read on arXiv. Grade A for the dataset, the method comparison and the k = 8 choice. I could not confirm where it was published.
+- Drachen et al., arXiv:1407.3950, read on arXiv (introduction, data, methods, results and conclusions). Grade A for the dataset, the method comparison and the k = 8 choice. I could not confirm where it was published.
 - Drachen et al. 2012 (CIG), abstract read on a catalogue mirror (manuscript.isc.ac). Grade A for the abstract's claims only. I did not see its segments or figures, so this lesson gives none.
-- Both studies use two to three games and few variables. How studios segment players in practice is mostly unpublished, as the 2014 paper itself notes.
+- The 2014 comparison uses one game and two variables; the 2012 paper covers two games. How studios segment players in practice is mostly unpublished, as the 2014 paper itself notes.

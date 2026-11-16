@@ -87,5 +87,5 @@ It shows whether a system can produce a dynamic effect and which values to tune.
 ## Sources and grades
 
 - Dormans 2011, full text read (AAAI workshop PDF). Grade A for the framework, the SimWar results and the stated limits.
-- The planned source was Adams and Dormans 2012, *Game Mechanics: Advanced Game Design*, a book I could not open, so I swapped in this paper by the same author.
+- The planned source was Adams and Dormans 2012 (book). I did not try to get the book, since an open paper by the same author covers the simulation method, so I used that instead.
 - The evidence is thin: one hypothetical game, simple bots, no comparison with real players. Studio use of economy simulation for free-to-play games is mostly unpublished.

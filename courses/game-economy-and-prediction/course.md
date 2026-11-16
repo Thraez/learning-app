@@ -10,7 +10,7 @@ audience: designer with a game design degree and three years in the industry
 
 # Game economies, telemetry and prediction models
 
-**Status: draft.** Written overnight without the usual approval step, so you could try it on waking. Read this page, take the placement quiz, try lesson 1, then approve the course or redirect it. Anything you say goes into version 0.2.
+**Status: draft.** Written overnight without the usual approval step, so you could try it on waking. Read this page, take the placement quiz, try lesson 1, then approve the course or redirect it. Anything you say goes into the next version.
 
 ## Start here
 
@@ -75,5 +75,5 @@ Assumed known from your degree and work: what F2P is, retention cohorts (D1, D7)
 
 ## Change log
 
-- 0.2.0 (2026-11-16): lessons 7 to 12 written, every source opened and graded. Lesson 7 uses the open 2014 arXiv comparison by Drachen and colleagues as its main source, with the 2012 CIG paper from its abstract only. Lesson 8 found one games uplift study (Wei et al. 2024, Tencent preprint) and leans on Ascarza 2018 (marketing, abstract) and a review. Lesson 9 adds Viljanen et al. 2017 on playtime survival analysis. Lesson 10 swaps the Adams and Dormans book, which I could not open, for Dormans 2011. Lesson 11 keeps EOMM; it is a simulation, not a live test. Lesson 12 uses three loot box surveys; the link to spend models is graded C. Thin spots: no published check of a pre-launch economy simulation against live data, and no published study of whale models and vulnerable players. No placement quiz items added.
+- 0.2.0 (2026-11-16): lessons 7 to 12 written, every source opened and graded. Lesson 7 uses the open 2014 arXiv comparison by Drachen and colleagues as its main source, with the 2012 CIG paper from its abstract only. Lesson 8 found one games uplift study (Wei et al. 2024, Tencent preprint) and leans on Ascarza 2018 (marketing, abstract) and a review. Lesson 9 adds Viljanen et al. 2017 on playtime survival analysis. Lesson 10 uses Dormans 2011, an open paper by the same author, instead of the Adams and Dormans book, which I did not try to get. Lesson 11 keeps EOMM; it is a simulation, not a live test. Lesson 12 uses three loot box surveys; the link to spend models is graded C. Thin spots: no published check of a pre-launch economy simulation against live data, and no published study of whale models and vulnerable players. No placement quiz items added.
 - 0.1.0 (2026-11-16): first draft. Course page, placement quiz, lessons 1 to 6. Same day: checked lesson 1 and 3 figures against the paper and slides, regraded the Hadiji 2014 source from its abstract, added two concept items to the quiz.

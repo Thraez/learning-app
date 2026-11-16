@@ -9,7 +9,7 @@ sources:
     url: https://doi.org/10.1509/jmr.16.0163
     grade: A
     note: abstract
-  - cite: "Gutierrez, Gérardy (2016). Causal Inference and Uplift Modelling: A Review of the Literature. PMLR 67, 1-13."
+  - cite: "Gutierrez, Gérardy (2016). Causal Inference and Uplift Modeling: A Review of the Literature. PMLR 67, 1-13."
     url: http://proceedings.mlr.press/v67/gutierrez17a/gutierrez17a.pdf
     grade: A
   - cite: "Wei, Qiu, Li, Sun, Li (2024). Multi-Treatment Multi-Task Uplift Modeling for Enhancing User Growth. arXiv:2408.12803."
@@ -35,13 +35,13 @@ The customers with the highest churn risk were not necessarily the best targets.
 
 A retention offer is worth giving to a player only if it changes what that player does. Churn risk doesn't measure that. The measure you want is uplift: the player's outcome with the offer minus their outcome without it.
 
-The catch is that you never see both outcomes for the same player. Each player either got the offer or didn't. Gutierrez and Gérardy call this the counterfactual problem and point out that uplift modelling relies on randomized experiments: some players get the offer at random, some don't, and a model learns from the difference. The simplest method, the two-model approach, trains one model on the treated group and one on the control group and subtracts their predictions. Because no single player's uplift can be observed, these models are judged on groups, for example by deciles or uplift curves, not player by player.
+The catch is that you never see both outcomes for the same player. Each player either got the offer or didn't. Gutierrez and Gérardy point out that uplift modelling relies on randomized experiments: some players get the offer at random, some don't, and a model learns from the difference. The simplest method, the two-model approach, trains one model on the treated group and one on the control group and subtracts their predictions. Because no single player's uplift can be observed, these models are judged on groups, for example by deciles or uplift curves, not player by player.
 
 The review also names a type that makes risk-based targeting dangerous: the "sleeping dog", a customer who churns because they were contacted and would have stayed otherwise.
 
 Ascarza's paper (marketing, not games) tested the standard practice in two field experiments. Its abstract says retention programmes are sometimes futile "not because firms offer the wrong incentives" but because of the targeting rule, and that targeting by sensitivity to the intervention was significantly more effective than targeting the highest-risk customers. This fits lesson 6, where free currency for predicted churners did nothing.
 
-In games, a 2024 Tencent preprint (Wei and colleagues) built an uplift model for in-game bonuses, trained on over 10 million samples from randomized trials on their gaming platform, with next-day login and more games over 7 days as outcomes. They report that low-activity players were more likely to play the next game when given a higher-valued bonus, while highly active players often kept playing regardless. The model is deployed, but the paper reports offline scores, not the live effect.
+In games, a 2024 Tencent preprint (Wei and colleagues) built an uplift model for in-game bonuses, trained on over 10 million samples from randomized trials on their gaming platform, with next-day login and more games over 7 days as outcomes. They report that low-activity players were more likely to play the next game when given a higher-valued bonus, while highly active players often kept playing regardless. The model is deployed, and the paper charts activity growth on the live server, but its text gives no live uplift figures.
 
 ## Why
 
@@ -97,6 +97,6 @@ Someone who leaves because they were contacted and would have stayed if left alo
 ## Sources and grades
 
 - Ascarza 2018, abstract read via Crossref. Grade A for the abstract's claims. I did not see the effect sizes or the settings of the two experiments, so this lesson gives none.
-- Gutierrez and Gérardy, full text read. Grade A for the counterfactual problem, the two-model approach, group-level evaluation and the sleeping dog definition.
-- Wei et al. 2024, full text read on arXiv. Grade A for what the paper reports, but it is a preprint from a company platform with confidential data and no live effect sizes.
+- Gutierrez and Gérardy, read the introduction, causal framework, the two-model approach and the evaluation section. Grade A for the counterfactual problem, the two-model approach, group-level evaluation and the sleeping dog definition.
+- Wei et al. 2024, read on arXiv (introduction, datasets, results and deployment sections). Grade A for what the paper reports, but it is a preprint from a company platform with confidential data, and the live results appear only in a chart I could not read as numbers.
 - Published uplift studies in games are rare. I found one; most studio practice is unpublished.
