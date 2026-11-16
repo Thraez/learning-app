@@ -10,8 +10,8 @@ course. The goal is learning that lasts weeks, not passing a test. The spec is t
 `Workspace/Inbox/claude - Learning App Purpose.md`; the evidence behind it is
 `Workspace/Inbox/claude - Learning Science for a Learning App.md` (finding numbers below refer to it).
 
-No app code exists yet. Building the app, choosing a host, adding a remote and any scheduled task each need the user's
-yes first.
+The app is a static phone web app (PWA) in this repo, hosted on GitHub Pages from the public repo `Thraez/learning-app`
+(the user's yes, 2026-11-16). Any scheduled task, a server, sign-in or a new host each need the user's yes first.
 
 ## Rules
 
@@ -44,6 +44,26 @@ yes first.
 | `courses/<course-folder>/course.md` | one-page course draft: direction, questions, concept map, lesson list, sources, change log |
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
+| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `export.ts` |
+| `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
+| `src/sw-template.js` | service worker; the build fills in the file list |
+| `test/` | parser tests against the real course files, scheduler and export tests |
+| `docs/export-schema.md` | the export file format; change it with `src/export.ts` |
+| `public/` | web manifest and icons (`npm run icons` redraws the icons) |
+| `.github/workflows/pages.yml` | tests and builds every PR; deploys `main` to GitHub Pages |
+
+## Building the app
+
+Node 20 or later. `npm ci`, then `npm test` (parser, scheduler, export), `npm run build` (writes `dist/`), and
+`npm run dev` for a local server. A merge to `main` deploys to https://thraez.github.io/learning-app/ within a few
+minutes; the phone picks it up the next time the app is opened online and shows a Reload bar.
+
+The parser reads every `courses/*/course.md`, `placement-quiz.md` and `lessons/*.md` at build time, so a new lesson
+needs no app change. It fails the build, with the file and the reason, on a broken item heading, an unknown type, an ID
+outside its lesson, a duplicate ID, a missing `<details>` answer, or an answer block with no item heading. Run
+`npm test` before committing course files. Placement answers end with "Lesson N." so the app can map each item to a
+lesson; the test checks that every placement item does. The app keys every stored answer by item ID, which is why rule
+4 matters: a renamed ID splits an item's history in two.
 
 ## Lesson file format
 

@@ -1,0 +1,123 @@
+:root {
+  --bg: #f7f5f0;
+  --fg: #1d1d1b;
+  --muted: #5f6368;
+  --card: #ffffff;
+  --line: #d9d6cf;
+  --accent: #1f3a5f;
+  --right: #2e7d32;
+  --partly: #a66a00;
+  --wrong: #b3261e;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161a1f;
+    --fg: #e8e6e1;
+    --muted: #a0a6ad;
+    --card: #20262d;
+    --line: #38404a;
+    --accent: #8fb4e3;
+    --right: #81c784;
+    --partly: #e0b050;
+    --wrong: #ef8a80;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 18px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem calc(5rem + env(safe-area-inset-bottom));
+}
+h1 { font-size: 1.5rem; line-height: 1.25; margin: 0.5rem 0 1rem; }
+h2 { font-size: 1.15rem; margin: 1.75rem 0 0.5rem; }
+a { color: var(--accent); }
+.back { display: inline-block; margin-top: 0.25rem; font-size: 0.9rem; text-decoration: none; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+.card, .item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+}
+.card h2 { margin-top: 0.25rem; }
+.card h2 a { text-decoration: none; }
+.item-kind { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.prompt p:first-child { margin-top: 0.4rem; }
+textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 16px; /* 16px or more stops iOS from zooming in */
+  padding: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+}
+.row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.6rem 0; }
+button, .button {
+  font: inherit;
+  font-size: 1rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+button.primary, .button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); margin: 0.5rem 0; }
+button:disabled { opacity: 0.6; }
+.chip { min-height: 40px; padding: 0.3rem 0.8rem; border-radius: 20px; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.answer { border-top: 1px solid var(--line); margin-top: 0.75rem; padding-top: 0.5rem; }
+.answer-label { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+.mark { flex: 1; justify-content: center; }
+.mark-right { border-color: var(--right); color: var(--right); }
+.mark-partly { border-color: var(--partly); color: var(--partly); }
+.mark-wrong { border-color: var(--wrong); color: var(--wrong); }
+.marked { font-weight: 600; margin-top: 0.6rem; }
+.marked-right { color: var(--right); }
+.marked-partly { color: var(--partly); }
+.marked-wrong { color: var(--wrong); }
+.prose ul, .prose ol { padding-left: 1.25rem; }
+.prose table { border-collapse: collapse; font-size: 0.85rem; display: block; overflow-x: auto; }
+.prose td, .prose th { border: 1px solid var(--line); padding: 0.25rem 0.4rem; }
+ol.lessons { padding-left: 0; list-style: none; }
+ol.lessons li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1rem; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+.course-page { margin-top: 2rem; }
+.course-page summary { cursor: pointer; color: var(--accent); }
+nav.bottom {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  padding: 0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom));
+}
+nav.bottom a { padding: 0.5rem; text-decoration: none; }
+#update-bar {
+  position: fixed;
+  left: 0; right: 0; top: 0;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.5rem 1rem calc(0.5rem);
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  display: flex; gap: 1rem; align-items: center; justify-content: center;
+}
