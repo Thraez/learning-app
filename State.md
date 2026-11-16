@@ -10,8 +10,8 @@ every answer so Claude can revise the course.
 
 ## Where it stands
 
-- Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main` at b7216aa (PRs #1
-  to #4 and #6 to #9 merged).
+- Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main` at 5ff4c52 (PRs #1
+  to #4 and #6 to #10 merged).
 - App on `main`: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load,
   installable. Course list, lessons, placement quiz with a "where to start" summary, review sessions, self-marking,
   Progress (late recall at 14+ days), Export as JSON (`docs/export-schema.md`, schema 2), restore from an export that
@@ -20,17 +20,14 @@ every answer so Claude can revise the course.
 - Lesson check pipeline on `main` (`AGENTS.md`, "Checking a lesson"): writer and checker are never the same context,
   a claim ledger per lesson, `checked: <date>` in a lesson's front matter once every row passes.
 - Course 1 on `main`, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz,
-  version 0.3.1 (lessons 2 and 5 fixed from the pilot). No lesson is marked checked on `main` yet; that is PR #10.
+  version 0.3.2. All 12 lessons are checked against their sources (PR #10, merged 2026-11-16): a ledger each under
+  `ledgers/`, every row `matches` or `inference`, `checked: 2026-11-16` in each lesson. No item ID changed.
 - Private learner state (interest profile, exports) lives in the private vault at `Workspace/Learning/`, never here.
   That folder is committed locally in the Workspace repo and not pushed.
 - Not checked on a real phone. The share-sheet export on iPhone is untested. No note shows the app has been used yet.
 
 ## Open pull requests (a merge deploys)
 
-- **PR #10, game economy check (course 0.3.2).** All 12 lessons checked against their sources, with a ledger each;
-  every row is `matches` or `inference`, so all 12 carry `checked: 2026-11-16`. Fixes in ten lessons, no item ID
-  changed. Tests, build and dash grep pass. It was meant to be merged under the user's delegation, but the merge
-  command was refused by Claude Code's permission check, so the user merges it.
 - **PR #5, course 2 (learning how to learn, id `learn`, 0.2.0).** Lessons 1 to 5 written and checked, 12 planned, a
   14-item placement quiz. `course.md` declares `lessons_planned: 12`, so the quiz may point at lessons 6 to 11 before
   they exist; the app shows those as planned and never recommends starting there. The user merges this one. Lesson
@@ -52,7 +49,7 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 
 ## Waiting on the user
 
-1. Merge PR #10 and PR #5, or ask for changes.
+1. Merge PR #5, or ask for changes.
 2. Install the app, take a placement quiz and lesson 1. Nothing can be judged until late-recall data exists.
 
 ## Next
