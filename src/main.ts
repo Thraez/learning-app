@@ -525,7 +525,7 @@ function settingsScreen() {
   const settings = getSettings();
 
   main.append(el('h2', {}, 'Experiments'));
-  main.append(el('p', { class: 'muted small' }, 'Both are off until you switch them on. An item keeps its arm for good, even if you switch the experiment off and on again. Each answer records which arm it got.'));
+  main.append(el('p', { class: 'muted small' }, 'Both are on unless you switch them off here. An item keeps its arm for good, even if you switch the experiment off and on again. Each answer records which arm it got.'));
   for (const exp of EXPERIMENTS) {
     const cb = el('input', { type: 'checkbox', id: `exp-${exp.id}` });
     cb.checked = experimentOn(settings, exp.id);

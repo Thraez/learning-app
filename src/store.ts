@@ -73,7 +73,7 @@ export type Assignments = Record<string, Record<string, { arm: string; assignedA
 
 export type WholeAppValue = { value: string; since: string; until: string | null };
 export interface Settings {
-  /** Experiment id -> on. Missing means off. */
+  /** Experiment id -> on. Missing means on (the default); a stored `false` means the owner switched it off. */
   experiments: Record<string, boolean>;
   /** Whole-app variant id -> its value, when it was switched on, and an optional last day (YYYY-MM-DD). */
   whole: Record<string, WholeAppValue>;

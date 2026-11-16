@@ -16,7 +16,7 @@ commit.
 | `courses` | the courses in that build (below) |
 | `sessions` | every session, oldest first (below) |
 | `assignments` | the arm each item was given in each experiment, `{ [itemId]: { [experimentId]: { arm, assignedAt } } }`; `{}` if none |
-| `settings` | the Settings screen state `{ experiments, whole }` (below), or `null` if the user never changed one |
+| `settings` | the Settings screen state `{ experiments, whole }` (below), or `null` if the user never changed one, which means the defaults (experiments on) |
 | `items` | one entry per item the user has answered at least once, sorted by ID (below) |
 
 All times are UTC ISO 8601 strings.
@@ -87,7 +87,10 @@ replaying the attempts through FSRS at export time, so it can always be recomput
 
 ## Experiments, settings and assignments
 
-Experiments are off by default and switched on in Settings. An item gets one arm of an experiment once, at random
+Experiments are on by default and can be switched off in Settings (before 2026-11-16 they were off by default).
+In `settings.experiments` a missing key means on and only `false` means off, so `settings: null` means the
+defaults: both experiments on, review length `standard`. An answer's own `variant` field always records what applied
+when it was given. An item gets one arm of an experiment once, at random
 (balanced within its lesson), and keeps it.
 
 | Experiment | Eligible items | Arms |
