@@ -6,12 +6,10 @@ order: 6
 status: draft
 sources:
   - cite: "Runge, Gao, Garcin, Faltings (2014). Churn prediction for high-value players in casual social games. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932875."
-    url: https://manuscript.isc.ac/Inventory/49/130212.htm
+    url: https://doi.org/10.1109/CIG.2014.6932875
     grade: A
-    note: abstract
-  - cite: "Game Developer, Churn prediction and prevention in high value players (write-up of the same work)."
-    url: https://www.gamedeveloper.com/business/churn-prediction-and-prevention-in-high-value-players
-    grade: B
+    tier: 1
+    note: abstract only, read on IEEE Xplore
 ---
 
 # Lesson 6: Predicting who leaves is not knowing what keeps them
@@ -20,20 +18,20 @@ sources:
 
 ### gd-econ/predict-vs-act/open · open
 
-A team built a churn model for high-value players in two casual social games with millions of players. Then they ran an A/B test: players the model flagged as about to leave got free premium currency. Guess: did the gift lower churn or raise spending?
+In 2014, Julian Runge and colleagues built a churn model for high-value players in two casual social games with millions of players each. Then they ran an A/B test in one game: players the model flagged as about to leave got free in-game currency. Guess: did the gift lower churn or raise spending?
 
 <details>
 <summary>Answer</summary>
-No. The free currency had no significant effect on churn or on spending.
+Neither. The free currency had no significant effect on churn or on spending.
 </details>
 
 ## The idea
 
 A churn model tells you who is likely to leave. It does not tell you what will make them stay. That needs its own test.
 
-Runge and colleagues (2014) compared four classifiers on two casual social games (Diamond Dash and Monster World, per the write-up below) and added a hidden Markov model to track changes over time. A neural network had the best AUC. Then they acted on the predictions in an A/B test. The abstract's finding: giving out free in-game currency did not significantly change churn or monetization. One thing did help: contacting players shortly before the predicted churn point made the communication itself work better. The authors suggest cross-promoting the studio's other games to players who are about to leave, instead of trying to hold them.
+[Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) (peer-reviewed at IEEE CIG 2014) compared four common classifiers on the two games and added a hidden Markov model to track changes over time. A neural network had the best AUC. Then they acted on the predictions in an A/B test. The abstract's finding: giving out free in-game currency did not significantly change churn or monetization. One thing did help: contacting players shortly before the predicted churn point "substantially improves" how well the communication works.
 
-A secondary write-up (grade B) adds that in the Monster World test, the group targeted by the model did no better than a group picked by a simple rule.
+From this the authors draw a strong conclusion: players can only be kept by "remarkably changing their gameplay experience" before they would leave, and pointing them to the studio's other games may work better than trying to hold them. The abstract even lists, as a last resort, passing leaving players on to other companies through in-game ads. These are the authors' suggestions; the test covered one kind of gift in one game.
 
 Compare lesson 1. In Top Eleven, more free currency at the start raised retention. Here, free currency handed to players already on their way out did nothing measurable. Same lever, different players and timing, different result. That is the case for testing each intervention on the group you will use it on. (The comparison across the two studies is my inference, grade C.)
 
@@ -45,7 +43,7 @@ Why can a model that predicts churn well still be useless for deciding who shoul
 
 <details>
 <summary>Model answer</summary>
-Being likely to leave and being moved by an offer are different things. Some flagged players will leave whatever you do, some would have stayed anyway, and only the ones in between are worth an offer. A churn model ranks the first property, not the second. Finding the movable group needs an experiment, or a model trained on experiment results, often called uplift modelling. The uplift framing is mine, grade C; lesson 8 is planned to source it.
+Being likely to leave and being moved by an offer are different things. Some flagged players will leave whatever you do, some would have stayed anyway, and only the ones in between are worth an offer. A churn model ranks the first property, not the second. Finding the movable group needs an experiment, or a model trained on experiment results, called uplift modelling. Lesson 8 covers it with sources; this framing here is my summary, grade C.
 </details>
 
 ## Scenario
@@ -85,11 +83,11 @@ What did the authors suggest doing with players likely to leave?
 
 <details>
 <summary>Answer</summary>
-Cross-promote the studio's other games to them.
+Cross-promote the studio's other games to them, or change their game experience a lot before they would leave.
 </details>
 
 ## Sources and grades
 
-- Runge et al. 2014, abstract read on a catalogue mirror. Grade A for its claims. The full paper was not opened, so effect sizes and sample sizes per arm are not given.
-- Game Developer write-up of the same work. Grade B for the comparison of the model-picked group with the rule-picked group.
-- One studio, two casual games, one kind of incentive. Published tests of retention offers are rare, so this result can't be generalised far.
+- [Runge et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932875), abstract read on IEEE Xplore. Grade A for its claims, tier 1 (peer-reviewed). The full paper is paywalled and was not opened, so effect sizes, sample sizes per arm and the games' names are not given.
+- Cut: a Game Developer trade-press write-up of the same work. It was the only source for the games' names and for the claim that the model-picked group did no better than a rule-picked group, so both claims are gone.
+- One studio, two casual games, one kind of gift. Published tests of retention offers in games are rare, so this result can't be generalised far.

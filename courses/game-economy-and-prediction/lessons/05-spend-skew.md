@@ -5,17 +5,21 @@ title: Spend is mostly zero and very concentrated
 order: 5
 status: draft
 sources:
-  - cite: "Sifa, Hadiji, Runge, Drachen, Kersting, Bauckhage (2015). Predicting Purchase Decisions in Mobile Free-to-Play Games. AIIDE 2015, pp. 79-85."
-    url: https://ojs.aaai.org/index.php/AIIDE/article/view/12788
+  - cite: "Close, Spicer, Nicklin, Uther, Lloyd, Lloyd (2021). Secondary analysis of loot box data: Are high-spending whales wealthy gamers or problem gamblers? Addictive Behaviors 117, 106851. DOI 10.1016/j.addbeh.2021.106851."
+    url: https://doi.org/10.1016/j.addbeh.2021.106851
     grade: A
-    note: abstract
-  - cite: "Swrve press releases, January and July 2014 monetization reports."
-    url: https://www.prnewswire.com/news-releases/swrve-finds-015-of-mobile-gamers-contribute-50-of-all-in-game-revenue-247246771.html
-    grade: B
-  - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018; arXiv:1811.12799."
-    url: https://arxiv.org/abs/1811.12799
+    tier: 1
+    note: abstract read (PubMed record of the published version)
+  - cite: "Sifa, Hadiji, Runge, Drachen, Kersting, Bauckhage (2015). Predicting Purchase Decisions in Mobile Free-to-Play Games. AIIDE 2015, pp. 79-85. DOI 10.1609/aiide.v11i1.12788."
+    url: https://doi.org/10.1609/aiide.v11i1.12788
     grade: A
-    note: B for the 2% and 50% revenue figure, which the abstract does not source
+    tier: 1
+    note: abstract only, read on the AAAI publisher page
+  - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
+    url: https://doi.org/10.1109/BigData.2018.8622151
+    grade: A
+    tier: 1
+    note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without data
 ---
 
 # Lesson 5: Spend is mostly zero and very concentrated
@@ -24,20 +28,20 @@ sources:
 
 ### gd-econ/spend-skew/open · open
 
-A mobile analytics vendor looked at one month of in-app purchases across many free-to-play games in early 2014. Guess: what share of players brought in half of that month's in-game revenue?
+Psychologists pooled every open survey dataset on loot box buying they could find: 7,767 people who buy loot boxes. Most spent modest amounts, under $20 a month. Guess: what share of these buyers accounted for half of all the loot box spending?
 
 <details>
 <summary>Answer</summary>
-0.15%, according to Swrve's January 2014 report. That is about one player in 670. The grade is B; see below.
+The top 5%, the ones spending over $100 a month. One buyer in twenty brought half the money.
 </details>
 
 ## The idea
 
-In free-to-play, most players spend nothing and a tiny group brings most of the money. So "how much will this player spend" is really two questions: will they pay at all, and if so, how much.
+In free-to-play, most players spend nothing and a small group brings much of the money. So "how much will this player spend" is really two questions: will they pay at all, and if so, how much.
 
-The figures on concentration come mostly from industry, not peer review. Swrve's press releases (grade B) reported that 0.15% of players brought 50% of in-game revenue in January 2014, and that by July 2014, 0.13% brought 62%, with only 1.35% of players paying at all. Chen and colleagues' 2018 abstract says "up to 50%" of free-to-play revenue comes from "around 2%" of players, but gives no source for the figure there (grade B). The numbers differ a lot because they measure different things over different games and windows. What they agree on is the shape: mostly zeros, then a very long tail.
+Good public numbers on this are scarce. The pooled loot box data comes from [Close and colleagues](https://doi.org/10.1016/j.addbeh.2021.106851), a peer-reviewed secondary analysis of self-report surveys: the top 5% of buyers made up half of loot box revenue. Those are survey answers from loot box buyers, not sales records from games, and they cover loot boxes only. In a studio paper on the mobile RPG Age of Ishtaria, [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) define a "whale" by sorting players by monthly spend and drawing the line where the top spenders reach half of the month's revenue. They say whales are "around 2%" of players and "may provide up to 50%" of revenue, but show no count behind the 2%, so that figure is grade B. The often quoted claim that 0.15% of players bring half of mobile game revenue comes from a 2014 vendor press release; it is not used here.
 
-That shape drives how spend is modelled. Sifa and colleagues (AIIDE 2015, 100,000 players from a Wooga puzzle game) split the problem in two: a classifier for whether a player will purchase, and a regression for how many purchases a payer will make, both as decision and regression trees so the rules could be acted on. Chen and colleagues compared deep neural networks with Pareto/NBD, a classic parametric model of customer purchases, for predicting lifetime value, and report that convolutional networks did best and were well suited to spotting future high spenders early.
+That shape drives how spend is modelled. [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) (peer-reviewed at AIIDE 2015, a 100,000-player dataset) open with the point that "only a small fraction of the players makes any purchases" and split the problem in two: a classifier for whether a player will purchase, and a regression for how many purchases a payer will make, both as decision and regression trees so the rules could be acted on. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) compared deep neural networks with Pareto/NBD, a classic statistical model of customer purchases, for predicting lifetime value, and found convolutional networks did best and were well suited to spotting future whales early.
 
 ## Why
 
@@ -74,11 +78,11 @@ A classifier for whether a player will make a purchase, and a regression for how
 
 ### gd-econ/spend-skew/r2 · recall
 
-In Swrve's July 2014 report, what share of players paid at all?
+In the pooled loot box surveys, what share of buyers made up half of loot box revenue, and how much did they spend?
 
 <details>
 <summary>Answer</summary>
-1.35%. Grade B, from a press release.
+The top 5%, who spent over $100 a month. This is self-reported survey data on loot boxes only.
 </details>
 
 ### gd-econ/spend-skew/r3 · recall
@@ -92,7 +96,7 @@ Deep neural networks against parametric models such as Pareto/NBD. Convolutional
 
 ## Sources and grades
 
-- Sifa et al. 2015, abstract read on a DFKI publication page, and dataset details from a search digest of the paper. Grade A for the abstract. The paper's own figures (for example its share of paying players) were not read, so none are given.
-- Swrve 2014 figures, press releases seen through search results. Grade B. A vendor's own data, one month per report, not peer reviewed.
-- Chen et al. 2018, abstract read on arXiv. Grade A for the method and result claims, B for the "2% bring up to 50%" figure, which has no source in the abstract.
-- Up-to-date, peer-reviewed figures on spend concentration are scarce. Most current numbers are private or come from vendors.
+- [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed). Grade A, tier 1. The top 5% and $100 figures are from the abstract.
+- [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract read on the AAAI page. Grade A for the abstract, tier 1. The full PDF sits behind a bot check I could not pass, so the paper's own share of paying players and which game it used are not given.
+- [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI as the published version. Grade A, tier 1 for the method and results. Grade B for the "around 2%, up to 50%" whale figure, which the paper states without the count behind it.
+- Cut: the Swrve press release figures from the earlier draft. A vendor press release can't carry a fact under this course's standard. Peer-reviewed figures on spend concentration across many free-to-play games are something I did not find.

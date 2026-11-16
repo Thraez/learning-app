@@ -8,7 +8,7 @@ items: 12
 
 # Placement quiz
 
-About 10 to 15 minutes. These questions are about specific published studies, not general design knowledge, so expect to guess on many. That is fine: a wrong guess followed by the answer still helps you learn it (finding 7, grade B).
+About 10 to 15 minutes. These questions are about specific published studies, not general design knowledge, so expect to guess on many. That is fine: a wrong guess followed by the answer still helps you learn it. [Pan and Rivers 2023](https://doi.org/10.3758/s13421-022-01392-1), a peer-reviewed paper in Memory and Cognition, describe this pretesting effect as established; they state it as background rather than testing it, so it is grade B here.
 
 For each question, write or say your answer, mark how sure you were (sure, unsure, guess), then open the answer. Note the result next to the ID. Each question points at the lesson it places you into.
 
@@ -60,7 +60,7 @@ In a published telemetry study of a Microsoft racing game, how many of the game'
 
 <details>
 <summary>Answer</summary>
-12 of 29 (Project Gotham Racing 4, figure from slides, grade B). Lesson 3.
+12 of 29 (Project Gotham Racing 4, from the peer-reviewed ESEM 2012 paper). Lesson 3.
 </details>
 
 ### gd-econ/placement/p06 · recall
@@ -83,11 +83,11 @@ Churn is a rule each team picks, such as how many days without a login counts as
 
 ### gd-econ/placement/p08 · recall
 
-A 2014 vendor report on mobile free-to-play games: about what share of players brought in half of a month's in-game revenue? Pick one: 0.15%, 1.5%, 5%, 15%.
+Survey data pooled from 7,767 loot box buyers: about what share of the buyers accounted for half of all loot box spending? Pick one: 0.5%, 5%, 20%, 50%.
 
 <details>
 <summary>Answer</summary>
-0.15% (Swrve, January 2014, grade B). Lesson 5.
+5%, the buyers spending over $100 a month (Close and colleagues 2021, self-reported survey data). Lesson 5.
 </details>
 
 ### gd-econ/placement/p09 · recall

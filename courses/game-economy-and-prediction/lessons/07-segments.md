@@ -8,11 +8,13 @@ sources:
   - cite: "Drachen, Thurau, Sifa, Bauckhage (2014). A Comparison of Methods for Player Clustering via Behavioral Telemetry. arXiv:1407.3950."
     url: https://arxiv.org/abs/1407.3950
     grade: A
-    note: venue not confirmed
+    tier: 2
+    note: arXiv comment says Foundations of Digital Games 2013; no publisher record found, so treated as not peer-reviewed
   - cite: "Drachen, Sifa, Bauckhage, Thurau (2012). Guns, swords and data: Clustering of player behavior in computer games in the wild. IEEE CIG 2012, pp. 163-170. DOI 10.1109/CIG.2012.6374152."
-    url: https://manuscript.isc.ac/Inventory/49/579604.htm
+    url: https://doi.org/10.1109/CIG.2012.6374152
     grade: A
-    note: abstract
+    tier: 1
+    note: abstract only, read on IEEE Xplore
 ---
 
 # Lesson 7: The clustering method shapes the segments
@@ -21,22 +23,22 @@ sources:
 
 ### gd-econ/segments/open · open
 
-An analyst runs k-means on two years of playtime and levelling data and hands you eight player segments. You look at the eight average players and they all look much the same. Is the data telling you players are similar, or is something else going on?
+Researchers ran k-means on the playtime and levelling speed of 70,014 World of Warcraft characters and asked for eight player groups. When they plotted the groups' average players, the centroids were so alike they were hard to tell apart. Is the data telling you WoW players are similar, or is something else going on?
 
 <details>
 <summary>Answer</summary>
-Probably something else. K-means describes each group by its average player, and averages of large groups tend to look alike. A method that looks for extreme players instead gave clearly different profiles on the same kind of data.
+Something else. K-means describes each group by its average player, and averages of large groups tend to look alike. A method that looks for extreme players instead gave clearly different profiles on the same data.
 </details>
 
 ## The idea
 
 Clustering doesn't find the segments in your players. It finds the segments its own method is built to find, and different methods give different answers from the same data.
 
-Drachen and colleagues compared common methods on playtime and levelling speed for 70,014 World of Warcraft characters, sampled from about 18 million logged between 2005 and 2010 (data mined from a public site, with a few percent of values filled in). They set eight groups for every method. The results split three ways. PCA and NMF gave profiles that can't happen in the game, such as players losing levels. K-means gave legal profiles, but its centroids were so similar that they were hard to label. Archetypal analysis (run with an algorithm called SIVM) looks for extreme players on the edge of the data rather than averages, so each profile is a real player, and its profiles were clearly different from each other.
+[Drachen and colleagues](https://arxiv.org/abs/1407.3950) compared common methods on playtime and levelling speed for 70,014 World of Warcraft characters, sampled from about 18 million logged between 2005 and 2010 (data mined from a public site, with a few percent of values filled in). They set eight groups for every method. The paper is on arXiv; its own note says it was presented at Foundations of Digital Games 2013, but I found no publisher record, so treat it as not peer-reviewed. The results split three ways. PCA and NMF gave profiles that can't happen in the game, such as players losing levels. K-means gave legal profiles, but its centroids were so similar that they were hard to label. Archetypal analysis (run with an algorithm called SIVM) looks for extreme players on the edge of the data rather than averages, so each profile is a real player, and its profiles were clearly different from each other.
 
 Two more points from the paper. The number of groups is a judgment call, since unsupervised methods have no objective cutoff; here the authors picked eight by weighing variance explained against a usable number of profiles. And the paper uses only two variables from one game, so it shows that the choice matters, not which method is best in general.
 
-An earlier paper by the same group (CIG 2012) clustered 260,000 characters from Tera and Battlefield: Bad Company 2 with k-means and SIVM. Its abstract says the two algorithms gave different insights into the same players, and that the clustering was combined with considerations of each game's design to get actionable profiles.
+An [earlier paper by the same group](https://doi.org/10.1109/CIG.2012.6374152) (peer-reviewed, IEEE CIG 2012) clustered 260,000 characters from Tera and Battlefield: Bad Company 2 with k-means and SIVM. Its abstract says the two algorithms gave different insights into the same players, and that the clustering was combined with considerations of each game's design to get actionable profiles.
 
 ## Why
 
@@ -91,6 +93,6 @@ The authors picked eight by weighing variance explained against a useful number 
 
 ## Sources and grades
 
-- Drachen et al., arXiv:1407.3950, read on arXiv (introduction, data, methods, results and conclusions). Grade A for the dataset, the method comparison and the k = 8 choice. I could not confirm where it was published.
-- Drachen et al. 2012 (CIG), abstract read on a catalogue mirror (manuscript.isc.ac). Grade A for the abstract's claims only. I did not see its segments or figures, so this lesson gives none.
+- [Drachen et al., arXiv:1407.3950](https://arxiv.org/abs/1407.3950), full text read (arXiv PDF). Grade A for the dataset, the method comparison and the k = 8 choice, all checked against the text. Tier 2: its arXiv note names Foundations of Digital Games 2013, but neither Crossref nor the arXiv record gives a published version, so it is labelled not peer-reviewed.
+- [Drachen et al. 2012, IEEE CIG](https://doi.org/10.1109/CIG.2012.6374152), abstract read on IEEE Xplore. Grade A for the abstract's claims only, tier 1. I did not see its segments or figures, so this lesson gives none.
 - The 2014 comparison uses one game and two variables; the 2012 paper covers two games. How studios segment players in practice is mostly unpublished, as the 2014 paper itself notes.

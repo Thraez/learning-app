@@ -5,9 +5,11 @@ title: Simulating an economy before it is built
 order: 10
 status: draft
 sources:
-  - cite: "Dormans (2011). Simulating Mechanics to Study Emergence in Games. AAAI Technical Report WS-11-19."
-    url: https://cdn.aaai.org/ojs/12477/12477-52-16005-1-2-20201228.pdf
+  - cite: "Dormans (2011). Simulating Mechanics to Study Emergence in Games. AIIDE 2011 workshop, AAAI Technical Report WS-11-19. DOI 10.1609/aiide.v7i3.12477."
+    url: https://doi.org/10.1609/aiide.v7i3.12477
     grade: A
+    tier: 2
+    note: workshop paper; review process not confirmed, so not counted as peer-reviewed
 ---
 
 # Lesson 10: Simulating an economy before it is built
@@ -16,7 +18,7 @@ sources:
 
 ### gd-econ/simulation/open · open
 
-A designer simulates a two-player strategy economy a thousand times with scripted bots. Rushing wins almost never, so they try making defensive units dearer, even dearer than attack units. Guess: does that fix the balance?
+At GDC 2003, Will Wright described SimWar, a tiny war game he never built. In 2011 Joris Dormans (Amsterdam University of Applied Sciences) built its economy as a simulation and played it a thousand times with scripted bots. A rushing bot almost never beat a turtling one, so he tried making defensive units dearer, even dearer than attack units. Guess: does that fix the balance?
 
 <details>
 <summary>Answer</summary>
@@ -27,11 +29,11 @@ Barely. Even with defence costing more than offence, turtling stayed dominant. W
 
 You can run an economy before you build the game, if you write its resource flows down as a model a computer can execute. The value is finding which levers matter and which don't. The limit is that the model is only the economy, not the game.
 
-Dormans's Machinations framework draws a game's internal economy as a diagram: pools hold resources, sources create them, drains destroy them, converters turn one into another, and traders move them between players (the four functions come from Adams and Rollings). Diagrams run step by step, and scripted "artificial players" can play them thousands of times while charts log the result.
+[Dormans's Machinations framework](https://doi.org/10.1609/aiide.v7i3.12477) draws a game's internal economy as a diagram: pools hold resources, sources create them, drains destroy them, converters turn one into another, and traders move them between players (the four functions come from Adams and Rollings). Diagrams run step by step, and scripted "artificial players" can play them thousands of times while charts log the result.
 
 The paper tests this on SimWar, a minimal war game Will Wright described at GDC 2003 but never built: factories make resources, resources buy defensive and offensive units. In 1,000 runs, a rushing bot beat a turtling bot only twice. Dormans then changed one cost at a time and ran 1,000 games per change. Rush wins rose to 745 when factories cost 10, and to 806 when offensive units cost 1.2. Raising the cost of defence to 2.5 lifted rush wins only to 196. So balance depended mostly on production against offence, and little on offence against defence.
 
-Dormans is direct about the limits. The model leaves out level design, tactics and player skill, so "it is naive to assume" the tweaks give a balanced game once built. What it gives is a sign of whether a system can produce a dynamic effect, and ideas about which values to tune. The bots follow simple scripts, and the paper tests nothing against real players.
+[Dormans is direct](https://doi.org/10.1609/aiide.v7i3.12477) about the limits. The model leaves out level design, tactics and player skill, so "it is naive to assume" the tweaks give a balanced game once built. What it gives is a sign of whether a system can produce a dynamic effect, and ideas about which values to tune. The bots follow simple scripts, and the paper tests nothing against real players.
 
 ## Why
 
@@ -86,6 +88,6 @@ It shows whether a system can produce a dynamic effect and which values to tune.
 
 ## Sources and grades
 
-- Dormans 2011, full text read (AAAI workshop PDF). Grade A for the framework, the SimWar results and the stated limits.
+- [Dormans 2011](https://doi.org/10.1609/aiide.v7i3.12477), full text read (AAAI PDF). Grade A for the framework, the SimWar results and the stated limits, all checked against the text. Tier 2: a workshop paper published as an AAAI technical report; I could not confirm it was peer-reviewed, so treat it as a careful report by a named researcher rather than a checked result.
 - The planned source was Adams and Dormans 2012 (book). I did not try to get the book, since an open paper by the same author covers the simulation method, so I used that instead.
 - The evidence is thin: one hypothetical game, simple bots, no comparison with real players. Studio use of economy simulation for free-to-play games is mostly unpublished.

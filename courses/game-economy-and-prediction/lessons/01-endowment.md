@@ -6,8 +6,9 @@ order: 1
 status: draft
 sources:
   - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
-    url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0186407
+    url: https://doi.org/10.1371/journal.pone.0186407
     grade: A
+    tier: 1
 ---
 
 # Lesson 1: Starting currency is a retention lever
@@ -27,11 +28,11 @@ Retention went up in both bigger groups, and purchases did not fall. Read on for
 
 A faucet aimed at new players is not only a cost to monetization. It can be a retention lever.
 
-Nordeus and Edward Castronova ran a randomized test on about 575,000 new Top Eleven players, split equally into three groups: 40 Tokens (the control, the default since late 2014), 80 and 120. It ran for 28 days, one in-game season.
+Nordeus and Edward Castronova [ran a randomized test](https://doi.org/10.1371/journal.pone.0186407) on about 575,000 new Top Eleven players, split equally into three groups: 40 Tokens (the control, the default since late 2014), 80 and 120. It ran for 28 days, one in-game season. The paper is peer-reviewed (PLOS ONE).
 
-Against control, day-7 retention was 6.9% higher with 80 Tokens and 7.7% higher with 120. Both were significant against control, but not different from each other. On purchases, the share of players making a first real-money purchase rose by 8% and 4.3%, but neither was statistically significant. The size of that first purchase rose 14% (80 Tokens, not significant) and 34.8% (120 Tokens, significant).
+Against control, day-7 retention was 6.9% higher with 80 Tokens and 7.7% higher with 120. Both were significant against control (p = 0.015 and 0.005), but not different from each other. On purchases, the daily share of players making a first real-money purchase rose by about 8% and 4%, but neither was statistically significant (p = 0.054 and 0.197). The size of that first purchase rose 14% (80 Tokens, p = 0.057, just short of significance) and 34.8% (120 Tokens, p = 0.005). All figures are from the [paper's Table 2](https://doi.org/10.1371/journal.pone.0186407).
 
-Now the catch. The abstract says a bigger money supply "leads to inflation and increased money demand". The paper measured no prices and no inflation; Token packages keep fixed real-money prices. So the inflation part is the authors' reading, not a result. What was measured: more free currency at the start, more players still there a week later, and no drop in buying. The authors also say they cannot locate the best amount, only that it lies somewhere around 80 to 120.
+Now the catch. The [abstract](https://doi.org/10.1371/journal.pone.0186407) says a bigger money supply "leads to inflation and increased money demand". The paper measured no prices and no inflation; Token packages keep fixed real-money prices. So the inflation part is the authors' reading, not a result. What was measured: more free currency at the start, more players still there a week later, and no drop in buying. The authors also say they cannot locate the best amount, only that it lies somewhere around 80 to 120.
 
 ## Why
 
@@ -86,5 +87,5 @@ No. It measured retention and purchases. The inflation claim in the abstract is 
 
 ## Sources and grades
 
-- Zivic et al. 2017, PLOS ONE, full text read. Grade A for the design and figures. One caveat from the paper itself: several authors worked at Nordeus and the data can't be shared, so the results can't be checked independently.
+- [Zivic et al. 2017, PLOS ONE](https://doi.org/10.1371/journal.pone.0186407), full text read (publisher PDF). Grade A, tier 1 (peer-reviewed). Every figure in this lesson was checked against the paper's text and Table 2. One caveat from the paper itself: several authors worked at Nordeus and the data can't be shared, so the results can't be checked independently.
 - The mechanism in the "why" answer is my inference, grade C.

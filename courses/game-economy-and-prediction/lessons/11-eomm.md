@@ -6,8 +6,10 @@ order: 11
 status: draft
 sources:
   - cite: "Chen, Xue, Kolen, Aghdaie, Zaman, Sun, Seif El-Nasr (2017). EOMM: An Engagement Optimized Matchmaking Framework. WWW 2017. DOI 10.1145/3038912.3052559; arXiv:1702.06820."
-    url: https://arxiv.org/abs/1702.06820
+    url: https://doi.org/10.1145/3038912.3052559
     grade: A
+    tier: 1
+    note: full text read on arXiv; the DOI is the published WWW 2017 version
 ---
 
 # Lesson 11: Matchmaking tuned for engagement
@@ -27,9 +29,9 @@ Almost double: about 5.1% after some losing runs against 2.6% to 2.7% for the sa
 
 Matchmaking usually aims for fair games. EOMM aims for something else: pick opponents so that as few players as possible stop playing. Fairness becomes one possible outcome of that goal, not the goal.
 
-Chen and colleagues (Northeastern University and EA, WWW 2017) treat the waiting pool as a graph. Every possible pair gets a weight: both players' predicted churn risk if they are matched. A standard algorithm then picks the set of pairs with the lowest total risk. Three parts make it work: a skill model (Glicko) that predicts win, loss or draw for each pair, a churn model that predicts each player's risk given their recent history and that outcome, and the matching algorithm. Here "churn" means no 1-vs-1 match in the next eight hours.
+[Chen and colleagues](https://doi.org/10.1145/3038912.3052559) (Northeastern University and EA, peer-reviewed at WWW 2017) treat the waiting pool as a graph. Every possible pair gets a weight: both players' predicted churn risk if they are matched. A standard algorithm then picks the set of pairs with the lowest total risk. Three parts make it work: a skill model (Glicko) that predicts win, loss or draw for each pair, a churn model that predicts each player's risk given their recent history and that outcome, and the matching algorithm. Here "churn" means no 1-vs-1 match in the next eight hours.
 
-The evidence is a simulation built on 36.9 million real matches by 1.68 million players from the first half of 2016. Bots were drawn from real player states and paired by four methods, 10,000 rounds per pool size. Averaged over pools of 200 to 500, EOMM retained 0.7% more players per round than skill-based matching. At the smallest pool of 100 it retained fewer than skill-based matching and was not significantly better than random pairing. The authors extrapolate that over 20 rounds this compounds to about 15% more players retained. Skill-based matching did not consistently beat random pairing.
+The evidence is a [simulation](https://doi.org/10.1145/3038912.3052559) built on 36.9 million real matches by 1.68 million players from the first half of 2016. Bots were drawn from real player states and paired by four methods, 10,000 rounds per pool size. Averaged over pools of 200 to 500, EOMM retained 0.7% more players per round than skill-based matching. At the smallest pool of 100 it retained fewer than skill-based matching and was not significantly better than random pairing. The authors extrapolate that over 20 rounds this compounds to about 15% more players retained. Skill-based matching did not consistently beat random pairing.
 
 Read the limits closely. Nothing was tested on live players. The same churn model chose the pairs and then decided in the simulation who churned, so the result shows the method optimises its own model, not that real players would stay. And the paper says the objective can be swapped for playtime or spending. That last point is where the ethics start: a matchmaker can be tuned for a business metric, and players can't see what it optimises.
 
@@ -86,5 +88,5 @@ No 1-vs-1 match within the next eight hours.
 
 ## Sources and grades
 
-- Chen et al. 2017, read on arXiv (introduction, method, case study, results, conclusion). Grade A for the method, the dataset size, the churn table and the simulation results. The paper doesn't name the game.
+- [Chen et al. 2017, WWW](https://doi.org/10.1145/3038912.3052559), full text read as [arXiv:1702.06820](https://arxiv.org/abs/1702.06820), the authors' copy marked WWW2017. Grade A, tier 1 (peer-reviewed). The method, dataset size, churn table and simulation results were checked against the text. The paper doesn't name the game.
 - Whether EOMM or anything like it runs in a live game is not stated in the paper. Studio matchmaking practice is unpublished, so this lesson says nothing about current use.
