@@ -8,41 +8,25 @@ items: 12
 
 # Placement quiz
 
-About 10 to 15 minutes. These questions are about specific published studies, not general design knowledge, so expect to guess on many. That is fine: a wrong guess followed by the answer still helps you learn it. [Pan and Rivers 2023](https://doi.org/10.3758/s13421-022-01392-1), a peer-reviewed paper in Memory and Cognition, call this pretesting effect a known finding, and their five experiments found that most learners don't believe it: they think reading works better.
+About 10 to 15 minutes, one question per lesson. Every question can be reasoned out from design experience; none asks for a figure from a paper. Guess when you are unsure: a wrong guess followed by the answer still helps you learn it. [Pan and Rivers 2023](https://doi.org/10.3758/s13421-022-01392-1), a peer-reviewed paper in Memory and Cognition, call this pretesting effect a known finding, and their five experiments found that most learners don't believe it: they think reading works better.
 
-For each question, write or say your answer, mark how sure you were (sure, unsure, guess), then open the answer. Note the result next to the ID. Each question points at the lesson it places you into.
+For each question, write or say your answer, mark how sure you were (sure, unsure, guess), then open the answer. Each question points at the lesson it places you into.
 
-**How to read your result.** Items marked `recall` ask for figures from one paper, so an expert will often miss them; they are a pretest, not a placement. Place yourself with the `scenario` and `why` items: right and sure on a lesson's concept item means skim that lesson and do only its scenario. Anything else: do the full lesson. If every concept item is right and sure, tell me, and the course skips ahead to lessons 7 to 12.
+**How to read your result.** Right and sure means skim that lesson and do only its scenario. Anything else: do the full lesson.
 
-Sources and grades for every answer are in the linked lesson.
+Sources and grades for every answer are in the lesson named at the end of that answer. Where an answer says "grade C", that part is my reasoning and not a finding.
+
+Retired in course version 0.3.3, and never to be reused: p01, p02, p03, p05, p06, p08 and p09. They asked for a figure, a term or a result from a single paper, which says little about where to start.
 
 ---
 
-### gd-econ/placement/p01 · recall
+### gd-econ/placement/p13 · why
 
-In a randomized test on about 575,000 new players of a football manager game, new players got 40, 80 or 120 units of premium currency. What happened to day-7 retention in the bigger groups, and did real-money buying drop?
-
-<details>
-<summary>Answer</summary>
-Retention rose about 7% against control in both bigger groups, and buying did not drop. The size of the first purchase rose in the 120 group. Source: [Zivic et al. 2017](https://doi.org/10.1371/journal.pone.0186407). Lesson 1.
-</details>
-
-### gd-econ/placement/p02 · recall
-
-That same paper's abstract says a bigger money supply leads to inflation. What did the paper actually measure about prices?
+A free-to-play game doubles the premium currency it hands to new players. Give one reason real-money purchases might fall, and one reason they might not.
 
 <details>
-<summary>Answer</summary>
-Nothing. It measured retention and purchases; the inflation claim is an interpretation. Source: [Zivic et al. 2017](https://doi.org/10.1371/journal.pone.0186407). Lesson 1.
-</details>
-
-### gd-econ/placement/p03 · recall
-
-Old School RuneScape funded an item sink from a 1% market tax, buying high-level items from players and deleting them. What happened to those items' prices and to their trading volume?
-
-<details>
-<summary>Answer</summary>
-Prices rose (about 7% in the first round and about 14 to 16% in the second) and no change in trading volume was detected, though that estimate is loose. Source: [Hogan-Hennessy et al. 2022, preprint](https://arxiv.org/abs/2210.07970). Lesson 2.
+<summary>Model answer</summary>
+They might fall because players now hold currency they would otherwise have bought. They might not because a bigger grant can keep more players in the game, and players who stay have more chances to buy. Both reasons are my reasoning, grade C. In a randomized test in Top Eleven, the two bigger starting grants raised day-7 retention by 6.9% and 7.7% against control and buying did not drop; the size of the first purchase rose in the largest group. That is one game over 28 days. Source: [Zivic et al. 2017](https://doi.org/10.1371/journal.pone.0186407). Lesson 1.
 </details>
 
 ### gd-econ/placement/p04 · scenario
@@ -51,61 +35,7 @@ A designer proposes a sink that buys rare items off players and destroys them, "
 
 <details>
 <summary>Answer</summary>
-Buying and destroying items adds demand and cuts supply, so prices go up, not down. That is what happened in RuneScape. Source: [Hogan-Hennessy et al. 2022, preprint](https://arxiv.org/abs/2210.07970). Lesson 2.
-</details>
-
-### gd-econ/placement/p05 · recall
-
-In a published telemetry study of a Microsoft racing game, how many of the game's 29 event types showed up in fewer than 1% of races?
-
-<details>
-<summary>Answer</summary>
-12 of 29 (Project Gotham Racing 4). Source: [Hullett et al. 2012](https://doi.org/10.1145/2372251.2372265). Lesson 3.
-</details>
-
-### gd-econ/placement/p06 · recall
-
-A churn study pulls data on a fixed day, and many players are still active. What is the name for their unknown outcome, and what kind of model handles it?
-
-<details>
-<summary>Answer</summary>
-Censored data. Survival models, which predict time until churn and treat still-active players as "lasted at least this long". Source: [Periáñez et al. 2016](https://doi.org/10.1109/DSAA.2016.84). Lesson 4.
-</details>
-
-### gd-econ/placement/p07 · scenario
-
-Two studios both report a 30-day churn rate. Why might the numbers not be comparable even for similar games?
-
-<details>
-<summary>Answer</summary>
-Churn is a rule each team picks, such as how many days without a login counts as gone. Different rules give different rates from the same data. Source: [Periáñez et al. 2016](https://doi.org/10.1109/DSAA.2016.84). Lesson 4.
-</details>
-
-### gd-econ/placement/p08 · recall
-
-Survey data pooled from 7,767 loot box buyers: about what share of the buyers accounted for half of all loot box spending? Pick one: 0.5%, 5%, 20%, 50%.
-
-<details>
-<summary>Answer</summary>
-5%, the buyers spending over $100 a month (self-reported survey data). Source: [Close et al. 2021](https://doi.org/10.1016/j.addbeh.2021.106851). Lesson 5.
-</details>
-
-### gd-econ/placement/p09 · recall
-
-In a 2014 test, high-value players predicted to churn were given free in-game currency. What was the effect on churn and spending?
-
-<details>
-<summary>Answer</summary>
-No significant effect on either. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
-</details>
-
-### gd-econ/placement/p10 · why
-
-In one or two sentences: why doesn't a churn model that predicts well tell you who should get a retention offer?
-
-<details>
-<summary>Model answer</summary>
-It ranks how likely players are to leave, not how much an offer would change their choice. Some will leave anyway and some would stay anyway; finding the ones an offer moves needs an experiment. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
+Buying items in order to destroy them adds demand, so prices go up, not down. In RuneScape the sink worked like a large buyer entering the market, and the targeted items got dearer. Each destroyed item also leaves fewer for players, which should push the same way; the paper does not name that as a cause, so it is inference, grade C. Source: [Hogan-Hennessy et al. 2022, preprint](https://arxiv.org/abs/2210.07970). Lesson 2.
 </details>
 
 ### gd-econ/placement/p11 · why
@@ -114,14 +44,86 @@ Telemetry shows a piece of content is almost never used. Name two different reas
 
 <details>
 <summary>Model answer</summary>
-Players may find it dull or weak, or they may never find or reach it (hidden, locked or far into progression). The count looks the same either way. Source: [Hullett et al. 2012](https://doi.org/10.1145/2372251.2372265). Lesson 3.
+Players may find it dull or weak, or they may never find or reach it (hidden, locked or far into progression). The count looks the same either way. That a count can't show why is the lesson's reasoning, grade C, and not a finding of the paper it draws on. Source: [Hullett et al. 2012](https://doi.org/10.1145/2372251.2372265). Lesson 3.
+</details>
+
+### gd-econ/placement/p07 · scenario
+
+Two studios run similar games and both log every login. Each reports a churn rate for a player's first month, and one rate is much higher than the other. Before you conclude that one game loses more players, what would you check about how each number was made?
+
+<details>
+<summary>Answer</summary>
+The rule each team used for "churned". A player never sends a churned event, so the team picks a rule, such as how many days without a login counts as gone. Periáñez and colleagues used 10 days and checked that choice against their own data. A different window gives a different churn rate from the same data, so two rates compare only if the rules match. That whole point about comparing is the lesson's reasoning, grade C. Source: [Periáñez et al. 2016](https://doi.org/10.1109/DSAA.2016.84). Lesson 4.
 </details>
 
 ### gd-econ/placement/p12 · why
 
-Why do purchase prediction models in free-to-play often split the problem into two parts? Name the parts.
+One published approach to predicting purchases in a free-to-play game uses two models where you might expect one. What would you guess the two models do, and what about player spending makes the split sensible?
 
 <details>
 <summary>Model answer</summary>
-Most players spend nothing and a few spend a lot, so one model for spend fits nobody well. The parts are whether a player will pay at all, and how much a payer will spend. Source: [Close et al. 2021](https://doi.org/10.1016/j.addbeh.2021.106851). Lesson 5.
+Only a small fraction of players buy anything, so one question is whether a player will buy at all and a second is how much buying follows. Sifa and colleagues built a classifier for whether a player will purchase, and a regression for the number of purchases a user will make. Reading the pair as "will they pay, and if so how much" is the lesson's framing. Source: [Sifa et al. 2015](https://doi.org/10.1609/aiide.v11i1.12788). Lesson 5.
+</details>
+
+### gd-econ/placement/p10 · why
+
+A churn model correctly flags the players most likely to quit next week. Marketing wants to send each of them a free gift. Why isn't the model's accuracy enough to say the gift will keep them?
+
+<details>
+<summary>Model answer</summary>
+Being likely to leave and being moved by a gift are different things. Some flagged players will leave whatever you do and some would have stayed anyway, and the model ranks only how likely each is to leave. Whether the gift changes anything needs its own test (my summary, grade C). In one published A/B test, giving out free in-game currency did not significantly change churn or spending. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
+</details>
+
+### gd-econ/placement/p14 · scenario
+
+Two analysts cluster the same player data. One reports four player types, the other reports seven, and the descriptions don't line up. Has one of them made a mistake?
+
+<details>
+<summary>Answer</summary>
+Not necessarily. Different clustering methods give different answers from the same data, and the number of groups is a judgment call, since these methods have no objective cutoff. On the same World of Warcraft data, k-means gave profiles so similar that they were hard to label, while archetypal analysis gave clearly different ones. So segments describe the analysis as well as the players (my reading, grade C). The paper is on arXiv and names a conference whose review process I could not confirm, so treat it as not peer-reviewed. Source: [Drachen et al. 2014](https://arxiv.org/abs/1407.3950). Lesson 7.
+</details>
+
+### gd-econ/placement/p15 · why
+
+A retention offer can fail to keep a player. Could it also do harm, by pushing out a player who would have stayed? What would that mean for sending offers to everyone a churn model flags?
+
+<details>
+<summary>Model answer</summary>
+It is possible in principle, though the lesson has no measured case of it. A review of uplift modelling defines the "sleeping dog": a customer who churns because they were contacted and would have stayed otherwise. So the players worth an offer are the ones whose outcome the offer improves, and estimating that relies on a randomized experiment in which some players get the offer and some don't. That sleeping dogs are a reason risk-based targeting can backfire is my link, grade C. I could not confirm the review's own peer review. Source: [Gutierrez and Gérardy 2017](https://proceedings.mlr.press/v67/gutierrez17a.html). Lesson 8.
+</details>
+
+### gd-econ/placement/p16 · why
+
+A game's median total playtime is under an hour, but its mean is over two hours. What does the gap tell you about its players, and why report both numbers?
+
+<details>
+<summary>Model answer</summary>
+Half the players are gone within the first hour, while a minority play far longer and pull the mean up. Either number alone misleads: the median hides the long players and the mean hides how early most leave. Both points are my reading, grade C. In one test version of the puzzle game Hipster Sheep the median was 0.77 hours and the mean 2.41, and the authors argue for reporting both. Source: [Viljanen et al. 2018](https://doi.org/10.1109/TCIAIG.2017.2727642). Lesson 9.
+</details>
+
+### gd-econ/placement/p17 · why
+
+Before a game is built, a designer writes its economy down as resource flows and lets scripted bots play that model a thousand times. Name one thing the model can tell you and one thing it can't.
+
+<details>
+<summary>Model answer</summary>
+It can give a sign of whether a system is able to produce a dynamic effect, and ideas about which values to tune. It can't tell you the finished game is balanced: Dormans himself says the model leaves out level design, tactics and player skill. The bots also follow simple scripts, and the paper tests nothing against real players. It is a workshop paper, and I could not confirm it was peer-reviewed. Source: [Dormans 2011](https://doi.org/10.1609/aiide.v7i3.12477). Lesson 10.
+</details>
+
+### gd-econ/placement/p18 · scenario
+
+A paper reports that a matchmaker built to keep players from quitting retained more players than skill-based matching. The result comes from a simulation built on real match data, not from a live test. What would you want to know about the simulation before you believed the result?
+
+<details>
+<summary>Answer</summary>
+What decided which simulated players quit. Here the same churn model chose the pairs and then decided who churned, so the result shows that the method optimises its own model, not that real players would stay (my reading, grade C). Nothing was tested on live players. Ask about size and conditions too: the gain was 0.7% more players retained per round, averaged over pools of 200 to 500, and at the smallest pool of 100 it retained fewer than skill-based matching. Source: [Chen et al. 2017](https://doi.org/10.1145/3038912.3052559). Lesson 11.
+</details>
+
+### gd-econ/placement/p19 · scenario
+
+A model flags a game's likely top spenders in their first week, and the game sells loot boxes. Why might the players it flags not simply be the ones with the most money?
+
+<details>
+<summary>Answer</summary>
+For loot boxes, survey evidence links bigger spending with problem gambling and not with earnings. In pooled survey data the top 5% of spenders made up half of loot box revenue, and spend tracked problem gambling. So a model that finds big spenders may also be finding vulnerable players. The surveys are self-reported and correlational, and none studies a spend model, so that last step is my inference, grade C. Source: [Close et al. 2021](https://doi.org/10.1016/j.addbeh.2021.106851). Lesson 12.
 </details>
