@@ -20,9 +20,7 @@ Top Eleven is a football manager game by Nordeus. New players started with 40 To
 
 <details>
 <summary>Answer</summary>
-
 Retention went up in both bigger groups, and purchases did not fall. Read on for the numbers and the catch.
-
 </details>
 
 ## The idea
@@ -43,9 +41,7 @@ Why might giving away premium currency at the start raise later purchase size in
 
 <details>
 <summary>Model answer</summary>
-
 Players who get more currency early can try more of the paid systems, so they learn what the currency is worth to them and may settle on a higher spending level. Players who stay longer also have more chances to buy, so even unchanged buying per day adds up. This is my explanation (grade C); the paper reports the outcome, not the mechanism, and it says only that whether such reference points carry across games is uncertain.
-
 </details>
 
 ## Scenario
@@ -56,9 +52,7 @@ Your live team wants to cut the new-player gem grant in a mid-core strategy game
 
 <details>
 <summary>Explained answer</summary>
-
 Neither side can settle it from this paper. It is one game, one genre, one 28-day window and a range of 40 to 120 Tokens, so it shows that a bigger grant did not hurt early buying in Top Eleven, not that it will in your game. A strategy game's gems may also flow into longer-term sinks, where an early surplus could shorten the time before players hit a paywall or could cheapen it. The useful move is to run the test yourself: randomize new installs into grant sizes, read day-7 retention, conversion and first-purchase size, and keep watching past the first month, because the paper's window ended at 28 days and later effects are unknown.
-
 </details>
 
 ## Recall
@@ -69,9 +63,7 @@ What were the three starting Token amounts in the Top Eleven test, and which was
 
 <details>
 <summary>Answer</summary>
-
 40, 80 and 120 Tokens. 40 was the control.
-
 </details>
 
 ### gd-econ/endowment/r2 · recall
@@ -80,9 +72,7 @@ Which purchase result was statistically significant?
 
 <details>
 <summary>Answer</summary>
-
 Only the size of the first purchase in the 120-Token group, up 34.8% against control. The change in how many players converted was not significant in either group.
-
 </details>
 
 ### gd-econ/endowment/r3 · recall
@@ -91,9 +81,7 @@ Did the paper measure inflation?
 
 <details>
 <summary>Answer</summary>
-
 No. It measured retention and purchases. The inflation claim in the abstract is the authors' interpretation.
-
 </details>
 
 ## Sources and grades

@@ -7,7 +7,8 @@ status: draft
 sources:
   - cite: "Runge, Gao, Garcin, Faltings (2014). Churn prediction for high-value players in casual social games. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932875."
     url: https://manuscript.isc.ac/Inventory/49/130212.htm
-    grade: A (abstract)
+    grade: A
+    note: abstract
   - cite: "Game Developer, Churn prediction and prevention in high value players (write-up of the same work)."
     url: https://www.gamedeveloper.com/business/churn-prediction-and-prevention-in-high-value-players
     grade: B
@@ -23,9 +24,7 @@ A team built a churn model for high-value players in two casual social games wit
 
 <details>
 <summary>Answer</summary>
-
 No. The free currency had no significant effect on churn or on spending.
-
 </details>
 
 ## The idea
@@ -46,9 +45,7 @@ Why can a model that predicts churn well still be useless for deciding who shoul
 
 <details>
 <summary>Model answer</summary>
-
 Being likely to leave and being moved by an offer are different things. Some flagged players will leave whatever you do, some would have stayed anyway, and only the ones in between are worth an offer. A churn model ranks the first property, not the second. Finding the movable group needs an experiment, or a model trained on experiment results, often called uplift modelling. The uplift framing is mine, grade C; lesson 8 is planned to source it.
-
 </details>
 
 ## Scenario
@@ -59,9 +56,7 @@ Outside games: a gym chain's model flags members likely to cancel next month, an
 
 <details>
 <summary>Explained answer</summary>
-
 A holdout. Send the offer to a random part of the flagged members and nothing to the rest, then compare cancellations. Without it, any drop could just be people who would have stayed anyway, and the free month costs real money for each of them. Also try timing, since Runge and colleagues found contact shortly before the predicted leaving point worked better. The gym case is a transfer of the game result, grade C.
-
 </details>
 
 ## Recall
@@ -72,9 +67,7 @@ What effect did free in-game currency have on players predicted to churn?
 
 <details>
 <summary>Answer</summary>
-
 No significant effect on churn or on monetization.
-
 </details>
 
 ### gd-econ/predict-vs-act/r2 · recall
@@ -83,9 +76,7 @@ What did help, according to the same study?
 
 <details>
 <summary>Answer</summary>
-
 Contacting players shortly before the predicted churn point made the communication more effective.
-
 </details>
 
 ### gd-econ/predict-vs-act/r3 · recall
@@ -94,9 +85,7 @@ What did the authors suggest doing with players likely to leave?
 
 <details>
 <summary>Answer</summary>
-
 Cross-promote the studio's other games to them.
-
 </details>
 
 ## Sources and grades

@@ -7,13 +7,15 @@ status: draft
 sources:
   - cite: "Sifa, Hadiji, Runge, Drachen, Kersting, Bauckhage (2015). Predicting Purchase Decisions in Mobile Free-to-Play Games. AIIDE 2015, pp. 79-85."
     url: https://ojs.aaai.org/index.php/AIIDE/article/view/12788
-    grade: A (abstract)
+    grade: A
+    note: abstract
   - cite: "Swrve press releases, January and July 2014 monetization reports."
     url: https://www.prnewswire.com/news-releases/swrve-finds-015-of-mobile-gamers-contribute-50-of-all-in-game-revenue-247246771.html
     grade: B
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018; arXiv:1811.12799."
     url: https://arxiv.org/abs/1811.12799
-    grade: A for the abstract, B for its revenue figure
+    grade: A
+    note: B for the 2% and 50% revenue figure, which the abstract does not source
 ---
 
 # Lesson 5: Spend is mostly zero and very concentrated
@@ -26,9 +28,7 @@ A mobile analytics vendor looked at one month of in-app purchases across many fr
 
 <details>
 <summary>Answer</summary>
-
 0.15%, according to Swrve's January 2014 report. That is about one player in 670. The grade is B; see below.
-
 </details>
 
 ## The idea
@@ -47,9 +47,7 @@ Why is average revenue per user a poor summary of a free-to-play game's players,
 
 <details>
 <summary>Model answer</summary>
-
 The average mixes a large group at zero with a handful of very large spenders, so it describes almost nobody. A few big spenders joining or leaving moves it a lot, which makes LTV estimates from small cohorts swing from week to week. Splitting into "will pay" and "how much, given they pay", as Sifa and colleagues did, describes each group better. The fragility argument is my reasoning, grade C.
-
 </details>
 
 ## Scenario
@@ -60,9 +58,7 @@ User acquisition wants a day-3 LTV prediction to set bids per channel. A small t
 
 <details>
 <summary>Explained answer</summary>
-
 Check how many payers sit behind that number. With spend this concentrated, 400 installs may hold only a few payers, and one large spender can triple a channel's average on its own. Look at the conversion rate and the spend per payer separately, and at how the estimate moves if the top spender is removed. If it collapses, the channel needs more installs before the budget moves. This follows from the skew the sources describe; the specific check is my suggestion, grade C.
-
 </details>
 
 ## Recall
@@ -73,9 +69,7 @@ What two models did Sifa and colleagues build for purchase prediction?
 
 <details>
 <summary>Answer</summary>
-
 A classifier for whether a player will make a purchase, and a regression for how many purchases they will make.
-
 </details>
 
 ### gd-econ/spend-skew/r2 · recall
@@ -84,9 +78,7 @@ In Swrve's July 2014 report, what share of players paid at all?
 
 <details>
 <summary>Answer</summary>
-
 1.35%. Grade B, from a press release.
-
 </details>
 
 ### gd-econ/spend-skew/r3 · recall
@@ -95,9 +87,7 @@ Which model types did Chen and colleagues compare for lifetime value, and which 
 
 <details>
 <summary>Answer</summary>
-
 Deep neural networks against parametric models such as Pareto/NBD. Convolutional neural networks did best in their study.
-
 </details>
 
 ## Sources and grades

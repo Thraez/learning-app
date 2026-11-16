@@ -32,7 +32,7 @@ yes first.
 5. **Courses are versioned.** Each course page has front matter with `id`, `version`, `status` (`draft`, `active`,
    `retired`). Change the version on every revision and log what changed in the course page.
 6. **Phone-readable Markdown.** Answers sit in `<details>` blocks. Inside a block, write plain sentences only (no
-   lists, bold or tables), and leave a blank line after `</summary>`, so both Obsidian and GitHub render it.
+   lists, bold or tables), and put no blank lines inside the block, since Obsidian ends an HTML block at a blank line.
 
 ## Folder layout
 

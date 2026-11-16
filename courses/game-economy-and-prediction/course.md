@@ -15,7 +15,7 @@ audience: designer with a game design degree and three years in the industry
 ## Start here
 
 1. This page (3 minutes).
-2. [Placement quiz](placement-quiz.md): 10 questions, about 10 to 15 minutes. Guess when you don't know; guessing before being taught helps you learn the answer afterwards (finding 7, grade B).
+2. [Placement quiz](placement-quiz.md): 12 questions, about 10 to 15 minutes. Guess when you don't know; guessing before being taught helps you learn the answer afterwards (finding 7, grade B).
 3. [Lesson 1: starting currency](lessons/01-endowment.md), about 10 to 15 minutes.
 
 The times are estimates. Each lesson has the same shape: a question you probably can't answer yet, one idea, a "why" prompt, a scenario, and recall questions. Try each answer before you open it.
@@ -35,7 +35,7 @@ The research behind economy and analytics decisions in live games: what publishe
 
 ## How strong the evidence is
 
-Thin in places, and that is part of what the course teaches. Peer-reviewed work on game economies is a handful of natural experiments and one large randomized test. Most churn and spend modelling papers come from a few research groups working with studios, so the games and data are confidential and results can't be checked. Industry figures (such as how much revenue comes from the top fraction of a percent of players) mostly come from vendor press releases, graded B. Most studio practice is unpublished. Each lesson grades its sources: A read in the paper itself, B secondary or untraced, C my inference.
+Thin in places, and that is part of what the course teaches. For game economies, this search found one large randomized test (peer reviewed) and one natural experiment (a preprint). Most churn and spend modelling papers come from a few research groups working with studios, so the games and data are confidential and results can't be checked. Industry figures (such as how much revenue comes from the top fraction of a percent of players) mostly come from vendor press releases, graded B. Most studio practice is unpublished. Each lesson grades its sources: A read in the paper itself, B secondary or untraced, C my inference.
 
 ## Concept map
 
@@ -56,7 +56,7 @@ Assumed known from your degree and work: what F2P is, retention cohorts (D1, D7)
 |---|---|---|---|---|
 | 1 | [Starting currency is a retention lever](lessons/01-endowment.md) | Zivic et al. 2017, PLOS ONE | A | full |
 | 2 | [Sinks move prices, not only remove value](lessons/02-sinks.md) | Hogan-Hennessy et al. 2022, arXiv | A (preprint) | full |
-| 3 | [Telemetry shows where design effort goes unused](lessons/03-content-usage.md) | Hullett et al. 2011 | A abstract, B figures | full |
+| 3 | [Telemetry shows where design effort goes unused](lessons/03-content-usage.md) | Hullett et al. 2011; Microsoft slides | A abstract, B figures | full |
 | 4 | [Churn is a definition and a time, not a label](lessons/04-churn-time.md) | Periáñez et al. 2017; Hadiji et al. 2014 | A | full |
 | 5 | [Spend is mostly zero and very concentrated](lessons/05-spend-skew.md) | Sifa et al. 2015; Swrve 2014; Chen et al. 2018 | A and B | full |
 | 6 | [Predicting who leaves is not knowing what keeps them](lessons/06-predict-vs-act.md) | Runge et al. 2014 | A | full |
@@ -77,4 +77,4 @@ Lessons 7 to 12 are a plan, not written. Their sources still have to be opened a
 
 ## Change log
 
-- 0.1.0 (2026-11-16): first draft. Course page, placement quiz, lessons 1 to 6.
+- 0.1.0 (2026-11-16): first draft. Course page, placement quiz, lessons 1 to 6. Same day: checked lesson 1 and 3 figures against the paper and slides, regraded the Hadiji 2014 source from its abstract, added two concept items to the quiz.
