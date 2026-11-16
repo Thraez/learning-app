@@ -10,7 +10,7 @@ items: 14
 
 About 10 to 15 minutes. These questions are about specific published findings, so expect to guess on some. That is the point: a review of the research finds that testing on material you have not learned yet can often help you learn it, if you study the answers afterwards ([Pan and Carpenter 2023](https://doi.org/10.1007/s10648-023-09814-5), peer-reviewed review).
 
-For each question, write or say your answer, mark how sure you were (sure, unsure, guess), then open the answer. Each question points at the planned lesson it places you into. No lessons are written yet, so the numbers refer to the lesson list on the course page.
+For each question, write or say your answer, mark how sure you were (sure, unsure, guess), then open the answer. Each question points at the lesson it places you into. Lessons 1 to 5 are written; lessons 6 to 11 are planned, so for those the numbers refer to the lesson list on the course page.
 
 **How to read your result.** Items marked `recall` ask for figures from one paper, so they are a pretest, not a placement. Place yourself with the `scenario` and `why` items: right and sure on a lesson's item means that lesson can be shortened to its limits and scenario. Lesson 12 is a planning exercise and has no quiz item.
 
@@ -58,7 +58,7 @@ You need to remember a set of facts for a test in one week. A friend needs the s
 
 <details>
 <summary>Model answer</summary>
-No. In a study of more than 1,350 people, the best gap grew as the final test moved further away, but shrank as a share of the delay: about 20 to 40% of a one-week delay, and about 5 to 10% of a one-year delay ([Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x)). So you review after about one and a half to three days, and your friend waits about three to five weeks. Lesson 3.
+No. In a study of more than 1,350 people, the best gap grew as the final test moved further away, but shrank as a share of the delay: about 20 to 40% of a one-week delay, and about 5 to 10% of a one-year delay ([Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x)). Of the gaps the study tested, the best for recall was 1 day for the one-week delay and 21 days for the one-year delay; those figures are from the in-press manuscript, which may differ from the published text. So you review after a day or two, and your friend waits about three weeks. Lesson 3.
 </details>
 
 ### learn/placement/p06 · why
@@ -67,7 +67,7 @@ Many flashcard apps make each gap between reviews longer than the last. Does the
 
 <details>
 <summary>Model answer</summary>
-Not on average. A meta-analysis of 29 studies found spacing retrieval out clearly beat massing it (g = 0.74), but found no significant difference between expanding and even gaps (g = 0.034). Expanding gaps did better when items were tested more times ([Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8)). Lesson 3.
+Not on average. A meta-analysis of 29 studies found spacing retrieval out clearly beat massing it (g = 0.74), but found no significant difference between expanding and even gaps (g = 0.034). The abstract adds that expanding gaps did better the more times items were tested ([Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8)). The authors' [preprint](https://osf.io/kzy7u), which is not peer-reviewed, says 0.74 is the figure after a correction for publication bias, with 1.02 before it, and calls the "more tests" result tentative (p = 0.09). Lesson 3.
 </details>
 
 ### learn/placement/p07 · scenario

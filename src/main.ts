@@ -15,6 +15,7 @@ import {
   type ReviewSize,
 } from './variants';
 import { parseExportFile, restoreExport } from './restore';
+import { placementResult } from './placement';
 import { computeSchedules, courseProgress, dueItems, nextDue, LATE_DAYS } from './scheduler';
 import { buildExport, deliverExport, downloadExport, exportFileName } from './export';
 
@@ -392,16 +393,12 @@ function placementSummary(main: HTMLElement, course: Course, p: Placement, run: 
   const box = el('section', { class: 'card end' });
   box.append(el('h2', {}, 'Where to start'));
   box.append(el('p', {}, 'Placement uses the why and scenario items only. Recall items are about figures from single papers, so missing them says little.'));
-  const rows: string[] = [];
-  for (const l of course.lessons) {
-    const concept = p.blocks.flatMap((b) => (b.kind === 'item' && b.item.targetLessonOrder === l.order && b.item.type !== 'recall' ? [b.item] : []));
-    if (!concept.length) continue;
-    // Solid is right and sure. An item whose L11 arm is "none" was never asked how sure, so right is enough.
-    const solid = concept.every((it) => {
-      const a = latest.get(it.id);
-      return a?.mark === 'right' && (a.confidence === 'sure' || a.variants?.L11 === 'none');
-    });
-    rows.push(`<li><a href="${route('lesson', l.id)}">${l.order}. ${esc(l.title)}</a>: ${solid ? 'right and sure, so skim it and do its scenario' : 'do the full lesson'}</li>`);
+  const result = placementResult(course, p, latest);
+  const rows = result.rows.map((r) => r.lesson
+    ? `<li><a href="${route('lesson', r.lesson.id)}">${r.order}. ${esc(r.lesson.title)}</a>: ${r.solid ? 'right and sure, so skim it and do its scenario' : 'do the full lesson'}</li>`
+    : `<li>Lesson ${r.order}: planned, not written yet</li>`);
+  if (result.start) {
+    box.append(el('p', {}, `Start with <a href="${route('lesson', result.start.id)}">lesson ${result.start.order}: ${esc(result.start.title)}</a>.`));
   }
   box.append(el('ul', {}, rows.join('') || '<li>No concept items in this quiz.</li>'));
   box.append(appealCard(run));

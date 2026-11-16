@@ -53,13 +53,14 @@ describe('real course files', () => {
       }
 
       if (c.placement) {
-        it('placement items each point at an existing lesson', () => {
+        it('placement items each point at an existing or a planned lesson', () => {
           const orders = new Set(c.lessons.map((l) => l.order));
           const items = c.placement!.blocks.flatMap((b) => (b.kind === 'item' ? [b.item] : []));
           for (const it of items) {
-            expect(it.targetLessonOrder, it.id).toBeDefined();
-            // A draft course with no lesson files yet only has to name a planned lesson.
-            if (c.lessons.length) expect(orders.has(it.targetLessonOrder!), it.id).toBe(true);
+            const n = it.targetLessonOrder;
+            expect(n, it.id).toBeDefined();
+            const planned = c.lessonsPlanned !== undefined && n! >= 1 && n! <= c.lessonsPlanned;
+            expect(orders.has(n!) || planned, it.id).toBe(true);
           }
         });
       }
@@ -118,6 +119,41 @@ describe('format errors fail the build', () => {
     expect(build(withUrl('    url: doi.org/10.1/x\n'))).toThrow(/https link/);
     expect(build(withUrl('    url: https://doi.org/10.1/x\n'))().courses[0].lessons[0].sources[0].url).toBe('https://doi.org/10.1/x');
   });
+  describe('placement targets', () => {
+    const item = (n: string, tail: string) => `### t/placement/${n} · scenario\n\nQ?\n\n<details>\n<summary>Answer</summary>\nA. ${tail}\n</details>\n\n`;
+    function buildCourse(courseExtra: string, quizBody: string, lessonOrder = 1) {
+      const root = mkdtempSync(join(tmpdir(), 'courses-'));
+      mkdirSync(join(root, 't', 'lessons'), { recursive: true });
+      writeFileSync(join(root, 't', 'course.md'), `---\nid: t\ntitle: T\nversion: 0.1.0\nstatus: draft\n${courseExtra}---\nHi\n`);
+      writeFileSync(join(root, 't', 'lessons', '01-a.md'), `---\nid: t/a\ncourse: t\ntitle: A\norder: ${lessonOrder}\n---\n## Recall\n`);
+      writeFileSync(join(root, 't', 'placement-quiz.md'), `---\nid: t/placement\ncourse: t\ntitle: Placement quiz\n---\n${quizBody}`);
+      return () => parseCourses(root);
+    }
+    it('accepts an existing lesson, and a planned one when the course declares lessons_planned', () => {
+      const c = buildCourse('lessons_planned: 3\n', item('p01', 'Lesson 1.') + item('p02', 'Lesson 3.'))().courses[0];
+      expect(c.lessonsPlanned).toBe(3);
+      expect(c.placement!.itemIds).toEqual(['t/placement/p01', 't/placement/p02']);
+    });
+    it('rejects a lesson number above lessons_planned', () => {
+      expect(buildCourse('lessons_planned: 3\n', item('p01', 'Lesson 4.'))).toThrow(/above "lessons_planned: 3"/);
+      expect(buildCourse('lessons_planned: 3\n', item('p01', 'Lesson 0.'))).toThrow(/lessons_planned/);
+    });
+    it('rejects an answer that names no lesson number', () => {
+      expect(buildCourse('lessons_planned: 3\n', item('p01', 'Lesson three.'))).toThrow(/must end with "Lesson N\."/);
+      expect(buildCourse('lessons_planned: 3\n', item('p01', 'See the course page.'))).toThrow(/must end with "Lesson N\."/);
+    });
+    it('stays strict for a course without lessons_planned', () => {
+      expect(buildCourse('', item('p01', 'Lesson 1.'))().courses[0].lessonsPlanned).toBeUndefined();
+      expect(buildCourse('', item('p01', 'Lesson 2.'))).toThrow(/no lesson file/);
+    });
+    it('rejects a lessons_planned that is not a whole number, or is below an existing lesson', () => {
+      for (const bad of ['twelve', '2.5', '"3"', '0']) {
+        expect(buildCourse(`lessons_planned: ${bad}\n`, item('p01', 'Lesson 1.')), bad).toThrow(/whole number/);
+      }
+      expect(buildCourse('lessons_planned: 1\n', item('p01', 'Lesson 1.'), 2)).toThrow(/is below lesson 2/);
+    });
+  });
+
   it('reads a checked date and rejects a malformed one', () => {
     const withChecked = (line: string) => `---\nid: t/a\ncourse: t\ntitle: A\norder: 1\n${line}---\n## Recall\n`;
     expect(build(withChecked(''))().courses[0].lessons[0].checked).toBeUndefined();

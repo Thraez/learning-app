@@ -63,6 +63,12 @@ export interface Course {
   /** course.md body rendered to HTML, with links to lesson files rewritten to app routes. */
   html: string;
   lessons: Lesson[];
+  /**
+   * How many lessons the course page plans in all ("lessons_planned" in course.md front matter).
+   * A placement item may point at a planned lesson number that has no file yet. Absent means
+   * every placement item must point at a lesson that exists.
+   */
+  lessonsPlanned?: number;
   placement?: Placement;
 }
 
