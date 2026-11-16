@@ -18,7 +18,7 @@ sources:
 
 ### gd-econ/eomm/open · open
 
-In a 1-vs-1 game from Electronic Arts, researchers measured how many players stopped playing for a week after a match, grouped by their last three results. Guess: how much higher was that rate after some runs of losses than after the safest runs?
+In a 1-vs-1 game from Electronic Arts, [researchers](https://doi.org/10.1145/3038912.3052559) measured how many players stopped playing for a week after a match, grouped by their last three results. Guess: how much higher was that rate after some runs of losses than after the safest runs?
 
 <details>
 <summary>Answer</summary>

@@ -26,7 +26,7 @@ sources:
 
 ### gd-econ/vulnerable/open · open
 
-A 2021 study pooled survey data on 7,767 people who buy loot boxes and asked who the biggest spenders are. One common guess is that they are simply people with money. Guess: did loot box spending track earnings or problem gambling scores?
+A [2021 study](https://doi.org/10.1016/j.addbeh.2021.106851) pooled survey data on 7,767 people who buy loot boxes and asked who the biggest spenders are. One common guess is that they are simply people with money. Guess: did loot box spending track earnings or problem gambling scores?
 
 <details>
 <summary>Answer</summary>

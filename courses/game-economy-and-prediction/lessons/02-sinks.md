@@ -18,7 +18,7 @@ sources:
 
 ### gd-econ/sinks/open · open
 
-In December 2021, Old School RuneScape added a 1% tax on sales in its player market (the Grand Exchange) and used the tax money to buy expensive high-level items from players and delete them. Guess: did the tax cut trading, and what happened to the prices of the deleted items?
+In December 2021, Old School RuneScape added a 1% tax on sales in its player market (the Grand Exchange) and used the tax money to buy expensive high-level items from players and delete them ([Hogan-Hennessy et al. 2022](https://arxiv.org/abs/2210.07970), a preprint). Guess: did the tax cut trading, and what happened to the prices of the deleted items?
 
 <details>
 <summary>Answer</summary>

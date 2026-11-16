@@ -17,7 +17,7 @@ sources:
 
 ### gd-econ/endowment/open · open
 
-Top Eleven is a football manager game by Nordeus. New players started with 40 Tokens, its premium currency. In a test, some new players got 80 or 120 instead. Before reading on, guess: what happened to day-7 retention, and did players buy fewer Tokens with real money?
+Top Eleven is a football manager game by Nordeus. New players started with 40 Tokens, its premium currency. In a [published test](https://doi.org/10.1371/journal.pone.0186407), some new players got 80 or 120 instead. Before reading on, guess: what happened to day-7 retention, and did players buy fewer Tokens with real money?
 
 <details>
 <summary>Answer</summary>

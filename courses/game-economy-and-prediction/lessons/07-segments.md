@@ -23,7 +23,7 @@ sources:
 
 ### gd-econ/segments/open · open
 
-Researchers ran k-means on the playtime and levelling speed of 70,014 World of Warcraft characters and asked for eight player groups. When they plotted the groups' average players, the centroids were so alike they were hard to tell apart. Is the data telling you WoW players are similar, or is something else going on?
+[Researchers](https://arxiv.org/abs/1407.3950) ran k-means on the playtime and levelling speed of 70,014 World of Warcraft characters and asked for eight player groups. When they plotted the groups' average players, the centroids were so alike they were hard to tell apart. Is the data telling you WoW players are similar, or is something else going on?
 
 <details>
 <summary>Answer</summary>

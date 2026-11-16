@@ -28,7 +28,7 @@ sources:
 
 ### gd-econ/uplift/open · open
 
-You have a good churn model and budget for retention gifts to 10% of players. The obvious plan is to give them to the 10% with the highest churn risk. Eva Ascarza, a marketing professor, tested exactly this choice in two field experiments with real customers, published in the Journal of Marketing Research in 2018. Guess what she found.
+You have a good churn model and budget for retention gifts to 10% of players. The obvious plan is to give them to the 10% with the highest churn risk. A [2018 study by Ascarza](https://doi.org/10.1509/jmr.16.0163) in the Journal of Marketing Research tested exactly this choice in two field experiments with real customers. Guess what it found.
 
 <details>
 <summary>Answer</summary>

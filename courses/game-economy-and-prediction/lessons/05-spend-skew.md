@@ -28,7 +28,7 @@ sources:
 
 ### gd-econ/spend-skew/open · open
 
-Psychologists pooled every open survey dataset on loot box buying they could find: 7,767 people who buy loot boxes. Most spent modest amounts, under $20 a month. Guess: what share of these buyers accounted for half of all the loot box spending?
+[Psychologists pooled](https://doi.org/10.1016/j.addbeh.2021.106851) every open survey dataset on loot box buying they could find: 7,767 people who buy loot boxes. Most spent modest amounts, under $20 a month. Guess: what share of these buyers accounted for half of all the loot box spending?
 
 <details>
 <summary>Answer</summary>
@@ -41,7 +41,7 @@ In free-to-play, most players spend nothing and a small group brings much of the
 
 Good public numbers on this are scarce. The pooled loot box data comes from [Close and colleagues](https://doi.org/10.1016/j.addbeh.2021.106851), a peer-reviewed secondary analysis of self-report surveys: the top 5% of buyers made up half of loot box revenue. Those are survey answers from loot box buyers, not sales records from games, and they cover loot boxes only. In a studio paper on the mobile RPG Age of Ishtaria, [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) define a "whale" by sorting players by monthly spend and drawing the line where the top spenders reach half of the month's revenue. They say whales are "around 2%" of players and "may provide up to 50%" of revenue, but show no count behind the 2%, so that figure is grade B. The often quoted claim that 0.15% of players bring half of mobile game revenue comes from a 2014 vendor press release; it is not used here.
 
-That shape drives how spend is modelled. [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) (peer-reviewed at AIIDE 2015, a 100,000-player dataset) open with the point that "only a small fraction of the players makes any purchases" and split the problem in two: a classifier for whether a player will purchase, and a regression for how many purchases a payer will make, both as decision and regression trees so the rules could be acted on. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) compared deep neural networks with Pareto/NBD, a classic statistical model of customer purchases, for predicting lifetime value, and found convolutional networks did best and were well suited to spotting future whales early.
+That shape drives how spend is modelled. [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) (peer-reviewed at AIIDE 2015, a 100,000-player dataset) open with the point that "only a small fraction of the players makes any purchases" and split the problem in two: a classifier for whether a player will purchase, and a regression for how many purchases a payer will make, both as decision and regression trees so the rules could be acted on. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) compared deep neural networks with Pareto/NBD, a classic statistical model of customer purchases, for predicting lifetime value. Both neural networks beat the parametric models and gave almost identical results; the abstract singles out convolutional networks as the most efficient and well suited to spotting future whales early.
 
 ## Why
 
@@ -91,7 +91,7 @@ Which model types did Chen and colleagues compare for lifetime value, and which 
 
 <details>
 <summary>Answer</summary>
-Deep neural networks against parametric models such as Pareto/NBD. Convolutional neural networks did best in their study.
+Deep neural networks against parametric models such as Pareto/NBD. The neural networks did better, with the two network types almost tied; the abstract names convolutional networks as the best.
 </details>
 
 ## Sources and grades

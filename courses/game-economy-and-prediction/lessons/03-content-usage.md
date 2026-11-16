@@ -18,7 +18,7 @@ sources:
 
 ### gd-econ/content-usage/open · open
 
-Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. Microsoft researchers read 3.1 million race starts logged from players on Xbox Live. Guess: how many of the 134 vehicles were picked in fewer than 1% of races each?
+Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. [Microsoft researchers](https://doi.org/10.1145/2372251.2372265) read 3.1 million race starts logged from players on Xbox Live. Guess: how many of the 134 vehicles were picked in fewer than 1% of races each?
 
 <details>
 <summary>Answer</summary>
@@ -29,7 +29,7 @@ Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. Microsoft re
 
 Players use a small part of what a game ships, and only telemetry tells you which part. Designers' guesses about use are not a substitute.
 
-[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012). Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes, 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles. The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer and in career mode.
+[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012). Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles. The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer and in career mode.
 
 From this they recommend [fewer options in future games](https://doi.org/10.1145/2372251.2372265), since each car costs modelling, texturing, tuning and testing. They also argue against themselves: rarely used content can extend a game's life, lead to play nobody planned, and sell the game ("more than 100 vehicles" on the box). So they suggest a cut of about 20%, not a purge. That trade-off is their judgment; the paper did not test what players would lose.
 
@@ -54,7 +54,7 @@ You are planning the next content drop for a live mobile strategy game. The data
 
 <details>
 <summary>Explained answer</summary>
-Both, if you can, because they answer different questions. Unlock without use tells you players get the unit but don't choose it, which points at balance or appeal. Low unlocks point at the path to the unit. With only use logged, a rarely used unit could be either, which is the same gap the Project Gotham Racing 4 data has: it logged what players picked, not what they could pick. Decide what question you will ask of the data before you log it. That last point is common practice in game analytics, not a finding from this study, grade C.
+Both, if you can, because they answer different questions. Unlock without use tells you players get the unit but don't choose it, which points at balance or appeal. Low unlocks point at the path to the unit. With only use logged, a rarely used unit could be either, which is the same gap in the Project Gotham Racing 4 study: the analysis used what players picked, not what they could pick. Decide what question you will ask of the data before you log it. That last point is common practice in game analytics, not a finding from this study, grade C.
 </details>
 
 ## Recall

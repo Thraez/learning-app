@@ -23,7 +23,7 @@ sources:
 
 ### gd-econ/churn-time/open · open
 
-Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon Studio. Its data team counted a player as churned after 10 days in a row without logging in. With that rule, guess two numbers: the share of non-paying players who churned on their very first day, and the share of the top spenders who had churned after 100 days.
+Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon Studio. Its data team ([Periáñez et al. 2016](https://doi.org/10.1109/DSAA.2016.84)) counted a player as churned after 10 days in a row without logging in. With that rule, guess two numbers: the share of non-paying players who churned on their very first day, and the share of the top spenders who had churned after 100 days.
 
 <details>
 <summary>Answer</summary>
@@ -95,4 +95,4 @@ Generic behaviour features such as playtime, session length and the time between
 
 - [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures, the sample sizes and the censoring argument were checked against the text.
 - [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read on IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
-- Both studies use confidential studio data, so their results can't be rerun by others. Both teams worked with or at the studios whose games they studied.
+- Periáñez and colleagues worked at the studio whose game they studied, on confidential data, so their results can't be rerun by others. The Hadiji abstract does not say whose data it used.

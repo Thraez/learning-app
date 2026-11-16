@@ -5,7 +5,7 @@ title: Survival curves for churn and lifetime value
 order: 9
 status: draft
 sources:
-  - cite: "Viljanen, Airola, Heikkonen, Pahikkala (2018). Playtime Measurement With Survival Analysis. IEEE Transactions on Games 10(2). DOI 10.1109/TCIAIG.2017.2727642. Read as arXiv:1701.02359."
+  - cite: "Viljanen, Airola, Heikkonen, Pahikkala (2018). Playtime Measurement With Survival Analysis. IEEE Transactions on Games 10(2), 128-138. DOI 10.1109/TCIAIG.2017.2727642. Read as arXiv:1701.02359."
     url: https://doi.org/10.1109/TCIAIG.2017.2727642
     grade: A
     tier: 1
@@ -26,7 +26,7 @@ sources:
 
 ### gd-econ/survival/open · open
 
-Hipster Sheep is a mobile puzzle game the studio Tribeflame was developing in 2015. In one test version, the typical player quit after 0.77 hours of total playtime. Guess the mean playtime for the same players: about the same, about double, or about three times as long?
+Hipster Sheep is a mobile puzzle game the studio Tribeflame was developing in 2015. In one test version ([Viljanen et al. 2018](https://doi.org/10.1109/TCIAIG.2017.2727642)), the typical player quit after 0.77 hours of total playtime. Guess the mean playtime for the same players: about the same, about double, or about three times as long?
 
 <details>
 <summary>Answer</summary>

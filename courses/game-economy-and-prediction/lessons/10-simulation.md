@@ -18,11 +18,11 @@ sources:
 
 ### gd-econ/simulation/open · open
 
-At GDC 2003, Will Wright described SimWar, a tiny war game he never built. In 2011 Joris Dormans (Amsterdam University of Applied Sciences) built its economy as a simulation and played it a thousand times with scripted bots. A rushing bot almost never beat a turtling one, so he tried making defensive units dearer, even dearer than attack units. Guess: does that fix the balance?
+At GDC 2003, Will Wright described SimWar, a tiny war game he never built. In 2011 [Joris Dormans](https://doi.org/10.1609/aiide.v7i3.12477) (Amsterdam University of Applied Sciences) built its economy as a simulation and played it a thousand times with scripted bots. A rushing bot almost never beat a turtling one, so the next runs tried making defensive units dearer. Guess: does that fix the balance?
 
 <details>
 <summary>Answer</summary>
-Barely. Even with defence costing more than offence, turtling stayed dominant. What moved the balance was the cost of factories and of offensive units.
+Barely. Even with defence costing 2.5, the highest setting tested, the rushing bot won only 196 of 1,000 games. What moved the balance was the cost of factories and of offensive units.
 </details>
 
 ## The idea

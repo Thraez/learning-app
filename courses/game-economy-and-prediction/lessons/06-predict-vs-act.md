@@ -18,7 +18,7 @@ sources:
 
 ### gd-econ/predict-vs-act/open · open
 
-In 2014, Julian Runge and colleagues built a churn model for high-value players in two casual social games with millions of players each. Then they ran an A/B test in one game: players the model flagged as about to leave got free in-game currency. Guess: did the gift lower churn or raise spending?
+In 2014, [Julian Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) built a churn model for high-value players in two casual social games with millions of players each. Then they ran an A/B test in one game: players the model flagged as about to leave got free in-game currency. Guess: did the gift lower churn or raise spending?
 
 <details>
 <summary>Answer</summary>
