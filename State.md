@@ -1,6 +1,6 @@
 # State
 
-**Updated:** 2026-11-16
+**Updated:** 2026-11-16 (evening)
 
 ## Goal
 
@@ -10,35 +10,53 @@ every answer so Claude can revise the course.
 
 ## Where it stands
 
-- Repo `Thraez/learning-app`, public, on GitHub. Live at https://thraez.github.io/learning-app/ (PRs #1 and #2
-  merged).
-- App v1: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Works
-  offline after the first load and can be installed to the home screen. Course list, lessons (later text stays hidden
-  until the item above it is answered), placement quiz with a "where to start" summary, review sessions of up to 10
-  due items, missed items asked again at the end of the session, self-marking (right, partly, wrong) with optional
-  confidence, Progress (lessons finished, items learned, late recall at 14+ days), Export of the full history as JSON.
-  Format: `docs/export-schema.md`.
-- Checked in a desktop Chromium at phone size, under the `/learning-app/` subpath: lesson, review, placement, progress,
-  export download, and offline reload. Not checked on a real phone; the share-sheet export on iPhone is untested.
-- First course drafted, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz.
-  Version 0.3.0 (branch `claude/upbeat-chatelet-dea743`, PR open, not merged) applies the user's source standard,
-  `AGENTS.md` rule 4: a credibility tier per source, inline DOI links, vendor and trade-press figures cut. Sources
-  are tier 1 except lessons 2, 7 (one of two), 8 (two of three) and 10, labelled not peer-reviewed in the lesson.
-- The second course (learning how to learn) is not written.
+- Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main` at 392e860 (PRs #1
+  to #4 merged).
+- App v1 on `main`: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load,
+  installable. Course list, lessons, placement quiz with a "where to start" summary, review sessions of up to 10 due
+  items, self-marking with optional confidence, Progress (late recall at 14+ days), Export as JSON
+  (`docs/export-schema.md`).
+- First course on `main`, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz,
+  version 0.3.0, with the source standard of `AGENTS.md` rule 4 applied.
+- Variants, rating, settings and restore are live (PR #4, merged 2026-11-16). Per-item experiments L1 (recall or
+  reread) and L11 (confidence before the answer), both off until switched on in Settings; review session length (5,
+  10, all due) as the one whole-app variant; a one-tap rating at the end of a session; restore from an export file
+  that only adds, never overwrites. Export schema is version 2 and restore reads 1 and 2. Not built: streak, points,
+  progress display, story and cue variants. Known gap: for a reread item, Progress counts late recall from the first
+  real answer, not the first read.
+- Not checked on a real phone. The share-sheet export on iPhone is untested. No note shows the app has been used yet.
 
-## Not in the app yet
+## Open pull requests (each merge is the user's yes; a merge deploys)
 
-- Variant support and the one-tap appeal rating after a session (in the approved first-version scope, left out of
-  this build). Attempts and sessions already carry `variant: "default"`, so the export format won't need to change.
-- Restore from an export file. If the phone's browser storage is lost, the history is lost except for past exports.
+- **PR #5, course 2 draft (learning how to learn).** `course.md` (id `learn`, 0.1.0, a 12-lesson plan, 15 tier 1
+  sources reopened) and a 14-item placement quiz. No lessons. One test line relaxed so a course with no lesson files
+  passes. If merged before lessons exist, the live app shows the course with "0 of 0 lessons" and a placement summary
+  that says "No concept items in this quiz", so merge it when the first lessons land or accept that. Placement item
+  IDs and their "Lesson N." numbers are permanent once answered, so settle the lesson order before merging. Caveats
+  from the worker: nine sources were read at abstract only, some through Crossref or Europe PMC records because the
+  publisher blocked the fetch; Annual Review and Current Directions were given tier 1 without confirming their review
+  process. Rechecked: 32 tests pass, build passes, dash grep clean, both files read, two abstracts (Cepeda 2008,
+  Brunmair 2019) sampled against the numbers.
 
-## Next steps
+## Source check pilot (no repo change)
 
-1. Review and merge the source credibility PR (the user's yes).
-2. Install on the phone, take the placement quiz and lesson 1.
-3. First export after about a week; Claude revises the course from it.
-4. Design the learning-how-to-learn course with the user.
-5. Decide whether to build variant support and the appeal rating next.
+A fresh checker opened the sources of lessons 02 and 05: 76 claims, 63 match, 7 differ, 5 not in source (3 of them
+labelled grade C inferences), 1 could not open. No wrong number; the errors are wording and attribution, plus one
+paper whose text and table disagree. Report: `Workspace/Inbox/claude - Learning App Source Check Pilot.md`. The
+lessons are not yet fixed.
+
+## Waiting on the user
+
+1. Merge PR #5, or ask for changes.
+2. Which per-item variants to switch on first (L1 and L11 are built).
+3. The research pipeline and the "what to learn next" proposal:
+   `Workspace/Inbox/claude - Learning App Pipeline and Next-Topic Proposal.md`. `AGENTS.md` rules 3 and 4 stay as
+   they are until the user agrees.
+4. Where private learner state (exports, interest profile) lives. Candidate: a folder in the private Workspace vault.
+   Never in this public repo.
+5. Whether to fix lessons 02 and 05 from the pilot's list now (version 0.3.1).
+6. The open questions in the course 2 draft (`course.md`, "For you to decide").
+7. Install the app, take the placement quiz and lesson 1. Nothing can be judged until late-recall data exists.
 
 ## Open questions
 
