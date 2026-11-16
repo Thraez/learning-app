@@ -14,7 +14,7 @@ sources:
     url: https://doi.org/10.1609/aiide.v11i1.12788
     grade: A
     tier: 1
-    note: abstract only, read on the AAAI publisher page
+    note: abstract only (the publisher abstract, read through the OpenAlex record); the AAAI page and PDF sit behind a bot check
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
     url: https://doi.org/10.1109/BigData.2018.8622151
     grade: A
@@ -28,7 +28,7 @@ sources:
 
 ### gd-econ/spend-skew/open · open
 
-[Psychologists pooled](https://doi.org/10.1016/j.addbeh.2021.106851) every open survey dataset on loot box buying they could find: 7,767 people who buy loot boxes. Most spent modest amounts, under $20 a month. Guess: what share of these buyers accounted for half of all the loot box spending?
+[Psychologists pooled](https://doi.org/10.1016/j.addbeh.2021.106851) every open survey dataset on loot box buying they could find: 7,767 people who buy loot boxes. Their abstract says monthly spending is typically modest, under $20, as background rather than as a result of the pooled data. Guess: what share of these buyers accounted for half of all the loot box spending?
 
 <details>
 <summary>Answer</summary>
@@ -37,11 +37,11 @@ The top 5%, the ones spending over $100 a month. One buyer in twenty brought hal
 
 ## The idea
 
-In free-to-play, most players spend nothing and a small group brings much of the money. So "how much will this player spend" is really two questions: will they pay at all, and if so, how much.
+In free-to-play, only a small fraction of players buy anything ([Sifa et al. 2015](https://doi.org/10.1609/aiide.v11i1.12788)) and a small group can bring much of the money ([Chen et al. 2018](https://doi.org/10.1109/BigData.2018.8622151)). So "how much will this player spend" is really two questions: will they pay at all, and if so, how much.
 
-Good public numbers on this are scarce. The pooled loot box data comes from [Close and colleagues](https://doi.org/10.1016/j.addbeh.2021.106851), a peer-reviewed secondary analysis of self-report surveys: the top 5% of buyers made up half of loot box revenue. Those are survey answers from loot box buyers, not sales records from games, and they cover loot boxes only. In a studio paper on the mobile RPG Age of Ishtaria, [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) define a "whale" by sorting players by monthly spend and drawing the line where the top spenders reach half of the month's revenue. They say whales are "around 2%" of players and "may provide up to 50%" of revenue, but show no count behind the 2%, so that figure is grade B. The often quoted claim that 0.15% of players bring half of mobile game revenue comes from a 2014 vendor press release; it is not used here.
+I found few good public numbers on this; that is my judgment from the search for this lesson, not a sourced fact. The pooled loot box data comes from [Close and colleagues](https://doi.org/10.1016/j.addbeh.2021.106851), a peer-reviewed secondary analysis of self-report surveys: the top 5% of buyers made up half of loot box revenue. Those are survey answers from loot box buyers, not sales records from games, and they cover loot boxes only. In a paper on the mobile RPG Age of Ishtaria, [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151), who worked at the game analytics company Yokozuna Data, define a "whale" by sorting players by monthly spend and drawing the line where the top spenders reach half of the month's revenue. They say whales are "around 2%" of players and "may provide up to 50%" of revenue, but show no count behind the 2%, so that figure is grade B.
 
-That shape drives how spend is modelled. [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) (peer-reviewed at AIIDE 2015, a 100,000-player dataset) open with the point that "only a small fraction of the players makes any purchases" and split the problem in two: a classifier for whether a player will purchase, and a regression for how many purchases a payer will make, both as decision and regression trees so the rules could be acted on. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) compared deep neural networks with Pareto/NBD, a classic statistical model of customer purchases, for predicting lifetime value. Both neural networks beat the parametric models and gave almost identical results; the abstract singles out convolutional networks as the most efficient and well suited to spotting future whales early.
+That shape drives how spend is modelled. [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) (peer-reviewed at AIIDE 2015, a 100,000-player dataset) open with the point that "only a small fraction of the players makes any purchases" and split the problem in two: a classifier for whether a player will purchase, and a regression for the number of purchases a user will make, both as decision and regression trees so the rules could be acted on. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) compared deep neural networks with Pareto/NBD, a classic statistical model of customer purchases, for predicting lifetime value. Both neural networks beat the parametric models and gave almost identical results; the abstract singles out convolutional networks as the most efficient and well suited to spotting future whales early.
 
 ## Why
 
@@ -51,7 +51,7 @@ Why is average revenue per user a poor summary of a free-to-play game's players,
 
 <details>
 <summary>Model answer</summary>
-The average mixes a large group at zero with a handful of very large spenders, so it describes almost nobody. A few big spenders joining or leaving moves it a lot, which makes LTV estimates from small cohorts swing from week to week. Splitting into "will pay" and "how much, given they pay", as Sifa and colleagues did, describes each group better. The fragility argument is my reasoning, grade C.
+The average mixes a large group at zero with a handful of very large spenders, so it describes almost nobody. A few big spenders joining or leaving moves it a lot, which makes LTV estimates from small cohorts swing from week to week. Splitting the question in two describes each group better. Sifa and colleagues split it into whether a purchase will occur and how many purchases a user will make. The fragility argument is my reasoning, grade C.
 </details>
 
 ## Scenario
@@ -91,12 +91,12 @@ Which model types did Chen and colleagues compare for lifetime value, and which 
 
 <details>
 <summary>Answer</summary>
-Deep neural networks against parametric models such as Pareto/NBD. The neural networks did better, with the two network types almost tied; the abstract names convolutional networks as the best.
+Deep neural networks against parametric models such as Pareto/NBD. The neural networks did better, with the two network types almost tied; the abstract names convolutional networks as the most efficient.
 </details>
 
 ## Sources and grades
 
-- [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed). Grade A, tier 1. The top 5% and $100 figures are from the abstract.
-- [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract read on the AAAI page. Grade A for the abstract, tier 1. The full PDF sits behind a bot check I could not pass, so the paper's own share of paying players and which game it used are not given.
+- [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed record, through Europe PMC). Grade A, tier 1. The top 5% and $100 figures are from the abstract. The "under $20" line is the abstract's background, not a pooled result.
+- [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract only, read through the OpenAlex record of the publisher abstract. Grade A for the abstract, tier 1. The AAAI page and PDF sit behind a bot check, so the paper's own share of paying players, which game it used and whether the second model was fitted on payers only are not given.
 - [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI as the published version. Grade A, tier 1 for the method and results. Grade B for the "around 2%, up to 50%" whale figure, which the paper states without the count behind it.
 - Cut: the Swrve press release figures from the earlier draft. A vendor press release can't carry a fact under this course's standard. Peer-reviewed figures on spend concentration across many free-to-play games are something I did not find.

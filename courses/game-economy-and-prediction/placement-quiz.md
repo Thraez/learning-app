@@ -42,7 +42,7 @@ Old School RuneScape funded an item sink from a 1% market tax, buying high-level
 
 <details>
 <summary>Answer</summary>
-Prices rose (about 7% and 14% in the two rounds) and trading volume did not change meaningfully. Source: [Hogan-Hennessy et al. 2022, preprint](https://arxiv.org/abs/2210.07970). Lesson 2.
+Prices rose (about 7% in the first round and about 14 to 16% in the second) and no change in trading volume was detected, though that estimate is loose. Source: [Hogan-Hennessy et al. 2022, preprint](https://arxiv.org/abs/2210.07970). Lesson 2.
 </details>
 
 ### gd-econ/placement/p04 · scenario
