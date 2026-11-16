@@ -4,6 +4,7 @@ course: gd-econ
 title: Survival curves for churn and lifetime value
 order: 9
 status: draft
+checked: 2026-11-16
 sources:
   - cite: "Viljanen, Airola, Heikkonen, Pahikkala (2018). Playtime Measurement With Survival Analysis. IEEE Transactions on Games 10(2), 128-138. DOI 10.1109/TCIAIG.2017.2727642. Read as arXiv:1701.02359."
     url: https://doi.org/10.1109/TCIAIG.2017.2727642
@@ -35,7 +36,7 @@ About three times as long: 2.41 hours. A few dedicated players with very long pl
 
 ## The idea
 
-Lesson 4 showed why churn data is censored. Survival analysis is the toolkit built for that, and it gives designers better numbers than a churn rate.
+Lesson 4 showed why churn data is censored. Survival analysis is the toolkit built for that, and it gives designers more than one retention figure: a curve, a median, a mean and a churn rate that changes over playtime.
 
 [Viljanen and colleagues](https://doi.org/10.1109/TCIAIG.2017.2727642) (University of Turku, peer-reviewed in IEEE Transactions on Games) apply it to total playtime in Hipster Sheep, an in-development puzzle game, using 3,753 players from three test versions. The survival curve shows the share of players still playing after each amount of playtime, and the Kaplan-Meier method draws it while counting censored players correctly. From the curve come the median (when half the players have gone) and the mean (the area under the curve). Simply dropping censored players biases the mean downward, they note. In version 1.18 the median was 0.77 hours and the mean 2.41 hours, which is why they argue for reporting both. In the same version the hazard, the churn rate among those still playing, started at about 0.6 churns per hour, halved to 0.3 within the first 4 hours, and settled near 0.2 from about 10 hours on.
 
@@ -101,4 +102,4 @@ They often predicted no purchases for players who kept spending, and they consis
 - [Viljanen et al. 2018, IEEE Transactions on Games](https://doi.org/10.1109/TCIAIG.2017.2727642), full text read as [arXiv:1701.02359](https://arxiv.org/abs/1701.02359). Crossref lists the journal version with the same title and authors. Grade A, tier 1. The dataset, median, mean, hazard figures, the log-rank results (p = 0.534) and the cohort caveat were checked against the text. One small in-development game.
 - [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists this DOI. Grade A, tier 1 for the Brier scores (Table I).
 - [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI. Grade A, tier 1 for the two weaknesses of the parametric models.
-- All three use confidential studio data.
+- All three use a studio's own player data, which none of the papers publishes.

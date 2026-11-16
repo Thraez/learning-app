@@ -4,12 +4,18 @@ course: gd-econ
 title: Predicting who leaves is not knowing what keeps them
 order: 6
 status: draft
+checked: 2026-11-16
 sources:
   - cite: "Runge, Gao, Garcin, Faltings (2014). Churn prediction for high-value players in casual social games. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932875."
     url: https://doi.org/10.1109/CIG.2014.6932875
     grade: A
     tier: 1
     note: abstract only, read on IEEE Xplore
+  - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
+    url: https://doi.org/10.1371/journal.pone.0186407
+    grade: A
+    tier: 1
+    note: full text read for lesson 1; used here for one comparison sentence
 ---
 
 # Lesson 6: Predicting who leaves is not knowing what keeps them
@@ -18,7 +24,7 @@ sources:
 
 ### gd-econ/predict-vs-act/open · open
 
-In 2014, [Julian Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) built a churn model for high-value players in two casual social games with millions of players each. Then they ran an A/B test in one game: players the model flagged as about to leave got free in-game currency. Guess: did the gift lower churn or raise spending?
+In 2014, [Julian Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) built a churn model for high-value players in two casual social games with millions of players each. Then they ran an A/B test in one game, using free in-game currency as an incentive to keep players. Guess: did the gift lower churn or raise spending?
 
 <details>
 <summary>Answer</summary>
@@ -29,11 +35,11 @@ Neither. The free currency had no significant effect on churn or on spending.
 
 A churn model tells you who is likely to leave. It does not tell you what will make them stay. That needs its own test.
 
-[Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) (peer-reviewed at IEEE CIG 2014) compared four common classifiers on the two games and added a hidden Markov model to track changes over time. A neural network had the best AUC. Then they acted on the predictions in an A/B test. The abstract's finding: giving out free in-game currency did not significantly change churn or monetization. One thing did help: contacting players shortly before the predicted churn point "substantially improves" how well the communication works.
+[Runge and colleagues](https://doi.org/10.1109/CIG.2014.6932875) (peer-reviewed at IEEE CIG 2014) compared four common classifiers on the two games and added a hidden Markov model to track changes over time. A neural network had the best AUC. Then, to gauge the business value of churn prediction, they ran an A/B test. The abstract's finding: giving out free in-game currency did not significantly change churn or monetization. One thing did help: contacting players shortly before the predicted churn point "substantially improves" how well the communication works.
 
-From this the authors draw a strong conclusion: players can only be kept by "remarkably changing their gameplay experience" before they would leave, and pointing them to the studio's other games may work better than trying to hold them. The abstract even lists, as a last resort, passing leaving players on to other companies through in-game ads. These are the authors' suggestions; the test covered one kind of gift in one game.
+From this the authors suggest that players can only be kept by "remarkably changing their gameplay experience" before they would leave, and pointing them to the studio's other games may work better than trying to hold them. The abstract even lists, as a last resort, passing leaving players on to other companies through in-game ads. These are the authors' suggestions; the test covered one kind of gift in one game.
 
-Compare lesson 1. In Top Eleven, more free currency at the start raised retention. Here, free currency handed to players already on their way out did nothing measurable. Same lever, different players and timing, different result. That is the case for testing each intervention on the group you will use it on. (The comparison across the two studies is my inference, grade C.)
+Compare lesson 1. In [Top Eleven](https://doi.org/10.1371/journal.pone.0186407), more free currency at the start raised day-7 retention. Here, free currency in an A/B test had no significant effect on churn or spending. Same lever, a different game and moment, a different result. That is the case for testing each intervention on the group you will use it on. (The comparison across the two studies is my inference, grade C.)
 
 ## Why
 
@@ -61,7 +67,7 @@ A holdout. Send the offer to a random part of the flagged members and nothing to
 
 ### gd-econ/predict-vs-act/r1 · recall
 
-What effect did free in-game currency have on players predicted to churn?
+What effect did free in-game currency have in the A/B test?
 
 <details>
 <summary>Answer</summary>
@@ -90,4 +96,5 @@ Cross-promote the studio's other games to them, or change their game experience 
 
 - [Runge et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932875), abstract read on IEEE Xplore. Grade A for its claims, tier 1 (peer-reviewed). The full paper is paywalled and was not opened, so effect sizes, sample sizes per arm and the games' names are not given.
 - Cut: a Game Developer trade-press write-up of the same work. It was the only source for the games' names and for the claim that the model-picked group did no better than a rule-picked group, so both claims are gone.
-- One studio, two casual games, one kind of gift. Published tests of retention offers in games are rare, so this result can't be generalised far.
+- [Zivic et al. 2017, PLOS ONE](https://doi.org/10.1371/journal.pone.0186407), full text read for lesson 1 (publisher PDF). Grade A, tier 1. Used here only for the one-sentence comparison with Top Eleven.
+- Two casual games, one kind of gift, tested in one of the games. I found few other published tests of retention offers in games (my search, grade C), so this result can't be generalised far.

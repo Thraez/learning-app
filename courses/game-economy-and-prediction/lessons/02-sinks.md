@@ -4,6 +4,7 @@ course: gd-econ
 title: Sinks move prices, not only remove value
 order: 2
 status: draft
+checked: 2026-11-16
 sources:
   - cite: "Hogan-Hennessy, Xenopoulos, Silva (2022). Market Interventions in a Large-Scale Virtual Economy. arXiv:2210.07970."
     url: https://arxiv.org/abs/2210.07970
