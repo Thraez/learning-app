@@ -33,8 +33,12 @@ every answer so Claude can revise the course.
 - **PR #5, course 2 draft (learning how to learn).** `course.md` (id `learn`, 0.1.0, a 12-lesson plan, 15 tier 1
   sources reopened) and a 14-item placement quiz. No lessons. One test line relaxed so a course with no lesson files
   passes. If merged before lessons exist, the live app shows the course with "0 of 0 lessons" and a placement summary
-  that says "No concept items in this quiz", so merge it when the first lessons land or accept that. Rechecked: 32
-  tests pass, build passes, dash grep clean, three abstracts sampled against the numbers.
+  that says "No concept items in this quiz", so merge it when the first lessons land or accept that. Placement item
+  IDs and their "Lesson N." numbers are permanent once answered, so settle the lesson order before merging. Caveats
+  from the worker: nine sources were read at abstract only, some through Crossref or Europe PMC records because the
+  publisher blocked the fetch; Annual Review and Current Directions were given tier 1 without confirming their review
+  process. Rechecked: 32 tests pass, build passes, dash grep clean, both files read, two abstracts (Cepeda 2008,
+  Brunmair 2019) sampled against the numbers.
 
 ## Source check pilot (no repo change)
 
@@ -52,6 +56,7 @@ lessons are not yet fixed.
    they are until the user agrees.
 4. Where private learner state (exports, interest profile) lives. Candidate: a folder in the private Workspace vault.
    Never in this public repo.
+   Follow-up once PR #4 merges: add `variants.ts` and `restore.ts` to the `src/` row in `AGENTS.md`.
 5. Whether to fix lessons 02 and 05 from the pilot's list now (version 0.3.1).
 6. The open questions in the course 2 draft (`course.md`, "For you to decide").
 7. Install the app, take the placement quiz and lesson 1. Nothing can be judged until late-recall data exists.
