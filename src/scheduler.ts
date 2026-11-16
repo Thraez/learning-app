@@ -5,10 +5,11 @@
 // Only lesson items of type recall, why and scenario are scheduled. Opening questions and
 // placement items are pretests, so they are recorded but never scheduled.
 // Marks map to ratings: right = Good, partly = Hard, wrong = Again. "retry" attempts (the
-// second try inside a session) are not fed to the scheduler.
+// second try inside a session) are not fed to the scheduler. A read exposure (the L1 reread arm)
+// counts as a first rating of Good, so the item enters review like a correctly recalled one.
 
 import { fsrs, createEmptyCard, Rating, type Card, type Grade, type State } from 'ts-fsrs';
-import type { Attempt, Mark } from './store';
+import { isRead, type Attempt, type Mark } from './store';
 import type { Course, ItemType } from './types';
 
 const f = fsrs({ enable_short_term: false, enable_fuzz: false });
@@ -19,6 +20,10 @@ const RATING: Record<Mark, Grade> = {
   partly: Rating.Hard,
   wrong: Rating.Again,
 };
+
+function ratingOf(a: Attempt): Grade {
+  return isRead(a) || a.mark === null ? Rating.Good : RATING[a.mark];
+}
 
 export interface ItemSchedule {
   itemId: string;
@@ -53,7 +58,7 @@ export function computeSchedules(attempts: readonly Attempt[]): Map<string, Item
   const out = new Map<string, ItemSchedule>();
   for (const [itemId, list] of schedulingAttempts(attempts)) {
     let card = createEmptyCard(new Date(list[0].markedAt));
-    for (const a of list) card = f.next(card, new Date(a.markedAt), RATING[a.mark]).card;
+    for (const a of list) card = f.next(card, new Date(a.markedAt), ratingOf(a)).card;
     out.set(itemId, { itemId, card });
   }
   return out;
@@ -110,7 +115,8 @@ export function courseProgress(
   now = new Date(),
 ): CourseProgress {
   const ids = new Set(scheduledItemIds(course));
-  const by = schedulingAttempts(attempts.filter((a) => ids.has(a.itemId)));
+  // A read exposure is not an answer: it is left out of learned, accuracy and late recall.
+  const by = schedulingAttempts(attempts.filter((a) => ids.has(a.itemId) && !isRead(a)));
   let learned = 0;
   let partly = 0;
   let lateAnswers = 0;
@@ -127,7 +133,7 @@ export function courseProgress(
     for (const a of list) {
       if (new Date(a.markedAt).getTime() - first >= LATE_DAYS * DAY) {
         lateAnswers++;
-        lateScore += SCORE[a.mark];
+        lateScore += SCORE[a.mark!];
         lateItems.add(itemId);
       }
     }
