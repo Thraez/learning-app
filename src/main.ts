@@ -315,6 +315,9 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
   const prior = new Map<string, Attempt>();
   if (open) {
     run.sessionId = open.sessionId;
+    // A resumed session keeps the whole-app variants it started with, so its record stays true
+    // (a visual does not appear halfway through a session logged without L15).
+    run.whole = open.variants ?? {};
     const retried = new Set<string>();
     for (const a of getAttempts()) {
       if (a.sessionId !== open.sessionId) continue;
