@@ -11,9 +11,10 @@ import {
   type Appeal, type Attempt, type Confidence, type Mark, type Mode, type SessionKind, type VariantMap,
 } from './store';
 import {
-  E6_DEFAULT, EXPERIMENTS, REVIEW_SIZES, activeWhole, ensureLessonAssignments, experimentOn, itemArms, reviewCap,
+  E6_DEFAULT, EXPERIMENTS, L15_ON, REVIEW_SIZES, activeWhole, ensureLessonAssignments, experimentOn, itemArms, reviewCap,
   type ReviewSize,
 } from './variants';
+import { renderVisual } from './visuals';
 import { parseExportFile, restoreExport } from './restore';
 import { placementResult } from './placement';
 import { computeSchedules, courseProgress, dueItems, nextDue, LATE_DAYS } from './scheduler';
@@ -333,6 +334,8 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
       const b = blocks[i++];
       if (b.kind === 'section') main.append(el('h2', {}, esc(b.title)));
       else if (b.kind === 'prose') main.append(el('div', { class: 'prose' }, b.html));
+      // A visual shows only with L15 on (fixed for the session, like every whole-app variant); otherwise it is skipped.
+      else if (b.kind === 'visual') { if (run.whole.L15 === L15_ON) main.append(renderVisual(b.visual)); }
       else {
         const it = b.item;
         const done = prior.get(it.id);
@@ -567,6 +570,21 @@ function settingsScreen() {
   row.append(select, el('span', { class: 'muted small' }, 'Last day (optional):'), until);
   main.append(row, note);
   describe();
+
+  main.append(el('h2', {}, 'Interactive visuals'));
+  main.append(el('p', { class: 'muted small' }, 'Off unless you switch it on. Some lessons have a picture you can tap through; it restates figures the lesson text already gives. Sessions record whether it was on.'));
+  const vis = el('input', { type: 'checkbox', id: 'l15-on' });
+  vis.checked = activeWhole(settings).L15 === L15_ON;
+  vis.onchange = () => {
+    const s = getSettings();
+    s.whole.L15 = { value: vis.checked ? L15_ON : 'off', since: nowIso(), until: null };
+    saveSettings(s);
+  };
+  const visLabel = el('label', { class: 'switch' });
+  visLabel.append(vis, el('span', {}, ' <strong>L15: Show interactive visuals in lessons.</strong>'));
+  const visP = el('p');
+  visP.append(visLabel);
+  main.append(visP);
 
   main.append(el('h2', {}, 'Restore from an export file'));
   main.append(el('p', { class: 'muted small' }, 'Adds answers and sessions from an export file that are missing on this phone. Nothing already here is changed or deleted, so restoring the same file twice adds nothing. Settings come back only if this phone has none.'));

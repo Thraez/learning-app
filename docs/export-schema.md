@@ -100,7 +100,10 @@ when it was given. An item gets one arm of an experiment once, at random
 
 `settings` is `{ "experiments": { "L1": true }, "whole": { "E6": { "value", "since", "until" } } }`. `E6` is the review
 session length: `short` (5 items), `standard` (10, the default) or `open` (all due). `since` is when the value was set
-(ISO 8601); `until` is the last day it applies (`YYYY-MM-DD`) or `null`, after which `standard` applies.
+(ISO 8601); `until` is the last day it applies (`YYYY-MM-DD`) or `null`, after which `standard` applies. `L15` has the
+same shape and the value `on` or `off` (the default): with it on, a lesson that has a visual shows it, and sessions
+started then carry `L15=on` in `variant` and `variants`. A visual has an ID of the item form
+(`<course-id>/<lesson-slug>/v1`) but is never answered, so it adds no attempt and no new field.
 
 ## Version history
 

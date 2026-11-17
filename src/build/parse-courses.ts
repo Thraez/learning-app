@@ -9,7 +9,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { Marked } from 'marked';
 import { parse as parseYaml } from 'yaml';
-import type { Block, Course, CourseData, Item, ItemType, Lesson, Placement, Source } from '../types';
+import type { Block, Course, CourseData, GapRow, Item, ItemType, Lesson, Placement, Source, Visual, VisualKind } from '../types';
 
 const ITEM_TYPES: ItemType[] = ['open', 'why', 'scenario', 'recall'];
 // "### gd-econ/endowment/r2 · recall" (the separator is U+00B7, middle dot)
@@ -57,6 +57,41 @@ function makeMarked(links: LinkMap) {
 interface ParsedBody {
   blocks: Block[];
   items: Item[];
+  visuals: Visual[];
+}
+
+const VISUAL_KINDS: VisualKind[] = ['gap-timeline'];
+const isCount = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v >= 0;
+
+/**
+ * Reads the YAML inside a "```visual" block. Every number in it is a claim the lesson makes, so
+ * anything missing or of the wrong shape fails the build instead of drawing a wrong picture.
+ */
+function parseVisual(yamlText: string, file: string, parentId: string): Visual {
+  let data: unknown;
+  try { data = parseYaml(yamlText); } catch (e) { fail(file, `a visual block is not valid YAML (${(e as Error).message})`); }
+  if (!data || typeof data !== 'object' || Array.isArray(data)) fail(file, 'a visual block must be a YAML mapping with id, kind, title, text and rows');
+  const o = data as Record<string, unknown>;
+  const id = typeof o.id === 'string' ? o.id : '';
+  if (!id) fail(file, 'a visual block has no "id"');
+  if (!id.startsWith(parentId + '/')) fail(file, `visual ${id} does not start with "${parentId}/"`);
+  const rest = id.slice(parentId.length + 1);
+  if (!rest || rest.includes('/')) fail(file, `visual ${id} must have exactly one part after "${parentId}/"`);
+  const kind = String(o.kind ?? '');
+  if (!(VISUAL_KINDS as string[]).includes(kind)) fail(file, `visual ${id} has unknown kind "${kind}" (allowed: ${VISUAL_KINDS.join(', ')})`);
+  const title = typeof o.title === 'string' ? o.title.trim() : '';
+  const text = typeof o.text === 'string' ? o.text.trim() : '';
+  if (!title) fail(file, `visual ${id} has no "title"`);
+  if (!text) fail(file, `visual ${id} has no "text" (one sentence saying what the picture shows)`);
+  if (!Array.isArray(o.rows) || o.rows.length === 0) fail(file, `visual ${id} has no "rows"`);
+  const rows: GapRow[] = o.rows.map((r, n) => {
+    const row = (r ?? {}) as Record<string, unknown>;
+    if (!isCount(row.delay) || !isCount(row.gap) || !isCount(row.share) || row.delay === 0) {
+      fail(file, `visual ${id}, row ${n + 1}: "delay", "gap" and "share" must be numbers, and the delay above 0`);
+    }
+    return { delay: row.delay, gap: row.gap, share: row.share };
+  });
+  return { id, kind: kind as VisualKind, parentId, title, text, rows };
 }
 
 /**
@@ -67,6 +102,7 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
   const lines = body.split('\n');
   const blocks: Block[] = [];
   const items: Item[] = [];
+  const visuals: Visual[] = [];
   let prose: string[] = [];
   let inFence = false;
 
@@ -81,6 +117,19 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
   let i = 0;
   while (i < lines.length) {
     const line = lines[i];
+    // A "```visual" block: data for a picture the app draws. It becomes its own block, never prose.
+    if (!inFence && /^```visual\s*$/.test(line)) {
+      flushProse();
+      const inner: string[] = [];
+      i++;
+      while (i < lines.length && !/^```\s*$/.test(lines[i])) { inner.push(lines[i]); i++; }
+      if (i >= lines.length) fail(file, 'a "```visual" block is never closed');
+      i++;
+      const visual = parseVisual(inner.join('\n'), file, parentId);
+      visuals.push(visual);
+      blocks.push({ kind: 'visual', visual });
+      continue;
+    }
     if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
     if (inFence) { prose.push(line); i++; continue; }
 
@@ -137,7 +186,7 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
     i++;
   }
   flushProse();
-  return { blocks, items };
+  return { blocks, items, visuals };
 }
 
 function parseSources(raw: unknown, file: string): Source[] {
@@ -217,7 +266,7 @@ export function parseCourseFolder(dir: string): Course {
     if (!slug || slug.includes('/')) fail(path, `lesson id "${id}" must be "<course-id>/<lesson-slug>"`);
     const order = Number(str(data, 'order', path));
     if (!Number.isFinite(order)) fail(path, '"order" must be a number');
-    const { blocks, items } = parseBody(body, path, id, render);
+    const { blocks, items, visuals } = parseBody(body, path, id, render);
     return {
       id,
       slug,
@@ -229,6 +278,7 @@ export function parseCourseFolder(dir: string): Course {
       sources: parseSources(data.sources, path),
       blocks,
       itemIds: items.map((it) => it.id),
+      visualIds: visuals.map((v) => v.id),
     };
   });
   lessons.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
@@ -246,7 +296,8 @@ export function parseCourseFolder(dir: string): Course {
     const { data, body } = splitFrontMatter(readFileSync(placementFile, 'utf8'), placementFile);
     const id = str(data, 'id', placementFile);
     if (id !== placementId) fail(placementFile, `placement id must be "${placementId}", found "${id}"`);
-    const { blocks, items } = parseBody(body, placementFile, id, render);
+    const { blocks, items, visuals } = parseBody(body, placementFile, id, render);
+    if (visuals.length) fail(placementFile, `visual ${visuals[0].id}: a placement quiz cannot hold a visual`);
     // Each placement answer ends with "Lesson N." so the app can map the item to a lesson. N must be
     // a lesson that exists, or a number up to "lessons_planned" when the course page declares one.
     for (const it of items) {
@@ -303,6 +354,7 @@ export function parseCourses(coursesRoot: string): CourseData {
     for (const l of c.lessons) {
       claim(l.id, `${c.folder}/${l.file}`);
       for (const it of l.itemIds) claim(it, `${c.folder}/${l.file}`);
+      for (const v of l.visualIds) claim(v, `${c.folder}/${l.file}`);
     }
     if (c.placement) {
       claim(c.placement.id, `${c.folder}/placement-quiz.md`);

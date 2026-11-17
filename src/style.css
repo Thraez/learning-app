@@ -121,3 +121,16 @@ nav.bottom a { padding: 0.5rem; text-decoration: none; }
   padding-top: max(0.5rem, env(safe-area-inset-top));
   display: flex; gap: 1rem; align-items: center; justify-content: center;
 }
+
+/* Visuals (src/visuals.ts): a tap-through picture inside a lesson. */
+.visual { margin: 1rem 0; padding: 0.75rem; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+.visual figcaption { font-weight: 600; }
+.visual button[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.vis-picture svg { width: 100%; height: auto; display: block; }
+.vis-picture text { fill: var(--fg); font-size: 11px; }
+.vis-picture .vis-strong { font-weight: 700; fill: var(--accent); }
+.vis-delay { stroke: var(--line); stroke-width: 4; stroke-linecap: round; }
+.vis-gap { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; }
+.vis-dot { fill: var(--fg); }
+.vis-dot.vis-review { fill: var(--accent); }
+.vis-line { margin: 0.4rem 0 0; min-height: 1.4em; }

@@ -1,7 +1,7 @@
 ---
 id: learn
 title: Learning how to learn
-version: 0.2.0
+version: 0.2.1
 status: draft
 lessons_planned: 12
 created: 2026-11-16
@@ -131,5 +131,6 @@ Still open:
 
 ## Change log
 
+- 0.2.1 (2026-11-18): lesson 3 gains a visual, `learn/spacing/v1`: a tap-through timeline of the four tested delays and their best gaps. It restates figures already in the lesson and adds none. The app shows it only with the Settings switch "Interactive visuals" on, which is off by default. No item ID changed. Its ledger rows were checked by a fresh reader on 2026-11-18.
 - 0.2.0 (2026-11-16): lessons 1 to 5 written, each checked against its sources by a reader who did not write it, with a claim ledger per lesson under `ledgers/`; all five carry `checked: 2026-11-16`. New sources: Vaughn, Dunlosky and Rawson 2016 (lesson 4) and the Latimier 2020 preprint (lesson 3, not peer-reviewed). This page: `lessons_planned: 12` added so the placement quiz may point at lessons 6 to 11 before they exist; the lesson list links the written lessons; the sources table now says what was read for Bjork 2013, Cepeda 2008 and Pan and Rickard 2018; three review journals are marked tier 1 unverified; the decisions on scope are recorded. Placement quiz: p05 now gives the best gaps the study tested (1 day and 21 days) next to the abstract's ranges, in place of day counts worked out from the ranges; p06 says 0.74 is the bias-corrected figure and that the "more tests" result is tentative, both from the preprint. No item ID changed; items whose answer text changed: placement/p05, placement/p06.
 - 0.1.0 (2026-11-16): first draft. Course page and a 14-item placement quiz, no lessons. Every source was opened again on this date; tiers assigned under AGENTS.md rule 4, and every figure checked against the abstract or full text named in the sources table.

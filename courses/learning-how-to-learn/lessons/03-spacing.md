@@ -4,7 +4,7 @@ course: learn
 title: The best gap depends on when you need it
 order: 3
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Cepeda, Vul, Rohrer, Wixted, Pashler (2008). Spacing Effects in Learning: A Temporal Ridgeline of Optimal Retention. Psychological Science 19(11), 1095 to 1102."
     url: https://doi.org/10.1111/j.1467-9280.2008.02209.x
@@ -43,6 +43,18 @@ There is no single best gap between studying something and reviewing it. The bes
 The main study is [Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x), one large experiment. In the first session, people answered each fact until they got it right once. After the gap, a second session tested every fact twice and showed the answer each time. Then, after a delay counted from that review, came a recall test and a five-choice test. There were 26 combinations of gap and delay, and each person got one. The delays were 7, 35, 70 and 350 days.
 
 For every delay, recall first rose as the gap grew, then fell. The best gaps tested for recall were [1, 11, 21 and 21 days](https://doi.org/10.1111/j.1467-9280.2008.02209.x) for the four delays. As a share of the delay, those are about 14%, 31%, 30% and 6%. The [published abstract](https://doi.org/10.1111/j.1467-9280.2008.02209.x) summarises it as about 20 to 40% of a one-week delay, falling to about 5 to 10% of a one-year delay. The tested best for one week, 1 day, sits below that range; the in-press copy I read gives about 20% for delays of a few weeks and about 5% for a year. Its fitted curve puts the best gap for a one-year delay at 23 days, 7% of it. So read the ranges as the authors' rough summary, not a rule.
+
+```visual
+id: learn/spacing/v1
+kind: gap-timeline
+title: The best gap tested for recall, for each delay
+text: "For tests 7, 35, 70 and 350 days after the review, the best gaps tested for recall were 1, 11, 21 and 21 days: about 14%, 31%, 30% and 6% of the delay."
+rows:
+  - { delay: 7, gap: 1, share: 14 }
+  - { delay: 35, gap: 11, share: 31 }
+  - { delay: 70, gap: 21, share: 30 }
+  - { delay: 350, gap: 21, share: 6 }
+```
 
 The size is large. With study time held equal, the best gap gave [64% more final recall](https://doi.org/10.1111/j.1467-9280.2008.02209.x) than no gap (d = 1.1). The authors also point out that a gap longer than the best one costs much less than a gap that is too short.
 

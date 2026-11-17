@@ -6,7 +6,7 @@ import type { Course, Item, Lesson, Placement } from '../src/types';
 import type { Attempt } from '../src/store';
 
 const lesson = (order: number): Lesson => ({
-  id: `t/l${order}`, slug: `l${order}`, file: `lessons/0${order}.md`, title: `L${order}`, order, status: 'draft', sources: [], blocks: [], itemIds: [],
+  id: `t/l${order}`, slug: `l${order}`, file: `lessons/0${order}.md`, title: `L${order}`, order, status: 'draft', sources: [], blocks: [], itemIds: [], visualIds: [],
 });
 const item = (n: number, type: Item['type'], target: number): Item => ({
   id: `t/placement/p${n}`, type, parentId: 't/placement', promptHtml: 'Q', answerHtml: 'A', answerLabel: 'Answer', targetLessonOrder: target,

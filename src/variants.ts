@@ -1,6 +1,6 @@
 // Variants: per-item experiments (an item gets one arm, once, for good) and whole-app settings
 // (a value that applies to the whole app for a period). Experiments are on unless the owner switched
-// them off in Settings; whole-app settings stay at their default until changed.
+// them off in Settings; whole-app settings (E6 review length, L15 visuals) stay at their default until changed.
 
 import type { Item, Lesson } from './types';
 import {
@@ -45,6 +45,14 @@ export const REVIEW_SIZES: Record<ReviewSize, { label: string; cap: number }> = 
 };
 export const E6_DEFAULT: ReviewSize = 'standard';
 
+/**
+ * L15, interactive visuals: a whole-app setting, off by default. It is not in EXPERIMENTS, because
+ * an experiment is on unless switched off, and a lesson must read exactly as before until the owner
+ * asks for visuals. Sessions started while it is on record `L15=on`.
+ */
+export const L15_ON = 'on';
+export const visualsOn = (s: Settings, now = new Date()) => activeWhole(s, now).L15 === L15_ON;
+
 /** On by default: a missing key means on, and only a stored `false` switches an experiment off. */
 export const experimentOn = (s: Settings, id: string) => s.experiments[id] !== false;
 
@@ -59,6 +67,8 @@ export function activeWhole(s: Settings, now = new Date()): VariantMap {
   const out: VariantMap = {};
   const e6 = s.whole.E6;
   if (e6 && e6.value in REVIEW_SIZES && e6.value !== E6_DEFAULT && !(e6.until && localDay(now) > e6.until)) out.E6 = e6.value;
+  const l15 = s.whole.L15;
+  if (l15 && l15.value === L15_ON && !(l15.until && localDay(now) > l15.until)) out.L15 = L15_ON;
   return out;
 }
 
