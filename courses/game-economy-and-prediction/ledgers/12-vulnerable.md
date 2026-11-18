@@ -38,3 +38,16 @@ Zendle and Cairns 2018: full text read, the PLOS ONE printable PDF (12 pages, pd
 | Sources and grades | Close: abstract of published version read; grade A, tier 1 | Europe PMC | matches | Grade A covers what the abstract says, per rule 3. |
 | Sources and grades | All three rest on self-report surveys; Zendle and Cairns surveyed adults: in English in 2018, and gamers from the USA in 2019 | 2018 Method; 2019 Design and Participants | matches | 2018: "This survey was available only in English." 2019: "1,545 responses were collected in total from gamers from the USA"; two non-USA participants were removed. Rechecked 2026-11-16. |
 | Sources and grades | Close pooled several surveys; who each sampled not checked; no published study of whale models and vulnerable players found | Close abstract | inference | Accurate about what was read; the literature claim is the writer's search, marked as such. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Zendle 2018 | read: full text, publisher PDF | Ledger opening lines | matches | Ledger: PLOS ONE printable PDF, 12 pages, Tables 1 to 3. |
+| front matter, Zendle 2018 | caveat: Self-report survey, run in English. | Row 'Sources and grades, surveyed adults: in English in 2018' | matches | Ledger quotes 'This survey was available only in English.' |
+| front matter, Zendle 2019 | read: full text, publisher PDF | Ledger opening lines | matches | Ledger: PLOS ONE printable PDF, 13 pages. |
+| front matter, Zendle 2019 | caveat: Self-report survey of US gamers; a replication. | Rows '2019: 1,172 gamers on Amazon Mechanical Turk' and 'Sources and grades' (gamers from the USA) | matches | Ledger: responses from gamers from the USA, two non-US participants removed. The study repeats the 2018 design with participants not told the topic. |
+| front matter, Close 2021 | read: abstract only, Europe PMC record | Ledger opening lines | matches | Ledger: published abstract from Europe PMC (PMID 33578105); manuscript pages returned 403 and 404. |
+| front matter, Close 2021 | caveat: Abstract only; who each pooled survey sampled was not checked. | Ledger row 'Close pooled several surveys; who each sampled not checked' | matches | The abstract does not give the number of surveys or their samples. |
+| front matter, Close 2021 | corrected note and Sources and grades sentence: abstract read from the Europe PMC record | Ledger opening lines | matches | Replaces 'PubMed'. The ledger says Europe PMC; the PubMed record has the same PMID. |

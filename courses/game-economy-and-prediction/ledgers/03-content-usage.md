@@ -43,3 +43,17 @@ Hullett et al. 2012 was read in full text: the PDF linked from the Microsoft Res
 | Sources and grades | The earlier version took its figures from a SlideShare deck; they are replaced with figures from the paper itself | Whole paper | matches | The old claim about the deck's thresholds is gone. Every figure now in the lesson was found in the paper (see the rows above). Rechecked 2026-11-16. |
 | Sources and grades | One game, one study, opted-in players | Sections 4 and 8 | matches | The authors say "The paper is specific to Project Gotham Racing 4". |
 | Sources and grades | "I found little published evidence on content usage in other games (my search, grade C)" | None | inference | Now labelled as the writer's own search, grade C. Rechecked 2026-11-16. |
+
+
+Recheck 2026-11-18: rows the 2026-11-18 edits touched, by a fresh context that did not make the edits. Hullett et al. 2012 was read in full text again from the Microsoft Research PDF (wp-content/uploads/2016/02/Hullett-MSR.pdf), extracted with pdftotext. A bare request got a 403 and one retry got a 502; a request with a browser user agent returned the PDF. Affiliations were also checked against the OpenAlex record for the DOI. The ACM page was not opened.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, sources | read: full text, Microsoft Research copy | Whole PDF | matches | Consistent with the opening lines of this ledger. |
+| front matter, sources | caveat: one game, one team's study, opted-in players only | Section 3 (game and data); Section 8 | matches | "Telemetry data was collected from players who opted in" while connected to Xbox Live. The paper says it is specific to Project Gotham Racing 4. |
+| front matter, sources | note: whether the copy is the camera-ready version is not confirmed | Title page footer | matches | The copy carries the ACM permission notice, "ESEM'12, September 19 to 20, 2012, Lund, Sweden" and "Copyright 2012 ACM 978-1-4503-1056-7/12/09...$15.00", in ACM layout. That fits a camera-ready or ACM-formatted copy but does not prove it, so the lesson's wording is right. |
+| Opening question | Researchers from UC Santa Cruz, Microsoft and Bungie | Title page affiliations | matches | Hullett: UC Santa Cruz. Nagappan: Microsoft Research. Schuh: Microsoft Game Studios. Hopson: Bungie Studios. OpenAlex lists Santa Cruz and Microsoft for three authors and none for Hopson. |
+| Opening question | 3.1 million race starts logged from Xbox Live players | Section 5 | matches | "approximately 3.1 million entries, one for each time a player started a race". |
+| Sources and grades | Link to the Microsoft Research copy | URL tested | matches | The link serves the PDF, though it needed a browser user agent. |
+| Sources and grades | The ACM page was not tried; camera-ready status cannot be confirmed | Title page footer | matches | See the note row above. |
+| Item IDs and answers | No item ID or heading changed; no answer block touched | git diff d4ce597 e2c3a5a | matches |  |

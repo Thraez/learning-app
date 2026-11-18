@@ -52,3 +52,11 @@ How far the source was read. Pan and Rickard 2018: full text of the APA advance 
 Counts: 37 matches, 0 differs, 0 not in source, 0 could not open, 5 inference. No fix required.
 
 One small point for the writer, not a fix: the cite's volume and pages come from a secondary reference list, since the advance PDF carries none and the APA page was not opened.
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Pan 2018 | read: full text, first author's site PDF | Ledger opening lines | matches | Ledger: APA advance online PDF from the first author's site. |
+| front matter, Pan 2018 | caveat: A meta-analysis; the opening case is an earlier study as the review describes it. | Rows 'A review describes a case from an earlier study' and 'History-fact case is from Pan, Gopal and others 2015' | matches | Ledger: Pan, Gopal and Rickard 2015 was not opened; the case rests on the review's description. |

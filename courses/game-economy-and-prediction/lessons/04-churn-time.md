@@ -4,6 +4,7 @@ course: gd-econ
 title: Churn is a definition and a time, not a label
 order: 4
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Periáñez, Saas, Guitart, Magne (2016). Churn Prediction in Mobile Social Games: Towards a Complete Assessment Using Survival Ensembles. IEEE DSAA 2016, pp. 564-573. DOI 10.1109/DSAA.2016.84. Read as arXiv:1710.02264."
     url: https://doi.org/10.1109/DSAA.2016.84
@@ -31,7 +32,7 @@ Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon S
 
 <details>
 <summary>Answer</summary>
-About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo for non-paying). Only about 20% of the top spenders had churned after 100 days. Both are approximate values read off the paper's survival curves. Same game, same rule, very different lives.
+About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo for non-paying). Only about 20% of the top spenders had churned after 100 days. Both figures are stated in the paper's text, which describes its survival curves; it says "approximately" for the 80% and gives the 20% without a hedge. Same game, same rule, very different lives.
 </details>
 
 ```decide
@@ -55,7 +56,7 @@ The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84
 
 <!-- break -->
 
-The Age of Ishtaria figures in the opening come from approximate readings of Kaplan-Meier curves on a sample of 1.5 million players in that paper, which I read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) (IEEE CIG 2014) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games.
+The Age of Ishtaria figures in the opening are stated in the text that describes the Kaplan-Meier curves (Section III-B) on a sample of 1.5 million players in that paper, which I read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) (IEEE CIG 2014) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games.
 
 <!-- break -->
 
@@ -199,6 +200,6 @@ Generic behaviour features such as playtime, session length and the time between
 
 ## Sources and grades
 
-- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures (approximate values read off survival curves, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
+- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures (stated in the text describing the survival curves, "approximately" on the 80% only, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
 - [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
 - Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish, so others can't rerun the results. The Hadiji abstract does not say whose data it used.

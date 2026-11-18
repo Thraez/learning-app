@@ -4,6 +4,7 @@ course: gd-econ
 title: Starting currency is a retention lever
 order: 1
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
     url: https://doi.org/10.1371/journal.pone.0186407

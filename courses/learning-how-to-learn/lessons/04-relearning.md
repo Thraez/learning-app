@@ -4,6 +4,7 @@ course: learn
 title: Recall until right, then again another day
 order: 4
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Rawson, Dunlosky (2022). Successive Relearning: An Underexplored but Potent Technique for Obtaining and Maintaining Knowledge. Current Directions in Psychological Science 31(4), 362 to 368."
     url: https://doi.org/10.1177/09637214221100484
