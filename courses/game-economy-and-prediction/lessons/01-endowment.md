@@ -4,12 +4,14 @@ course: gd-econ
 title: Starting currency is a retention lever
 order: 1
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
     url: https://doi.org/10.1371/journal.pone.0186407
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "One study, one game (Top Eleven); authors include Nordeus staff; data not shareable."
 ---
 
 # Lesson 1: Starting currency is a retention lever
@@ -31,9 +33,9 @@ A faucet aimed at new players is not only a cost to monetization. It can be a re
 
 Nordeus and Edward Castronova [ran a randomized test](https://doi.org/10.1371/journal.pone.0186407) on about 575,000 new Top Eleven players, split equally into three groups: 40 Tokens (the control, the default since late 2014), 80 and 120. It ran for 28 days, one in-game season. The paper is peer-reviewed (PLOS ONE).
 
-Against control, day-7 retention was 6.9% higher with 80 Tokens and 7.7% higher with 120. Both were significant against control (p = 0.015 and 0.005), but not different from each other. On purchases, the daily share of players making a first real-money purchase rose by about 8% and 4%, but neither was statistically significant (p = 0.054 and 0.197). The paper's text gives 4.3% for the 120-Token group where its Table 2 gives 4.0%. The size of that first purchase rose 14% (80 Tokens, p = 0.057, just short of significance) and 34.8% (120 Tokens, p = 0.005). All figures are from the [paper's Table 2](https://doi.org/10.1371/journal.pone.0186407).
+Against control, day-7 retention was 6.9% higher with 80 Tokens and 7.7% higher with 120. These are relative lifts, not percentage points: Table 1 gives every result as an index with the 40-Token control set to 100, and the paper prints no baseline retention rate, so this lesson has none. Both were significant against control (p = 0.015 and 0.005), but not different from each other. On purchases, the daily share of players making a first real-money purchase rose by about 8% and 4%, but neither was statistically significant (p = 0.054 and 0.197). The paper's text gives 4.3% for the 120-Token group where its Table 2 gives 4.0%. The size of that first purchase rose 14% (80 Tokens, p = 0.057, just short of significance; Table 1 implies 13.9%) and 34.8% (120 Tokens, p = 0.005). Figures are from the [paper's Table 2](https://doi.org/10.1371/journal.pone.0186407).
 
-Now the catch. The [abstract](https://doi.org/10.1371/journal.pone.0186407) says a bigger money supply "leads to inflation and increased money demand". The paper measured no prices and no inflation; Token packages keep fixed real-money prices. So the inflation part is the authors' reading, not a result. What was measured: more free currency at the start, more players still there a week later, and no drop in buying. The authors also say they cannot pin down the best amount for retention, only that it probably lies somewhere in the 80 to 120 range.
+Now the catch. The [abstract](https://doi.org/10.1371/journal.pone.0186407) says a bigger money supply "leads to inflation and increased money demand". The paper measured no prices and no inflation; Token packages keep fixed real-money prices. So the inflation part is the authors' reading, not a result. The abstract also says purchases were "significantly higher", but in Table 2 only one of the four purchase comparisons against control is significant. What was measured: more free currency at the start, more players still there a week later, and no drop in buying. The authors also say they cannot pin down the best amount for retention, only that it probably lies somewhere in the 80 to 120 range.
 
 ## Why
 

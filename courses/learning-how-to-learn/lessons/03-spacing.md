@@ -4,22 +4,28 @@ course: learn
 title: The best gap depends on when you need it
 order: 3
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Cepeda, Vul, Rohrer, Wixted, Pashler (2008). Spacing Effects in Learning: A Temporal Ridgeline of Optimal Retention. Psychological Science 19(11), 1095 to 1102."
     url: https://doi.org/10.1111/j.1467-9280.2008.02209.x
     grade: A
     tier: 1
+    read: "abstract and in-press manuscript"
+    caveat: "One online experiment; the best gaps are the best of those tested."
     note: "published abstract (Crossref record) and full text of the in-press manuscript (University of California eScholarship copy), which may differ from the published version; the publisher page was not opened"
   - cite: "Latimier, Peyre, Ramus (2021). A Meta-Analytic Review of the Benefit of Spacing out Retrieval Practice Episodes on Retention. Educational Psychology Review 33, 959 to 987."
     url: https://doi.org/10.1007/s10648-020-09572-8
     grade: A
     tier: 1
+    read: "abstract and appendix only"
+    caveat: "A meta-analysis; the paywalled body was not read."
     note: "published abstract and appendix on the publisher page; the body is paywalled and was not read in this version"
   - cite: "Latimier, Peyre, Ramus (2020). A meta-analytic review of the benefit of spacing out retrieval practice episodes on retention. Preprint, PsyArXiv/OSF."
     url: https://osf.io/kzy7u
     grade: A
     tier: 2
+    read: "full text, OSF preprint"
+    caveat: "Preprint, not peer-reviewed; some figures differ from the published version."
     note: "full text of the authors' March 2020 preprint (Word file on OSF), not peer-reviewed; some figures differ slightly from the published version (0.032 against 0.034)"
 ---
 

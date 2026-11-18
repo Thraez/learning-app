@@ -4,17 +4,21 @@ course: learn
 title: Recall until right, then again another day
 order: 4
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Rawson, Dunlosky (2022). Successive Relearning: An Underexplored but Potent Technique for Obtaining and Maintaining Knowledge. Current Directions in Psychological Science 31(4), 362 to 368."
     url: https://doi.org/10.1177/09637214221100484
     grade: A
     tier: 1
+    read: "abstract only, Crossref record"
+    caveat: "A short review; read at the abstract only."
     note: "abstract only (Crossref record); the publisher and APS pages blocked automated access and no open copy was found; tier 1 unverified, since the journal publishes some invited papers and its page does not say whether those are peer-reviewed"
   - cite: "Vaughn, Dunlosky, Rawson (2016). Effects of successive relearning on recall: Does relearning override the effects of initial learning criterion? Memory and Cognition 44, 897 to 909."
     url: https://doi.org/10.3758/s13421-016-0606-y
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "Two experiments; most recall values are approximate, read off figures."
     note: "full text read, the publisher's PDF on Springer"
 ---
 
