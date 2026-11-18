@@ -188,6 +188,14 @@ describe('validation fails the build with the file and the reason', () => {
     expect(build(details('t/a/r1', 'recall', '\nStray text.\n'))).toThrow(/has text after its <\/details>/);
     expect(build(details('t/a/r1', 'recall', '\n' + fence('check', CHECK)))).not.toThrow();
   });
+  it('every new block and a break marker may follow </details>, in order; prose after it still fails', () => {
+    const tail = '\n' + fence('predict', PREDICT) + '\n<!-- break -->\n\n' + fence('decide', DECIDE) + '\n' + fence('check', CHECK) + '\n' + fence('visual', BARS);
+    const c = parseCourses(makeRoot(details('t/a/r1', 'recall') + tail)).courses[0];
+    expect(c.lessons[0].blocks.map((b) => b.kind)).toEqual(['item', 'predict', 'break', 'decide', 'check', 'visual']);
+    expect(c.lessons[0].itemIds).toEqual(['t/a/r1']);
+    expect(build(details('t/a/r1', 'recall', '\nProse.\n\n' + fence('check', CHECK)))).toThrow(/has text after its <\/details>/);
+    expect(build(details('t/a/r1', 'recall', '\n' + fence('check', CHECK) + '\nProse.\n'))).toThrow(/has text after its <\/details>/);
+  });
   it('a chunk break needs a blank line either side', () => {
     expect(build('## The idea\n\nOne.\n<!-- break -->\n\nTwo.\n')).toThrow(/blank line before it and after it/);
     expect(build('## The idea\n\nOne.\n\n<!-- break -->\nTwo.\n')).toThrow(/blank line before it and after it/);

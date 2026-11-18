@@ -182,6 +182,10 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
       for (let k = i; k < itemEnd; k++) {
         const t = lines[k];
         if (t.trim() === '') continue;
+        if (t.trim() === '<!-- break -->') {
+          if (!allowBlocks) fail(file, `a chunk break marker is not allowed here${where}`);
+          continue;
+        }
         const f = FENCE_START.exec(t);
         if (!f) fail(file, afterMsg);
         if (!allowBlocks) fail(file, `a "\`\`\`${f[1]}" block is not allowed here${where}`);
