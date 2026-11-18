@@ -158,6 +158,8 @@ function parseSources(raw: unknown, file: string): Source[] {
       grade: o.grade ? String(o.grade) : undefined,
       tier: tier as 1 | 2 | 3,
       note: o.note ? String(o.note) : undefined,
+      read: o.read ? String(o.read) : undefined,
+      caveat: o.caveat ? String(o.caveat) : undefined,
     };
   });
 }
@@ -226,6 +228,9 @@ export function parseCourseFolder(dir: string): Course {
       order,
       status: str(data, 'status', path, false) || 'draft',
       checked: checkedDate(data, path),
+      ledgerUrl: existsSync(join(dir, 'ledgers', f))
+        ? `https://github.com/Thraez/learning-app/blob/main/courses/${folder}/ledgers/${f}`
+        : undefined,
       sources: parseSources(data.sources, path),
       blocks,
       itemIds: items.map((it) => it.id),
