@@ -63,13 +63,13 @@ Nordeus and Edward Castronova [ran a randomized test](https://doi.org/10.1371/jo
 id: gd-econ/endowment/c1
 prompt: "What is the job of the 40-Token group in this test?"
 options:
+  - text: "It is the group that got the most Tokens."
+    why: "The control got 40, the fewest. The 80 and 120 groups got more."
   - text: "It is the comparison. Every lift is measured against it."
     correct: true
-    why: "Right. The 40-Token group is the control, and the paper's Table 1 gives every result as an index with the control set to 100."
-  - text: "It is the group that got the most Tokens."
-    why: "No. The control got 40, the fewest. The 80 and 120 groups got more."
+    why: "The 40-Token group is the control, and the paper's Table 1 gives every result as an index with the control set to 100."
   - text: "It is the group the designers expected to do best."
-    why: "No. It was the default since late 2014, and its job is to be the comparison, not a prediction."
+    why: "It was the default since late 2014, and its job is to be the comparison, not a prediction."
 ```
 
 <!-- break -->
@@ -82,9 +82,9 @@ prompt: "Day-7 retention was 6.9% higher with 80 Tokens. Which reading is right?
 options:
   - text: "A relative lift. The paper prints no baseline rate, so percentage points cannot be given."
     correct: true
-    why: "Right. Table 1 gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
+    why: "Table 1 gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
   - text: "Retention rose by 6.9 percentage points."
-    why: "No. A rise in percentage points needs the baseline retention rate, and the paper prints none."
+    why: "A rise in percentage points needs the baseline retention rate, and the paper prints none."
 ```
 
 <!-- break -->
@@ -130,13 +130,13 @@ Now the catch. The [abstract](https://doi.org/10.1371/journal.pone.0186407) says
 id: gd-econ/endowment/c3
 prompt: "The abstract says a bigger money supply leads to inflation. How should you treat that sentence?"
 options:
+  - text: "As a result, because it is in the abstract."
+    why: "The paper measured no prices and no inflation, so the sentence cannot be a measured result."
+  - text: "As wrong, because Token packages keep fixed real-money prices."
+    why: "The paper did not test inflation either way. The lesson only says it is the authors' reading, not a result."
   - text: "As the authors' reading. The paper measured no prices and no inflation."
     correct: true
-    why: "Right. The lesson says the paper measured retention and purchases only, so the inflation part is an interpretation, not a result."
-  - text: "As a result, because it is in the abstract."
-    why: "No. The paper measured no prices and no inflation, so the sentence cannot be a measured result."
-  - text: "As wrong, because Token packages keep fixed real-money prices."
-    why: "No. The paper did not test inflation either way. The lesson only says it is the authors' reading, not a result."
+    why: "The lesson says the paper measured retention and purchases only, so the inflation part is an interpretation, not a result."
 ```
 
 <!-- break -->

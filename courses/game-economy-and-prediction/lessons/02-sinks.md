@@ -51,7 +51,7 @@ options:
   - text: "Collect the 1% tax and do nothing with the money."
     outcome: "The study measured the tax on its own for trading volume: no detectable effect at the 100 GP threshold, and about a 6.9% drop near the 500 million GP cap point (interval 1 to 13%). The lesson reports nothing on item rarity under the tax alone."
   - text: "Do nothing and let the market settle."
-    outcome: "The study did not test this, so the lesson has no evidence on it."
+    outcome: "This lesson has no evidence on it."
 ```
 
 ## The idea
@@ -72,11 +72,11 @@ The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) 
 id: gd-econ/sinks/c1
 prompt: "What does the control group of similarly expensive items do in this study?"
 options:
+  - text: "It proves the sink caused the price rise."
+    why: "This is a natural experiment, not a randomized test, so the estimate holds only if the control items were a fair comparison."
   - text: "It shows what prices did without the sink, so the targeted items' jump is read against it."
     correct: true
-    why: "Right. The researchers compared the targeted items against control items whose prices did not move with them. The result holds only if those control items were a fair comparison."
-  - text: "It proves the sink caused the price rise."
-    why: "No. This is a natural experiment, not a randomized test, so the estimate holds only if the control items were a fair comparison."
+    why: "The researchers compared the targeted items against control items whose prices did not move with them. The result holds only if those control items were a fair comparison."
 ```
 
 <!-- break -->
@@ -112,9 +112,9 @@ prompt: "For round two the paper's text says 14.4% and its table works out to ab
 options:
   - text: "Both are reported. 14.4% is the paper's text. 15.8% is this lesson's conversion of the table's coefficient, which the paper does not print."
     correct: true
-    why: "Right. Table A1 lists a coefficient of 0.147 with a standard error of 0.024, and the paper does not explain the gap between the two figures."
+    why: "Table A1 lists a coefficient of 0.147 with a standard error of 0.024, and the paper does not explain the gap between the two figures."
   - text: "15.8% is the paper's corrected figure."
-    why: "No. It is the lesson's own recomputation from Table A1. The paper does not print it."
+    why: "It is the lesson's own recomputation from Table A1. The paper does not print it."
 ```
 
 <!-- break -->
@@ -125,11 +125,11 @@ No change in the trading volume of those items was detected, but the estimates a
 id: gd-econ/sinks/c3
 prompt: "The study found no detectable change in the trading volume of the targeted items. What does that tell you?"
 options:
+  - text: "That the sink had no effect on volume at all."
+    why: "No change was detected, but the intervals include sizeable drops, so a real drop cannot be ruled out."
   - text: "Not that volume stayed the same. The estimates are loose, and a sizeable drop cannot be ruled out."
     correct: true
-    why: "Right. By the lesson's arithmetic from Table A1, round one runs from a 13% drop to an 8% rise, and round two from a 23% drop to a 19% rise."
-  - text: "That the sink had no effect on volume at all."
-    why: "No. No change was detected, but the intervals include sizeable drops, so a real drop cannot be ruled out."
+    why: "By the lesson's arithmetic from Table A1, round one runs from a 13% drop to an 8% rise, and round two from a 23% drop to a 19% rise."
 ```
 
 <!-- break -->

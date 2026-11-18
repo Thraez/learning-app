@@ -66,7 +66,7 @@ options:
     outcome: "This is what the authors advise: to plan your study, first decide how long you want to remember. The best gaps tested were 1, 11, 21 and 21 days for delays of 7, 35, 70 and 350 days. They are the best of those tested, from one online experiment."
     best: true
   - text: "Make the gaps grow each time."
-    outcome: "In a meta-analysis of 29 studies, growing gaps did no better than even gaps on average (g = 0.034, not significant)."
+    outcome: "In a meta-analysis of 29 studies, growing gaps did no better than even gaps on average (g = 0.034, not significant). The abstract adds that growing gaps did better the more times items were tested."
 ```
 
 ## The idea
@@ -107,13 +107,13 @@ rows:
 id: learn/spacing/c1
 prompt: "The best gap tested was 1 day for a one-week delay and 21 days for a one-year delay. Is the best gap a fixed share of the delay?"
 options:
+  - text: "Yes, about a third of the delay."
+    why: "The shares were about 14%, 31%, 30% and 6%, so there is no fixed share."
   - text: "No. It grows in days but shrinks as a share of the delay."
     correct: true
-    why: "Right. The shares were about 14%, 31%, 30% and 6% for the four delays."
-  - text: "Yes, about a third of the delay."
-    why: "No. The shares were about 14%, 31%, 30% and 6%, so there is no fixed share."
+    why: "The shares were about 14%, 31%, 30% and 6% for the four delays."
   - text: "No. A longer gap is always better."
-    why: "No. For every delay, recall first rose as the gap grew, then fell."
+    why: "For every delay, recall first rose as the gap grew, then fell."
 ```
 
 <!-- break -->
@@ -130,9 +130,9 @@ prompt: "You are unsure of the best gap. Which mistake is safer?"
 options:
   - text: "A gap that is a bit too long."
     correct: true
-    why: "Right. The authors point out that a gap longer than the best one costs much less than a gap that is too short."
+    why: "The authors point out that a gap longer than the best one costs much less than a gap that is too short."
   - text: "A gap that is a bit too short."
-    why: "No. A gap that is too short costs more. With study time held equal, the best gap gave 64% more final recall than no gap."
+    why: "A gap that is too short costs more. The authors point out that a gap longer than the best one costs much less than a gap that is too short."
 ```
 
 <!-- break -->
@@ -143,11 +143,11 @@ A second source checks the schedule. [Latimier, Peyre and Ramus 2021](https://do
 id: learn/spacing/c3
 prompt: "A meta-analysis of 29 studies found spacing beat massing (g = 0.74) but growing gaps no better than even gaps (g = 0.034, not significant). What do you take from it?"
 options:
+  - text: "Growing gaps are worse than even gaps."
+    why: "The difference was not significant, so the data do not say growing gaps are worse."
   - text: "Spreading practice out helps. On average, growing the gaps adds nothing detectable."
     correct: true
-    why: "Right. The lesson also says the abstract's result that growing gaps did better with more tests is called tentative in the preprint."
-  - text: "Growing gaps are worse than even gaps."
-    why: "No. The difference was not significant, so the data do not say growing gaps are worse."
+    why: "The lesson also says the abstract's result that growing gaps did better with more tests is called tentative in the preprint."
 ```
 
 <!-- break -->

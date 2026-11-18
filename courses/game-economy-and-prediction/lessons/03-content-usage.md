@@ -78,11 +78,11 @@ rest_label: "the other 30"
 id: gd-econ/content-usage/c1
 prompt: "104 of the 134 vehicles were used in fewer than 1% of races. What does that mean?"
 options:
+  - text: "Together, the 104 vehicles made up under 1% of races."
+    why: "The figure is per vehicle: each one was used in fewer than 1% of races, not all 104 together."
   - text: "Each of those 104 vehicles was used in fewer than 1% of races across the whole dataset."
     correct: true
-    why: "Right. The lesson says these options were each used in fewer than 1% of races."
-  - text: "Together, the 104 vehicles made up under 1% of races."
-    why: "No. The figure is per vehicle: each one was used in fewer than 1% of races, not all 104 together."
+    why: "The lesson says these options were each used in fewer than 1% of races."
 ```
 
 <!-- break -->
@@ -95,13 +95,13 @@ Within single-player races, regular players chose it more often (59.9% against 4
 
 ```check
 id: gd-econ/content-usage/c2
-prompt: "Regular players chose career mode more within single-player races (59.9% against 47.5%), yet it was 36.6% of their races against 47.0% across all races. How can both stand?"
+prompt: "Regular players chose career mode more within single-player races (59.9% against 47.5%), yet across all races career mode was 36.6% of regular players' races against 47.0% of infrequent players' races. How can both stand?"
 options:
   - text: "They use different bases: a share of single-player races in one case, a share of all races in the other."
     correct: true
-    why: "Right. The lesson says the paper's figures point two ways. Its text says regular players favour career mode both overall and in the first ten races, which the all-races figures do not show."
+    why: "The lesson says the paper's figures point two ways. Its text says regular players favour career mode both overall and in the first ten races, which the all-races figures do not show."
   - text: "One of the two figures must be a typo."
-    why: "No. The lesson gives both as the paper's figures, on different bases. What does not fit is the paper's own text on overall use."
+    why: "The lesson gives both as the paper's figures, on different bases. What does not fit is the paper's own text on overall use."
 ```
 
 <!-- break -->
@@ -120,11 +120,11 @@ And the career-mode result is a correlation. The authors recommend steering new 
 id: gd-econ/content-usage/c3
 prompt: "Regular players used career mode more. Does that show that steering new players into it would keep them playing?"
 options:
+  - text: "Yes. A gap that large must be caused by the mode."
+    why: "The lesson calls the result a correlation, so a gap alone does not show which way it runs."
   - text: "No. Players who already planned to stay may simply prefer career mode."
     correct: true
-    why: "Right. The result is a correlation. Only a test that steers some new players and not others would show which way it runs."
-  - text: "Yes. A gap that large must be caused by the mode."
-    why: "No. The lesson calls the result a correlation, so a gap alone does not show which way it runs."
+    why: "The result is a correlation. Only a test that steers some new players and not others would show which way it runs."
 ```
 
 ## Why

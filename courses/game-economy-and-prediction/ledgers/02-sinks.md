@@ -57,3 +57,25 @@ Recheck 2026-11-18: rows the 2026-11-18 edits touched, by a fresh context that d
 | Answer to the sinks question (body) | Found on recheck, not a lesson claim: text and table disagree beyond the point estimate | Section 4.1 against Table A1 column 3 | matches | The text CI 11.9% to 16.9% implies an SE near 0.012; the table's SE of 0.024 would give about 10.5% to 21.4%. The lesson states no interval, so nothing in it is wrong. It matters only if a CI is ever quoted. |
 | Answer to the sinks question (body) | Natural experiment, so results hold only if the control items were a fair comparison | Section 4 (DiD, control group, pre-trends) | matches | DiD is described as a causal comparison "when researcher-directed randomization did not occur", resting on the constructed control group and the pre-trends assumption. |
 | Item IDs and answers | No item ID or heading changed; the reworded answer is plain sentences with no blank line, list, bold or table | git diff d4ce597 e2c3a5a | matches |  |
+
+Check of the flow blocks, 2026-11-18, by a fresh context that did not write them. Each block statement was held against the lesson prose and answers; figures were also checked in the papers opened in this check (see the notes). The "Right." and "No." openers of the why lines and the option order were being edited by another session during the check; no fact changed, and the rows below do not depend on either.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/sinks/c1 | Control items of similar price; fair-comparison caveat | The idea: "control group of similarly expensive items whose prices didn't move with them"; r2 | matches | |
+| gd-econ/sinks/c2 | 14.4% is the text; 15.8% is the lesson's conversion of 0.147; the paper does not explain the gap | The idea, Table A1 paragraph | matches | Table A1 column 3 in the arXiv PDF: Post x Treated 0.147, SE 0.024. exp(0.147) minus 1 is 15.8%. |
+| gd-econ/sinks/c3 | Round one 13% drop to 8% rise; round two 23% drop to 19% rise; the why labels it the lesson's arithmetic | The idea: "by my arithmetic from the same table" | inference | Redone from Table A1. Column 2: minus 0.034, SE 0.056, so minus 0.144 to 0.076, a 13% drop to an 8% rise. Column 4: minus 0.045, SE 0.112, so minus 0.265 to 0.175, a 23% drop to a 19% rise. Both match. |
+| gd-econ/sinks/p1 | About 7% rise, first 34 items, interval 5.0 to 9.6%, natural experiment | The idea: "about 7% (95% interval 5.0 to 9.6%)" | matches | The paper text (Section 4.1) gives on the order of 7%, 5.0% to 9.6%. |
+| gd-econ/sinks/d1, option 1 | Buy and delete up to a daily maximum; 7%, 14.4%, about 15.8% | The idea, sink paragraph and figures | matches | "This is what Jagex did" rests on the lesson's account of the sink. |
+| gd-econ/sinks/d1, option 2 | No effect at 100 GP; about 6.9% drop near 500 million GP, interval 1 to 13% | The idea, tax paragraph; r3 | matches | Paper: the tax "reduced trading volume by 6.9%", bounds minus 13 to minus 1%. |
+| gd-econ/sinks/d1, option 3 | "The study did not test this" | None | not in source | The lesson never says what the study did or did not test here. Suggested: "The lesson has no evidence on this." |
+| gd-econ/sinks/v1 | Three bars and intervals; third labelled the lesson's arithmetic | The idea | matches | The interval 10.5 to 21.4 is in the lesson and the bar's note says it is the lesson's arithmetic. |
+| gd-econ/sinks/why points | Three points | Model answer | inference | Points two and three are labelled grade C in the points. Point one is the lesson's demand reading, which the authors say fits theory. |
+| gd-econ/sinks/scenario points | Four points | Explained answer | inference | The last point is labelled grade C; the first three restate the answer's data. |
+
+
+Recheck of the flow blocks 2026-11-18 (second): the blocks the fixes touched, by a fresh context that did not make the fixes. Each block was held against the lesson's own prose and answers; no source was reopened.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/sinks/d1, option 3 | "This lesson has no evidence on it" (do nothing, let the market settle) | The idea, whole section: no sentence covers a no-action case | matches | A statement about the lesson only, and true. The control items are a comparison group, not a no-action policy. |
