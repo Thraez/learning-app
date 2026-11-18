@@ -85,7 +85,7 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
   while (i < lines.length) {
     const line = lines[i];
 
-    // Fenced blocks that are not items: check, predict, decide, visual. Each becomes its own block, never prose.
+    // Fenced blocks that are not items: check, predict, decide, visual, sure. Each becomes its own block, never prose.
     const fence = inFence ? null : FENCE_START.exec(line);
     if (fence) {
       const kind = fence[1];
@@ -94,7 +94,12 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
       flushProse();
       const { yaml, next } = readFence(lines, i, kind, file);
       i = next;
-      if (kind === 'check') blocks.push({ kind: 'check', check: parseCheck(yaml, parentId, failHere) });
+      if (kind === 'sure') {
+        // The one block whose body is Markdown, not YAML: the audit sentences keep their links.
+        if (!yaml.trim()) fail(file, 'a "```sure" block is empty');
+        if (/<\/?details|<summary/i.test(yaml)) fail(file, 'a "```sure" block holds plain Markdown; the app adds the <details> itself');
+        blocks.push({ kind: 'sure', html: render(yaml.trim()) });
+      } else if (kind === 'check') blocks.push({ kind: 'check', check: parseCheck(yaml, parentId, failHere) });
       else if (kind === 'predict') blocks.push({ kind: 'predict', predict: parsePredict(yaml, parentId, failHere) });
       else if (kind === 'decide') blocks.push({ kind: 'decide', decide: parseDecide(yaml, parentId, failHere) });
       else blocks.push({ kind: 'visual', visual: parseVisual(yaml, parentId, failHere) });
@@ -201,7 +206,7 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
   return { blocks, items };
 }
 
-const FENCE_START = /^```(check|predict|decide|visual|points)\s*$/;
+const FENCE_START = /^```(check|predict|decide|visual|points|sure)\s*$/;
 
 /** Reads a fenced block from its opening line; returns its text and the index of the line after the closing fence. */
 function readFence(lines: string[], start: number, kind: string, file: string): { yaml: string; next: number } {

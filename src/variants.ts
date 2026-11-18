@@ -3,7 +3,7 @@
 // them off in Settings; whole-app settings stay at their default until changed.
 
 import type { Item, Lesson } from './types';
-import { FLOW_DEFAULT, asFlow, isFlow, type Flow } from './flows';
+import { FLOW_DEFAULT, isFlow, type Flow } from './flows';
 import {
   getAssignments, getSettings, nowIso, saveAssignments, saveSettings,
   type Assignments, type Settings, type VariantMap,
@@ -60,15 +60,27 @@ export function activeWhole(s: Settings, now = new Date()): VariantMap {
   const out: VariantMap = {};
   const e6 = s.whole.E6;
   if (e6 && e6.value in REVIEW_SIZES && e6.value !== E6_DEFAULT && !(e6.until && localDay(now) > e6.until)) out.E6 = e6.value;
-  // F, the lesson flow: recorded on each session like E6, and only when it differs from Classic.
-  const f = s.whole.F;
-  if (f && isFlow(f.value) && f.value !== FLOW_DEFAULT && !(f.until && localDay(now) > f.until)) out.F = f.value;
+  // F, the lesson flow: recorded on each session unless it is Classic, so a session without F ran as Classic,
+  // in old exports and new ones alike. Stepped is the default and is recorded like any other flow.
+  const flow = currentFlow(s, now);
+  if (flow !== 'classic') out.F = flow;
   return out;
 }
 
-/** The flow in force now. A missing, expired or unknown stored value is Classic. */
+/**
+ * The whole-app variants a session records. F is the style a lesson ran in, so only lesson sessions
+ * carry it: placement and review sessions always run as Classic cards and never get an F.
+ */
+export function sessionWhole(s: Settings, kind: 'lesson' | 'review' | 'placement', now = new Date()): VariantMap {
+  const out = activeWhole(s, now);
+  if (kind !== 'lesson') delete out.F;
+  return out;
+}
+
+/** The flow in force now. A stored choice wins; a missing, expired or unknown stored value is the default, Stepped. */
 export function currentFlow(s: Settings, now = new Date()): Flow {
-  return asFlow(activeWhole(s, now).F);
+  const f = s.whole.F;
+  return f && isFlow(f.value) && !(f.until && localDay(now) > f.until) ? f.value : FLOW_DEFAULT;
 }
 
 /** Stores the flow as the whole-app setting F. Existing `since` is kept when the value does not change. */

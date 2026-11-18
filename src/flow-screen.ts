@@ -4,7 +4,7 @@
 // Taps on checks, predictions and decisions are saved as responses, never as attempts.
 
 import { el, esc } from './dom';
-import { buildScreens, type Flow, type Screen } from './flows';
+import { buildScreens, sureHtml, type Flow, type Screen } from './flows';
 import { addResponse, nowIso, type Mark } from './store';
 import type { Item, Lesson } from './types';
 import { renderVisual } from './visuals';
@@ -85,6 +85,7 @@ function renderScreen(s: Screen, stage: HTMLElement, d: FlowDeps, marks: Map<str
     case 'chunk': {
       if (s.html) stage.append(el('div', { class: 'prose' }, s.html));
       for (const v of s.visuals) stage.append(renderVisual(v));
+      for (const h of s.sure) stage.append(el('div', { class: 'prose' }, sureHtml(h)));
       return false;
     }
     case 'check': return renderCheck(s, stage, d, unlock);

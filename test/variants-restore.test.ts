@@ -240,8 +240,8 @@ describe('whole-app variant E6', () => {
     expect(reviewCap(s('open', null), now)).toBe(Infinity);
     expect(reviewCap(s('short', '2026-11-20'), now)).toBe(5);
     expect(reviewCap(s('short', '2026-11-19'), now)).toBe(10);
-    expect(activeWhole(s('standard', null), now)).toEqual({});
-    expect(activeWhole(s('short', null), now)).toEqual({ E6: 'short' });
+    expect(activeWhole(s('standard', null), now)).toEqual({ F: 'stepped' });
+    expect(activeWhole(s('short', null), now)).toEqual({ E6: 'short', F: 'stepped' });
   });
 });
 

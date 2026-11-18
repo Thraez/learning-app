@@ -120,10 +120,17 @@ read a response against the lesson file of the course version in the session.
 
 ## The `F` variant
 
-`F` is a whole-app setting for the lesson flow: `stepped`, `predict` or `case`. Classic is the default and is never
-stored on a session, like a default `E6`. A session that ran in a flow has it in `variants` (for example
-`{ "F": "case" }`) and in `variant` (`F=case`), and so does each attempt made in it. `settings.whole.F` has the
-same shape as `E6`, with `until` always `null`. A stored value the app does not know reads as Classic.
+`F` is a whole-app setting for the lesson flow: `classic`, `stepped`, `predict` or `case`. A session that ran with a
+flow other than Classic has it in `variants` (for example `{ "F": "case" }`) and in `variant` (`F=case`), and so does
+each attempt made in it. Classic is never written on a session, so a lesson session without `F` ran as Classic. That
+holds for every export, old and new. Since 2026-11-18 only lesson sessions carry `F`: placement and review sessions
+show Classic cards whatever the setting, and get no `F`. Before that date a stored non-Classic choice was also
+written on placement and review sessions, where it means nothing.
+
+Since 2026-11-18 Stepped is what a phone with no stored choice runs, and such a session records `F: stepped` like
+any other. Before that date the default was Classic and recorded nothing. `settings.whole.F` has the same shape as
+`E6`, with `until` always `null`; it is absent until the learner picks a style, and a stored `classic` is a choice
+that wins over the default. A stored value the app does not know reads as Stepped.
 
 ## Version history
 

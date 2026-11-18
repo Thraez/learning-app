@@ -87,6 +87,8 @@ export type Block =
   | { kind: 'decide'; decide: Decide }
   | { kind: 'visual'; visual: Visual }
   | { kind: 'points'; points: Points }
+  /** A "```sure" block: the audit detail behind a "How sure is this?" tap. Every flow shows it, Classic included. */
+  | { kind: 'sure'; html: string }
   | { kind: 'break' };
 
 export interface Source {

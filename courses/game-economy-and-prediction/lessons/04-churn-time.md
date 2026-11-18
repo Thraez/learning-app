@@ -18,7 +18,7 @@ sources:
     grade: A
     tier: 1
     read: "abstract only, OpenAlex record"
-    caveat: "Abstract only; no accuracy figure or churn window seen."
+    caveat: "Abstract only; no accuracy figure or churn definition seen."
     note: abstract only, read from the OpenAlex record; IEEE Xplore was not opened
 ---
 
@@ -32,7 +32,7 @@ Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon S
 
 <details>
 <summary>Answer</summary>
-About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo for non-paying). Only about 20% of the top spenders had churned after 100 days. Both figures are stated in the paper's text, which describes its survival curves; it says "approximately" for the 80% and gives the 20% without a hedge. Same game, same rule, very different lives.
+About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo). Only about 20% of the top spenders had churned after 100 days. Same game, same rule, very different lives.
 </details>
 
 ```decide
@@ -49,17 +49,33 @@ options:
 
 ## The idea
 
-A player never sends a "churned" event. Churn is a rule the team picks, and it is an event in time, so a model has to deal with players whose time hasn't come yet.
+A player never sends a "churned" event. Churn is a rule the team picks.
 
-The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) (Silicon Studio, peer-reviewed at IEEE DSAA 2016) used 10 days without a login and checked it against their data: top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue, so 10 days was a fair line for "gone".
-
-<!-- break -->
-
-The Age of Ishtaria figures in the opening are stated in the text that describes the Kaplan-Meier curves (Section III-B) on a sample of 1.5 million players in that paper, which I read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) (IEEE CIG 2014) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games.
+It is also an event in time. So a model has to deal with players whose time hasn't come yet.
 
 <!-- break -->
 
-A different window gives a different churn rate from the same data, so two teams' churn rates are only comparable if their rules match (my reasoning, grade C).
+The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) at Silicon Studio counted a player as churned after 10 days without a login.
+
+They checked that rule against their own data. Top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue. So top spenders who went 10 idle days became mostly inactive: they left for good or their activity became negligible.
+
+The paper was published at an IEEE conference (DSAA 2016). It is one game, studied by the studio's own staff.
+
+```sure
+The 80% and 20% in the opening are stated in the paper's text describing its Kaplan-Meier survival curves (Section IV-B), on a sample of 1.5 million players. The paper says "approximately" for the 80% and gives the 20% without a hedge. It prints "non-playing" where this lesson says non-paying, which I read as a typo. I read the full text as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). The paper does not publish its data.
+```
+
+<!-- break -->
+
+[Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) defined churn formally, "aligning with industry standards", in what their abstract calls the first cross-game study of churn prediction in free-to-play games. It covers five games.
+
+I have read only the abstract of that paper, so I cannot tell you their definition.
+
+<!-- break -->
+
+A different window gives a different churn rate from the same data. So two teams' churn rates are only comparable if their rules match (my reasoning, grade C).
+
+For a designer, again my reasoning: before you trust a churn number, ask what rule made it.
 
 ```check
 id: gd-econ/churn-time/c1
@@ -74,7 +90,9 @@ options:
 
 <!-- break -->
 
-Then time. When data is pulled, many players are still active, and their churn time is unknown. Statisticians call this censored data.
+Then time. When data is pulled, many players are still active, and their churn time is unknown.
+
+Statisticians call this censored data.
 
 ```visual
 id: gd-econ/churn-time/v1
@@ -112,7 +130,11 @@ options:
 
 <!-- break -->
 
-[Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) argue that binary classifiers can't say when a player will stop and work from static information, and that classic regressions only work once every player has left. Their answer is survival analysis, which predicts the time until churn and treats the censored players as having lasted at least this long. They trained it on 2,500 top spenders (lesson 9 has the results).
+Why this matters for a churn model. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) argue that binary classifiers, which answer only "churned, yes or no", can't say when a player will stop and work from static information. Classic regressions, they argue, only work once every player has left.
+
+Their answer is survival analysis. It predicts the time until churn and treats the censored players as having lasted at least this long.
+
+They trained it on 2,500 top spenders. Lesson 9 has the results.
 
 ```check
 id: gd-econ/churn-time/c3
@@ -127,7 +149,13 @@ options:
 
 <!-- break -->
 
-[Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) show what churn classifiers can run on: generic behaviour features such as playtime, session length and the time between sessions, combined with a retention model for each game and no game-specific design features, gave what the abstract calls high-accuracy churn prediction across the five games. The abstract gives no accuracy figure, and I have not read the full paper, so this lesson gives none.
+What can a churn classifier run on? [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) used generic behaviour features such as playtime, session length and the time between sessions, combined with a retention model for each game, and no game-specific design features.
+
+Their abstract calls the result high-accuracy churn prediction across the five games. It gives no accuracy figure, so this lesson gives none.
+
+```sure
+I read the Hadiji abstract from the OpenAlex record and have not read the full paper, which is paywalled. So I did not see its churn definition or its accuracy figures, and the abstract does not say whose data it used.
+```
 
 ## Why
 
@@ -199,6 +227,6 @@ Generic behaviour features such as playtime, session length and the time between
 
 ## Sources and grades
 
-- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures (stated in the text describing the survival curves, "approximately" on the 80% only, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
-- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
-- Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish, so others can't rerun the results. The Hadiji abstract does not say whose data it used.
+- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (IEEE conference paper). The 10-day rule, the 1.4% figure, the 80% and 20% figures (stated in the text describing the survival curves, "approximately" on the 80% only, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
+- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn definition or accuracy figures.
+- Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish. The Hadiji abstract does not say whose data it used.

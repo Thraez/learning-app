@@ -56,17 +56,33 @@ options:
 
 ## The idea
 
-A sink does not just take value out of an economy. Where it takes it from decides whose prices move.
+A sink does not only take value out of an economy. It can also move prices, and which prices depends on what the sink takes. That is my reading of one case (grade C), not a rule the paper states.
 
-The evidence here is one study, [Hogan-Hennessy, Xenopoulos and Silva 2022](https://arxiv.org/abs/2210.07970). It is a preprint on arXiv and has not been peer-reviewed, so treat it as a careful analysis that no journal has checked yet.
-
-<!-- break -->
-
-Jagex's stated worry was that high-level items had become too common. Its two-part fix: a 1% tax on Grand Exchange sales above 100 GP, capped at 5 million GP per sale and paid out of the seller's proceeds; and an item sink that spends the tax money buying selected high-level items on the market and deleting them, up to a daily maximum Jagex sets. The first round targeted 34 items, the second, a week later, 27 more.
+The case: a sink that bought items off the market acted like a big new buyer, and the price of what it bought went up.
 
 <!-- break -->
 
-The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) against a control group of similarly expensive items whose prices didn't move with them. Prices of the first 34 items jumped about 7% (95% interval 5.0 to 9.6%). For the next 27 the paper's text gives 14.4% (11.9 to 16.9%).
+The evidence is one study of Old School RuneScape, by [Hogan-Hennessy, Xenopoulos and Silva](https://arxiv.org/abs/2210.07970). It is a preprint: no journal has checked it yet.
+
+It is also a comparison made after the fact, not a randomized test. Keep both in mind for every figure below.
+
+<!-- break -->
+
+What Jagex did. [Its stated worry](https://arxiv.org/abs/2210.07970) was that high-level items had become too common. The fix had two parts.
+
+A tax: 1% on Grand Exchange sales above 100 GP, capped at 5 million GP per sale and paid out of the seller's proceeds.
+
+An item sink: the tax money buys selected high-level items on the market and deletes them, up to a daily maximum Jagex sets. The first round targeted 34 items. A second round, a week later, added 27 more.
+
+<!-- break -->
+
+What happened to prices? The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) against a control group: similarly expensive items whose prices didn't move with them.
+
+Against that group, the first 34 items rose about 7%. The figure holds only if the control items were a fair comparison.
+
+```sure
+The 95% interval for round one runs from 5.0 to 9.6%. The study is a natural experiment: it compares targeted items with control items before and after the change, and the researchers did not assign items at random.
+```
 
 ```check
 id: gd-econ/sinks/c1
@@ -81,7 +97,13 @@ options:
 
 <!-- break -->
 
-Its own appendix table disagrees: Table A1 lists a coefficient of 0.147 with a standard error of 0.024, which works out to about 15.8% (10.5 to 21.4%). That second figure is my recomputation, not the paper's, and the paper does not explain the gap.
+The estimate for the second round is higher, but how high depends on where you look. [The paper's text](https://arxiv.org/abs/2210.07970) says 14.4%. Its own appendix table works out to about 15.8%.
+
+The 15.8% is this lesson's conversion of the table, not a figure the paper prints. The paper does not explain the gap.
+
+```sure
+The paper's text gives 14.4% with a 95% interval of 11.9 to 16.9%. Its Table A1 lists a coefficient of 0.147 with a standard error of 0.024, which works out to about 15.8% (10.5 to 21.4%). That second figure is my recomputation.
+```
 
 ```visual
 id: gd-econ/sinks/v1
@@ -119,7 +141,13 @@ options:
 
 <!-- break -->
 
-No change in the trading volume of those items was detected, but the estimates are loose: by my arithmetic from the same table, anything from a 13% drop to an 8% rise in round one and from a 23% drop to a 19% rise in round two, so a sizeable drop can't be ruled out.
+Did trading in those items dry up? [No change in their trading volume](https://arxiv.org/abs/2210.07970) was detected.
+
+But "not detected" is not "none". The estimates are loose, so a sizeable drop can't be ruled out.
+
+```sure
+By my arithmetic from the same Table A1, the estimates allow anything from a 13% drop to an 8% rise in round one, and from a 23% drop to a 19% rise in round two. The paper does not print these ranges.
+```
 
 ```check
 id: gd-econ/sinks/c3
@@ -134,11 +162,19 @@ options:
 
 <!-- break -->
 
-The tax had no detectable effect on volume at the 100 GP threshold. Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%, but the interval runs from 1 to 13%, so that estimate is loose too. Prices for illicit gold from real-money traders did not change either.
+And the tax itself? [At the 100 GP threshold](https://arxiv.org/abs/2210.07970) it had no detectable effect on trading volume.
+
+Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%. That estimate is loose too: the interval runs from 1 to 13%.
+
+No change was detected in prices for illicit gold from real-money traders either.
 
 <!-- break -->
 
-So a buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices. If the goal was to make these items rarer and dearer, that worked. The [authors note](https://arxiv.org/abs/2210.07970) Jagex has not publicly stated what it intended with this round of changes, so whether they "succeeded" can't be judged. Their data also has no player-level records, so the study can't say how individual players changed their behaviour.
+So the buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices.
+
+Was that the goal? The [authors note](https://arxiv.org/abs/2210.07970) that Jagex has not publicly stated what it intended with this round of changes, so whether they "succeeded" can't be judged.
+
+One more limit. The data has no player-level records, so the study can't analyse the effects on player behaviour.
 
 ## Why
 

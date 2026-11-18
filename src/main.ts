@@ -14,7 +14,7 @@ import {
   type Appeal, type Attempt, type Confidence, type Mark, type Mode, type SessionKind, type VariantMap,
 } from './store';
 import {
-  E6_DEFAULT, EXPERIMENTS, REVIEW_SIZES, activeWhole, currentFlow, ensureLessonAssignments, experimentOn, itemArms, reviewCap, setFlow,
+  E6_DEFAULT, EXPERIMENTS, REVIEW_SIZES, activeWhole, currentFlow, sessionWhole, ensureLessonAssignments, experimentOn, itemArms, reviewCap, setFlow,
   type ReviewSize,
 } from './variants';
 import { parseExportFile, restoreExport } from './restore';
@@ -83,10 +83,12 @@ function page(title: string, back?: { href: string; label: string }): HTMLElemen
 class Run {
   sessionId: string | null = null;
   /** Whole-app variants in force when the session starts; fixed for its length. */
-  whole: VariantMap = activeWhole(getSettings());
+  whole: VariantMap;
   missed: Item[] = [];
   marked = 0;
-  constructor(public kind: SessionKind, public course: Course, public targetId: string) {}
+  constructor(public kind: SessionKind, public course: Course, public targetId: string) {
+    this.whole = sessionWhole(getSettings(), kind);
+  }
   ensure(): string {
     if (!this.sessionId) {
       this.sessionId = newId();
