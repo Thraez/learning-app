@@ -32,3 +32,12 @@ Dormans 2011: full text read, all seven pages, from the Amsterdam University of 
 | Sources and grades | Full text read (AAAI PDF); grade A; tier 2, workshop paper as AAAI technical report, peer review not confirmed | PDF; call for papers | matches | I read the repository copy marked as the final published version, same text. |
 | Sources and grades | Adams and Dormans 2012 not obtained; an open paper by the same author used instead | none | inference | Process note, not a claim about a source. Dormans is a co-author of the book, so "same author" holds. |
 | Sources and grades | Evidence is thin; studio use of economy simulation for F2P mostly unpublished | whole paper | inference | One hypothetical game and simple bots matches the paper. The F2P practice claim is the writer's, consistent with rule 3's "mark it as unpublished". |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Dormans 2011 | read: full text, university repository copy | Ledger opening lines | matches | Ledger: Amsterdam University of Applied Sciences repository copy (pure.hva.nl), labelled final published version. |
+| front matter, Dormans 2011 | caveat: One hypothetical game, simple bots, no real players; workshop paper. | Rows 'Bots follow simple scripts; paper tests nothing against real players' and 'Tier 2, review process not confirmed' | matches | Ledger: 'rudimentary' artificial players, SimWar never built, workshop paper as AAAI technical report. |
+| front matter, Dormans 2011 | corrected note and Sources and grades sentence: full text read from the Amsterdam repository copy, labelled final published version | Ledger opening lines | matches | Replaces 'AAAI PDF'. The ledger says the aaai.org copies refused download and the repository copy was read. |

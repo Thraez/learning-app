@@ -161,3 +161,34 @@ describe('format errors fail the build', () => {
     expect(build(withChecked('checked: yes\n'))).toThrow(/checked/);
   });
 });
+
+describe('trust fields', () => {
+  const src = (extra: string) =>
+    `---\nid: t/a\ncourse: t\ntitle: A\norder: 1\nsources:\n  - cite: "Smith (2020). Title."\n    url: https://example.org/x\n    tier: 1\n${extra}---\n## Recall\n`;
+  function build(lessonText: string, ledger?: string) {
+    const root = mkdtempSync(join(tmpdir(), 'courses-'));
+    mkdirSync(join(root, 't', 'lessons'), { recursive: true });
+    writeFileSync(join(root, 't', 'course.md'), '---\nid: t\ntitle: T\nversion: 0.1.0\nstatus: draft\n---\nHi\n');
+    writeFileSync(join(root, 't', 'lessons', '01-a.md'), lessonText);
+    if (ledger) {
+      mkdirSync(join(root, 't', 'ledgers'));
+      writeFileSync(join(root, 't', 'ledgers', ledger), 'ledger\n');
+    }
+    return parseCourses(root).courses[0].lessons[0];
+  }
+
+  it('reads read and caveat, and leaves them undefined when absent', () => {
+    const a = build(src('    read: full text\n    caveat: One study, one game.\n')).sources[0];
+    expect(a.read).toBe('full text');
+    expect(a.caveat).toBe('One study, one game.');
+    const b = build(src('')).sources[0];
+    expect(b.read).toBeUndefined();
+    expect(b.caveat).toBeUndefined();
+  });
+
+  it('sets ledgerUrl only when the ledger file exists', () => {
+    expect(build(src(''))).toMatchObject({ ledgerUrl: undefined });
+    expect(build(src(''), '01-a.md').ledgerUrl).toBe('https://github.com/Thraez/learning-app/blob/main/courses/t/ledgers/01-a.md');
+    expect(build(src(''), '02-b.md').ledgerUrl).toBeUndefined();
+  });
+});

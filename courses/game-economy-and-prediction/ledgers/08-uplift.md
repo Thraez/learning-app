@@ -40,3 +40,16 @@ How far each source was read. Ascarza 2018: abstract only, from the OpenAlex rec
 | Sources and grades | Low-activity finding stated as an observation without numbers; live results only in a chart | Wei, section 1; Fig. 1 | matches | As above. |
 | Sources and grades | A 2026 Neurocomputing paper by the same authors on a similarly named model may be a reviewed version; not read | Crossref | matches | Crossref: "MTMT: Tiered treatment effect decomposition for multi-task uplift modeling", Neurocomputing, 2026, DOI 10.1016/j.neucom.2026.134494, same five authors. Different title, so under rule 4 the arXiv paper stays tier 2. |
 | Sources and grades | "I found one published uplift study in games. How rare such studies are is my impression from that search, grade C." | none | inference | The unsourced "most studio practice is unpublished" is gone; the rest is labelled as the writer's search. Rechecked 2026-11-16. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Ascarza 2018 | read: abstract only, OpenAlex record | Ledger opening lines | matches | Ledger: abstract only, OpenAlex record (ascarza2018.txt). |
+| front matter, Ascarza 2018 | caveat: Abstract only; effect sizes and experiment settings not seen. | Ledger opening lines and Sources and grades | matches | Ledger: no full text found. The lesson says it did not see effect sizes or settings. |
+| front matter, Ascarza 2018 | corrected note and Sources and grades sentence: abstract read from the OpenAlex record, Crossref carries the same abstract | Ledger opening lines | matches | Ledger: 'Crossref carries the same abstract and confirms JMR 55(1), 80 to 98'. Replaces 'read via Crossref'. |
+| front matter, Gutierrez 2017 | read: full text, PMLR PDF | Ledger opening lines | matches | Ledger: full text, PMLR PDF (gutierrez2017.txt). |
+| front matter, Gutierrez 2017 | caveat: A literature review; its review process is not stated. | Ledger opening lines and tier row | matches | Ledger: the volume preface is a scanned image, so how papers were selected could not be read. The lesson says the same. |
+| front matter, Wei 2024 | read: full text, arXiv PDF | Ledger opening lines | matches | Ledger: full text, arXiv PDF v1. |
+| front matter, Wei 2024 | caveat: Preprint, not peer-reviewed; Tencent data, confidential. | Rows 'Wei cite', 'Tencent preprint' and 'Sources and grades, Wei' | matches | Ledger: preprint with no venue, Tencent authors, abstract calls the data 'an online proprietary dataset'. 'Confidential' is the ledger's own gloss of 'proprietary'. |

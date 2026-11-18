@@ -44,3 +44,15 @@ How far each source was read: Close et al. 2021, the published abstract (Europe 
 | Sources and grades | Sifa abstract only, via OpenAlex; AAAI page and PDF behind a bot check, so share of payers, game used and whether the second model used payers only are not given | ojs.aaai.org; Sifa abstract | matches | The abstract gives none of the three. Rechecked 2026-11-16. |
 | Sources and grades | arXiv lists this DOI as the published version | arXiv abs page, journal reference field | matches |  |
 | Sources and grades | Chen: grade A for method and results, B for the whale figure | Chen full text | matches |  |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Close 2021 | read: abstract only, published abstract | Ledger opening lines | matches | Ledger: published abstract, Europe PMC copy of the PubMed record. The pilot checker also read the accepted manuscript, but no lesson claim rests on it. |
+| front matter, Close 2021 | caveat: Abstract only; the full text was not read. | Ledger opening lines | matches | Same as the ledger and the lesson's Sources and grades. |
+| front matter, Sifa 2015 | read: abstract only, OpenAlex copy | Ledger opening lines | matches | Ledger: abstract only, OpenAlex copy of the publisher abstract. |
+| front matter, Sifa 2015 | caveat: Abstract only; game, share of payers and method not seen. | Ledger opening lines | matches | Ledger: game used, share of payers and whether the regression used payers only are unread. 'Method' is slightly wider, and true, since the full text was never opened. |
+| front matter, Chen 2018 | read: full text, arXiv copy | Ledger opening lines | matches | Ledger: full text from the arXiv PDF (arXiv:1811.12799); IEEE version not opened. |
+| front matter, Chen 2018 | caveat: The 2% and 50% whale figure is stated without the count behind it. | Rows 'No count behind the 2%' and 'stated without data, so grade B' (Chen III.B, Tables I to III) | matches | Ledger: no whale count is given; Figure 3 is normalized. |

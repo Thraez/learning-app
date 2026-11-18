@@ -4,17 +4,21 @@ course: gd-econ
 title: Predicting who leaves is not knowing what keeps them
 order: 6
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Runge, Gao, Garcin, Faltings (2014). Churn prediction for high-value players in casual social games. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932875."
     url: https://doi.org/10.1109/CIG.2014.6932875
     grade: A
     tier: 1
-    note: abstract only, read on IEEE Xplore
+    read: "abstract only, OpenAlex record"
+    caveat: "Abstract only; effect sizes, sample sizes and game names not seen."
+    note: abstract only, read from the OpenAlex record; IEEE Xplore was not opened
   - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
     url: https://doi.org/10.1371/journal.pone.0186407
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "Used here only for one comparison sentence."
     note: full text read for lesson 1; used here for one comparison sentence
 ---
 
@@ -94,7 +98,7 @@ Cross-promote the studio's other games to them, or change their game experience 
 
 ## Sources and grades
 
-- [Runge et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932875), abstract read on IEEE Xplore. Grade A for its claims, tier 1 (peer-reviewed). The full paper is paywalled and was not opened, so effect sizes, sample sizes per arm and the games' names are not given.
+- [Runge et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932875), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for its claims, tier 1 (peer-reviewed). The full paper is paywalled and was not opened, so effect sizes, sample sizes per arm and the games' names are not given.
 - Cut: a Game Developer trade-press write-up of the same work. It was the only source for the games' names and for the claim that the model-picked group did no better than a rule-picked group, so both claims are gone.
 - [Zivic et al. 2017, PLOS ONE](https://doi.org/10.1371/journal.pone.0186407), full text read for lesson 1 (publisher PDF). Grade A, tier 1. Used here only for the one-sentence comparison with Top Eleven.
 - Two casual games, one kind of gift, tested in one of the games. I found few other published tests of retention offers in games (my search, grade C), so this result can't be generalised far.
