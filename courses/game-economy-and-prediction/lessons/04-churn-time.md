@@ -41,7 +41,6 @@ prompt: "You are on the data team of a mobile role-playing game and must set the
 options:
   - text: "Test a candidate window against what returners later bring in."
     outcome: "This is what Silicon Studio did. It used 10 days without a login and checked it: top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue. One game, the studio's own data."
-    best: true
   - text: "Wait until every player has left, then label them all."
     outcome: "The paper argues that classic regressions only work once every player has left, and that binary classifiers cannot say when a player will stop."
   - text: "Copy another team's window."
@@ -66,11 +65,11 @@ A different window gives a different churn rate from the same data, so two teams
 id: gd-econ/churn-time/c1
 prompt: "Team A counts a player as churned after 10 days without a login. Team B uses 7 days. This is an invented pair of teams. Can you compare their churn rates directly?"
 options:
+  - text: "Yes. Churn is churn, whatever the window."
+    why: "Churn is a rule the team picks, and a different window gives a different rate from the same data."
   - text: "Only if their rules match. A different window gives a different churn rate from the same data."
     correct: true
-    why: "Right. The lesson says two teams' churn rates are only comparable if their rules match. This is the lesson's own reasoning, grade C."
-  - text: "Yes. Churn is churn, whatever the window."
-    why: "No. Churn is a rule the team picks, and a different window gives a different rate from the same data."
+    why: "The lesson says two teams' churn rates are only comparable if their rules match. This is the lesson's own reasoning, grade C."
 ```
 
 <!-- break -->
@@ -81,7 +80,7 @@ Then time. When data is pulled, many players are still active, and their churn t
 id: gd-econ/churn-time/v1
 kind: spans
 title: "Invented example: known and unknown churn days"
-text: "An invented schematic, not data: the days are made up. Players A and B have a known churn day under a no-login rule. Player C is still active when the data is pulled, so their churn day is unknown and they are known only to have lasted at least this long."
+text: "An invented schematic, not data: the days are made up. Players A and B have a known churn day under a 10-day no-login rule. Player C is still active when the data is pulled, so their churn day is unknown and they are known only to have lasted at least this long."
 axis: "days since install"
 max: 40
 rows:
@@ -91,7 +90,7 @@ rows:
     note: "churned"
   - label: "Player B, churn day known"
     from: 0
-    to: 25
+    to: 20
     note: "churned"
   - label: "Player C, still active when the data is pulled"
     from: 0
@@ -106,9 +105,9 @@ prompt: "Which of these players is censored?"
 options:
   - text: "A player still active on the day the data is pulled."
     correct: true
-    why: "Right. Their churn time is unknown. All that is known is that they lasted at least until the cutoff."
+    why: "Their churn time is unknown. All that is known is that they lasted at least until the cutoff."
   - text: "A player with 10 days in a row without a login."
-    why: "No. Under the 10-day rule that player has churned, and the churn time is known."
+    why: "Under the 10-day rule that player has churned, and the churn time is known."
 ```
 
 <!-- break -->
@@ -119,11 +118,11 @@ options:
 id: gd-econ/churn-time/c3
 prompt: "Why do the authors say a binary churn classifier is not enough?"
 options:
+  - text: "It only works once every player has left."
+    why: "That is the limit the authors name for classic regressions, not for binary classifiers."
   - text: "It cannot say when a player will stop, and it works from static information."
     correct: true
-    why: "Right. That is why they turn to survival analysis, which predicts the time until churn."
-  - text: "It only works once every player has left."
-    why: "No. That is the limit the authors name for classic regressions, not for binary classifiers."
+    why: "That is why they turn to survival analysis, which predicts the time until churn."
 ```
 
 <!-- break -->

@@ -70,3 +70,31 @@ Recheck 2026-11-18 (second): the rows the fixes touched, by a fresh context that
 | Opening question (answer) | "approximately" on the 80%, no hedge on the 20% | Section III-B | matches | "Approximately 80% of the non-playing players have churned the first day..."; "the 20% churn rate of the whales after 100 days", no hedge. |
 | The idea (churn rule) | The opening figures are stated in the text describing the Kaplan-Meier curves, Section III-B, on a sample of 1.5 million players | Section III heading "DATASET"; subsection B "Kaplan-Meier estimates" | matches | Section III is "Dataset", subsection B is "Kaplan-Meier estimates", so III-B is right. "we take a sample of 1.500.000 players" is in the same subsection. |
 | Sources and grades | 80% and 20% figures stated in the text describing the survival curves, "approximately" on the 80% only, "non-playing" printed for non-paying | Section III-B | matches | All three parts match as above. |
+
+Check of the flow blocks, 2026-11-18, by a fresh context that did not write them. Each block statement was held against the lesson prose and answers; figures were also checked in the papers opened in this check (see the notes). The "Right." and "No." openers of the why lines and the option order were being edited by another session during the check; no fact changed, and the rows below do not depend on either.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/churn-time/d1, option 1 | Test a window against returners' revenue; 10 days; 1.4%; marked best | The idea: "10 days was a fair line for 'gone'" | differs | The lesson says "a fair line", not the best way to choose. No lesson sentence ranks the three approaches, so `best: true` rests on nothing. Suggested: remove `best`, or word the outcome as one way the studio checked its window. The 10 days and 1.4% match. |
+| gd-econ/churn-time/d1, option 2 | Classic regressions need every player gone; classifiers cannot say when | The idea, survival paragraph | matches | The option text ("label them all") is a loose fit for the regression claim, but the outcome is the lesson's sentence. |
+| gd-econ/churn-time/d1, option 3 | A different window gives a different rate | The idea: "(my reasoning, grade C)" | inference | Labelled as such in the outcome. |
+| gd-econ/churn-time/c1 | Invented pair of teams; rates comparable only if rules match | The idea | inference | Grade C in the lesson; invention flagged in the prompt. |
+| gd-econ/churn-time/v1 | Invented spans showing censoring | The idea, censoring paragraph | inference | Title and text both say invented, so it cannot pass as data. One oddity: Player B ends at day 25 and the data pull is day 32 (Player C). Under a 10-day rule B's churn would not be known yet on day 32. Suggested: end B by day 22, or pull later. |
+| gd-econ/churn-time/c2 | Censored means still active; 10 idle days counts as churned | The idea; r2 | matches | |
+| gd-econ/churn-time/c3 | Classifiers: cannot say when, static information; regressions: need all gone | The idea: "binary classifiers can't say when a player will stop and work from static information, and that classic regressions only work once every player has left" | matches | |
+| gd-econ/churn-time/why points | Three points | Model answer | inference | The lesson labels the bias direction grade C. |
+| gd-econ/churn-time/scenario points | Four points | Explained answer | inference | The lesson labels the application grade C. |
+
+The Perianez figures in d1 (10 days, 1.4%) rest on the earlier check; the paper was not reopened here.
+
+
+Recheck of the flow blocks 2026-11-18 (second): the blocks the fixes touched, by a fresh context that did not make the fixes. Each block was held against the lesson's own prose and answers; no source was reopened.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/churn-time/d1, markers | No option is marked best | Block text; the lesson ranks none | matches | No `best` key in the block. |
+| gd-econ/churn-time/d1, option 1 outcome | Silicon Studio used 10 days and checked it: returning top spenders brought 1.4% of that group's revenue | The idea: "used 10 days without a login and checked it ... only 1.4% of that group's revenue" | matches | |
+| gd-econ/churn-time/d1, option 2 outcome | The paper argues classic regressions only work once every player has left and binary classifiers cannot say when a player will stop | The idea: "argue that binary classifiers can't say when a player will stop ... and that classic regressions only work once every player has left" | matches | The outcome gives both arguments, each to its own method, as the lesson does. |
+| gd-econ/churn-time/d1, option 3 outcome | A different window gives a different rate; rates comparable only if rules match; labelled grade C | The idea: "A different window gives a different churn rate ... (my reasoning, grade C)" | matches | |
+| gd-econ/churn-time/v1, labelling | Title and text say it is invented | Block title "Invented example"; text "An invented schematic, not data: the days are made up" | matches | |
+| gd-econ/churn-time/v1, numbers | A (to 12) and B (to 20) churned; C (to 32, open) still running; 10-day rule | The idea and c2: "Under the 10-day rule that player has churned" | matches | The block gives no data end date. If the end is where C's bar stops (day 32), A has 20 idle days and B 12, both at least 10, and C has none. A reader who takes "to" as the churn day gets the same result. Nothing in the block contradicts the rule; the data end is implied, not stated. |
