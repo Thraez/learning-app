@@ -17,7 +17,7 @@ sources:
     grade: A
     tier: 1
     read: "abstract only, OpenAlex record"
-    caveat: "Abstract only; no accuracy figure or churn window seen."
+    caveat: "Abstract only; no accuracy figure or churn definition seen."
     note: abstract only, read from the OpenAlex record; IEEE Xplore was not opened
 ---
 
@@ -56,7 +56,7 @@ It is also an event in time. So a model has to deal with players whose time hasn
 
 The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) at Silicon Studio counted a player as churned after 10 days without a login.
 
-They checked that rule against their own data. Top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue. So for top spenders, 10 idle days mostly meant gone.
+They checked that rule against their own data. Top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue. So top spenders who went 10 idle days became mostly inactive: they left for good or their activity became negligible.
 
 The paper was published at an IEEE conference (DSAA 2016). It is one game, studied by the studio's own staff.
 
@@ -153,7 +153,7 @@ What can a churn classifier run on? [Hadiji and colleagues](https://doi.org/10.1
 Their abstract calls the result high-accuracy churn prediction across the five games. It gives no accuracy figure, so this lesson gives none.
 
 ```sure
-I read the Hadiji abstract from the OpenAlex record and have not read the full paper, which is paywalled. So I did not see its churn window or its accuracy figures, and the abstract does not say whose data it used.
+I read the Hadiji abstract from the OpenAlex record and have not read the full paper, which is paywalled. So I did not see its churn definition or its accuracy figures, and the abstract does not say whose data it used.
 ```
 
 ## Why
@@ -226,6 +226,6 @@ Generic behaviour features such as playtime, session length and the time between
 
 ## Sources and grades
 
-- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures (stated in the text describing the survival curves, "approximately" on the 80% only, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
-- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
-- Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish, so others can't rerun the results. The Hadiji abstract does not say whose data it used.
+- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (IEEE conference paper). The 10-day rule, the 1.4% figure, the 80% and 20% figures (stated in the text describing the survival curves, "approximately" on the 80% only, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
+- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn definition or accuracy figures.
+- Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish. The Hadiji abstract does not say whose data it used.

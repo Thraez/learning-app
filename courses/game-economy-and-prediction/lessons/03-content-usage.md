@@ -56,7 +56,7 @@ options:
 
 In Project Gotham Racing 4, most races used a minority of what shipped. Most of the vehicles were rarely picked.
 
-For a designer (my reading, not the paper's): a team is unlikely to see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to understand how players use a game.
+For a designer (my reading, not the paper's): a team is unlikely to see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting metrics over the long term is the only workable way to understand players and how they interact with the game.
 
 <!-- break -->
 
