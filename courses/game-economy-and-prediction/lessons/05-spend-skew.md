@@ -4,22 +4,27 @@ course: gd-econ
 title: Spend is mostly zero and very concentrated
 order: 5
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Close, Spicer, Nicklin, Uther, Lloyd, Lloyd (2021). Secondary analysis of loot box data: Are high-spending whales wealthy gamers or problem gamblers? Addictive Behaviors 117, 106851. DOI 10.1016/j.addbeh.2021.106851."
     url: https://doi.org/10.1016/j.addbeh.2021.106851
     grade: A
     tier: 1
+    read: "abstract only, published abstract"
+    caveat: "Abstract only; the full text was not read."
     note: abstract read (PubMed record of the published version)
   - cite: "Sifa, Hadiji, Runge, Drachen, Kersting, Bauckhage (2015). Predicting Purchase Decisions in Mobile Free-to-Play Games. AIIDE 2015, pp. 79-85. DOI 10.1609/aiide.v11i1.12788."
     url: https://doi.org/10.1609/aiide.v11i1.12788
     grade: A
     tier: 1
+    read: "abstract only, OpenAlex copy"
+    caveat: "Abstract only; game, share of payers and method not seen."
     note: abstract only (the publisher abstract, read through the OpenAlex record); the AAAI page and PDF sit behind a bot check
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
     url: https://doi.org/10.1109/BigData.2018.8622151
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "The 2% and 50% whale figure is stated without the count behind it."
     note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without data
 ---
 

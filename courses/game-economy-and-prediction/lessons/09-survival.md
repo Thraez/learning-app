@@ -4,21 +4,26 @@ course: gd-econ
 title: Survival curves for churn and lifetime value
 order: 9
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Viljanen, Airola, Heikkonen, Pahikkala (2018). Playtime Measurement With Survival Analysis. IEEE Transactions on Games 10(2), 128-138. DOI 10.1109/TCIAIG.2017.2727642. Read as arXiv:1701.02359."
     url: https://doi.org/10.1109/TCIAIG.2017.2727642
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "One small game in development; the studio's own data."
     note: full text read on arXiv; the DOI is the published journal version
   - cite: "Periáñez, Saas, Guitart, Magne (2016). Churn Prediction in Mobile Social Games: Towards a Complete Assessment Using Survival Ensembles. IEEE DSAA 2016, pp. 564-573. DOI 10.1109/DSAA.2016.84. Read as arXiv:1710.02264."
     url: https://doi.org/10.1109/DSAA.2016.84
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "One game; the studio's own unpublished data; Brier scores from Table I."
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
     url: https://doi.org/10.1109/BigData.2018.8622151
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "The studio's own player data, which the paper does not publish."
 ---
 
 # Lesson 9: Survival curves for churn and lifetime value

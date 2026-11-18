@@ -4,18 +4,21 @@ course: gd-econ
 title: The clustering method shapes the segments
 order: 7
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Drachen, Thurau, Sifa, Bauckhage (2014). A Comparison of Methods for Player Clustering via Behavioral Telemetry. arXiv:1407.3950."
     url: https://arxiv.org/abs/1407.3950
     grade: A
     tier: 2
+    read: "full text, arXiv copy and conference copy"
+    caveat: "One game, two variables; review process not confirmed."
     note: arXiv comment says Foundations of Digital Games 2013, and a copy with the same title and authors is on the conference site (http only); the conference's review process could not be confirmed from its own pages, so treated as not peer-reviewed
   - cite: "Drachen, Sifa, Bauckhage, Thurau (2012). Guns, swords and data: Clustering of player behavior in computer games in the wild. IEEE CIG 2012, pp. 163-170. DOI 10.1109/CIG.2012.6374152."
     url: https://doi.org/10.1109/CIG.2012.6374152
     grade: A
     tier: 1
-    note: abstract only, read on IEEE Xplore
+    read: "abstract only, OpenAlex record"
+    caveat: "Abstract only; two games; no segments or figures seen."
+    note: abstract only, read from the OpenAlex record; IEEE Xplore was not opened
 ---
 
 # Lesson 7: The clustering method shapes the segments
@@ -95,5 +98,5 @@ The authors picked eight by weighing variance explained against a useful number 
 ## Sources and grades
 
 - [Drachen et al., arXiv:1407.3950](https://arxiv.org/abs/1407.3950), full text read (arXiv PDF). Grade A for the dataset, the method comparison and the k = 8 choice, all checked against the text. Tier 2: its arXiv note names Foundations of Digital Games 2013 and the conference site carries the same paper, but Crossref has no record and I could not open the conference's own statement of its review process (a repost of its call for papers speaks of peer-reviewed papers). Until that is confirmed it is labelled not peer-reviewed.
-- [Drachen et al. 2012, IEEE CIG](https://doi.org/10.1109/CIG.2012.6374152), abstract read on IEEE Xplore. Grade A for the abstract's claims only, tier 1. I did not see its segments or figures, so this lesson gives none.
+- [Drachen et al. 2012, IEEE CIG](https://doi.org/10.1109/CIG.2012.6374152), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims only, tier 1. I did not see its segments or figures, so this lesson gives none.
 - The 2014 comparison uses one game and two variables; the 2012 paper covers two games. How studios segment players in practice is mostly unpublished, as the 2014 paper itself notes.

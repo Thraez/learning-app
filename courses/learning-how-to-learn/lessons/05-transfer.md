@@ -4,12 +4,13 @@ course: learn
 title: When recall practice carries over to new problems
 order: 5
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Pan, Rickard (2018). Transfer of Test-Enhanced Learning: Meta-Analytic Review and Synthesis. Psychological Bulletin 144(7), 710 to 756."
     url: https://doi.org/10.1037/bul0000151
     grade: A
     tier: 1
+    read: "full text, first author's site PDF"
+    caveat: "A meta-analysis; the opening case is an earlier study as the review describes it."
     note: "full text read, the APA advance online PDF posted on the first author's site; page numbers there are not final"
 ---
 

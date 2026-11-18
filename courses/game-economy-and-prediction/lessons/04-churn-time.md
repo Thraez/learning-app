@@ -4,18 +4,21 @@ course: gd-econ
 title: Churn is a definition and a time, not a label
 order: 4
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Periáñez, Saas, Guitart, Magne (2016). Churn Prediction in Mobile Social Games: Towards a Complete Assessment Using Survival Ensembles. IEEE DSAA 2016, pp. 564-573. DOI 10.1109/DSAA.2016.84. Read as arXiv:1710.02264."
     url: https://doi.org/10.1109/DSAA.2016.84
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "One game; the studio's own staff and unpublished data."
     note: full text read on arXiv; the DOI is the published version
   - cite: "Hadiji, Sifa, Drachen, Thurau, Kersting, Bauckhage (2014). Predicting player churn in the wild. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932876."
     url: https://doi.org/10.1109/CIG.2014.6932876
     grade: A
     tier: 1
-    note: abstract only, read on IEEE Xplore
+    read: "abstract only, OpenAlex record"
+    caveat: "Abstract only; no accuracy figure or churn window seen."
+    note: abstract only, read from the OpenAlex record; IEEE Xplore was not opened
 ---
 
 # Lesson 4: Churn is a definition and a time, not a label
@@ -28,14 +31,14 @@ Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon S
 
 <details>
 <summary>Answer</summary>
-About 80% of non-paying players churned on their first day. Only about 20% of the top spenders had churned after 100 days. Same game, same rule, very different lives.
+About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo for non-paying). Only about 20% of the top spenders had churned after 100 days. Both are approximate values read off the paper's survival curves. Same game, same rule, very different lives.
 </details>
 
 ## The idea
 
 A player never sends a "churned" event. Churn is a rule the team picks, and it is an event in time, so a model has to deal with players whose time hasn't come yet.
 
-The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) (Silicon Studio, peer-reviewed at IEEE DSAA 2016) used 10 days without a login and checked it against their data: top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue, so 10 days was a fair line for "gone". The Age of Ishtaria figures in the opening come from Kaplan-Meier curves on a sample of 1.5 million players in that paper. [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) (IEEE CIG 2014) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games. A different window gives a different churn rate from the same data, so two teams' churn rates are only comparable if their rules match (my reasoning, grade C).
+The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) (Silicon Studio, peer-reviewed at IEEE DSAA 2016) used 10 days without a login and checked it against their data: top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue, so 10 days was a fair line for "gone". The Age of Ishtaria figures in the opening come from approximate readings of Kaplan-Meier curves on a sample of 1.5 million players in that paper, which I read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) (IEEE CIG 2014) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games. A different window gives a different churn rate from the same data, so two teams' churn rates are only comparable if their rules match (my reasoning, grade C).
 
 Then time. When data is pulled, many players are still active, and their churn time is unknown. Statisticians call this censored data. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) argue that binary classifiers can't say when a player will stop and work from static information, and that classic regressions only work once every player has left. Their answer is survival analysis, which predicts the time until churn and treats the censored players as having lasted at least this long. They trained it on 2,500 top spenders (lesson 9 has the results).
 
@@ -89,11 +92,11 @@ Which kinds of features did Hadiji and colleagues use so the model would work ac
 
 <details>
 <summary>Answer</summary>
-Generic behaviour features such as playtime, session length and the time between sessions, with no game-specific design features.
+Generic behaviour features such as playtime, session length and the time between sessions, combined with a retention model for each game, and no game-specific design features.
 </details>
 
 ## Sources and grades
 
-- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures, the sample sizes and the censoring argument were checked against the text.
-- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read on IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
+- [Periáñez et al. 2016, IEEE DSAA](https://doi.org/10.1109/DSAA.2016.84), full text read as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264), which lists the DSAA paper and DOI as its published version. Grade A, tier 1 (peer-reviewed). The 10-day rule, the 1.4% figure, the 80% and 20% figures (approximate values read off survival curves, with "non-playing" printed for non-paying), the sample sizes and the censoring argument were checked against the text.
+- [Hadiji et al. 2014, IEEE CIG](https://doi.org/10.1109/CIG.2014.6932876), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims, tier 1. The full paper is paywalled; I did not see its churn window or accuracy figures.
 - Periáñez and colleagues worked at the studio whose game they studied, on the studio's own player data, which the paper does not publish, so others can't rerun the results. The Hadiji abstract does not say whose data it used.

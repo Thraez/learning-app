@@ -4,22 +4,27 @@ course: gd-econ
 title: Target the players an offer changes, not the ones most likely to leave
 order: 8
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Ascarza (2018). Retention Futility: Targeting High-Risk Customers Might Be Ineffective. Journal of Marketing Research 55(1), 80-98. DOI 10.1509/jmr.16.0163."
     url: https://doi.org/10.1509/jmr.16.0163
     grade: A
     tier: 1
-    note: abstract only, read via Crossref
+    read: "abstract only, OpenAlex record"
+    caveat: "Abstract only; effect sizes and experiment settings not seen."
+    note: abstract only, read from the OpenAlex record (Crossref carries the same abstract)
   - cite: "Gutierrez, Gérardy (2017). Causal Inference and Uplift Modelling: A Review of the Literature. International Conference on Predictive Applications and APIs (PAPIs 2016), PMLR 67, 1-13."
     url: https://proceedings.mlr.press/v67/gutierrez17a.html
     grade: A
     tier: 2
+    read: "full text, PMLR PDF"
+    caveat: "A literature review; its review process is not stated."
     note: conference proceedings; the review process is not stated, so not counted as peer-reviewed
   - cite: "Wei, Qiu, Li, Sun, Li (2024). Multi-Treatment Multi-Task Uplift Modeling for Enhancing User Growth. arXiv:2408.12803."
     url: https://arxiv.org/abs/2408.12803
     grade: A
     tier: 2
+    read: "full text, arXiv PDF"
+    caveat: "Preprint, not peer-reviewed; Tencent data, confidential."
     note: preprint, not peer-reviewed, Tencent data
 ---
 
@@ -101,7 +106,7 @@ Someone who leaves because they were contacted and would have stayed if left alo
 
 ## Sources and grades
 
-- [Ascarza 2018, Journal of Marketing Research](https://doi.org/10.1509/jmr.16.0163), abstract read via Crossref. Grade A for the abstract's claims, tier 1. I did not see the effect sizes or the settings of the two experiments, so this lesson gives none.
+- [Ascarza 2018, Journal of Marketing Research](https://doi.org/10.1509/jmr.16.0163), abstract read from the OpenAlex record (Crossref carries the same abstract). Grade A for the abstract's claims, tier 1. I did not see the effect sizes or the settings of the two experiments, so this lesson gives none.
 - [Gutierrez and Gérardy 2017, PMLR](https://proceedings.mlr.press/v67/gutierrez17a.html), full text read (PMLR PDF). Grade A for the counterfactual problem, the two-model approach, decile-based evaluation and the sleeping dog definition. Tier 2: it is a literature review in conference proceedings whose review process I could not confirm.
 - [Wei et al. 2024, arXiv:2408.12803](https://arxiv.org/abs/2408.12803), full text read (arXiv PDF). Grade A for what the paper reports, tier 2: a preprint by a company research team, not peer-reviewed, with confidential data. The low-activity finding is stated as an observation without numbers, and the live results appear only in a chart. A 2026 Neurocomputing paper by the same authors on a similarly named model may be a reviewed version; I have not read it.
 - I found one published uplift study in games. How rare such studies are is my impression from that search, grade C.

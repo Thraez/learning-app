@@ -4,21 +4,26 @@ course: gd-econ
 title: Spend prediction and vulnerable players
 order: 12
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Zendle, Cairns (2018). Video game loot boxes are linked to problem gambling: Results of a large-scale survey. PLOS ONE 13(11): e0206767."
     url: https://doi.org/10.1371/journal.pone.0206767
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "Self-report survey, run in English."
   - cite: "Zendle, Cairns (2019). Loot boxes are again linked to problem gambling: Results of a replication study. PLOS ONE 14(3): e0213194."
     url: https://doi.org/10.1371/journal.pone.0213194
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "Self-report survey of US gamers; a replication."
   - cite: "Close, Spicer, Nicklin, Uther, Lloyd, Lloyd (2021). Secondary analysis of loot box data: are high-spending whales wealthy gamers or problem gamblers? Addictive Behaviors 117, 106851. DOI 10.1016/j.addbeh.2021.106851."
     url: https://doi.org/10.1016/j.addbeh.2021.106851
     grade: A
     tier: 1
-    note: abstract of the published version read (PubMed)
+    read: "abstract only, Europe PMC record"
+    caveat: "Abstract only; who each pooled survey sampled was not checked."
+    note: abstract of the published version read (Europe PMC record)
 ---
 
 # Lesson 12: Spend prediction and vulnerable players
@@ -98,5 +103,5 @@ The direction of cause. Loot boxes may lead to problem gambling, problem gambler
 ## Sources and grades
 
 - [Zendle and Cairns 2018](https://doi.org/10.1371/journal.pone.0206767) and [2019](https://doi.org/10.1371/journal.pone.0213194), PLOS ONE, full text read (publisher PDFs). Grade A, tier 1. Samples, effect sizes and stated limits checked against the text.
-- [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed). Grade A, tier 1. The earlier draft of this lesson used the accepted manuscript; the figures here are the published abstract's.
+- [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (Europe PMC record). Grade A, tier 1. The earlier draft of this lesson used the accepted manuscript; the figures here are the published abstract's.
 - All three rest on self-report surveys. Zendle and Cairns surveyed adults: in English in 2018, and gamers from the USA in 2019. Close et al. pooled several surveys; I read only their abstract, so I have not checked who each survey sampled. The link to spend prediction models is my inference, grade C. I found no published study of whale-detection models and vulnerable players.

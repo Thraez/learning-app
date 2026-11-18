@@ -4,12 +4,13 @@ course: gd-econ
 title: Matchmaking tuned for engagement
 order: 11
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Chen, Xue, Kolen, Aghdaie, Zaman, Sun, Seif El-Nasr (2017). EOMM: An Engagement Optimized Matchmaking Framework. WWW 2017. DOI 10.1145/3038912.3052559; arXiv:1702.06820."
     url: https://doi.org/10.1145/3038912.3052559
     grade: A
     tier: 1
+    read: "full text, arXiv copy"
+    caveat: "Simulation only; nothing tested on live players."
     note: full text read on arXiv; the DOI is the published WWW 2017 version
 ---
 

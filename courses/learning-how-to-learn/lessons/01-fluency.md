@@ -4,22 +4,27 @@ course: learn
 title: What feels like learning and what is
 order: 1
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Bjork, Dunlosky, Kornell (2013). Self-Regulated Learning: Beliefs, Techniques, and Illusions. Annual Review of Psychology 64, 417 to 444."
     url: https://doi.org/10.1146/annurev-psych-113011-143823
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "A narrative review; the studies it describes were not opened."
     note: "full text read, the published Annual Reviews PDF; a narrative review, and the studies it describes were not opened; tier 1 unverified, since the journal's pages blocked automated access and its review process is not confirmed"
   - cite: "Kornell, Bjork (2007). The promise and perils of self-regulated study. Psychonomic Bulletin and Review 14(2), 219 to 224."
     url: https://doi.org/10.3758/BF03194055
     grade: A
     tier: 1
+    read: "full text, publisher PDF"
+    caveat: "A review of the authors' own studies plus a survey."
     note: "full text read, PDF on the publisher site (Springer); a review of the authors' own studies plus a survey"
   - cite: "Dunlosky, Rawson, Marsh, Nathan, Willingham (2013). Improving Students' Learning With Effective Learning Techniques. Psychological Science in the Public Interest 14(1), 4 to 58."
     url: https://doi.org/10.1177/1529100612453266
     grade: A
     tier: 1
+    read: "abstract only, Europe PMC record"
+    caveat: "Abstract only; a long review monograph, only its ratings used."
     note: "abstract only, from the Europe PMC record; publisher page blocked automated access; tier 1 unverified, since the journal commissions its reports and its own page does not say how they are reviewed"
 ---
 

@@ -4,12 +4,13 @@ course: gd-econ
 title: Simulating an economy before it is built
 order: 10
 status: draft
-checked: 2026-11-16
 sources:
   - cite: "Dormans (2011). Simulating Mechanics to Study Emergence in Games. AIIDE 2011 workshop, AAAI Technical Report WS-11-19. DOI 10.1609/aiide.v7i3.12477."
     url: https://doi.org/10.1609/aiide.v7i3.12477
     grade: A
     tier: 2
+    read: "full text, university repository copy"
+    caveat: "One hypothetical game, simple bots, no real players; workshop paper."
     note: workshop paper; review process not confirmed, so not counted as peer-reviewed
 ---
 
@@ -89,6 +90,6 @@ It shows whether a system can produce a dynamic effect and which values to tune.
 
 ## Sources and grades
 
-- [Dormans 2011](https://doi.org/10.1609/aiide.v7i3.12477), full text read (AAAI PDF). Grade A for the framework, the SimWar results and the stated limits, all checked against the text. Tier 2: a workshop paper published as an AAAI technical report; I could not confirm it was peer-reviewed, so treat it as a careful report by a named researcher rather than a checked result.
+- [Dormans 2011](https://doi.org/10.1609/aiide.v7i3.12477), full text read (the Amsterdam University of Applied Sciences repository copy, labelled final published version). Grade A for the framework, the SimWar results and the stated limits, all checked against the text. Tier 2: a workshop paper published as an AAAI technical report; I could not confirm it was peer-reviewed, so treat it as a careful report by a named researcher rather than a checked result.
 - The planned source was Adams and Dormans 2012 (book). I did not try to get the book, since an open paper by the same author covers the simulation method, so I used that instead.
 - The evidence is thin: one hypothetical game, simple bots, no comparison with real players. Studio use of economy simulation for free-to-play games is mostly unpublished.
