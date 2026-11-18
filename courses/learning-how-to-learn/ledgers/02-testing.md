@@ -55,3 +55,11 @@ How far the source was read. Rowland 2014: full text of the APA online-first ver
 | Sources and grades | Free recall practice tests are 0.81 in Table 2 and 0.82 in the Discussion; the lesson gives the table figure | Table 2, Initial test type; Results; Discussion | matches | Table 2 free recall "0.81 0.45 1.18 10"; Discussion: "cued recall and free recall led to substantially larger effects (g = 0.72 and 0.82, respectively)". The Results text also gives "free recall (g = 0.81, CI [0.45, 1.18])", so only the Discussion says 0.82. The lesson uses 0.81. Rechecked 2026-11-16. |
 | Sources and grades | Feedback and delay comparisons are moderator analyses across studies | Method of analysis | matches | |
 | Sources and grades | Lab word lists to a technical subject at work is grade C | | inference | Labelled. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Rowland 2014 | read: full text, author's online-first upload | Ledger opening lines | matches | Ledger: APA online-first version, ResearchGate upload by the author. |
+| front matter, Rowland 2014 | caveat: A meta-analysis; feedback and delay comparisons are across studies, not experiments. | Rows 'Whether you see the answer decides...' (between-study comparison) and 'Caution also because retention interval... not controlled for' | matches | Ledger: the feedback comparison is between studies, and retention interval was not controlled and can be confounded with feedback delay. |

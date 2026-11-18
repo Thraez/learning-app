@@ -38,3 +38,14 @@ How far each source was read. Drachen, Thurau, Sifa, Bauckhage, "A Comparison of
 | Sources and grades | Drachen 2012: abstract only; grade A for the abstract's claims, tier 1; no segments or figures given | OpenAlex abstract | matches | No open full text found. |
 | Sources and grades | 2014 comparison uses one game and two variables; 2012 paper covers two games | Section 5; 2012 abstract | matches | As above. |
 | Sources and grades | How studios segment players in practice is mostly unpublished, as the 2014 paper notes | Section 3 | matches | "The current state-of-the-art of user categorization analysis... in the game industry is difficult to evaluate because telemetry data and analysis techniques are considered proprietary"; knowledge is shared "but rarely at the level of detail of academic research". |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Drachen 2014 | read: full text, arXiv copy and conference copy | Ledger opening lines | matches | Ledger: arXiv PDF 1407.3950 and the FDG 2013 copy, word-diffed as near-identical. |
+| front matter, Drachen 2014 | caveat: One game, two variables; review process not confirmed. | Rows 'one game and two variables' (Sections 5 and 7) and the front matter review-process row | matches | Ledger: 'single game', 'Only two behavioral variables'. Review process could not be confirmed from the conference's own pages. |
+| front matter, Drachen 2012 | read: abstract only, OpenAlex record | Ledger opening lines | matches | Ledger: abstract only, OpenAlex record; IEEE Xplore refuses automated fetches. |
+| front matter, Drachen 2012 | caveat: Abstract only; two games; no segments or figures seen. | Ledger rows '2012 abstract' and 'covers two games' | matches | Ledger: the abstract speaks of two games. The lesson gives no segments or figures. |
+| front matter, Drachen 2012 | corrected note and Sources and grades sentence: abstract read from the OpenAlex record, IEEE Xplore not opened | Ledger opening lines | matches | Replaces 'read on IEEE Xplore'. Now consistent with the ledger. |

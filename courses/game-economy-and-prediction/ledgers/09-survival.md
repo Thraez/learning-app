@@ -41,3 +41,24 @@ All three sources were read in full text from arXiv PDFs, extracted with pdftote
 | Sources and grades | Periáñez full text read as arXiv:1710.02264, which lists this DOI; grade A, tier 1 for Brier scores (Table I) | arXiv record | matches | |
 | Sources and grades | Chen full text read as arXiv:1811.12799, which lists this DOI; grade A, tier 1 | arXiv record | matches | |
 | Sources and grades | "All three use a studio's own player data, which none of the papers publishes" | All three texts | matches | Viljanen: Hipster Sheep data from "Tribeflame Ltd."; Periáñez and Chen: Age of Ishtaria, which Chen names as a game by "Silicon Studio". A grep of all three texts for "available" and "confidential" finds no data availability statement or released dataset. The word "confidential" is gone. Rechecked 2026-11-16. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Viljanen 2018 | read: full text, arXiv copy | Ledger opening lines | matches | Ledger: full text, arXiv:1701.02359, pdftotext. |
+| front matter, Viljanen 2018 | caveat: One small game in development; the studio's own data. | Ledger rows 'Hipster Sheep' (Sections 2.3, 2.4) and 'in-development puzzle game, 3,753 players'; arXiv PDF 1701.02359 Section 2.3 opened by me | differs | Ledger and paper: one game in development, Tribeflame's Hipster Sheep, 3,753 players over three versions. Not recorded anywhere: 'small' (the paper says only 'time and sample limited data' in general) and 'the studio's own data' (the authors are at the University of Turku, the game is Tribeflame's). Suggest 'One game in development, from Tribeflame; not the authors' own studio.' |
+| front matter, Perianez 2016 | read: full text, arXiv copy | Ledger opening lines | matches | Ledger: full text, arXiv:1710.02264; Table I from a raw extraction. |
+| front matter, Perianez 2016 | caveat: One game; the studio's own unpublished data; Brier scores from Table I. | Ledger row 'Perianez used survival ensembles' (Table I); arXiv PDF 1710.02264 title page and Section III opened by me | matches | Ledger confirms Table I and the sample of 2,500 whales. Opened by me: the authors are at Silicon Studio, the data come from 'a major mobile social game' (Age of Ishtaria, developed by Silicon Studio), and there is no data-availability statement; only aggregates are shown. |
+| front matter, Chen 2018 | read: full text, arXiv copy | Ledger opening lines | matches | Ledger: full text, arXiv:1811.12799. |
+| front matter, Chen 2018 | caveat: The studio's own player data, which the paper does not publish. | Ledger front matter row (authors at Yokozuna Data, not Silicon Studio); arXiv PDF 1811.12799 title page and Section III.B opened by me | differs | Ledger: 'Authors are at Yokozuna Data (a Keywords Studio), not Silicon Studio.' Paper: the dataset 'comes from Age of Ishtaria ... originally developed by Silicon Studio'. So it is a game studio's data, but not the authors' own studio's. 'Does not publish' is true (no release statement, aggregate tables only). Suggest 'Player data from Age of Ishtaria (Silicon Studio), which the paper does not publish.' |
+
+Recheck 2026-11-18 (second): the rows the fixes touched, by a fresh context that did not make the fixes. Sources opened: arXiv:1701.02359 and arXiv:1811.12799 PDF text, pdftotext.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, Viljanen 2018, caveat | One game still in development | Viljanen Section 2.3 | matches | "an in-development mobile game"; "commercial grade puzzle game being developed by Tribeflame Ltd"; "During the development". |
+| front matter, Viljanen 2018, caveat | 3,753 players across three versions | Viljanen Section 2.3 | matches | Versions 1.11, 1.15 and 1.18 with 970, 1246 and 1537 users; "The three versions hold 3753 players in total". The sum redone: 970 + 1246 + 1537 = 3753. |
+| front matter, Chen 2018, caveat | Player data from one game, Age of Ishtaria | Chen Section III-B | matches | "The dataset used in the present work comes from Age of Ishtaria". |
+| front matter, Chen 2018, caveat | The paper does not publish the data | Chen whole text | matches | No data release or availability statement found by search; only aggregate results are shown. This is absence of a statement, which the lesson words as "does not publish". |
