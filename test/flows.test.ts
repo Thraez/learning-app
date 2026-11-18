@@ -298,13 +298,16 @@ describe('screens for each flow', () => {
     expect(s.slice(1)).toEqual(buildScreens(lessonWith, 'stepped'));
     expect(s.some((x) => x.kind === 'decide')).toBe(false);
   });
-  it('case: the decision first, then the idea, then the scenario, then the rest', () => {
+  it('case: the decision first, then the opening question, the idea, the scenario, then the rest', () => {
     const s = buildScreens(lessonWith, 'case');
     expect(s[0].kind).toBe('decide');
     const afterDecide = s.slice(1).map((x) => (x.kind === 'item' ? x.item.id : `${x.kind}:${x.section}`));
-    expect(afterDecide.slice(0, 4)).toEqual(['chunk:The idea', 'chunk:The idea', 'check:The idea', 'chunk:The idea']);
-    expect(afterDecide[4]).toBe('t/a/sc');
-    expect(afterDecide.slice(5).filter((x) => x.startsWith('t/a/'))).toEqual(['t/a/open', 't/a/why', 't/a/r1', 't/a/r2']);
+    const idea = afterDecide.indexOf('chunk:The idea');
+    expect(afterDecide.slice(0, idea).every((x) => x === 't/a/open' || x.endsWith(':Opening question'))).toBe(true);
+    expect(afterDecide.slice(0, idea)).toContain('t/a/open');
+    expect(afterDecide.slice(idea, idea + 4)).toEqual(['chunk:The idea', 'chunk:The idea', 'check:The idea', 'chunk:The idea']);
+    expect(afterDecide[idea + 4]).toBe('t/a/sc');
+    expect(afterDecide.slice(idea + 5).filter((x) => x.startsWith('t/a/'))).toEqual(['t/a/why', 't/a/r1', 't/a/r2']);
   });
   it('a lesson with none of the new blocks runs as stepped with long prose split at paragraphs', () => {
     const long = Array.from({ length: 6 }, (_, k) => `Paragraph ${k + 1} ${'word '.repeat(40)}`).join('\n\n');

@@ -152,10 +152,12 @@ export function buildScreens(lesson: { blocks: readonly Block[] }, flow: Flow): 
   }
   if (flow === 'case') {
     const first: Screen[] = blocks.flatMap((b): Screen[] => (b.kind === 'decide' ? [{ kind: 'decide', section: 'Opening question', decide: b.decide }] : []));
+    // The opening question stays before the idea: its card says "before you read".
+    const opening = base.filter((s) => s.section === 'Opening question');
     const idea = base.filter((s) => s.section === 'The idea' && s.kind !== 'item');
-    const scenario = base.filter((s) => s.kind === 'item' && s.item.type === 'scenario');
-    const rest = base.filter((s) => !idea.includes(s) && !scenario.includes(s));
-    return [...first, ...idea, ...scenario, ...rest];
+    const scenario = base.filter((s) => s.kind === 'item' && s.item.type === 'scenario' && !opening.includes(s));
+    const rest = base.filter((s) => !opening.includes(s) && !idea.includes(s) && !scenario.includes(s));
+    return [...first, ...opening, ...idea, ...scenario, ...rest];
   }
   return base;
 }

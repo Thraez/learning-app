@@ -131,7 +131,7 @@ nav.bottom a { padding: 0.5rem; text-decoration: none; }
 .source-footer div { margin-bottom: 0.2rem; }
 
 /* Lesson flows: one screen at a time */
-.flow-count { margin: 0.25rem 0 0; }
+.flow-count { margin: 0.25rem 0 0.6rem; }
 .flow-stage { outline: none; }
 .flow-next { margin: 1rem 0; min-width: 8rem; justify-content: center; }
 .choices { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.6rem 0; }

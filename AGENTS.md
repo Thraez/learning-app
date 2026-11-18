@@ -93,7 +93,7 @@ Not built: a dead-link check on pull requests. The build checks that a link is p
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
 | `courses/<course-folder>/ledgers/NN-<slug>.md` | the claim ledger for the lesson of the same name; the app does not read it |
-| `src/` | the app: `main.ts` (screens), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
+| `src/` | the app: `main.ts` (screens), `flows.ts` and `flow-screen.ts` (the one-screen-at-a-time lesson flows), `visuals.ts` (pictures drawn from lesson data), `trust.ts` (check date and source lines), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
 | `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
 | `src/sw-template.js` | service worker; the build fills in the file list |
 | `test/` | parser tests against the real course files, scheduler and export tests |
@@ -129,3 +129,29 @@ Then one `## ` heading per section, in this order: `Opening question`, `The idea
 `Sources and grades`. Each answerable item starts with a `### ` heading of the form `### <id> · <type>`, where type is
 `open`, `why`, `scenario` or `recall`, followed by the prompt and a `<details>` answer. The future app parses these
 headings, so keep the pattern exact.
+
+### Blocks for the lesson flows
+
+A lesson may also hold blocks that only the non-Classic flows show. Classic, reviews, the scheduler, Progress and the
+attempt log skip them, so adding one never changes what an existing item does. Each is a fenced block whose info string
+is the kind and whose body is YAML; the build fails on an unknown field or a broken rule.
+
+- `check` (`id`, `prompt`, `options` of two or three, each with `text` and `why`, exactly one with `correct: true`): a
+  tap question. Wrong options must be plausible and every `why` must teach, since a lure read without correction can
+  be learned as a fact. Vary where the right option sits.
+- `predict` (`id`, `prompt`, `unit`, `min`, `max`, `step`, `answer`, `answer_text`, `reveal`, `covers`, optional
+  `visual`): the learner commits a number, then sees the real one. `covers` names a recall item of the same lesson
+  whose answer holds the figure, because only items come back in reviews.
+- `decide` (`id`, `prompt`, `options` of two or three, each with `text` and `outcome`, at most one `best: true`): choose
+  first, then see what the source found for each choice. `best` only where the lesson's text supports it.
+- `visual` (`id`, `kind`, `title`, `text`, then the kind's fields): `bars`, `dot-grid`, `spans`, `gap-timeline`. Every
+  number is already in the lesson's prose; an invented example says so in its title or text.
+- `points` (`for`, `points` of two to four): directly after a why or scenario item, the points a good answer makes.
+- A line holding only `<!-- break -->`, with a blank line on each side, splits "The idea" into short screens.
+
+IDs are `<lesson-id>/c1`, `p1`, `d1`, `v1` and follow rule 5: permanent, never reused. `predict` and `decide` go in
+"Opening question" after the open item; `check`, `visual` and breaks go in "The idea". A block restates what the
+lesson's checked prose says, with the same labels (relative lift, this lesson's arithmetic, one game). It is a factual
+claim like any sentence: a new or changed block removes `checked` until a fresh checker has a ledger row for it, keyed
+by the block ID. The flows (Classic, Stepped, Predict first, Case first) are the whole-app setting `F`; taps on these
+blocks are stored as responses, apart from attempts (`docs/export-schema.md`).
