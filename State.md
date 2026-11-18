@@ -34,8 +34,8 @@ Claude can revise the course. The goal is learning that lasts weeks.
     Fresh checkers held every changed sentence against the sources, under a stricter bar than before: wording
     that says slightly more than the paper fails. They found 12, 9, 8 and 8 such wordings in lessons 1 to 4, some
     carried over from the old text. All were fixed and the fixes rechecked by further fresh contexts, up to four
-    rounds for lesson 3. All four lessons carry `checked: 2026-11-18` again. Lessons 5 to 12 were last checked on
-    16 Nov under the looser bar, so expect the same kind of findings when they are rewritten.
+    rounds for lesson 3. All four lessons carry `checked: 2026-11-18` again. Lessons 5 to 12 carry `checked: 2026-11-18` from
+    the earlier pass that day, under the looser bar, so expect the same kind of findings when they are rewritten.
 - Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
   Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
   lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.

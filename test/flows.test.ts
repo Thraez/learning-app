@@ -11,7 +11,7 @@ import { buildScreens, classicBlocks, screenItemIds, splitProse, hasNewBlocks, a
 import { computeSchedules, courseProgress, dueItems } from '../src/scheduler';
 import { buildExport } from '../src/export';
 import { parseExportFile, restoreExport } from '../src/restore';
-import { activeWhole, currentFlow, setFlow } from '../src/variants';
+import { activeWhole, currentFlow, sessionWhole, setFlow } from '../src/variants';
 import {
   addResponse, getAssignments, getAttempts, getResponses, getSessions, getSettings, getStoredSettings, saveSettings,
   type Attempt, type Mark, type Response,
@@ -392,6 +392,14 @@ describe('F, the lesson flow setting', () => {
     expect(currentFlow(getSettings())).toBe('stepped');
     expect(asFlow('sideways')).toBe('stepped');
     expect(Object.keys(FLOWS)).toEqual(['classic', 'stepped', 'predict', 'case']);
+  });
+  it('is recorded on lesson sessions only: placement and review sessions never carry F', () => {
+    expect(sessionWhole(getSettings(), 'lesson')).toEqual({ F: 'stepped' });
+    expect(sessionWhole(getSettings(), 'review')).toEqual({});
+    expect(sessionWhole(getSettings(), 'placement')).toEqual({});
+    setFlow('case');
+    expect(sessionWhole(getSettings(), 'lesson')).toEqual({ F: 'case' });
+    expect(sessionWhole(getSettings(), 'review')).toEqual({});
   });
   it('sits beside E6 without changing it', () => {
     const s = getSettings();

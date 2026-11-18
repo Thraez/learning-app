@@ -77,7 +77,12 @@ errors that the writer's own source pass had missed. The steps, in order:
    finding it acts on, and one number redone from a table where the lesson has one.
 7. **A lesson shows its check state.** When every row is `matches` or `inference`, the lesson's front matter gets
    `checked: YYYY-MM-DD`. A later edit to a factual sentence removes `checked` until its rows are rechecked. An edit
-   to wording that carries no claim leaves it.
+   to wording that carries no claim leaves it. A ledger is append-only: a later recheck row replaces the row it
+   rechecks, so `checked` is judged on the latest row for each claim, and older `differs` rows stay as the record.
+8. **The bar** (2026-11-18). Wording that says even slightly more than the source is `differs`, never `matches` with
+   a caveat: a narrower "only" claim, a result that was not significant worded as no change, a judgment the paper
+   does not make. The lesson's own reasoning is `inference` only when it is labelled as its own on the same screen;
+   a check block is a screen of its own.
 
 A ledger quotes papers, so it follows rule 1 like every other file: rewrite a range such as "5 to 9" in words.
 Not built: a dead-link check on pull requests. The build checks that a link is present and `https`, not that it opens.
@@ -133,8 +138,8 @@ headings, so keep the pattern exact.
 ### Blocks for the lesson flows
 
 A lesson may also hold blocks that only the non-Classic flows show. Classic, reviews, the scheduler, Progress and the
-attempt log skip them, so adding one never changes what an existing item does. Each is a fenced block whose info string
-is the kind and whose body is YAML; the build fails on an unknown field or a broken rule.
+attempt log skip them, so adding one never changes what an existing item does. The one exception is `sure`, which
+Classic shows too. Each is a fenced block whose info string is the kind and whose body is YAML (`sure` holds Markdown); the build fails on an unknown field or a broken rule.
 
 - `check` (`id`, `prompt`, `options` of two or three, each with `text` and `why`, exactly one with `correct: true`): a
   tap question. Wrong options must be plausible and every `why` must teach, since a lure read without correction can

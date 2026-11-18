@@ -67,6 +67,16 @@ export function activeWhole(s: Settings, now = new Date()): VariantMap {
   return out;
 }
 
+/**
+ * The whole-app variants a session records. F is the style a lesson ran in, so only lesson sessions
+ * carry it: placement and review sessions always run as Classic cards and never get an F.
+ */
+export function sessionWhole(s: Settings, kind: 'lesson' | 'review' | 'placement', now = new Date()): VariantMap {
+  const out = activeWhole(s, now);
+  if (kind !== 'lesson') delete out.F;
+  return out;
+}
+
 /** The flow in force now. A stored choice wins; a missing, expired or unknown stored value is the default, Stepped. */
 export function currentFlow(s: Settings, now = new Date()): Flow {
   const f = s.whole.F;
