@@ -28,15 +28,104 @@ Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. [Researchers
 104 of 134, or 78%. The same was true of 81 of the 121 routes. The paper and its catch are below.
 </details>
 
+```predict
+id: gd-econ/content-usage/p1
+prompt: "What do you think: Project Gotham Racing 4 had 29 event types. How many were each used in fewer than 1% of races?"
+unit: "event types"
+min: 0
+max: 29
+step: 1
+answer: 12
+answer_text: "12 of the 29 event types."
+reveal: "12 of 29 event types were each used in fewer than 1% of races in the game's Start of Race log. This is one game, from players who opted in to telemetry, in a peer-reviewed conference paper."
+covers: gd-econ/content-usage/r2
+```
+
+```decide
+id: gd-econ/content-usage/d1
+prompt: "You lead the team planning the sequel to a racing game. Telemetry shows that many of the cars are rarely picked, and each car costs modelling, texturing, tuning and testing. What do you do?"
+options:
+  - text: "Cut every rarely used car."
+    outcome: "The authors argue against this themselves. Rarely used content can extend a game's life, lead to play nobody planned, and sell the game, as with more than 100 vehicles on the box."
+  - text: "Cut about 20%, not a purge."
+    outcome: "This is the authors' own suggestion. It is their judgment: the paper did not test what players would lose."
+  - text: "Keep every car."
+    outcome: "The authors recommend fewer options in future games, since each car costs modelling, texturing, tuning and testing. They also give reasons to keep rare content, so the paper does not call keeping everything wrong."
+```
+
 ## The idea
 
 In Project Gotham Racing 4, players used a small part of what shipped. The authors argue that collecting usage data over the long term is the only workable way to see which part.
 
-[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012). Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles. The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer. On career mode the paper's figures point two ways. Within single-player races, regular players chose it more often (59.9% against 47.5%), and in their first ten races too (36.5% against 22.2%). Across all races it was 36.6% of regular players' races and 47.0% of infrequent players', although the paper's text says regular players favour career mode "both overall and in the first ten races".
+[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012).
+
+<!-- break -->
+
+Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles.
+
+```visual
+id: gd-econ/content-usage/v1
+kind: dot-grid
+title: "Vehicles used in fewer than 1% of races each"
+text: "104 of the 134 vehicles in Project Gotham Racing 4 were each used in fewer than 1% of races, across the whole dataset. One game, from players who opted in to telemetry."
+total: 134
+marked: 104
+marked_label: "each used in fewer than 1% of races"
+rest_label: "the other 30"
+```
+
+```check
+id: gd-econ/content-usage/c1
+prompt: "104 of the 134 vehicles were used in fewer than 1% of races. What does that mean?"
+options:
+  - text: "Together, the 104 vehicles made up under 1% of races."
+    why: "The figure is per vehicle: each one was used in fewer than 1% of races, not all 104 together."
+  - text: "Each of those 104 vehicles was used in fewer than 1% of races across the whole dataset."
+    correct: true
+    why: "The lesson says these options were each used in fewer than 1% of races."
+```
+
+<!-- break -->
+
+The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer. On career mode the paper's figures point two ways.
+
+<!-- break -->
+
+Within single-player races, regular players chose it more often (59.9% against 47.5%), and in their first ten races too (36.5% against 22.2%). Across all races it was 36.6% of regular players' races and 47.0% of infrequent players', although the paper's text says regular players favour career mode "both overall and in the first ten races".
+
+```check
+id: gd-econ/content-usage/c2
+prompt: "Regular players chose career mode more within single-player races (59.9% against 47.5%), yet across all races career mode was 36.6% of regular players' races against 47.0% of infrequent players' races. How can both stand?"
+options:
+  - text: "They use different bases: a share of single-player races in one case, a share of all races in the other."
+    correct: true
+    why: "The lesson says the paper's figures point two ways. Its text says regular players favour career mode both overall and in the first ten races, which the all-races figures do not show."
+  - text: "One of the two figures must be a typo."
+    why: "The lesson gives both as the paper's figures, on different bases. What does not fit is the paper's own text on overall use."
+```
+
+<!-- break -->
 
 From this they recommend [fewer options in future games](https://doi.org/10.1145/2372251.2372265), since each car costs modelling, texturing, tuning and testing. They also argue against themselves: rarely used content can extend a game's life, lead to play nobody planned, and sell the game ("more than 100 vehicles" on the box). So they suggest a cut of about 20%, not a purge. That trade-off is their judgment; the paper did not test what players would lose.
 
-Two limits to keep, both my reasoning (grade C) and not the paper's. Telemetry shows what players did, not why: a car nobody picks may be slow, ugly, hard to unlock or buried in a menu. And the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more, but players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
+<!-- break -->
+
+Two limits to keep, both my reasoning (grade C) and not the paper's. Telemetry shows what players did, not why: a car nobody picks may be slow, ugly, hard to unlock or buried in a menu.
+
+<!-- break -->
+
+And the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more, but players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
+
+```check
+id: gd-econ/content-usage/c3
+prompt: "Regular players used career mode more. Does that show that steering new players into it would keep them playing?"
+options:
+  - text: "Yes. A gap that large must be caused by the mode."
+    why: "The lesson calls the result a correlation, so a gap alone does not show which way it runs."
+  - text: "No. Players who already planned to stay may simply prefer career mode."
+    correct: true
+    why: "The result is a correlation. Only a test that steers some new players and not others would show which way it runs."
+```
 
 ## Why
 
@@ -49,6 +138,14 @@ Why can't the team that built a feature judge from playtests how much it will be
 Playtests are short, guided and run with small groups, so testers try features they would never seek out at home, and the team's own sense of a feature is shaped by the effort put into it. Live play shows choices made freely, over months, by players who were never told what to try. The paper argues that traditional playtesting can't cover everything a complex game allows; this account of why is my reasoning, grade C.
 </details>
 
+```points
+for: gd-econ/content-usage/why
+points:
+  - "Playtests are short, guided and run with small groups, so testers try features they would never seek out at home."
+  - "The team's own sense of a feature is shaped by the effort put into it."
+  - "Live play shows free choices over months by players who were never told what to try."
+```
+
 ## Scenario
 
 ### gd-econ/content-usage/scenario · scenario
@@ -59,6 +156,15 @@ You are planning the next content drop for a live mobile strategy game. The data
 <summary>Explained answer</summary>
 Both, if you can, because they answer different questions. Unlock without use tells you players get the unit but don't choose it, which points at balance or appeal. Low unlocks point at the path to the unit. With only use logged, a rarely used unit could be either, which is the same gap in the Project Gotham Racing 4 study: the fields the paper lists record what players picked, not what each player had unlocked. Decide what question you will ask of the data before you log it. That last point is common practice in game analytics, not a finding from this study, grade C.
 </details>
+
+```points
+for: gd-econ/content-usage/scenario
+points:
+  - "Log both, because use and unlock answer different questions."
+  - "Unlock without use points at balance or appeal. Low unlocks point at the path to the unit."
+  - "With only use logged, a rarely used unit could be either."
+  - "Decide what question you will ask of the data before you log it (common practice, grade C)."
+```
 
 ## Recall
 

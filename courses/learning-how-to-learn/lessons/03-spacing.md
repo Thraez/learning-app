@@ -42,17 +42,119 @@ More than 1,350 adults in an online study learned 32 obscure trivia facts, revie
 3 weeks. Of the seven gaps tested for that delay, from none to 105 days, 21 days gave the best recall.
 </details>
 
+```predict
+id: learn/spacing/p1
+prompt: "What do you think: for a test a year after the review, how many days before the review gave the best recall, among the gaps tested?"
+unit: "days"
+min: 0
+max: 105
+step: 1
+answer: 21
+answer_text: "21 days, the best of the gaps tested for a delay of about a year."
+reveal: "Of the seven gaps tested for that delay, from none to 105 days, 21 days gave the best recall. The best gaps are the best of those tested, so the true best may lie between them. It is one online experiment on trivia facts."
+covers: learn/spacing/r1
+visual: learn/spacing/v1
+```
+
+```decide
+id: learn/spacing/d1
+prompt: "You design the review schedule for a study app. What do you do about the gap between first study and review?"
+options:
+  - text: "Use one fixed gap for every item."
+    outcome: "In Cepeda's study the best gap tested was 1 day for a test a week away and 21 days for a test a year away. A fixed gap is too long for one goal and too short for another."
+  - text: "Ask how long the learner needs to remember, then set the gap."
+    outcome: "This is what the authors advise: to plan your study, first decide how long you want to remember. The best gaps tested were 1, 11, 21 and 21 days for delays of 7, 35, 70 and 350 days. They are the best of those tested, from one online experiment."
+    best: true
+  - text: "Make the gaps grow each time."
+    outcome: "In a meta-analysis of 29 studies, growing gaps did no better than even gaps on average (g = 0.034, not significant). The abstract adds that growing gaps did better the more times items were tested."
+```
+
 ## The idea
 
 There is no single best gap between studying something and reviewing it. The best gap grows the longer you need to remember, but it shrinks as a share of that time.
 
-The main study is [Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x), one large experiment. In the first session, people answered each fact until they got it right once. After the gap, a second session tested every fact twice and showed the answer each time. Then, after a delay counted from that review, came a recall test and a five-choice test. There were 26 combinations of gap and delay, and each person got one. The delays were 7, 35, 70 and 350 days.
+The main study is [Cepeda et al. 2008](https://doi.org/10.1111/j.1467-9280.2008.02209.x), one large experiment. In the first session, people answered each fact until they got it right once. After the gap, a second session tested every fact twice and showed the answer each time.
 
-For every delay, recall first rose as the gap grew, then fell. The best gaps tested for recall were [1, 11, 21 and 21 days](https://doi.org/10.1111/j.1467-9280.2008.02209.x) for the four delays. As a share of the delay, those are about 14%, 31%, 30% and 6%. The [published abstract](https://doi.org/10.1111/j.1467-9280.2008.02209.x) summarises it as about 20 to 40% of a one-week delay, falling to about 5 to 10% of a one-year delay. The tested best for one week, 1 day, sits below that range; the in-press copy I read gives about 20% for delays of a few weeks and about 5% for a year. Its fitted curve puts the best gap for a one-year delay at 23 days, 7% of it. So read the ranges as the authors' rough summary, not a rule.
+<!-- break -->
+
+Then, after a delay counted from that review, came a recall test and a five-choice test. There were 26 combinations of gap and delay, and each person got one. The delays were 7, 35, 70 and 350 days.
+
+<!-- break -->
+
+For every delay, recall first rose as the gap grew, then fell. The best gaps tested for recall were [1, 11, 21 and 21 days](https://doi.org/10.1111/j.1467-9280.2008.02209.x) for the four delays. As a share of the delay, those are about 14%, 31%, 30% and 6%.
+
+```visual
+id: learn/spacing/v1
+kind: gap-timeline
+title: "The best gap tested for recall, for each delay"
+text: "For test delays of 7, 35, 70 and 350 days, the best gaps tested for recall were 1, 11, 21 and 21 days, about 14%, 31%, 30% and 6% of the delay. These are the best of those tested, from one online experiment."
+rows:
+  - delay: 7
+    gap: 1
+    share: 14
+  - delay: 35
+    gap: 11
+    share: 31
+  - delay: 70
+    gap: 21
+    share: 30
+  - delay: 350
+    gap: 21
+    share: 6
+```
+
+```check
+id: learn/spacing/c1
+prompt: "The best gap tested was 1 day for a one-week delay and 21 days for a one-year delay. Is the best gap a fixed share of the delay?"
+options:
+  - text: "Yes, about a third of the delay."
+    why: "The shares were about 14%, 31%, 30% and 6%, so there is no fixed share."
+  - text: "No. It grows in days but shrinks as a share of the delay."
+    correct: true
+    why: "The shares were about 14%, 31%, 30% and 6% for the four delays."
+  - text: "No. A longer gap is always better."
+    why: "For every delay, recall first rose as the gap grew, then fell."
+```
+
+<!-- break -->
+
+The [published abstract](https://doi.org/10.1111/j.1467-9280.2008.02209.x) summarises it as about 20 to 40% of a one-week delay, falling to about 5 to 10% of a one-year delay. The tested best for one week, 1 day, sits below that range; the in-press copy I read gives about 20% for delays of a few weeks and about 5% for a year. Its fitted curve puts the best gap for a one-year delay at 23 days, 7% of it. So read the ranges as the authors' rough summary, not a rule.
+
+<!-- break -->
 
 The size is large. With study time held equal, the best gap gave [64% more final recall](https://doi.org/10.1111/j.1467-9280.2008.02209.x) than no gap (d = 1.1). The authors also point out that a gap longer than the best one costs much less than a gap that is too short.
 
-A second source checks the schedule. [Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8), a meta-analysis of 29 studies, found that spacing out retrieval practice beat doing it all at once (g = 0.74). Gaps that grow each time did no better than even gaps (g = 0.034, not significant). The abstract adds that growing gaps did better the more times items were tested. Their [preprint](https://osf.io/kzy7u), which is not peer-reviewed, says 0.74 is the figure after a correction for publication bias (studies with weak results going unpublished), and calls the "more tests" result tentative. The published appendix gives a mean of about 1.01 in its sensitivity table; reading that as the uncorrected figure is my inference from the preprint's uncorrected 1.02.
+```check
+id: learn/spacing/c2
+prompt: "You are unsure of the best gap. Which mistake is safer?"
+options:
+  - text: "A gap that is a bit too long."
+    correct: true
+    why: "The authors point out that a gap longer than the best one costs much less than a gap that is too short."
+  - text: "A gap that is a bit too short."
+    why: "A gap that is too short costs more. The authors point out that a gap longer than the best one costs much less than a gap that is too short."
+```
+
+<!-- break -->
+
+A second source checks the schedule. [Latimier, Peyre and Ramus 2021](https://doi.org/10.1007/s10648-020-09572-8), a meta-analysis of 29 studies, found that spacing out retrieval practice beat doing it all at once (g = 0.74). Gaps that grow each time did no better than even gaps (g = 0.034, not significant). The abstract adds that growing gaps did better the more times items were tested.
+
+```check
+id: learn/spacing/c3
+prompt: "A meta-analysis of 29 studies found spacing beat massing (g = 0.74) but growing gaps no better than even gaps (g = 0.034, not significant). What do you take from it?"
+options:
+  - text: "Growing gaps are worse than even gaps."
+    why: "The difference was not significant, so the data do not say growing gaps are worse."
+  - text: "Spreading practice out helps. On average, growing the gaps adds nothing detectable."
+    correct: true
+    why: "The lesson also says the abstract's result that growing gaps did better with more tests is called tentative in the preprint."
+```
+
+<!-- break -->
+
+Their [preprint](https://osf.io/kzy7u), which is not peer-reviewed, says 0.74 is the figure after a correction for publication bias (studies with weak results going unpublished), and calls the "more tests" result tentative. The published appendix gives a mean of about 1.01 in its sensitivity table; reading that as the uncorrected figure is my inference from the preprint's uncorrected 1.02.
+
+<!-- break -->
 
 The limits. [Cepeda](https://doi.org/10.1111/j.1467-9280.2008.02209.x) tested one review, of trivia facts, on adults online. In the meta-analysis, per the [preprint](https://osf.io/kzy7u), 23 of the 39 spaced against massed comparisons tested memory right after learning, and most studies in both parts were lab studies with adults.
 
@@ -67,6 +169,15 @@ Why can no app or teacher give you one best gap for reviewing everything? Answer
 Because the best gap depends on how long you need to remember. In Cepeda's study it was 1 day for a test a week away and 21 days for a test a year away, so a fixed gap is too long for one goal and too short for another. The authors put it plainly: to plan your study, first decide how long you want to remember. Why spacing works at all, the paper does not settle; it says some theories fit the data poorly and others may fit.
 </details>
 
+```points
+for: learn/spacing/why
+points:
+  - "The best gap depends on how long you need to remember."
+  - "In Cepeda's study it was 1 day for a test a week away and 21 days for a test a year away."
+  - "A fixed gap is too long for one goal and too short for another."
+  - "The authors say to decide first how long you want to remember."
+```
+
 ## Scenario
 
 ### learn/spacing/scenario · scenario
@@ -77,6 +188,15 @@ You are learning the core rules of a new tabletop system. You run a one-shot at 
 <summary>Explained answer</summary>
 Review once well before the convention, not in the last week. My own pick, grade C, is about a week to ten days after first study. In the study, with 35 days between review and test, the best gap tested was 11 days. For the campaign, review again weeks later rather than days: with a year to go, 21 days was best, and a late gap cost less than an early one. The authors say that for memory lasting years, a review months later is likely worth it, which goes past their own one-year data. Using trivia results for game rules, and any plan with more than one review, is my inference, grade C.
 </details>
+
+```points
+for: learn/spacing/scenario
+points:
+  - "Review once well before the convention, not in the last week. About a week to ten days after first study is the lesson's own pick, grade C."
+  - "With 35 days between review and test, the best gap tested was 11 days."
+  - "For the campaign, review again weeks later rather than days: with a year to go, 21 days was best, and a late gap cost less than an early one."
+  - "Using trivia results for game rules is the lesson's inference, grade C."
+```
 
 ## Recall
 

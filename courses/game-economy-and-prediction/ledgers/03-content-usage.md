@@ -57,3 +57,26 @@ Recheck 2026-11-18: rows the 2026-11-18 edits touched, by a fresh context that d
 | Sources and grades | Link to the Microsoft Research copy | URL tested | matches | The link serves the PDF, though it needed a browser user agent. |
 | Sources and grades | The ACM page was not tried; camera-ready status cannot be confirmed | Title page footer | matches | See the note row above. |
 | Item IDs and answers | No item ID or heading changed; no answer block touched | git diff d4ce597 e2c3a5a | matches |  |
+
+Check of the flow blocks, 2026-11-18, by a fresh context that did not write them. Each block statement was held against the lesson prose and answers; figures were also checked in the papers opened in this check (see the notes). The "Right." and "No." openers of the why lines and the option order were being edited by another session during the check; no fact changed, and the rows below do not depend on either.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/content-usage/c1 | 104 of 134 vehicles each under 1% of races | The idea: "these options were each used in fewer than 1% of races" | matches | Paper, opened in this check: 78% (104 of 134), 67% (81 of 121), 41% (12 of 29). |
+| gd-econ/content-usage/c2 | 59.9 against 47.5 within single-player races; 36.6 against 47.0 across all races; different bases | The idea, career-mode paragraphs | differs | The prompt says "36.6% of their races against 47.0% across all races", which can be read as both being regular players. The lesson says "36.6% of regular players' races and 47.0% of infrequent players'". The paper: 47.0% is infrequent players' share of all races. Different bases is right ("59.9% of single player races for regular players"). Suggested: "against 47.0% of infrequent players' races". |
+| gd-econ/content-usage/c3 | Career result is a correlation; a steering test is needed | The idea, last paragraph | inference | The lesson labels it its own reasoning, grade C. |
+| gd-econ/content-usage/p1 | 12 of 29 event types under 1%; opted-in players; peer-reviewed | Opening; The idea; r2 | matches | Paper: 41% (12 of 29). |
+| gd-econ/content-usage/d1, option 1 | The authors argue against cutting everything: rare content can extend life, lead to unplanned play, sell the game | The idea: "They also argue against themselves" | matches | |
+| gd-econ/content-usage/d1, option 2 | A cut of about 20% is the authors' judgment, not tested | The idea: "a cut of about 20%, not a purge ... their judgment" | matches | The paper has a passage on a 20% across-the-board reduction. |
+| gd-econ/content-usage/d1, option 3 | The authors recommend fewer options; "does not call keeping everything wrong" | The idea | inference | The second clause is a mild reading of "argue against themselves", not a lesson sentence. |
+| gd-econ/content-usage/v1 | 104 of 134; the other 30 | The idea | matches | |
+| gd-econ/content-usage/why points | Three points | Model answer | inference | The lesson labels this account grade C. |
+| gd-econ/content-usage/scenario points | Four points | Explained answer | inference | The last point is labelled grade C; the rest is the lesson's own reasoning. |
+
+
+Recheck of the flow blocks 2026-11-18 (second): the blocks the fixes touched, by a fresh context that did not make the fixes. Each block was held against the lesson's own prose and answers; no source was reopened.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| gd-econ/content-usage/c2, prompt | 59.9% against 47.5% is regular against infrequent within single-player races; 36.6% regular against 47.0% infrequent across all races | The idea: "regular players chose it more often (59.9% against 47.5%) ... Across all races it was 36.6% of regular players' races and 47.0% of infrequent players'" | matches | Each figure carries the right group, in the lesson's order. |
+| gd-econ/content-usage/c2, options | Different bases; the paper's text on overall use does not fit the all-races figures; not a typo | The idea: "although the paper's text says regular players favour career mode 'both overall and in the first ten races'" | matches | The words "different bases" are the block's reading of "Within single-player races" against "Across all races"; the lesson sentence supports it. |

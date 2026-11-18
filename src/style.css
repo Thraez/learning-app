@@ -129,3 +129,51 @@ nav.bottom a { padding: 0.5rem; text-decoration: none; }
 .trust-open { border-left-color: var(--partly); }
 .source-footer { border-top: 1px dashed var(--line); margin-top: 0.6rem; padding-top: 0.4rem; line-height: 1.35; }
 .source-footer div { margin-bottom: 0.2rem; }
+
+/* Lesson flows: one screen at a time */
+.flow-count { margin: 0.25rem 0 0.6rem; }
+.flow-stage { outline: none; }
+.flow-next { margin: 1rem 0; min-width: 8rem; justify-content: center; }
+.choices { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.6rem 0; }
+.choice { width: 100%; text-align: left; justify-content: flex-start; line-height: 1.35; padding: 0.6rem 0.8rem; }
+.choice.is-right { border-color: var(--right); border-width: 2px; }
+.choice.is-wrong { border-color: var(--wrong); border-width: 2px; }
+.choice[aria-pressed="true"]:not(.is-right):not(.is-wrong) { border-color: var(--accent); border-width: 2px; }
+.choice:disabled { opacity: 1; cursor: default; }
+.feedback { margin-top: 0.4rem; }
+.feedback p, .outcome p { margin: 0.35rem 0; }
+.outcome { border-left: 3px solid var(--line); padding: 0.1rem 0 0.1rem 0.7rem; margin: 0.7rem 0; }
+.outcome.is-chosen { border-left-color: var(--accent); }
+.outcome.is-best { border-left-color: var(--right); }
+.tag { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+.predict-row { flex-wrap: nowrap; }
+.predict-row input[type="range"] { flex: 1; min-width: 0; height: 44px; accent-color: var(--accent); }
+.predict-value { min-width: 4.5rem; text-align: right; font-weight: 600; }
+.predict-reveal p { margin: 0.4rem 0; }
+fieldset.points { border: 1px solid var(--line); border-radius: 8px; margin: 0.75rem 0 0; padding: 0.4rem 0.8rem; }
+fieldset.points legend { font-size: 0.9rem; color: var(--muted); padding: 0 0.3rem; }
+fieldset.points p { margin: 0.3rem 0; }
+fieldset.points input { width: 22px; height: 22px; vertical-align: middle; }
+.flow-card h2 { margin-top: 0.25rem; }
+
+/* Visuals */
+figure.visual { margin: 1rem 0; padding: 0.6rem 0.8rem; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+figure.visual figcaption { font-weight: 600; font-size: 0.95rem; }
+.vis-picture { margin: 0.4rem 0; }
+.vis-picture svg { width: 100%; height: auto; display: block; }
+.vis-line { margin: 0.3rem 0 0; font-size: 0.9rem; color: var(--muted); }
+.vis-picture text { fill: var(--fg); font-size: 12px; font-family: inherit; }
+.vis-picture .vis-strong { font-weight: 600; }
+.vis-picture .vis-note { fill: var(--muted); font-size: 11px; }
+.vis-delay { stroke: var(--line); stroke-width: 4; }
+.vis-gap { stroke: var(--accent); stroke-width: 4; }
+.vis-dot { fill: var(--accent); }
+.vis-dot.vis-review { fill: var(--right); }
+.vis-dot-off { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.vis-bar { fill: var(--accent); }
+.vis-bar.vis-neg { fill: var(--wrong); }
+.vis-whisker { stroke: var(--fg); stroke-width: 1.5; }
+.vis-zero, .vis-axis { stroke: var(--muted); stroke-width: 1; }
+.vis-span { stroke: var(--accent); stroke-width: 4; }
+.vis-arrow { fill: var(--accent); }
+.vis-stop { stroke: var(--accent); stroke-width: 3; }

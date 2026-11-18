@@ -76,3 +76,30 @@ Recheck 2026-11-18: the front matter fields `read` and `caveat` and the correcte
 | front matter, Latimier 2021 | caveat: A meta-analysis; the paywalled body was not read. | Ledger opening lines | matches | Same as the ledger. |
 | front matter, Latimier 2020 | read: full text, OSF preprint | Ledger opening lines | matches | Ledger: authors' March 2020 Word file on OSF. |
 | front matter, Latimier 2020 | caveat: Preprint, not peer-reviewed; some figures differ from the published version. | Front matter rows for the preprint cite and note | matches | Ledger: posted 2020-03-05, tier 2; g = 0.032 against 0.034 in the published abstract. |
+
+Check of the flow blocks, 2026-11-18, by a fresh context that did not write them. Each block statement was held against the lesson prose and answers; figures were also checked in the papers opened in this check (see the notes). The "Right." and "No." openers of the why lines and the option order were being edited by another session during the check; no fact changed, and the rows below do not depend on either.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| learn/spacing/p1 | 21 days best of seven gaps from none to 105; true best may lie between | Opening answer; The idea | matches | |
+| learn/spacing/d1, option 1 | Best gap 1 day for a week, 21 for a year; a fixed gap is too long and too short | Why model answer | matches | |
+| learn/spacing/d1, option 2 | The authors advise deciding first how long to remember; best gaps 1, 11, 21, 21 for 7, 35, 70, 350; marked best | Why model answer: "to plan your study, first decide how long you want to remember" | matches | `best` rests on the authors' advice. |
+| learn/spacing/d1, option 3 | Growing gaps no better than even gaps, g = 0.034, not significant, 29 studies | The idea, meta-analysis paragraph | differs | Drops the lesson's qualifier: "The abstract adds that growing gaps did better the more times items were tested." Suggested: add "though the abstract says they did better the more times items were tested". |
+| learn/spacing/v1 | Gaps and shares 14, 31, 30, 6 | The idea | matches | Arithmetic redone: 1 over 7 is 14.3%, 11 over 35 is 31.4%, 21 over 70 is 30%, 21 over 350 is 6%. |
+| learn/spacing/c1 | No fixed share; recall rose then fell | The idea | matches | |
+| learn/spacing/c2 | Too long is safer; 64% more than no gap | The idea: "a gap longer than the best one costs much less than a gap that is too short"; "64% more final recall than no gap (d = 1.1)" | differs | The wrong option's why uses the 64% to show a slightly short gap costs more. The lesson's 64% compares the best gap with no gap, not with a gap a bit too short. Suggested: drop the 64% sentence from that why. |
+| learn/spacing/c3 | Spacing beats massing g = 0.74; growing gaps not significant; tentative label | The idea; preprint paragraph | matches | "Adds nothing detectable" is a fair on-average reading of not significant. |
+| learn/spacing/why points | Four points | Model answer | matches | |
+| learn/spacing/scenario points | Four points | Explained answer | inference | Two points are labelled grade C in the points. |
+
+Not opened in this check: the Cepeda 2008 manuscript (no copy located). Its figures in these rows rest on the earlier check, with the shares redone above.
+
+
+Recheck of the flow blocks 2026-11-18 (second): the blocks the fixes touched, by a fresh context that did not make the fixes. Each block was held against the lesson's own prose and answers; no source was reopened.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| learn/spacing/d1, option 3 outcome | 29 studies; growing gaps no better than even gaps, g = 0.034, not significant; the abstract adds growing gaps did better the more times items were tested | The idea, Latimier paragraph: the same three sentences | matches | The qualifier is the lesson's own sentence word for word. The lesson says in the next paragraph that the preprint calls the "more tests" result tentative; the outcome omits that. Suggested, not required: add "which the preprint calls tentative". |
+| learn/spacing/d1, option 2 `best: true` | The best option is to ask how long the learner must remember, then set the gap | Why, model answer: "The authors put it plainly: to plan your study, first decide how long you want to remember"; title and first sentence of The idea | matches | The outcome says "this is what the authors advise", so `best` rests on the authors' advice and the lesson's own claim that no single best gap exists. The lesson does not literally say "best option". |
+| learn/spacing/c2, option 1 why | Authors: a gap longer than the best costs much less than one that is too short | The idea: "a gap longer than the best one costs much less than a gap that is too short" | matches | |
+| learn/spacing/c2, option 2 why | A gap that is too short costs more; the same authors' sentence | The idea, same sentence; r2 answer | matches | The 64% figure appears in neither why; it is used nowhere in this block. |

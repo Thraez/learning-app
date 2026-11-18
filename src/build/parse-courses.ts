@@ -10,6 +10,7 @@ import { join, basename } from 'node:path';
 import { Marked } from 'marked';
 import { parse as parseYaml } from 'yaml';
 import type { Block, Course, CourseData, Item, ItemType, Lesson, Placement, Source } from '../types';
+import { parseCheck, parseDecide, parsePoints, parsePredict, parseVisual } from './parse-blocks.ts';
 
 const ITEM_TYPES: ItemType[] = ['open', 'why', 'scenario', 'recall'];
 // "### gd-econ/endowment/r2 · recall" (the separator is U+00B7, middle dot)
@@ -63,8 +64,10 @@ interface ParsedBody {
  * Splits a lesson or quiz body into sections, prose and items.
  * An item runs from its "### id · type" heading to the next heading of level 1 to 3.
  */
-function parseBody(body: string, file: string, parentId: string, render: (md: string) => string): ParsedBody {
+function parseBody(body: string, file: string, parentId: string, render: (md: string) => string, allowBlocks: boolean): ParsedBody {
   const lines = body.split('\n');
+  const failHere = (msg: string): never => fail(file, msg);
+  const where = allowBlocks ? '' : ' (a placement quiz holds items only)';
   const blocks: Block[] = [];
   const items: Item[] = [];
   let prose: string[] = [];
@@ -81,6 +84,33 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
   let i = 0;
   while (i < lines.length) {
     const line = lines[i];
+
+    // Fenced blocks that are not items: check, predict, decide, visual. Each becomes its own block, never prose.
+    const fence = inFence ? null : FENCE_START.exec(line);
+    if (fence) {
+      const kind = fence[1];
+      if (!allowBlocks) fail(file, `a "\`\`\`${kind}" block is not allowed here${where}`);
+      if (kind === 'points') fail(file, 'a "```points" block must sit directly after an item\'s </details>');
+      flushProse();
+      const { yaml, next } = readFence(lines, i, kind, file);
+      i = next;
+      if (kind === 'check') blocks.push({ kind: 'check', check: parseCheck(yaml, parentId, failHere) });
+      else if (kind === 'predict') blocks.push({ kind: 'predict', predict: parsePredict(yaml, parentId, failHere) });
+      else if (kind === 'decide') blocks.push({ kind: 'decide', decide: parseDecide(yaml, parentId, failHere) });
+      else blocks.push({ kind: 'visual', visual: parseVisual(yaml, parentId, failHere) });
+      continue;
+    }
+    // The chunk break marker: its own line, a blank line either side. Splits prose for the one-screen flows.
+    if (!inFence && line.trim() === '<!-- break -->') {
+      if (!allowBlocks) fail(file, `a chunk break marker is not allowed here${where}`);
+      if ((i > 0 && lines[i - 1].trim() !== '') || (i + 1 < lines.length && lines[i + 1].trim() !== '')) {
+        fail(file, 'a "<!-- break -->" marker needs a blank line before it and after it');
+      }
+      flushProse();
+      blocks.push({ kind: 'break' });
+      i++;
+      continue;
+    }
     if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
     if (inFence) { prose.push(line); i++; continue; }
 
@@ -112,8 +142,12 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
       const promptMd = text.slice(0, open).trim();
       if (!promptMd) fail(file, `item ${id} has no prompt text`);
       const inner = text.slice(open + '<details>'.length, close);
-      const after = text.slice(close + '</details>'.length).trim();
-      if (after) fail(file, `item ${id} has text after its </details>; move it into the answer or below a new heading`);
+      // What follows </details>: only blank lines and fenced blocks may. The rest is read by this loop again.
+      const afterMsg = `item ${id} has text after its </details>; move it into the answer or below a new heading`;
+      const closeLine = text.slice(0, close).split('\n').length - 1;
+      if (text.slice(close + '</details>'.length).split('\n')[0].trim()) fail(file, afterMsg);
+      const itemEnd = i;
+      i -= itemLines.length - (closeLine + 1);
       const sm = /<summary>([\s\S]*?)<\/summary>/i.exec(inner);
       const answerLabel = sm ? sm[1].trim() : 'Answer';
       const answerMd = (sm ? inner.replace(sm[0], '') : inner).trim();
@@ -131,13 +165,72 @@ function parseBody(body: string, file: string, parentId: string, render: (md: st
       if (lm) item.targetLessonOrder = Number(lm[1]);
       items.push(item);
       blocks.push({ kind: 'item', item });
+
+      // A points block sits directly after the item's </details>, and only there.
+      let j = i;
+      while (j < itemEnd && lines[j].trim() === '') j++;
+      if (j < itemEnd && /^```points\s*$/.test(lines[j])) {
+        if (!allowBlocks) fail(file, `a "\`\`\`points" block is not allowed here${where}`);
+        const { yaml, next } = readFence(lines, j, 'points', file);
+        const points = parsePoints(yaml, failHere);
+        if (points.for !== id) fail(file, `points for ${points.for}: it sits after item ${id}, so "for" must name that item`);
+        if (type !== 'why' && type !== 'scenario') fail(file, `points for ${id}: "for" must name a why or scenario item, not ${type}`);
+        blocks.push({ kind: 'points', points });
+        i = next;
+      }
+      // Anything else left before the next heading must be a block fence; stray text is an error.
+      for (let k = i; k < itemEnd; k++) {
+        const t = lines[k];
+        if (t.trim() === '') continue;
+        if (t.trim() === '<!-- break -->') {
+          if (!allowBlocks) fail(file, `a chunk break marker is not allowed here${where}`);
+          continue;
+        }
+        const f = FENCE_START.exec(t);
+        if (!f) fail(file, afterMsg);
+        if (!allowBlocks) fail(file, `a "\`\`\`${f[1]}" block is not allowed here${where}`);
+        k = readFence(lines, k, f[1], file).next - 1;
+      }
       continue;
     }
     prose.push(line);
     i++;
   }
   flushProse();
+  checkBlockLinks(blocks, items, file);
   return { blocks, items };
+}
+
+const FENCE_START = /^```(check|predict|decide|visual|points)\s*$/;
+
+/** Reads a fenced block from its opening line; returns its text and the index of the line after the closing fence. */
+function readFence(lines: string[], start: number, kind: string, file: string): { yaml: string; next: number } {
+  const inner: string[] = [];
+  let k = start + 1;
+  while (k < lines.length && !/^```\s*$/.test(lines[k])) { inner.push(lines[k]); k++; }
+  if (k >= lines.length) fail(file, `a "\`\`\`${kind}" block is never closed`);
+  return { yaml: inner.join('\n'), next: k + 1 };
+}
+
+/** The rules that look across blocks of one file: duplicate ids, `covers` and `visual` links. */
+function checkBlockLinks(blocks: Block[], items: Item[], file: string) {
+  const seen = new Set(items.map((it) => it.id));
+  const itemById = new Map(items.map((it) => [it.id, it]));
+  const visualIds = new Set<string>();
+  for (const b of blocks) {
+    const id = b.kind === 'check' ? b.check.id : b.kind === 'predict' ? b.predict.id : b.kind === 'decide' ? b.decide.id : b.kind === 'visual' ? b.visual.id : '';
+    if (!id) continue;
+    if (seen.has(id)) fail(file, `duplicate id "${id}" (used twice in this file)`);
+    seen.add(id);
+    if (b.kind === 'visual') visualIds.add(id);
+  }
+  for (const b of blocks) {
+    if (b.kind !== 'predict') continue;
+    const cov = itemById.get(b.predict.covers);
+    if (!cov) fail(file, `predict ${b.predict.id}: "covers" names "${b.predict.covers}", which is not an item in this lesson`);
+    if (cov.type !== 'recall') fail(file, `predict ${b.predict.id}: "covers" must name a recall item, but ${cov.id} is a ${cov.type} item`);
+    if (b.predict.visual !== undefined && !visualIds.has(b.predict.visual)) fail(file, `predict ${b.predict.id}: "visual" names "${b.predict.visual}", which is not a visual block in this lesson`);
+  }
 }
 
 function parseSources(raw: unknown, file: string): Source[] {
@@ -219,7 +312,7 @@ export function parseCourseFolder(dir: string): Course {
     if (!slug || slug.includes('/')) fail(path, `lesson id "${id}" must be "<course-id>/<lesson-slug>"`);
     const order = Number(str(data, 'order', path));
     if (!Number.isFinite(order)) fail(path, '"order" must be a number');
-    const { blocks, items } = parseBody(body, path, id, render);
+    const { blocks, items } = parseBody(body, path, id, render, true);
     return {
       id,
       slug,
@@ -251,7 +344,7 @@ export function parseCourseFolder(dir: string): Course {
     const { data, body } = splitFrontMatter(readFileSync(placementFile, 'utf8'), placementFile);
     const id = str(data, 'id', placementFile);
     if (id !== placementId) fail(placementFile, `placement id must be "${placementId}", found "${id}"`);
-    const { blocks, items } = parseBody(body, placementFile, id, render);
+    const { blocks, items } = parseBody(body, placementFile, id, render, false);
     // Each placement answer ends with "Lesson N." so the app can map the item to a lesson. N must be
     // a lesson that exists, or a number up to "lessons_planned" when the course page declares one.
     for (const it of items) {
@@ -308,6 +401,10 @@ export function parseCourses(coursesRoot: string): CourseData {
     for (const l of c.lessons) {
       claim(l.id, `${c.folder}/${l.file}`);
       for (const it of l.itemIds) claim(it, `${c.folder}/${l.file}`);
+      for (const b of l.blocks) {
+        const bid = b.kind === 'check' ? b.check.id : b.kind === 'predict' ? b.predict.id : b.kind === 'decide' ? b.decide.id : b.kind === 'visual' ? b.visual.id : '';
+        if (bid) claim(bid, `${c.folder}/${l.file}`);
+      }
     }
     if (c.placement) {
       claim(c.placement.id, `${c.folder}/placement-quiz.md`);

@@ -3,15 +3,18 @@
 // Anything the user typed is escaped before it is shown.
 
 import './style.css';
+import { el, esc } from './dom';
+import { FLOWS, classicBlocks, type Flow } from './flows';
+import { flowScreen } from './flow-screen';
 import courseData from 'virtual:courses';
 import type { Course, Item, Lesson, Placement, Block } from './types';
 import {
-  addAttempt, addSession, endSession, getAssignments, getAttempts, getSessions, getSettings, getStoredSettings, isRead,
+  addAttempt, addSession, endSession, getAssignments, getAttempts, getResponses, getSessions, getSettings, getStoredSettings, isRead,
   newId, nowIso, requestPersistence, saveSettings, setAppeal, variantString,
   type Appeal, type Attempt, type Confidence, type Mark, type Mode, type SessionKind, type VariantMap,
 } from './store';
 import {
-  E6_DEFAULT, EXPERIMENTS, REVIEW_SIZES, activeWhole, ensureLessonAssignments, experimentOn, itemArms, reviewCap,
+  E6_DEFAULT, EXPERIMENTS, REVIEW_SIZES, activeWhole, currentFlow, ensureLessonAssignments, experimentOn, itemArms, reviewCap, setFlow,
   type ReviewSize,
 } from './variants';
 import { parseExportFile, restoreExport } from './restore';
@@ -27,16 +30,6 @@ const app = document.getElementById('app')!;
 const courses = courseData.courses.filter((c) => c.status !== 'retired');
 
 // ---------- helpers ----------
-
-const esc = (s: string) =>
-  s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
-
-function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string> = {}, html = ''): HTMLElementTagNameMap[K] {
-  const e = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
-  if (html) e.innerHTML = html;
-  return e;
-}
 
 const fmtDate = (d: Date) => d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
 const fmtDay = (d: Date) => {
@@ -162,7 +155,7 @@ const PLACEHOLDER: Record<Item['type'], string> = {
 };
 const TYPE_LABEL: Record<Item['type'], string> = { open: 'Before you read', recall: 'Recall', why: 'Why', scenario: 'Scenario' };
 
-function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (mark: Mark | null) => void): HTMLElement {
+function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (mark: Mark | null) => void, afterAnswer?: (card: HTMLElement) => void): HTMLElement {
   const card = el('section', { class: `item item-${item.type}` });
   const shownAt = nowIso();
   let revealedAt = '';
@@ -232,6 +225,7 @@ function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (
     card.append(el('div', {}, answerHtml));
     const foot = sourceFooter(item);
     if (foot) card.append(foot);
+    afterAnswer?.(card);
     const marks = el('div', { class: 'row marks' });
     marks.append(el('span', { class: 'muted' }, 'Your answer was'));
     for (const m of ['right', 'partly', 'wrong'] as Mark[]) {
@@ -303,7 +297,31 @@ function home() {
     box.append(el('p', { class: 'muted small' }, `${finished.size ? [...finished].filter((id) => c.lessons.some((l) => l.id === id)).length : 0} of ${c.lessons.length} lessons finished. <a href="${route('course', c.id)}">All lessons</a>`));
     main.append(box);
   }
+  main.append(flowCard());
   main.append(nav());
+}
+
+/** Home card: the current lesson style, and a one-tap switch to another. */
+function flowCard(): HTMLElement {
+  const box = el('section', { class: 'card flow-card' });
+  box.append(el('h2', {}, 'Lesson style'));
+  const about = el('p', { class: 'muted small' });
+  const row = el('div', { class: 'row', role: 'group', 'aria-label': 'Lesson style' });
+  const buttons = new Map<Flow, HTMLButtonElement>();
+  const refresh = () => {
+    const cur = currentFlow(getSettings());
+    about.textContent = FLOWS[cur].about;
+    for (const [f, b] of buttons) b.setAttribute('aria-pressed', String(f === cur));
+  };
+  for (const f of Object.keys(FLOWS) as Flow[]) {
+    const b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(FLOWS[f].label));
+    b.onclick = () => { setFlow(f); refresh(); };
+    buttons.set(f, b);
+    row.append(b);
+  }
+  box.append(row, about);
+  refresh();
+  return box;
 }
 
 function nav(): HTMLElement {
@@ -343,11 +361,14 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
   const main = page(title, { href: route('course', course.id), label: course.title });
   const run = new Run(kind, course, target.id);
   const mode: Mode = kind;
+  // Lessons may run in a flow other than Classic; placement always runs as Classic.
+  const flow: Flow = kind === 'lesson' ? currentFlow(getSettings()) : 'classic';
   if (kind === 'lesson') {
     ensureLessonAssignments(target as Lesson, EXPERIMENTS.map((e) => e.id));
-    main.append(trustStrip(target as Lesson));
+    if (flow === 'classic') main.append(trustStrip(target as Lesson));
   }
-  const blocks: Block[] = target.blocks;
+  // Classic skips the block kinds that only the other flows use.
+  const blocks: Block[] = classicBlocks(target.blocks);
   const marks = new Map<string, { mark: Mark | null }>();
   let i = 0;
 
@@ -371,12 +392,26 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
     if (prior.size) main.append(el('p', { class: 'muted small' }, 'Picked up where you left off.'));
   }
 
+  if (flow !== 'classic') {
+    flowScreen({
+      main, lesson: target as Lesson, flow, run,
+      itemCard: (item, onMarked, afterAnswer) => itemCard(item, run, mode, '', onMarked, afterAnswer),
+      answeredCard: (item) => {
+        const a = prior.get(item.id);
+        return a ? { card: answeredCard(item, a), mark: a.mark } : null;
+      },
+      trust: () => trustStrip(target as Lesson),
+      appeal: () => appealCard(run),
+    });
+    return;
+  }
+
   const advance = () => {
     while (i < blocks.length) {
       const b = blocks[i++];
       if (b.kind === 'section') main.append(el('h2', {}, esc(b.title)));
       else if (b.kind === 'prose') main.append(el('div', { class: 'prose' }, b.html));
-      else {
+      else if (b.kind === 'item') {
         const it = b.item;
         const done = prior.get(it.id);
         if (done) { marks.set(it.id, { mark: done.mark }); main.append(answeredCard(it, done)); continue; }
@@ -541,7 +576,7 @@ function exportScreen() {
   main.append(el('p', { class: 'muted small' }, 'Nothing leaves the phone unless you send the file. Exporting does not delete anything.'));
   const status = el('p', { class: 'muted' });
   const make = () => {
-    const json = JSON.stringify(buildExport(courseData, getAttempts(), getSessions(), BUILD, new Date(), getAssignments(), getStoredSettings()), null, 2);
+    const json = JSON.stringify(buildExport(courseData, getAttempts(), getSessions(), BUILD, new Date(), getAssignments(), getStoredSettings(), getResponses()), null, 2);
     return { json, name: exportFileName() };
   };
   const share = el('button', { type: 'button', class: 'primary' }, 'Export answers');
@@ -576,6 +611,20 @@ function settingsScreen() {
     };
     const label = el('label', { class: 'switch' });
     label.append(cb, el('span', {}, ` <strong>${esc(exp.id)}: ${esc(exp.title)}.</strong> ${esc(exp.about)}`));
+    const p = el('p');
+    p.append(label);
+    main.append(p);
+  }
+
+  main.append(el('h2', {}, 'Lesson style'));
+  main.append(el('p', { class: 'muted small' }, 'How a lesson is shown. Your answers are saved the same way in each, so nothing already saved changes. Each session records the style it ran in.'));
+  const flowNow = currentFlow(settings);
+  for (const f of Object.keys(FLOWS) as Flow[]) {
+    const radio = el('input', { type: 'radio', name: 'flow', value: f, id: `flow-${f}` });
+    radio.checked = f === flowNow;
+    radio.onchange = () => { if (radio.checked) setFlow(f); };
+    const label = el('label', { class: 'switch' });
+    label.append(radio, el('span', {}, ` <strong>${esc(FLOWS[f].label)}.</strong> ${esc(FLOWS[f].about)}`));
     const p = el('p');
     p.append(label);
     main.append(p);
@@ -622,7 +671,7 @@ function settingsScreen() {
     if (!parsed.ok) { status.textContent = parsed.error; file.value = ''; return; }
     const r = restoreExport(parsed.file);
     const plural = (n: number, w: string) => `${n} ${w}${n === 1 ? '' : 's'}`;
-    status.textContent = `Added ${plural(r.attempts, 'answer')}, ${plural(r.sessions, 'session')} and ${plural(r.assignments, 'experiment assignment')}. Settings ${r.settingsRestored ? 'restored' : 'kept as they were'}.${r.skipped ? ` Skipped ${plural(r.skipped, 'unusable entry')}.` : ''}`;
+    status.textContent = `Added ${plural(r.attempts, 'answer')}, ${plural(r.sessions, 'session')}, ${plural(r.assignments, 'experiment assignment')} and ${plural(r.responses, 'response')}. Settings ${r.settingsRestored ? 'restored' : 'kept as they were'}.${r.skipped ? ` Skipped ${plural(r.skipped, 'unusable entry')}.` : ''}`;
     file.value = '';
   };
   main.append(file, status);

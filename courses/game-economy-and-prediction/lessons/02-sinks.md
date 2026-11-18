@@ -28,15 +28,115 @@ In December 2021, Old School RuneScape added a 1% tax on sales in its player mar
 The tax barely changed trading volume, and the prices of the targeted items went up. The details are below.
 </details>
 
+```predict
+id: gd-econ/sinks/p1
+prompt: "What do you think: by how much did the prices of the first 34 targeted items rise, against a control group?"
+unit: "%"
+min: 0
+max: 30
+step: 1
+answer: 7
+answer_text: "About 7% higher, against a control group."
+reveal: "The first 34 targeted items rose about 7% against a control group of similarly expensive items (95% interval 5.0 to 9.6%). This is a natural experiment in a preprint, not a randomized test, so it holds only if the control group is a fair comparison."
+covers: gd-econ/sinks/r2
+visual: gd-econ/sinks/v1
+```
+
+```decide
+id: gd-econ/sinks/d1
+prompt: "You run the economy of a large online game. High-level items have become too common, and a new sales tax brings in money you can spend. What do you do with it?"
+options:
+  - text: "Buy selected high-level items on the market and delete them, up to a daily maximum."
+    outcome: "This is what Jagex did. The targeted items' prices rose about 7% in round one, and in round two by 14.4% in the paper's text or about 15.8% by this lesson's conversion of the table. A natural experiment in a preprint."
+  - text: "Collect the 1% tax and do nothing with the money."
+    outcome: "The study measured the tax on its own for trading volume: no detectable effect at the 100 GP threshold, and about a 6.9% drop near the 500 million GP cap point (interval 1 to 13%). The lesson reports nothing on item rarity under the tax alone."
+  - text: "Do nothing and let the market settle."
+    outcome: "This lesson has no evidence on it."
+```
+
 ## The idea
 
 A sink does not just take value out of an economy. Where it takes it from decides whose prices move.
 
 The evidence here is one study, [Hogan-Hennessy, Xenopoulos and Silva 2022](https://arxiv.org/abs/2210.07970). It is a preprint on arXiv and has not been peer-reviewed, so treat it as a careful analysis that no journal has checked yet.
 
+<!-- break -->
+
 Jagex's stated worry was that high-level items had become too common. Its two-part fix: a 1% tax on Grand Exchange sales above 100 GP, capped at 5 million GP per sale and paid out of the seller's proceeds; and an item sink that spends the tax money buying selected high-level items on the market and deleting them, up to a daily maximum Jagex sets. The first round targeted 34 items, the second, a week later, 27 more.
 
-The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) against a control group of similarly expensive items whose prices didn't move with them. Prices of the first 34 items jumped about 7% (95% interval 5.0 to 9.6%). For the next 27 the paper's text gives 14.4% (11.9 to 16.9%). Its own appendix table disagrees: Table A1 lists a coefficient of 0.147 with a standard error of 0.024, which works out to about 15.8% (10.5 to 21.4%). That second figure is my recomputation, not the paper's, and the paper does not explain the gap. No change in the trading volume of those items was detected, but the estimates are loose: by my arithmetic from the same table, anything from a 13% drop to an 8% rise in round one and from a 23% drop to a 19% rise in round two, so a sizeable drop can't be ruled out. The tax had no detectable effect on volume at the 100 GP threshold. Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%, but the interval runs from 1 to 13%, so that estimate is loose too. Prices for illicit gold from real-money traders did not change either.
+<!-- break -->
+
+The researchers [compared the targeted items](https://arxiv.org/abs/2210.07970) against a control group of similarly expensive items whose prices didn't move with them. Prices of the first 34 items jumped about 7% (95% interval 5.0 to 9.6%). For the next 27 the paper's text gives 14.4% (11.9 to 16.9%).
+
+```check
+id: gd-econ/sinks/c1
+prompt: "What does the control group of similarly expensive items do in this study?"
+options:
+  - text: "It proves the sink caused the price rise."
+    why: "This is a natural experiment, not a randomized test, so the estimate holds only if the control items were a fair comparison."
+  - text: "It shows what prices did without the sink, so the targeted items' jump is read against it."
+    correct: true
+    why: "The researchers compared the targeted items against control items whose prices did not move with them. The result holds only if those control items were a fair comparison."
+```
+
+<!-- break -->
+
+Its own appendix table disagrees: Table A1 lists a coefficient of 0.147 with a standard error of 0.024, which works out to about 15.8% (10.5 to 21.4%). That second figure is my recomputation, not the paper's, and the paper does not explain the gap.
+
+```visual
+id: gd-econ/sinks/v1
+kind: bars
+title: "Price rises of the targeted items, with intervals"
+text: "Price rises of the targeted items against control, with the intervals the lesson gives: about 7% in round one, 14.4% in round two by the paper's text, and about 15.8% in round two by this lesson's conversion of the table, which the paper does not print. A natural experiment in a preprint."
+unit: "%"
+rows:
+  - label: "Round one, 34 items"
+    value: 7
+    low: 5.0
+    high: 9.6
+    note: "about 7%"
+  - label: "Round two, 27 items, paper's text"
+    value: 14.4
+    low: 11.9
+    high: 16.9
+  - label: "Round two, 27 items, table converted"
+    value: 15.8
+    low: 10.5
+    high: 21.4
+    note: "this lesson's arithmetic"
+```
+
+```check
+id: gd-econ/sinks/c2
+prompt: "For round two the paper's text says 14.4% and its table works out to about 15.8%. Which statement is right?"
+options:
+  - text: "Both are reported. 14.4% is the paper's text. 15.8% is this lesson's conversion of the table's coefficient, which the paper does not print."
+    correct: true
+    why: "Table A1 lists a coefficient of 0.147 with a standard error of 0.024, and the paper does not explain the gap between the two figures."
+  - text: "15.8% is the paper's corrected figure."
+    why: "It is the lesson's own recomputation from Table A1. The paper does not print it."
+```
+
+<!-- break -->
+
+No change in the trading volume of those items was detected, but the estimates are loose: by my arithmetic from the same table, anything from a 13% drop to an 8% rise in round one and from a 23% drop to a 19% rise in round two, so a sizeable drop can't be ruled out.
+
+```check
+id: gd-econ/sinks/c3
+prompt: "The study found no detectable change in the trading volume of the targeted items. What does that tell you?"
+options:
+  - text: "That the sink had no effect on volume at all."
+    why: "No change was detected, but the intervals include sizeable drops, so a real drop cannot be ruled out."
+  - text: "Not that volume stayed the same. The estimates are loose, and a sizeable drop cannot be ruled out."
+    correct: true
+    why: "By the lesson's arithmetic from Table A1, round one runs from a 13% drop to an 8% rise, and round two from a 23% drop to a 19% rise."
+```
+
+<!-- break -->
+
+The tax had no detectable effect on volume at the 100 GP threshold. Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%, but the interval runs from 1 to 13%, so that estimate is loose too. Prices for illicit gold from real-money traders did not change either.
+
+<!-- break -->
 
 So a buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices. If the goal was to make these items rarer and dearer, that worked. The [authors note](https://arxiv.org/abs/2210.07970) Jagex has not publicly stated what it intended with this round of changes, so whether they "succeeded" can't be judged. Their data also has no player-level records, so the study can't say how individual players changed their behaviour.
 
@@ -51,6 +151,14 @@ Why would a sink that removes items raise their price rather than leave it alone
 The sink buys on the open market, so it adds demand, and more demand means a higher price. The authors say this fits standard economic theory. Each deleted item also leaves fewer for players, which should push the same way, but the paper does not name that as a cause of the price rise, so it is my inference, grade C. A sink that simply destroyed currency, such as a repair fee, would work through a different route, less money chasing the same goods. That comparison is also my inference, grade C.
 </details>
 
+```points
+for: gd-econ/sinks/why
+points:
+  - "The sink buys on the open market, so it adds demand, and more demand means a higher price."
+  - "Each deleted item leaves fewer for players, which should push the same way, but the paper does not name it as a cause (the lesson's inference, grade C)."
+  - "A sink that destroys currency, such as a repair fee, works through a different route (the lesson's inference, grade C)."
+```
+
 ## Scenario
 
 ### gd-econ/sinks/scenario · scenario
@@ -61,6 +169,15 @@ You run a tabletop campaign with a player-run market for magic items. Rare items
 <summary>Explained answer</summary>
 Probably right, in direction. In the RuneScape case the targeted items rose in price, by about 7% in the first round and, in the second, by 14.4% in the paper's text or about 15.8% as this lesson converts its table (the paper does not print that figure). These come from a natural experiment, not a randomized test, so they hold only if the control items were a fair comparison. A buyer that removes goods raises their price for everyone, newcomers included. Whether that is a problem depends on your goal: if the goal is that rare items feel rare, rising prices are the point. Watch the price of the targeted items against similar items you didn't target, the way the paper did, and keep a cheaper route for newcomers if access matters to you. The step from an MMO with tens of thousands of players to a table of five is my inference, grade C; a small market has thin trade and prices can jump on a single sale.
 </details>
+
+```points
+for: gd-econ/sinks/scenario
+points:
+  - "Probably right in direction: the targeted items rose in price, about 7% in round one and 14.4% or about 15.8% in round two."
+  - "The figures come from a natural experiment, so they hold only if the control items were a fair comparison."
+  - "Watch the targeted items against similar items you did not target, and keep a cheaper route for newcomers if access matters."
+  - "A table of five has thin trade, so prices can jump on a single sale (the lesson's inference, grade C)."
+```
 
 ## Recall
 

@@ -68,6 +68,20 @@ export interface Session {
   appealAt?: string | null;
 }
 
+/**
+ * A tap on a check, a prediction or a decision in one of the non-Classic flows. Never an attempt: it is
+ * kept apart so it cannot reach the scheduler or Progress. `value` is the option index (check, decide)
+ * or the committed number (predict).
+ */
+export interface Response {
+  /** The block id, for example "gd-econ/endowment/c1". */
+  id: string;
+  at: string;
+  /** The session the learner was in. */
+  session: string;
+  value: number;
+}
+
 /** itemId -> experimentId -> the arm the item was given, once, for good. */
 export type Assignments = Record<string, Record<string, { arm: string; assignedAt: string }>>;
 
@@ -83,6 +97,7 @@ const KEY_ATTEMPTS = 'learning-app:v1:attempts';
 const KEY_SESSIONS = 'learning-app:v1:sessions';
 const KEY_ASSIGNMENTS = 'learning-app:v1:assignments';
 const KEY_SETTINGS = 'learning-app:v1:settings';
+const KEY_RESPONSES = 'learning-app:v1:responses';
 
 function load<T>(key: string): T[] {
   try {
@@ -115,6 +130,14 @@ export function getSessions(): readonly Session[] {
 
 export function addAttempt(a: Attempt) {
   localStorage.setItem(KEY_ATTEMPTS, JSON.stringify([...load<Attempt>(KEY_ATTEMPTS), a]));
+}
+
+export function getResponses(): readonly Response[] {
+  return load<Response>(KEY_RESPONSES);
+}
+
+export function addResponse(r: Response) {
+  localStorage.setItem(KEY_RESPONSES, JSON.stringify([...load<Response>(KEY_RESPONSES), r]));
 }
 
 export function addSession(s: Session) {
@@ -173,6 +196,19 @@ export function addMissingAttempts(list: readonly Attempt[]): number {
     // Progress takes the latest answer by position, so keep the log in time order.
     const all = [...have, ...add].sort((x, y) => x.markedAt.localeCompare(y.markedAt));
     localStorage.setItem(KEY_ATTEMPTS, JSON.stringify(all));
+  }
+  return add.length;
+}
+
+const responseKey = (r: Response) => `${r.session}|${r.id}|${r.at}`;
+
+export function addMissingResponses(list: readonly Response[]): number {
+  const have = load<Response>(KEY_RESPONSES);
+  const keys = new Set(have.map(responseKey));
+  const add = list.filter((r) => !keys.has(responseKey(r)) && keys.add(responseKey(r)));
+  if (add.length) {
+    const all = [...have, ...add].sort((x, y) => x.at.localeCompare(y.at));
+    localStorage.setItem(KEY_RESPONSES, JSON.stringify(all));
   }
   return add.length;
 }

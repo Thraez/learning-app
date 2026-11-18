@@ -2,14 +2,16 @@
 // ID is already on the phone is left alone, so restoring the same file twice changes nothing.
 
 import {
-  addMissingAssignments, addMissingAttempts, addMissingSessions, restoreSettingsIfNone,
-  type Assignments, type Attempt, type Session, type Settings,
+  addMissingAssignments, addMissingAttempts, addMissingResponses, addMissingSessions, restoreSettingsIfNone,
+  type Assignments, type Attempt, type Response, type Session, type Settings,
 } from './store';
 
 export interface RestoreResult {
   attempts: number;
   sessions: number;
   assignments: number;
+  /** Responses to checks, predictions and decisions added. */
+  responses: number;
   settingsRestored: boolean;
   /** Entries in the file that were not usable and were skipped. */
   skipped: number;
@@ -94,11 +96,20 @@ export function restoreExport(file: Record<string, unknown>): RestoreResult {
     }
   }
 
+  // Optional: an export from before the flows has no "responses".
+  const responses: Response[] = [];
+  for (const r of Array.isArray(file.responses) ? file.responses : []) {
+    if (isObj(r) && isStr(r.id) && isStr(r.at) && isStr(r.session) && typeof r.value === 'number' && Number.isFinite(r.value)) {
+      responses.push({ id: r.id, at: r.at, session: r.session, value: r.value });
+    } else skipped++;
+  }
+
   const settings = isObj(file.settings) ? (file.settings as unknown as Settings) : null;
   return {
     attempts: addMissingAttempts(attempts),
     sessions: addMissingSessions(sessions),
     assignments: addMissingAssignments(assignments),
+    responses: addMissingResponses(responses),
     settingsRestored: settings ? restoreSettingsIfNone({ experiments: settings.experiments ?? {}, whole: settings.whole ?? {} }) : false,
     skipped,
   };

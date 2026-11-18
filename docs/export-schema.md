@@ -17,6 +17,7 @@ commit.
 | `sessions` | every session, oldest first (below) |
 | `assignments` | the arm each item was given in each experiment, `{ [itemId]: { [experimentId]: { arm, assignedAt } } }`; `{}` if none |
 | `settings` | the Settings screen state `{ experiments, whole }` (below), or `null` if the user never changed one, which means the defaults (experiments on) |
+| `responses` | taps on checks, predictions and decisions in the Stepped, Predict and Case lesson flows, oldest first (below); `[]` if none. Absent in files written before the flows, which still restore |
 | `items` | one entry per item the user has answered at least once, sorted by ID (below) |
 
 All times are UTC ISO 8601 strings.
@@ -102,7 +103,32 @@ when it was given. An item gets one arm of an experiment once, at random
 session length: `short` (5 items), `standard` (10, the default) or `open` (all due). `since` is when the value was set
 (ISO 8601); `until` is the last day it applies (`YYYY-MM-DD`) or `null`, after which `standard` applies.
 
+## `responses[]`
+
+A check, a prediction or a decision is not an item, so a tap on one is never an attempt and never reaches the
+scheduler or Progress. It is stored apart, one record per tap: `{ id, at, session, value }`.
+
+| Field | Meaning |
+|---|---|
+| `id` | the block's ID, for example `gd-econ/endowment/c1` (check), `.../p1` (prediction), `.../d1` (decision) |
+| `at` | UTC time of the tap |
+| `session` | the `sessionId` of the session the learner was in |
+| `value` | for a check or decision, the index of the tapped option (0 is the first listed in the lesson file); for a prediction, the number the learner committed, in the unit the block gives |
+
+Phone storage key: `learning-app:v1:responses`. The lesson file holds the block's text and its correct answer, so
+read a response against the lesson file of the course version in the session.
+
+## The `F` variant
+
+`F` is a whole-app setting for the lesson flow: `stepped`, `predict` or `case`. Classic is the default and is never
+stored on a session, like a default `E6`. A session that ran in a flow has it in `variants` (for example
+`{ "F": "case" }`) and in `variant` (`F=case`), and so does each attempt made in it. `settings.whole.F` has the
+same shape as `E6`, with `until` always `null`. A stored value the app does not know reads as Classic.
+
 ## Version history
+
+- **2, extended**: adds the optional `responses` array and the `F` value in `variants`. Neither breaks a reader that
+  ignores unknown fields, so the version stays at 2.
 
 - **2**: adds `assignments`, `settings`, session `variants`, `appeal`, `appealAt`, and attempt `exposure`, `variants`.
   `mark` can now be `null` (read exposures), which a version 1 reader would not expect, so the version was raised.
@@ -113,7 +139,8 @@ session length: `short` (5 items), `standard` (10, the default) or `open` (all d
 Settings has a file picker that merges an export into the phone. Attempts are matched by `attemptId` and sessions by
 `sessionId`; missing ones are added, existing ones are never changed or deleted, so restoring the same file twice adds
 nothing. Each attempt's `itemId`, `itemType`, `courseId` and `parentId` come from its item entry. A local assignment
-wins over the file's, and `settings` are taken from the file only when the phone has none. Files whose `schema` is not
+wins over the file's, and `settings` are taken from the file only when the phone has none. Responses are matched by session, block ID and time; missing ones are added. A file without `responses` restores as
+before. Files whose `schema` is not
 `learning-app-export`, or whose `schemaVersion` is not 1 or 2, are rejected.
 
 ## How the app uses the history
