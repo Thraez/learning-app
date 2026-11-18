@@ -149,7 +149,7 @@ rows:
 
 <!-- break -->
 
-Now the catch. The paper's [abstract](https://doi.org/10.1371/journal.pone.0186407) claims more than the test shows. It says a bigger money supply "leads to inflation and increased money demand".
+Now the catch. The paper's [abstract](https://doi.org/10.1371/journal.pone.0186407) goes beyond what the test measured. It suggests that a bigger money supply "leads to inflation and increased money demand".
 
 The test measured no prices and no inflation, and Token packages keep fixed real-money prices. So inflation is the authors' explanation, not a result.
 
@@ -203,7 +203,7 @@ Your live team wants to cut the new-player gem grant in a mid-core strategy game
 
 <details>
 <summary>Explained answer</summary>
-Neither side can settle it from this paper. It is one game, one genre, one 28-day window and a range of 40 to 120 Tokens, so it shows that a bigger grant did not hurt early buying in Top Eleven, not that it will in your game. A strategy game's gems may also flow into longer-term sinks, where an early surplus could shorten the time before players hit a paywall or could cheapen it. The useful move is to run the test yourself: randomize new installs into grant sizes, read day-7 retention, conversion and first-purchase size, and keep watching past the first month, because the paper's window ended at 28 days and later effects are unknown. The paper supplies the design and the 28-day limit; the points about sinks and running your own test are my reasoning, grade C.
+Neither side can settle it from this paper. It is one game, one genre, one 28-day window and a range of 40 to 120 Tokens, so it shows that a bigger grant did not hurt early first purchases in Top Eleven, not that it will in your game. A strategy game's gems may also flow into longer-term sinks, where an early surplus could shorten the time before players hit a paywall or could cheapen it. The useful move is to run the test yourself: randomize new installs into grant sizes, read day-7 retention, conversion and first-purchase size, and keep watching past the first month, because the paper's window ended at 28 days and later effects are unknown. The paper supplies the design and the 28-day limit; the points about sinks and running your own test are my reasoning, grade C.
 </details>
 
 ```points

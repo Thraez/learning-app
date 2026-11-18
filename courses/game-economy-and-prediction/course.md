@@ -58,7 +58,7 @@ Assumed known from your degree and work: what F2P is, retention cohorts (D1, D7)
 |---|---|---|---|---|
 | 1 | [Starting currency is a retention lever](lessons/01-endowment.md) | Zivic et al. 2017, PLOS ONE | A | 1 |
 | 2 | [Sinks move prices, not only remove value](lessons/02-sinks.md) | Hogan-Hennessy et al. 2022, arXiv | A | 2 |
-| 3 | [Telemetry shows where design effort goes unused](lessons/03-content-usage.md) | Hullett et al. 2012, ESEM | A | 1 |
+| 3 | [Telemetry shows which content players rarely use](lessons/03-content-usage.md) | Hullett et al. 2012, ESEM | A | 1 |
 | 4 | [Churn is a definition and a time, not a label](lessons/04-churn-time.md) | Periáñez et al. 2016, DSAA; Hadiji et al. 2014, CIG | A; A abstract | 1 |
 | 5 | [Spend is mostly zero and very concentrated](lessons/05-spend-skew.md) | Close et al. 2021; Sifa et al. 2015; Chen et al. 2018 | A abstract; A abstract; A | 1 |
 | 6 | [Predicting who leaves is not knowing what keeps them](lessons/06-predict-vs-act.md) | Runge et al. 2014, CIG | A abstract | 1 |

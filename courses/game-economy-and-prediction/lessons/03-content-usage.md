@@ -1,7 +1,7 @@
 ---
 id: gd-econ/content-usage
 course: gd-econ
-title: Telemetry shows where design effort goes unused
+title: Telemetry shows which content players rarely use
 order: 3
 status: draft
 sources:
@@ -14,7 +14,7 @@ sources:
     note: full text read from a copy on the Microsoft Research site; whether it is the camera-ready version is not confirmed
 ---
 
-# Lesson 3: Telemetry shows where design effort goes unused
+# Lesson 3: Telemetry shows which content players rarely use
 
 ## Opening question
 
@@ -109,25 +109,27 @@ Regular players raced more in multiplayer. On career mode, the paper's figures p
 
 <!-- break -->
 
-Look at single-player races only, and [regular players chose career mode more often](https://doi.org/10.1145/2372251.2372265): 59.9% against 47.5% for infrequent players. In each player's first ten races, regular players also chose it more: 36.5% against 22.2%.
+Look at single-player races only, and [regular players chose career mode more often](https://doi.org/10.1145/2372251.2372265): 59.9% against 47.5% for infrequent players.
 
-Look at all races in the whole dataset, and the paper's printed figures point the other way: career mode was 36.6% of regular players' races and 47.0% of infrequent players'. Treat that 47.0% with care, because it does not fit the paper's other figures for infrequent players.
+In each player's first ten races, regular players also chose career mode more: 36.5% against 22.2%.
+
+Look at all races in the whole dataset, and the paper's printed figures point the other way: career mode was 36.6% of regular players' races and 47.0% of infrequent players'. Treat that 47.0% with care: by my arithmetic it does not fit the paper's other figures for infrequent players.
 
 The lesson for a designer is mine, not the paper's: a share means nothing until you know what it is a share of.
 
 ```sure
-The paper's text says regular players favour career mode "both overall and in the first ten races". Its printed all-races figures, 36.6% against 47.0%, do not show the "overall" part. But the four mode shares the paper prints for infrequent players across all races (47.0%, 19.6%, 16.1% and 20.6%) add up to more than 100%, and it prints one of those modes a second time as 24.5%. So at least one of those figures is wrong, and the paper does not show which.
+The paper's text says regular players favour career mode "both overall and in the first ten races". Its printed all-races figures, 36.6% against 47.0%, do not show the "overall" part. By my arithmetic, the four mode shares the paper prints for infrequent players across all races (47.0%, 19.6%, 16.1% and 20.6%) add up to more than 100%, and it prints one of those modes a second time as 24.5%. So I take at least one of those figures to be wrong, and the paper does not show which.
 ```
 
 ```check
 id: gd-econ/content-usage/c2
-prompt: "Regular players chose career mode more within single-player races (59.9% against 47.5%), yet across all races career mode was 36.6% of regular players' races against 47.0% of infrequent players' races. How can both stand?"
+prompt: "Regular players chose career mode more within single-player races (59.9% against 47.5%), yet across all races career mode was 36.6% of regular players' races against 47.0% of infrequent players' races. Why can the two comparisons point different ways?"
 options:
   - text: "They use different bases: a share of single-player races in one case, a share of all races in the other."
     correct: true
-    why: "A share of single-player races and a share of all races are different things, so they can point different ways. The lesson adds a caution: the 47.0% does not fit the paper's other figures for infrequent players."
-  - text: "They cannot both stand, so the single-player figures must be wrong."
-    why: "The paper prints both, on different bases, so they can both stand. The figure the lesson flags is the 47.0%, which does not fit the paper's other figures for infrequent players."
+    why: "A share of single-player races and a share of all races are different things, so they can point different ways. The lesson adds a caution: by its arithmetic, the 47.0% does not fit the paper's other figures for infrequent players."
+  - text: "The single-player figures must be the wrong ones."
+    why: "Nothing in the paper shows that. Different bases let the two comparisons point different ways. The figure the lesson flags is the 47.0%, which by its arithmetic does not fit the paper's other figures for infrequent players."
 ```
 
 <!-- break -->

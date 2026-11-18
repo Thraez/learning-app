@@ -55,13 +55,13 @@ options:
 
 ## The idea
 
-A sink does not only take value out of an economy. Where it takes it from decides whose prices move.
+A sink does not only take value out of an economy. It can also move prices, and which prices depends on what the sink takes. That is my reading of one case (grade C), not a rule the paper states.
 
-For a designer: a sink that buys items off the market acts like a big new buyer. In the one study there is, the price of what it bought went up.
+The case: a sink that bought items off the market acted like a big new buyer, and the price of what it bought went up.
 
 <!-- break -->
 
-The evidence is one study of Old School RuneScape, by [Hogan-Hennessy, Xenopoulos and Silva](https://arxiv.org/abs/2210.07970). It is a preprint: a careful analysis that no journal has checked yet.
+The evidence is one study of Old School RuneScape, by [Hogan-Hennessy, Xenopoulos and Silva](https://arxiv.org/abs/2210.07970). It is a preprint: no journal has checked it yet.
 
 It is also a comparison made after the fact, not a randomized test. Keep both in mind for every figure below.
 
@@ -80,7 +80,7 @@ What happened to prices? The researchers [compared the targeted items](https://a
 Against that group, the first 34 items rose about 7%. The figure holds only if the control items were a fair comparison.
 
 ```sure
-The 95% interval for round one runs from 5.0 to 9.6%. The study is a natural experiment: it compares targeted items with control items before and after the change, and nobody assigned items at random.
+The 95% interval for round one runs from 5.0 to 9.6%. The study is a natural experiment: it compares targeted items with control items before and after the change, and the researchers did not assign items at random.
 ```
 
 ```check
@@ -96,7 +96,7 @@ options:
 
 <!-- break -->
 
-The second round rose more, but how much depends on where you look. [The paper's text](https://arxiv.org/abs/2210.07970) says 14.4%. Its own appendix table works out to about 15.8%.
+The estimate for the second round is higher, but how high depends on where you look. [The paper's text](https://arxiv.org/abs/2210.07970) says 14.4%. Its own appendix table works out to about 15.8%.
 
 The 15.8% is this lesson's conversion of the table, not a figure the paper prints. The paper does not explain the gap.
 
@@ -165,15 +165,15 @@ And the tax itself? [At the 100 GP threshold](https://arxiv.org/abs/2210.07970) 
 
 Around the 500 million GP point, where the cap starts to bite, it cut volume by about 6.9%. That estimate is loose too: the interval runs from 1 to 13%.
 
-Prices for illicit gold from real-money traders did not change either.
+No change was detected in prices for illicit gold from real-money traders either.
 
 <!-- break -->
 
-So the buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices. If the goal was to make these items rarer and dearer, that worked.
+So the buy-and-delete sink worked like a large buyer entering the market: more demand, higher prices.
 
 Was that the goal? The [authors note](https://arxiv.org/abs/2210.07970) that Jagex has not publicly stated what it intended with this round of changes, so whether they "succeeded" can't be judged.
 
-One more limit. The data has no player-level records, so the study can't say how individual players changed their behaviour.
+One more limit. The data has no player-level records, so the study can't analyse the effects on player behaviour.
 
 ## Why
 
