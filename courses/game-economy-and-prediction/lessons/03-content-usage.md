@@ -56,7 +56,7 @@ options:
 
 In Project Gotham Racing 4, most races used a minority of what shipped. Most of the vehicles were rarely picked.
 
-For a designer (my reading, not the paper's): a team is unlikely to see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to see which part gets used.
+For a designer (my reading, not the paper's): a team is unlikely to see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to understand how players use a game.
 
 <!-- break -->
 
@@ -127,9 +127,9 @@ prompt: "Regular players chose career mode more within single-player races (59.9
 options:
   - text: "They use different bases: a share of single-player races in one case, a share of all races in the other."
     correct: true
-    why: "A share of single-player races and a share of all races are different things, so they can point different ways. The lesson adds a caution: by its arithmetic, the 47.0% does not fit the paper's other figures for infrequent players."
+    why: "The lesson's point: a share of single-player races and a share of all races are different things, so they can point different ways. The lesson adds a caution: by its arithmetic, the 47.0% does not fit the paper's other figures for infrequent players."
   - text: "The single-player figures must be the wrong ones."
-    why: "Nothing in the paper shows that. Different bases let the two comparisons point different ways. The figure the lesson flags is the 47.0%, which by its arithmetic does not fit the paper's other figures for infrequent players."
+    why: "Nothing in the paper shows that. By the lesson's reasoning, different bases let the two comparisons point different ways. The figure the lesson flags is the 47.0%, which by its arithmetic does not fit the paper's other figures for infrequent players."
 ```
 
 <!-- break -->
