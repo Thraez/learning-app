@@ -31,7 +31,7 @@ Age of Ishtaria is a mobile role-playing game from the Japanese studio Silicon S
 
 <details>
 <summary>Answer</summary>
-About 80% of non-paying players churned on their first day. Only about 20% of the top spenders had churned after 100 days. Same game, same rule, very different lives.
+About 80% of non-paying players churned on their first day (the paper prints "non-playing", which I read as a typo). Only about 20% of the top spenders had churned after 100 days. Same game, same rule, very different lives.
 </details>
 
 ```decide
@@ -56,25 +56,25 @@ It is also an event in time. So a model has to deal with players whose time hasn
 
 The rule first. [Periáñez and colleagues](https://doi.org/10.1109/DSAA.2016.84) at Silicon Studio counted a player as churned after 10 days without a login.
 
-They checked that rule against their own data. Top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue, so 10 days was a fair line for "gone".
+They checked that rule against their own data. Top spenders who came back after 10 idle days brought in only 1.4% of that group's revenue. So for top spenders, 10 idle days mostly meant gone.
 
-The paper is peer-reviewed. It is one game, studied by the studio's own staff.
+The paper was published at an IEEE conference (DSAA 2016). It is one game, studied by the studio's own staff.
 
 ```sure
-The 80% and 20% in the opening are stated in the paper's text describing its Kaplan-Meier survival curves (Section III-B), on a sample of 1.5 million players. The paper says "approximately" for the 80% and gives the 20% without a hedge. It prints "non-playing" where this lesson says non-paying, which I read as a typo. I read the full text as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). The paper does not publish its data, so others can't rerun the results.
+The 80% and 20% in the opening are stated in the paper's text describing its Kaplan-Meier survival curves (Section IV-B), on a sample of 1.5 million players. The paper says "approximately" for the 80% and gives the 20% without a hedge. It prints "non-playing" where this lesson says non-paying, which I read as a typo. I read the full text as [arXiv:1710.02264](https://arxiv.org/abs/1710.02264). The paper does not publish its data.
 ```
 
 <!-- break -->
 
-Another team wrote its rule down too. [Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) defined churn formally, "aligning with industry standards", for what their abstract calls the first cross-game churn study, over five free-to-play games.
+[Hadiji and colleagues](https://doi.org/10.1109/CIG.2014.6932876) defined churn formally, "aligning with industry standards", in what their abstract calls the first cross-game study of churn prediction in free-to-play games. It covers five games.
 
-I have read only the abstract of that paper, so I cannot tell you their window.
+I have read only the abstract of that paper, so I cannot tell you their definition.
 
 <!-- break -->
 
 A different window gives a different churn rate from the same data. So two teams' churn rates are only comparable if their rules match (my reasoning, grade C).
 
-For a designer: before you trust a churn number, ask what rule made it.
+For a designer, again my reasoning: before you trust a churn number, ask what rule made it.
 
 ```check
 id: gd-econ/churn-time/c1
