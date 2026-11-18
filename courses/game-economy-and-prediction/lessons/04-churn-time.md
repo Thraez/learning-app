@@ -4,6 +4,7 @@ course: gd-econ
 title: Churn is a definition and a time, not a label
 order: 4
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Periáñez, Saas, Guitart, Magne (2016). Churn Prediction in Mobile Social Games: Towards a Complete Assessment Using Survival Ensembles. IEEE DSAA 2016, pp. 564-573. DOI 10.1109/DSAA.2016.84. Read as arXiv:1710.02264."
     url: https://doi.org/10.1109/DSAA.2016.84
