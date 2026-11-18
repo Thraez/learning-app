@@ -148,10 +148,33 @@ is the kind and whose body is YAML; the build fails on an unknown field or a bro
   number is already in the lesson's prose; an invented example says so in its title or text.
 - `points` (`for`, `points` of two to four): directly after a why or scenario item, the points a good answer makes.
 - A line holding only `<!-- break -->`, with a blank line on each side, splits "The idea" into short screens.
+- `sure`: the "How sure is this?" tap. The body is plain Markdown, not YAML, so its sentences keep their links, and it
+  has no ID because nothing is stored. The app draws it as a closed `<details>` under the text it follows, in all
+  four flows, Classic included. It holds what a reader needs to judge a figure but not to follow the lesson: p-values,
+  where a paper's text and table disagree, what the paper does not print, which copy was read. Put it directly after
+  the paragraph it qualifies, before any `visual` or `check`, so it lands on that paragraph's screen. Write no
+  `<details>` inside it and no blank line that would split a sentence from its link.
 
 IDs are `<lesson-id>/c1`, `p1`, `d1`, `v1` and follow rule 5: permanent, never reused. `predict` and `decide` go in
-"Opening question" after the open item; `check`, `visual` and breaks go in "The idea". A block restates what the
-lesson's checked prose says, with the same labels (relative lift, this lesson's arithmetic, one game). It is a factual
-claim like any sentence: a new or changed block removes `checked` until a fresh checker has a ledger row for it, keyed
-by the block ID. The flows (Classic, Stepped, Predict first, Case first) are the whole-app setting `F`; taps on these
-blocks are stored as responses, apart from attempts (`docs/export-schema.md`).
+"Opening question" after the open item; `check`, `visual`, `sure` and breaks go in "The idea". A block restates what
+the lesson's checked prose says, with the same labels (relative lift, this lesson's arithmetic, one game); a `sure`
+block counts as the lesson's prose for this, so a figure may live there. It is a factual claim like any sentence: a
+new or changed block removes `checked` until a fresh checker has a ledger row for it, keyed by the block ID, or for a
+`sure` block by its section and first words. The flows (Classic, Stepped, Predict first, Case first) are the
+whole-app setting `F`; Stepped is what a phone with no stored choice runs. Taps on these blocks are stored as
+responses, apart from attempts (`docs/export-schema.md`).
+
+### What goes on the main screen and what goes behind the tap
+
+Adopted 2026-11-18, after the learner said lessons 1 to 4 read like a questionnaire. The source check had leaked
+into the teaching text. The split:
+
+- **Main screen**: one idea per screen in plain words, with what it means for a designer first. The verdict on every
+  result stays here in plain words, because it changes what the learner believes: "too small to tell from chance" for
+  a result that was not significant, "a relative rise, not percentage points", "one game", "not peer-reviewed", "a
+  comparison, not a randomized test".
+- **Behind the tap** (`sure`): the audit trail for that verdict. The p-values, the table against the text, what the
+  paper does not print, how a figure was recomputed.
+- Moving detail behind the tap never makes a claim stronger. A result that was not significant is never worded as
+  "no change", and a designer takeaway the paper does not state is labelled as the lesson's own reasoning (grade C).
+- Every figure that an item answer or a block uses is still stated on a main screen or in the answer itself.

@@ -330,22 +330,67 @@ describe('screens for each flow', () => {
   });
 });
 
+// ---- the "How sure is this?" tap ----
+
+describe('a sure block', () => {
+  const SURE = 'The paper gives p = 0.054, so [not significant](https://example.org/paper).';
+  const body = '## The idea\n\nParagraph one.\n\n' + fence('sure', SURE) + '\n<!-- break -->\n\nParagraph two.\n\n## Recall\n\n' + details('t/a/r1', 'recall');
+  const lessonOf = (text: string) => parseCourses(makeRoot(text)).courses[0].lessons[0];
+
+  it('is parsed as Markdown, so its links survive, and has no id', () => {
+    const sure = lessonOf(body).blocks.filter((b) => b.kind === 'sure');
+    expect(sure).toHaveLength(1);
+    expect(sure[0].kind === 'sure' && sure[0].html).toContain('<a href="https://example.org/paper">not significant</a>');
+  });
+  it('fails the build when empty, when it holds its own <details>, or in a placement quiz', () => {
+    expect(build('## The idea\n\nOne.\n\n```sure\n\n```\n')).toThrow(/"```sure" block is empty/);
+    expect(build('## The idea\n\nOne.\n\n' + fence('sure', '<details>\nA\n</details>'))).toThrow(/plain Markdown/);
+    const item = details('t/placement/p01', 'why').replace('Answer for t/placement/p01.', 'Answer. Lesson 1.');
+    expect(build('## Why\n\n' + details('t/a/why', 'why'), item + '\n' + fence('sure', SURE))).toThrow(/not allowed here/);
+  });
+  it('shows in Classic as a closed <details> inside the prose it follows', () => {
+    const classic = classicBlocks(lessonOf(body).blocks);
+    expect(classic.every((b) => ['section', 'prose', 'item'].includes(b.kind))).toBe(true);
+    const prose = classic.flatMap((b) => (b.kind === 'prose' ? [b.html] : [])).join('');
+    expect(prose).toMatch(/Paragraph one\.<\/p>\s*<details class="sure"><summary>How sure is this\?<\/summary>/);
+    expect(prose).not.toContain('<details open');
+  });
+  it('sits on the screen of the chunk it follows in Stepped, Predict first and Case first, never on its own screen', () => {
+    for (const flow of ['stepped', 'predict', 'case'] as Flow[]) {
+      const screens = buildScreens(lessonOf(body), flow);
+      const chunks = screens.flatMap((s) => (s.kind === 'chunk' ? [s] : []));
+      expect(chunks).toHaveLength(2);
+      expect(chunks[0].html).toContain('Paragraph one.');
+      expect(chunks[0].sure).toHaveLength(1);
+      expect(chunks[0].sure[0]).toContain('p = 0.054');
+      expect(chunks[1].sure).toEqual([]);
+      expect(screenItemIds(screens)).toEqual(['t/a/r1']);
+    }
+  });
+});
+
 // ---- the F setting ----
 
 describe('F, the lesson flow setting', () => {
-  it('is Classic when absent, unknown or expired, and is recorded on the session when set', () => {
-    expect(currentFlow(getSettings())).toBe('classic');
-    expect(activeWhole(getSettings())).toEqual({});
+  it('is Stepped when absent, unknown or expired; a stored choice wins; only Classic leaves no F on the session', () => {
+    expect(getStoredSettings()?.whole?.F).toBeUndefined();
+    expect(currentFlow(getSettings())).toBe('stepped');
+    expect(activeWhole(getSettings())).toEqual({ F: 'stepped' });
     setFlow('case');
     expect(currentFlow(getSettings())).toBe('case');
     expect(activeWhole(getSettings())).toEqual({ F: 'case' });
     setFlow('classic');
+    expect(currentFlow(getSettings())).toBe('classic');
     expect(activeWhole(getSettings())).toEqual({});
     const s = getSettings();
     s.whole.F = { value: 'sideways', since: 'x', until: null };
     saveSettings(s);
-    expect(currentFlow(getSettings())).toBe('classic');
-    expect(asFlow('sideways')).toBe('classic');
+    expect(currentFlow(getSettings())).toBe('stepped');
+    expect(activeWhole(getSettings())).toEqual({ F: 'stepped' });
+    s.whole.F = { value: 'case', since: 'x', until: '2000-01-01' };
+    saveSettings(s);
+    expect(currentFlow(getSettings())).toBe('stepped');
+    expect(asFlow('sideways')).toBe('stepped');
     expect(Object.keys(FLOWS)).toEqual(['classic', 'stepped', 'predict', 'case']);
   });
   it('sits beside E6 without changing it', () => {

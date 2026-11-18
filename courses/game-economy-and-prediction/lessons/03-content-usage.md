@@ -4,7 +4,6 @@ course: gd-econ
 title: Telemetry shows where design effort goes unused
 order: 3
 status: draft
-checked: 2026-11-18
 sources:
   - cite: "Hullett, Nagappan, Schuh, Hopson (2012). Empirical analysis of user data in game software development. ESEM 2012, ACM-IEEE International Symposium on Empirical Software Engineering and Measurement. DOI 10.1145/2372251.2372265."
     url: https://doi.org/10.1145/2372251.2372265
@@ -55,13 +54,28 @@ options:
 
 ## The idea
 
-In Project Gotham Racing 4, players used a small part of what shipped. The authors argue that collecting usage data over the long term is the only workable way to see which part.
+Players use a small part of what a game ships. In Project Gotham Racing 4, most of the cars were rarely picked.
 
-[Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) studied Project Gotham Racing 4's "Start of Race" log: about 3.1 million entries, one per race started, from players who opted in to telemetry on Xbox Live. It is a peer-reviewed conference paper (ESEM 2012).
+For a designer: the team cannot see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to see which part gets used.
 
 <!-- break -->
 
-Across the whole dataset, these options were each used in fewer than 1% of races: 2 of 9 game modes (the paper says ten modes in one place and lists nine in another), 12 of 29 event types, 81 of 121 routes and 104 of 134 vehicles.
+The study. [Hullett and colleagues](https://doi.org/10.1145/2372251.2372265) (UC Santa Cruz, Microsoft Research, Microsoft Game Studios and Bungie) read the game's "Start of Race" log: about 3.1 million entries, one per race started.
+
+The paper is peer-reviewed. Two things to keep in mind: it is one game, and the log holds only players who opted in to telemetry on Xbox Live.
+
+<!-- break -->
+
+How much went unused? [Across the whole dataset](https://doi.org/10.1145/2372251.2372265), these options were each used in fewer than 1% of races:
+
+- 104 of 134 vehicles
+- 81 of 121 routes
+- 12 of 29 event types
+- 2 of 9 game modes
+
+```sure
+The paper says ten game modes in one place and lists nine in another. This lesson uses the nine it lists.
+```
 
 ```visual
 id: gd-econ/content-usage/v1
@@ -87,11 +101,21 @@ options:
 
 <!-- break -->
 
-The authors split players by total races, from "infrequent" (13 or fewer) to "regular" (over 200), and found regular players raced more in multiplayer. On career mode the paper's figures point two ways.
+Do keen players play differently? [The authors split players](https://doi.org/10.1145/2372251.2372265) by total races, from "infrequent" (13 or fewer) to "regular" (over 200).
+
+Regular players raced more in multiplayer. On career mode, the paper's figures point two ways.
 
 <!-- break -->
 
-Within single-player races, regular players chose it more often (59.9% against 47.5%), and in their first ten races too (36.5% against 22.2%). Across all races it was 36.6% of regular players' races and 47.0% of infrequent players', although the paper's text says regular players favour career mode "both overall and in the first ten races".
+Look at single-player races only, and [regular players chose career mode more often](https://doi.org/10.1145/2372251.2372265): 59.9% against 47.5% for infrequent players. In their first ten races too: 36.5% against 22.2%.
+
+Look at all races, and it flips. Career mode was 36.6% of regular players' races and 47.0% of infrequent players'.
+
+The lesson for a designer is mine, not the paper's: a share means nothing until you know what it is a share of.
+
+```sure
+The paper's text says regular players favour career mode "both overall and in the first ten races". Its own all-races figures, 36.6% against 47.0%, do not show the "overall" part.
+```
 
 ```check
 id: gd-econ/content-usage/c2
@@ -106,15 +130,23 @@ options:
 
 <!-- break -->
 
-From this they recommend [fewer options in future games](https://doi.org/10.1145/2372251.2372265), since each car costs modelling, texturing, tuning and testing. They also argue against themselves: rarely used content can extend a game's life, lead to play nobody planned, and sell the game ("more than 100 vehicles" on the box). So they suggest a cut of about 20%, not a purge. That trade-off is their judgment; the paper did not test what players would lose.
+What the authors make of it. They recommend [fewer options in future games](https://doi.org/10.1145/2372251.2372265), since each car costs modelling, texturing, tuning and testing.
+
+Then they argue against themselves. Rarely used content can extend a game's life, lead to play nobody planned, and sell the game ("more than 100 vehicles" on the box).
+
+So they suggest a cut of about 20%, not a purge. That trade-off is their judgment: the paper did not test what players would lose.
 
 <!-- break -->
 
-Two limits to keep, both my reasoning (grade C) and not the paper's. Telemetry shows what players did, not why: a car nobody picks may be slow, ugly, hard to unlock or buried in a menu.
+Two limits to keep. Both are my reasoning (grade C), not the paper's.
+
+First, telemetry shows what players did, not why. A car nobody picks may be slow, ugly, hard to unlock or buried in a menu.
 
 <!-- break -->
 
-And the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more, but players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
+Second, the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more.
+
+But players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
 
 ```check
 id: gd-econ/content-usage/c3

@@ -7,11 +7,12 @@ import type { Block, Check, Decide, Item, Predict, Visual } from './types';
 
 export type Flow = 'classic' | 'stepped' | 'predict' | 'case';
 
-export const FLOW_DEFAULT: Flow = 'classic';
+/** The flow of a phone with no stored choice, and of a stored value the app does not know. */
+export const FLOW_DEFAULT: Flow = 'stepped';
 
 /** The order here is the order of the picker. `about` is one plain line for Settings. */
 export const FLOWS: Record<Flow, { label: string; about: string }> = {
-  classic: { label: 'Classic', about: 'The whole lesson on one page, one card at a time. This is how lessons have always run.' },
+  classic: { label: 'Classic', about: 'The whole lesson on one page, one card at a time. This is how lessons first ran.' },
   stepped: { label: 'Stepped', about: 'One short screen at a time, with quick checks after the text they test.' },
   predict: { label: 'Predict first', about: 'Guess the key numbers before you see them, then go through the lesson in short screens.' },
   case: { label: 'Case first', about: 'Make a call on a real case first and see what follows, then the lesson in short screens.' },
@@ -19,11 +20,11 @@ export const FLOWS: Record<Flow, { label: string; about: string }> = {
 
 export const isFlow = (v: unknown): v is Flow => typeof v === 'string' && Object.prototype.hasOwnProperty.call(FLOWS, v);
 
-/** An unknown or missing stored value reads as Classic. */
+/** An unknown or missing stored value reads as the default, Stepped. */
 export const asFlow = (v: unknown): Flow => (isFlow(v) ? v : FLOW_DEFAULT);
 
 export type Screen =
-  | { kind: 'chunk'; section: string; html: string; visuals: Visual[] }
+  | { kind: 'chunk'; section: string; html: string; visuals: Visual[]; sure: string[] }
   | { kind: 'check'; section: string; check: Check }
   | { kind: 'item'; section: string; item: Item; points?: string[] }
   | { kind: 'predict'; section: string; predict: Predict; visual?: Visual }
@@ -31,6 +32,9 @@ export type Screen =
 
 /** Block kinds that only the non-Classic flows use. */
 export const NEW_KINDS: ReadonlySet<Block['kind']> = new Set(['check', 'predict', 'decide', 'visual', 'points', 'break']);
+
+/** A "```sure" block as every flow draws it: a closed <details> the learner may tap open. No script, so it works offline. */
+export const sureHtml = (html: string) => `<details class="sure"><summary>How sure is this?</summary>${html}</details>`;
 
 export const hasNewBlocks = (blocks: readonly Block[]) => blocks.some((b) => NEW_KINDS.has(b.kind));
 
@@ -42,9 +46,11 @@ export function classicBlocks(blocks: readonly Block[]): Block[] {
   const out: Block[] = [];
   for (const b of blocks) {
     if (NEW_KINDS.has(b.kind)) continue;
+    // A sure block is part of the text in Classic: it joins the prose it follows.
+    const cur: Block = b.kind === 'sure' ? { kind: 'prose', html: sureHtml(b.html) } : b;
     const last = out[out.length - 1];
-    if (b.kind === 'prose' && last?.kind === 'prose') out[out.length - 1] = { kind: 'prose', html: last.html + b.html };
-    else out.push(b);
+    if (cur.kind === 'prose' && last?.kind === 'prose') out[out.length - 1] = { kind: 'prose', html: last.html + cur.html };
+    else out.push(cur);
   }
   return out;
 }
@@ -93,7 +99,8 @@ export function splitProse(html: string, max = 500): string[] {
 }
 
 /**
- * Stepped over the lesson's blocks in file order. Prose chunks end at a break marker, a visual, a check,
+ * Stepped over the lesson's blocks in file order. A sure block goes on the screen of the chunk it follows, under any picture.
+ * Prose chunks end at a break marker, a visual, a check,
  * an item or a section heading. A visual goes on the screen of the chunk it follows. Predict and decide
  * blocks are left out here; the Predict and Case flows put them first.
  */
@@ -108,7 +115,7 @@ function stepped(blocks: readonly Block[], fallback: boolean): Screen[] {
     const html = pending.join('\n');
     pending = [];
     if (!html.trim()) return;
-    for (const part of fallback ? splitProse(html) : [html]) out.push({ kind: 'chunk', section, html: part, visuals: [] });
+    for (const part of fallback ? splitProse(html) : [html]) out.push({ kind: 'chunk', section, html: part, visuals: [], sure: [] });
   };
 
   for (const b of blocks) {
@@ -119,7 +126,13 @@ function stepped(blocks: readonly Block[], fallback: boolean): Screen[] {
       flush();
       const last = out[out.length - 1];
       if (last?.kind === 'chunk' && last.section === section) last.visuals.push(b.visual);
-      else out.push({ kind: 'chunk', section, html: '', visuals: [b.visual] });
+      else out.push({ kind: 'chunk', section, html: '', visuals: [b.visual], sure: [] });
+    } else if (b.kind === 'sure') {
+      // On the screen of the text it follows, never a screen of its own when there is one to join.
+      flush();
+      const last = out[out.length - 1];
+      if (last?.kind === 'chunk' && last.section === section) last.sure.push(b.html);
+      else out.push({ kind: 'chunk', section, html: '', visuals: [], sure: [b.html] });
     } else if (b.kind === 'check') { flush(); out.push({ kind: 'check', section, check: b.check }); }
     else if (b.kind === 'item') {
       flush();

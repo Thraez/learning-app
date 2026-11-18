@@ -4,7 +4,6 @@ course: gd-econ
 title: Starting currency is a retention lever
 order: 1
 status: draft
-checked: 2026-11-18
 sources:
   - cite: "Zivic, Andjelkovic, Ozden, Dekic, Castronova (2017). Results of a massive experiment on virtual currency endowments and money demand. PLOS ONE 12(10): e0186407."
     url: https://doi.org/10.1371/journal.pone.0186407
@@ -36,7 +35,7 @@ max: 80
 step: 1
 answer: 34.8
 answer_text: "34.8% higher, as a relative lift against the 40-Token control."
-reveal: "In the 120-Token group the size of the first purchase rose 34.8% against control (p = 0.005, significant). It is a relative lift, and the paper prints no baseline. The 14% rise in the 80-Token group was just short of significance (p = 0.057)."
+reveal: "In the 120-Token group the first purchase was 34.8% larger than in the 40-Token group, a statistically significant rise. It is a relative rise: the paper prints no purchase sizes. The 14% rise in the 80-Token group was not significant."
 covers: gd-econ/endowment/r2
 visual: gd-econ/endowment/v1
 ```
@@ -46,18 +45,24 @@ id: gd-econ/endowment/d1
 prompt: "You run the economy of a football manager game. New players start with 40 Tokens, and finance wants to keep it that way to protect purchases. What do you do?"
 options:
   - text: "Keep the grant at 40 Tokens."
-    outcome: "In the published test, day-7 retention was higher with 80 and 120 Tokens than with 40 (relative lifts of 6.9% and 7.7%, both significant), and buying did not fall. The paper prints no baseline rates."
+    outcome: "In the published test, day-7 retention was higher with 80 and 120 Tokens than with 40 (6.9% and 7.7% higher, both statistically significant, both relative rises), and buying did not fall."
   - text: "Raise the grant to 80 or 120 Tokens."
-    outcome: "In the test, retention rose in both groups and buying did not fall. First-purchase share rose about 8% and 4%, neither significant. First-purchase size rose 14% (not significant) and 34.8% (significant). The authors say the best amount for retention probably lies in the 80 to 120 range."
+    outcome: "In the test, retention rose in both groups and buying did not fall. The share of players making a first purchase was about 8% and 4% higher, neither rise significant. First-purchase size was 14% higher (not significant) and 34.8% higher (significant). The authors say the best amount for retention probably lies in the 80 to 120 range."
   - text: "Raise the grant far above 120 Tokens."
     outcome: "The test covered 40 to 120 Tokens only, so the lesson has nothing on larger grants. The authors say the best amount for retention probably lies somewhere in the 80 to 120 range."
 ```
 
 ## The idea
 
-A faucet aimed at new players is not only a cost to monetization. It can be a retention lever.
+A starting grant is not only a cost. It can keep players around.
 
-Nordeus and Edward Castronova [ran a randomized test](https://doi.org/10.1371/journal.pone.0186407) on about 575,000 new Top Eleven players, split equally into three groups: 40 Tokens (the control, the default since late 2014), 80 and 120. It ran for 28 days, one in-game season. The paper is peer-reviewed (PLOS ONE).
+So when someone wants to cut the new-player grant to protect sales, [the one large published test](https://doi.org/10.1371/journal.pone.0186407) points the other way: a bigger grant kept more players, and buying did not fall. It is one game, so take it as a reason to run your own test, not as a rule (that advice is mine, not the paper's).
+
+<!-- break -->
+
+The test. Nordeus staff and academic co-authors [split about 575,000 new Top Eleven players at random](https://doi.org/10.1371/journal.pone.0186407) into three equal groups. One group started with 40 Tokens, the default since late 2014. The others got 80 or 120. The test ran 28 days, one in-game season, and the paper is peer-reviewed.
+
+The 40-Token group is the control: every result below is a comparison with it.
 
 ```check
 id: gd-econ/endowment/c1
@@ -67,14 +72,22 @@ options:
     why: "The control got 40, the fewest. The 80 and 120 groups got more."
   - text: "It is the comparison. Every lift is measured against it."
     correct: true
-    why: "The 40-Token group is the control, and the paper's Table 1 gives every result as an index with the control set to 100."
+    why: "The 40-Token group is the control, and the paper gives every result relative to it."
   - text: "It is the group the designers expected to do best."
     why: "It was the default since late 2014, and its job is to be the comparison, not a prediction."
 ```
 
 <!-- break -->
 
-Against control, day-7 retention was 6.9% higher with 80 Tokens and 7.7% higher with 120. These are relative lifts, not percentage points: Table 1 gives every result as an index with the 40-Token control set to 100, and the paper prints no baseline retention rate, so this lesson has none. Both were significant against control (p = 0.015 and 0.005), but not different from each other.
+More Tokens, more players still there a week later. [Day-7 retention](https://doi.org/10.1371/journal.pone.0186407) was 6.9% higher with 80 Tokens and 7.7% higher with 120.
+
+Both rises are statistically significant, which means they are unlikely to be chance alone. The 80 and 120 groups did not differ from each other. The paper's reading: going from 40 to 80 did much more than going from 80 to 120.
+
+One thing to hold on to. These are relative rises, not percentage points: 6.9% higher than whatever the 40-Token group's retention was.
+
+```sure
+Both rises were significant against the 40-Token group (p = 0.015 for 80 Tokens, p = 0.005 for 120). The gap between the 80 and 120 groups was not (p = 0.403). The paper prints no retention rate for any group: [its Table 1](https://doi.org/10.1371/journal.pone.0186407) gives every result as an index with the 40-Token group set to 100. So this lesson cannot say what the rate was, only how much higher it got.
+```
 
 ```check
 id: gd-econ/endowment/c2
@@ -82,49 +95,63 @@ prompt: "Day-7 retention was 6.9% higher with 80 Tokens. Which reading is right?
 options:
   - text: "A relative lift. The paper prints no baseline rate, so percentage points cannot be given."
     correct: true
-    why: "Table 1 gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
+    why: "The paper gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
   - text: "Retention rose by 6.9 percentage points."
     why: "A rise in percentage points needs the baseline retention rate, and the paper prints none."
 ```
 
 <!-- break -->
 
-On purchases, the daily share of players making a first real-money purchase rose by about 8% and 4%, but neither was statistically significant (p = 0.054 and 0.197). The paper's text gives 4.3% for the 120-Token group where its Table 2 gives 4.0%.
+Did free Tokens replace bought ones? The test found no sign of it.
+
+[The share of players making a first real-money purchase](https://doi.org/10.1371/journal.pone.0186407) on a given day was about 8% higher with 80 Tokens and about 4% higher with 120. Neither rise is statistically significant, so either could be chance. Read it as "no drop found", not as "a proven rise".
+
+```sure
+The p-values are 0.054 for 80 Tokens and 0.197 for 120, and the paper itself says the daily conversion effects are not statistically significant. Its text gives 4.3% for the 120-Token group where [its Table 2](https://doi.org/10.1371/journal.pone.0186407) gives 4.0%, which is why this lesson says "about 4%". These are relative rises too.
+```
 
 <!-- break -->
 
-The size of that first purchase rose 14% (80 Tokens, p = 0.057, just short of significance; Table 1 implies 13.9%) and 34.8% (120 Tokens, p = 0.005). Figures are from the [paper's Table 2](https://doi.org/10.1371/journal.pone.0186407).
+Players who did buy spent more the first time. [The size of the first purchase](https://doi.org/10.1371/journal.pone.0186407) was 14% higher with 80 Tokens and 34.8% higher with 120.
+
+Only the 34.8% is statistically significant. The 14% is not, so it could be chance.
+
+```sure
+The 34.8% has p = 0.005. The 14% has p = 0.057, just short of significance, and Table 1 implies 13.9% where Table 2 gives 14.0%. The figures on these screens are from [the paper's Table 2](https://doi.org/10.1371/journal.pone.0186407). They are relative rises: the paper prints no purchase sizes.
+```
 
 ```visual
 id: gd-econ/endowment/v1
 kind: bars
 title: "Six results against the 40-Token control, as relative lifts"
-text: "Relative lifts against the 40-Token control, not percentage points; the paper prints no baseline rate. Day-7 retention in both groups and first-purchase size at 120 Tokens were significant. The other three results were not."
+text: "How much higher each result was than in the 40-Token group. These are relative lifts, not percentage points. Day-7 retention in both groups and first-purchase size at 120 Tokens were statistically significant. The other three results were not."
 unit: "%"
 rows:
   - label: "Day-7 retention, 80 Tokens"
     value: 6.9
-    note: "significant, p = 0.015"
+    note: "significant"
   - label: "Day-7 retention, 120 Tokens"
     value: 7.7
-    note: "significant, p = 0.005"
+    note: "significant"
   - label: "First-purchase share, 80 Tokens"
     value: 8
-    note: "about; not significant, p = 0.054"
+    note: "about; not significant"
   - label: "First-purchase share, 120 Tokens"
     value: 4
-    note: "about; not significant, p = 0.197"
+    note: "about; not significant"
   - label: "First-purchase size, 80 Tokens"
     value: 14
-    note: "not significant, p = 0.057"
+    note: "not significant"
   - label: "First-purchase size, 120 Tokens"
     value: 34.8
-    note: "significant, p = 0.005"
+    note: "significant"
 ```
 
 <!-- break -->
 
-Now the catch. The [abstract](https://doi.org/10.1371/journal.pone.0186407) says a bigger money supply "leads to inflation and increased money demand". The paper measured no prices and no inflation; Token packages keep fixed real-money prices. So the inflation part is the authors' reading, not a result.
+Now the catch. The paper's [abstract](https://doi.org/10.1371/journal.pone.0186407) claims more than the test shows. It says a bigger money supply "leads to inflation and increased money demand".
+
+The test measured no prices and no inflation, and Token packages keep fixed real-money prices. So inflation is the authors' explanation, not a result.
 
 ```check
 id: gd-econ/endowment/c3
@@ -141,7 +168,13 @@ options:
 
 <!-- break -->
 
-The abstract also says purchases were "significantly higher", but in Table 2 only one of the four purchase comparisons against control is significant. What was measured: more free currency at the start, more players still there a week later, and no drop in buying. The authors also say they cannot pin down the best amount for retention, only that it probably lies somewhere in the 80 to 120 range.
+What the test does support: more free currency at the start, more players still there a week later, and no drop in buying.
+
+How much to give? [The authors](https://doi.org/10.1371/journal.pone.0186407) say they cannot pin down the best amount for retention, only that it probably lies somewhere in the 80 to 120 range.
+
+```sure
+The abstract also says purchases were "significantly higher". In the paper's Table 2, only one of the four purchase comparisons against the 40-Token group is significant: first-purchase size at 120 Tokens. Several authors worked at Nordeus and the data cannot be shared, so nobody outside can rerun the numbers.
+```
 
 ## Why
 

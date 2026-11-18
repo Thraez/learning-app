@@ -95,6 +95,9 @@ button:disabled { opacity: 0.6; }
 .prose ul, .prose ol { padding-left: 1.25rem; }
 .prose table { border-collapse: collapse; font-size: 0.85rem; display: block; overflow-x: auto; }
 .prose td, .prose th { border: 1px solid var(--line); padding: 0.25rem 0.4rem; }
+details.sure { margin: 0.75rem 0; padding: 0.4rem 0.6rem; border-left: 3px solid var(--line); font-size: 0.9rem; color: var(--muted); }
+details.sure summary { cursor: pointer; color: var(--accent); padding: 0.35rem 0; min-height: 1.75rem; }
+details.sure p { margin: 0.4rem 0 0; }
 ol.lessons { padding-left: 0; list-style: none; }
 ol.lessons li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
 dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1rem; }
