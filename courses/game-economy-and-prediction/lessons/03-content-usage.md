@@ -4,13 +4,15 @@ course: gd-econ
 title: Telemetry shows where design effort goes unused
 order: 3
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Hullett, Nagappan, Schuh, Hopson (2012). Empirical analysis of user data in game software development. ESEM 2012, ACM-IEEE International Symposium on Empirical Software Engineering and Measurement. DOI 10.1145/2372251.2372265."
     url: https://doi.org/10.1145/2372251.2372265
     grade: A
     tier: 1
-    note: full text read from the authors' camera-ready copy on Microsoft Research
+    read: "full text, Microsoft Research copy"
+    caveat: "One game, one team's study, opted-in players only."
+    note: full text read from a copy on the Microsoft Research site; whether it is the camera-ready version is not confirmed
 ---
 
 # Lesson 3: Telemetry shows where design effort goes unused
@@ -19,7 +21,7 @@ sources:
 
 ### gd-econ/content-usage/open · open
 
-Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. [Microsoft researchers](https://doi.org/10.1145/2372251.2372265) read 3.1 million race starts logged from players on Xbox Live. Guess: how many of the 134 vehicles were picked in fewer than 1% of races each?
+Project Gotham Racing 4 (Xbox 360, 2007) shipped with 134 vehicles. [Researchers from UC Santa Cruz, Microsoft and Bungie](https://doi.org/10.1145/2372251.2372265) read 3.1 million race starts logged from players on Xbox Live. Guess: how many of the 134 vehicles were picked in fewer than 1% of races each?
 
 <details>
 <summary>Answer</summary>
@@ -89,6 +91,6 @@ Why players did or didn't use something: whether the content was unappealing, ha
 
 ## Sources and grades
 
-- [Hullett et al. 2012, ESEM](https://doi.org/10.1145/2372251.2372265), full text read from the authors' camera-ready copy hosted by Microsoft Research (the ACM page blocked automated access). Grade A, tier 1 (peer-reviewed). Every figure in this lesson was checked against that text.
+- [Hullett et al. 2012, ESEM](https://doi.org/10.1145/2372251.2372265), full text read from [a copy on the Microsoft Research site](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/Hullett-MSR.pdf); I did not try the ACM page, and I cannot confirm the copy is the camera-ready version. Grade A, tier 1 (peer-reviewed). Every figure in this lesson was checked against that text.
 - The earlier version of this lesson took its figures from a SlideShare deck. They are replaced with figures from the paper itself.
 - This lesson rests on one game, one team's study and players who opted in to telemetry. I found little published evidence on content usage in other games (my search, grade C).

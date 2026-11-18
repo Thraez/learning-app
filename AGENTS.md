@@ -120,7 +120,11 @@ number up to that count, and the app shows such a lesson as planned and never re
 ## Lesson file format
 
 Front matter: `id`, `course`, `title`, `order`, `status`, `sources` (each with `cite`, `url`, `grade`, `tier`; `tier` is 1, 2 or 3, `url` is an `https` link, the build fails without either, and `note` is optional), and
-`checked` (a date, present only once the lesson has passed "Checking a lesson").
+`checked` (a date, present only once the lesson has passed "Checking a lesson"). Each source also takes `read` (how far it
+was read and from which copy, in a few words, taken from the ledger's opening lines) and `caveat` (one short sentence a
+reader should hold next to the numbers: one study, one game, a preprint, the studio's own data). The app shows both,
+with the tier and the check date, under the lesson title and on every answer card, so they are factual claims and the
+checker covers them like any other sentence.
 Then one `## ` heading per section, in this order: `Opening question`, `The idea`, `Why`, `Scenario`, `Recall`,
 `Sources and grades`. Each answerable item starts with a `### ` heading of the form `### <id> · <type>`, where type is
 `open`, `why`, `scenario` or `recall`, followed by the prompt and a `<details>` answer. The future app parses these

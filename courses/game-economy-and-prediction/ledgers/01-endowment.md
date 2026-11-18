@@ -38,3 +38,19 @@ Zivic et al. 2017 was read in full text: the PLOS ONE printable PDF (journals.pl
 | Sources and grades | Every figure checked against text and Table 2 | Table 2 | matches | Holds, apart from the text-and-table disagreements noted above (4.3 against 4.0, 13.9 against 14.0). |
 | Sources and grades | Several authors worked at Nordeus and the data can't be shared | Funding, Competing interests, Data Availability | matches | "Authors NA, IA and MD are employees of Nordeus LLC"; "The data contain sensitive business information that may not be shared due to Nordeus' data confidentiality policy." Note that the paper writes "NZ, IA and MD" in Funding and "NA, IA and MD" in Competing interests, a typo in the paper. |
 | Sources and grades | The mechanism in the why answer is grade C | None | inference | |
+
+
+Recheck 2026-11-18: rows the 2026-11-18 edits touched, by a fresh context that did not make the edits. Zivic et al. 2017 was read in full text again: the PLOS ONE printable PDF (journals.plos.org), extracted with pdftotext in layout and raw modes; Tables 1 and 2 read from the raw extraction.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, sources | read: full text, publisher PDF | Whole PDF | matches | Consistent with the opening lines of this ledger. |
+| front matter, sources | caveat: one study, one game (Top Eleven); Nordeus staff among the authors; data not shareable | Funding, Data Availability Statement | matches | "Several authors are employees of Nordeus LLC"; "data contain sensitive business information that may not be shared". |
+| The idea | The lifts are relative, not percentage points; Table 1 gives every result as an index with the 40-Token control at 100 | Table 1 caption and rows | matches | Caption: "All real values are normalized to Control 40 group." Control row reads 100.0 in all four columns; D7 Retention reads 106.9 and 107.7. |
+| The idea | The paper prints no baseline retention rate | Whole text, Results | matches | Retention is defined with an invented ten-player example (0.50 and 0.30) only. No real rate in the text or tables. Figure images were not inspected; Fig 6 is token packages. |
+| The idea | Table 1 implies 13.9% where Table 2 gives 14.0% for conversion magnitude, 80 Tokens (p = 0.057) | Table 1 (113.9); Table 2 (greater by 14.0%, p 0.057); text says 14 percent | matches | Table 1 also gives 104.3 for daily conversion at 120 where Table 2 says 4.0%, as the lesson already states. |
+| The idea | Figures are from Table 2: retention 6.9 and 7.7 (p 0.015 and 0.005); conversion about 8 and 4 (p 0.054 and 0.197); magnitude 14 and 34.8 (p 0.057 and 0.005) | Table 2 | matches | Table gives 8.1% and 4.0%; the lesson's "about 8% and 4%" holds. |
+| The catch | The abstract says purchases were "significantly higher" | Abstract | matches | Abstract: "player money purchases were significantly higher in the shards where higher endowments were given." |
+| The catch | In Table 2 only one of the four purchase comparisons against control is significant | Table 2, Daily Conversion and Conversion Magnitude rows against Control 40 | matches | Against control the p values are 0.054, 0.197, 0.057 and 0.005. Only the last is under 0.05. The text agrees: daily conversion is not significant in any pairing. |
+| The catch | Inflation was not measured; the 80 to 120 range is the authors' reading | Results; Conclusion | matches | Reread, unchanged. |
+| Item IDs and answers | No item ID or heading changed; answer blocks still follow rule 7 | git diff d4ce597 e2c3a5a | matches | The diff touches front matter and two body paragraphs only. |

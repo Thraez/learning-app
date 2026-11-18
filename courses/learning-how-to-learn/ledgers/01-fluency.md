@@ -61,3 +61,15 @@ How far each source was read. Bjork, Dunlosky and Kornell 2013: full text, the A
 | Sources and grades | Kornell and Bjork 2008 looks like the published version of the same study | Bjork 2013, p. 432 to 433; Kornell 2007, p. 221 | inference | Labelled "(my inference from the matching design)". Both describe paintings by 12 artists, some presented consecutively and some interleaved. Rechecked 2026-11-16. |
 | Sources and grades | Dunlosky abstract only; tier 1 unverified because the journal commissions its reports and its page does not say how they are reviewed; a long review monograph; only its ratings used | Dunlosky abstract; APS page for PSPI | matches | Abstract: "this monograph is rather lengthy". APS page: "All articles are commissioned by the editors", nothing on review (as found on 2026-11-16); the tier itself remains unconfirmed. Rechecked 2026-11-16. |
 | Sources and grades | Step from lab studies to adult craft learning is grade C | | inference | Labelled. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Bjork 2013 | read: full text, publisher PDF | Ledger opening lines | matches | Ledger: Annual Reviews publisher PDF, read around every passage the lesson uses. |
+| front matter, Bjork 2013 | caveat: A narrative review; the studies it describes were not opened. | Front matter note row and row 'Bjork 2013 is a narrative review' | matches | Ledger: 'describes studies one at a time and reports no pooled estimate'. |
+| front matter, Kornell 2007 | read: full text, publisher PDF | Ledger opening lines | matches | Ledger: full text read end to end including Table 1. The lesson note names the Springer PDF. |
+| front matter, Kornell 2007 | caveat: A review of the authors' own studies plus a survey. | Front matter note row (abstract; final section) | matches | Ledger: 'We review our research'; survey of 472 students. |
+| front matter, Dunlosky 2013 | read: abstract only, Europe PMC record | Ledger opening lines | matches | Ledger: abstract only, Europe PMC record for PMID 26173288. |
+| front matter, Dunlosky 2013 | caveat: Abstract only; a long review monograph, only its ratings used. | Rows 'long review monograph', 'Rated ten techniques' and the high and low utility rows | matches | Ledger: the abstract says the monograph 'is rather lengthy'. The lesson uses only the utility ratings stated in the abstract. |

@@ -134,3 +134,11 @@ nav.bottom a { padding: 0.5rem; text-decoration: none; }
 .vis-dot { fill: var(--fg); }
 .vis-dot.vis-review { fill: var(--accent); }
 .vis-line { margin: 0.4rem 0 0; min-height: 1.4em; }
+
+.trust { margin: -0.5rem 0 1rem; padding: 0.5rem 0.6rem; border-left: 3px solid var(--line); line-height: 1.35; }
+.trust p { margin: 0 0 0.25rem; }
+.trust p:last-child { margin-bottom: 0; }
+.trust-check { font-weight: 600; }
+.trust-open { border-left-color: var(--partly); }
+.source-footer { border-top: 1px dashed var(--line); margin-top: 0.6rem; padding-top: 0.4rem; line-height: 1.35; }
+.source-footer div { margin-bottom: 0.2rem; }

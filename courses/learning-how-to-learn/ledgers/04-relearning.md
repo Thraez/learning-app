@@ -61,3 +61,13 @@ How far each source was read. Rawson and Dunlosky 2022: abstract only, from the 
 Counts: 49 matches, 0 differs, 0 not in source, 0 could not open, 2 inference.
 
 The three fixes (review wording, tier wording, Sources line count) were rechecked on 2026-11-16 and all rows are now matches or inference.
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Rawson 2022 | read: abstract only, Crossref record | Ledger opening lines | matches | Ledger: abstract only, Crossref API record; SAGE and APS pages blocked. |
+| front matter, Rawson 2022 | caveat: A short review; read at the abstract only. | Rows 'short review (seven pages)' and 'abstract says the authors review evidence' | matches | Ledger: pages 362 to 368. |
+| front matter, Vaughn 2016 | read: full text, publisher PDF | Ledger opening lines | matches | Ledger: publisher PDF with Table 1 and Appendix Tables 2 to 5. |
+| front matter, Vaughn 2016 | caveat: Two experiments; most recall values are approximate, read off figures. | Ledger opening (Figures 2 and 4 not in its text copy); Vaughn PDF opened by me (Springer, 13 pages) | matches | Ledger: two experiments (41 and 26 students). Not in the ledger: the paper words its recall values as 'approximately 20 % (see ... Fig. 4)', 'approximately 69 %' and so on, pointing to figures, so the caveat holds. Opened by me. |

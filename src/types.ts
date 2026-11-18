@@ -58,6 +58,10 @@ export interface Source {
   /** Credibility tier: 1 peer-reviewed, 2 preprint or report, 3 studio's own data report. */
   tier: 1 | 2 | 3;
   note?: string;
+  /** How far the source was read, for example "full text" or "abstract only". */
+  read?: string;
+  /** One short sentence on what limits the source. */
+  caveat?: string;
 }
 
 export interface Lesson {
@@ -69,6 +73,8 @@ export interface Lesson {
   status: string;
   /** YYYY-MM-DD of the last passed source check (AGENTS.md, "Checking a lesson"); absent when unchecked. */
   checked?: string;
+  /** GitHub link to the claim ledger, set when courses/<folder>/ledgers/<file> exists. */
+  ledgerUrl?: string;
   sources: Source[];
   blocks: Block[];
   itemIds: string[];

@@ -36,3 +36,11 @@ Chen et al. 2017: full text read, all six pages, from arXiv:1702.06820v1 (PDF, e
 | Sources and grades | Full text read as arXiv:1702.06820 marked WWW2017; grade A, tier 1; paper doesn't name the game | arXiv PDF | matches | The game is only "a popular PvP game made by EA". |
 | Sources and grades | Text gives gains of 1.1% and 0.6% for pools of 400 and 500, where Table 2 works out to about 0.9% and 0.75% (the lesson's arithmetic); the 0.7% average holds either way | Section 5.4 text; Table 2 | matches | Text: "0.3%, 0.9%, 1.1%, and 0.6% when P = 200, 300, 400 and 500 respectively. On average EOMM retains 0.7% more". Table 2, EOMM against SkillMM: P 400 is 209.37 against 207.43, P 500 is 261.19 against 259.24. Redone: 209.37 / 207.43 is 1.0094 (0.94%); 261.19 / 259.24 is 1.0075 (0.75%); with 0.27% and 0.93% at P 200 and 300, the mean is 0.72%. Added 2026-11-16. |
 | Sources and grades | Whether EOMM runs live is not stated; studio practice unpublished | whole paper | inference | Correct that the paper does not say; "studio practice is unpublished" is the writer's claim, marked as such per rule 3. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Chen 2017 | read: full text, arXiv copy | Ledger opening lines | matches | Ledger: arXiv:1702.06820v1; the ACM version was not opened. |
+| front matter, Chen 2017 | caveat: Simulation only; nothing tested on live players. | Row 'Nothing tested on live players' (Sections 5 and 6) | matches | Ledger: simulation only; future work names 'more realistic situations'. |

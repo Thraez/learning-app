@@ -4,12 +4,14 @@ course: gd-econ
 title: Sinks move prices, not only remove value
 order: 2
 status: draft
-checked: 2026-11-16
+checked: 2026-11-18
 sources:
   - cite: "Hogan-Hennessy, Xenopoulos, Silva (2022). Market Interventions in a Large-Scale Virtual Economy. arXiv:2210.07970."
     url: https://arxiv.org/abs/2210.07970
     grade: A
     tier: 2
+    read: "full text, arXiv PDF with Table A1"
+    caveat: "Preprint, not peer-reviewed; one game; a natural experiment, not randomized."
     note: preprint, not peer-reviewed; no published version found
 ---
 
@@ -57,7 +59,7 @@ You run a tabletop campaign with a player-run market for magic items. Rare items
 
 <details>
 <summary>Explained answer</summary>
-Probably right, in direction. In the RuneScape case the targeted items rose in price, by about 7% in the first round and about 14 to 16% in the second, so a buyer that removes goods raises their price for everyone, newcomers included. Whether that is a problem depends on your goal: if the goal is that rare items feel rare, rising prices are the point. Watch the price of the targeted items against similar items you didn't target, the way the paper did, and keep a cheaper route for newcomers if access matters to you. The step from an MMO with tens of thousands of players to a table of five is my inference, grade C; a small market has thin trade and prices can jump on a single sale.
+Probably right, in direction. In the RuneScape case the targeted items rose in price, by about 7% in the first round and, in the second, by 14.4% in the paper's text or about 15.8% as this lesson converts its table (the paper does not print that figure). These come from a natural experiment, not a randomized test, so they hold only if the control items were a fair comparison. A buyer that removes goods raises their price for everyone, newcomers included. Whether that is a problem depends on your goal: if the goal is that rare items feel rare, rising prices are the point. Watch the price of the targeted items against similar items you didn't target, the way the paper did, and keep a cheaper route for newcomers if access matters to you. The step from an MMO with tens of thousands of players to a table of five is my inference, grade C; a small market has thin trade and prices can jump on a single sale.
 </details>
 
 ## Recall
@@ -77,7 +79,7 @@ Roughly how much did the targeted items' prices rise in the two rounds?
 
 <details>
 <summary>Answer</summary>
-About 7% in the first round. For the second, about 14% by the paper's text and about 16% by its own table. Both are measured against a control group.
+About 7% in the first round. For the second, 14.4% by the paper's text; its table prints a coefficient of 0.147, which this lesson converts to about 15.8%, a figure the paper does not print. Both are measured against a control group in a natural experiment, not a randomized test, so they hold only if that control group is a fair comparison.
 </details>
 
 ### gd-econ/sinks/r3 · recall

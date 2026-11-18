@@ -17,6 +17,7 @@ import {
 import { renderVisual } from './visuals';
 import { parseExportFile, restoreExport } from './restore';
 import { placementResult } from './placement';
+import { trustView, type SourceView } from './trust';
 import { computeSchedules, courseProgress, dueItems, nextDue, LATE_DAYS } from './scheduler';
 import { buildExport, deliverExport, downloadExport, exportFileName } from './export';
 
@@ -119,6 +120,39 @@ class Run {
   }
 }
 
+// ---------- trust display ----------
+
+const srcLink = (v: SourceView) => `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.name)}</a>`;
+
+/** Under the lesson title: when the lesson was checked, and one line per source. */
+function trustStrip(lesson: Lesson): HTMLElement {
+  const t = trustView(lesson);
+  const box = el('div', { class: `trust small${t.checked ? '' : ' trust-open'}` });
+  box.append(el('p', { class: 'trust-check' }, esc(t.checkLine)));
+  for (const v of t.sources) {
+    box.append(el('p', { class: 'trust-src' }, `${srcLink(v)}: ${esc(v.tier)}, ${esc(v.read)}.${v.caveat ? ` ${esc(v.caveat)}` : ''}`));
+  }
+  if (t.ledgerUrl) box.append(el('p', { class: 'trust-src' }, `<a href="${esc(t.ledgerUrl)}" target="_blank" rel="noopener">See the claim-by-claim check</a>`));
+  return box;
+}
+
+/**
+ * After an answer is shown: every source of the item's lesson. No item-to-source map exists,
+ * so none is guessed. Placement items have no lesson and get no footer.
+ */
+function sourceFooter(item: Item): HTMLElement | null {
+  const lesson = findItem(item.id)?.lesson;
+  if (!lesson) return null;
+  const t = trustView(lesson);
+  const box = el('div', { class: 'source-footer small muted' });
+  box.append(el('div', {}, 'Sources for this lesson'));
+  for (const v of t.sources) {
+    box.append(el('div', {}, `${srcLink(v)}: ${esc(v.tier)}, ${esc(v.read)}.${v.caveat ? ` ${esc(v.caveat)}` : ''}`));
+  }
+  if (!t.checked) box.append(el('div', {}, 'Not yet checked against its sources.'));
+  return box;
+}
+
 // ---------- the item card ----------
 
 const PLACEHOLDER: Record<Item['type'], string> = {
@@ -155,6 +189,8 @@ function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (
   // L1, reread arm: lesson mode only. Review and retry always ask, so both arms are tested the same way later.
   if (arms.L1 === 'reread' && mode === 'lesson' && item.type === 'recall') {
     card.append(el('div', {}, answerHtml));
+    const foot0 = sourceFooter(item);
+    if (foot0) card.append(foot0);
     const read = el('button', { type: 'button', class: 'primary' }, 'Read it');
     read.onclick = () => {
       record({ text: '', confidence: null, mark: null, exposure: 'read', revealedAt: shownAt });
@@ -195,6 +231,8 @@ function itemCard(item: Item, run: Run, mode: Mode, context: string, onMarked: (
     card.querySelectorAll('.conf button').forEach((x) => ((x as HTMLButtonElement).disabled = true));
     show.remove();
     card.append(el('div', {}, answerHtml));
+    const foot = sourceFooter(item);
+    if (foot) card.append(foot);
     const marks = el('div', { class: 'row marks' });
     marks.append(el('span', { class: 'muted' }, 'Your answer was'));
     for (const m of ['right', 'partly', 'wrong'] as Mark[]) {
@@ -218,6 +256,8 @@ function answeredCard(item: Item, a: Attempt): HTMLElement {
   card.append(el('div', { class: 'prompt' }, item.promptHtml));
   if (a.text) card.append(el('p', { class: 'muted' }, `You wrote: ${esc(a.text)}`));
   card.append(el('div', { class: 'answer' }, `<div class="answer-label">${esc(item.answerLabel)}</div>${item.answerHtml}`));
+  const foot = sourceFooter(item);
+  if (foot) card.append(foot);
   card.append(isRead(a) ? el('div', { class: 'marked' }, 'Read.') : el('div', { class: `marked marked-${a.mark}` }, `Marked ${a.mark}.`));
   return card;
 }
@@ -304,7 +344,10 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
   const main = page(title, { href: route('course', course.id), label: course.title });
   const run = new Run(kind, course, target.id);
   const mode: Mode = kind;
-  if (kind === 'lesson') ensureLessonAssignments(target as Lesson, EXPERIMENTS.map((e) => e.id));
+  if (kind === 'lesson') {
+    ensureLessonAssignments(target as Lesson, EXPERIMENTS.map((e) => e.id));
+    main.append(trustStrip(target as Lesson));
+  }
   const blocks: Block[] = target.blocks;
   const marks = new Map<string, { mark: Mark | null }>();
   let i = 0;
