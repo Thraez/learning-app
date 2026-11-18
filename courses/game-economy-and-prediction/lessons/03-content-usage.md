@@ -54,9 +54,9 @@ options:
 
 ## The idea
 
-Players use a small part of what a game ships. In Project Gotham Racing 4, most of the cars were rarely picked.
+In Project Gotham Racing 4, most races used a minority of what shipped. Most of the vehicles were rarely picked.
 
-For a designer: the team cannot see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to see which part gets used.
+For a designer (my reading, not the paper's): a team is unlikely to see this from the inside. [The authors argue](https://doi.org/10.1145/2372251.2372265) that collecting usage data over the long term is the only workable way to see which part gets used.
 
 <!-- break -->
 
@@ -66,12 +66,14 @@ The paper is peer-reviewed. Two things to keep in mind: it is one game, and the 
 
 <!-- break -->
 
-How much went unused? [Across the whole dataset](https://doi.org/10.1145/2372251.2372265), these options were each used in fewer than 1% of races:
+How much was rarely used? [Across the whole dataset](https://doi.org/10.1145/2372251.2372265), these options were each used in fewer than 1% of races:
 
 - 104 of 134 vehicles
 - 81 of 121 routes
 - 12 of 29 event types
 - 2 of 9 game modes
+
+Rarely used is not unused. Together, those 104 vehicles still made up 38% of usage.
 
 ```sure
 The paper says ten game modes in one place and lists nine in another. This lesson uses the nine it lists.
@@ -107,14 +109,14 @@ Regular players raced more in multiplayer. On career mode, the paper's figures p
 
 <!-- break -->
 
-Look at single-player races only, and [regular players chose career mode more often](https://doi.org/10.1145/2372251.2372265): 59.9% against 47.5% for infrequent players. In their first ten races too: 36.5% against 22.2%.
+Look at single-player races only, and [regular players chose career mode more often](https://doi.org/10.1145/2372251.2372265): 59.9% against 47.5% for infrequent players. In each player's first ten races, regular players also chose it more: 36.5% against 22.2%.
 
-Look at all races, and it flips. Career mode was 36.6% of regular players' races and 47.0% of infrequent players'.
+Look at all races in the whole dataset, and the paper's printed figures point the other way: career mode was 36.6% of regular players' races and 47.0% of infrequent players'. Treat that 47.0% with care, because it does not fit the paper's other figures for infrequent players.
 
 The lesson for a designer is mine, not the paper's: a share means nothing until you know what it is a share of.
 
 ```sure
-The paper's text says regular players favour career mode "both overall and in the first ten races". Its own all-races figures, 36.6% against 47.0%, do not show the "overall" part.
+The paper's text says regular players favour career mode "both overall and in the first ten races". Its printed all-races figures, 36.6% against 47.0%, do not show the "overall" part. But the four mode shares the paper prints for infrequent players across all races (47.0%, 19.6%, 16.1% and 20.6%) add up to more than 100%, and it prints one of those modes a second time as 24.5%. So at least one of those figures is wrong, and the paper does not show which.
 ```
 
 ```check
@@ -123,9 +125,9 @@ prompt: "Regular players chose career mode more within single-player races (59.9
 options:
   - text: "They use different bases: a share of single-player races in one case, a share of all races in the other."
     correct: true
-    why: "The lesson says the paper's figures point two ways. Its text says regular players favour career mode both overall and in the first ten races, which the all-races figures do not show."
-  - text: "One of the two figures must be a typo."
-    why: "The lesson gives both as the paper's figures, on different bases. What does not fit is the paper's own text on overall use."
+    why: "A share of single-player races and a share of all races are different things, so they can point different ways. The lesson adds a caution: the 47.0% does not fit the paper's other figures for infrequent players."
+  - text: "They cannot both stand, so the single-player figures must be wrong."
+    why: "The paper prints both, on different bases, so they can both stand. The figure the lesson flags is the 47.0%, which does not fit the paper's other figures for infrequent players."
 ```
 
 <!-- break -->
@@ -144,7 +146,7 @@ First, telemetry shows what players did, not why. A car nobody picks may be slow
 
 <!-- break -->
 
-Second, the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more.
+Second, and again my reasoning: the career-mode result is a correlation. The authors recommend steering new players into career mode because, they say, regular players used it more.
 
 But players who already planned to stay may simply prefer career mode. Only a test that steers some new players and not others would show which way it runs.
 

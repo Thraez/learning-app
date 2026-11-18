@@ -23,7 +23,7 @@ Top Eleven is a football manager game by Nordeus. New players started with 40 To
 
 <details>
 <summary>Answer</summary>
-Retention went up in both bigger groups, and purchases did not fall. Read on for the numbers and the catch.
+Retention went up in both bigger groups, and first purchases did not fall. Read on for the numbers and the catch.
 </details>
 
 ```predict
@@ -45,9 +45,9 @@ id: gd-econ/endowment/d1
 prompt: "You run the economy of a football manager game. New players start with 40 Tokens, and finance wants to keep it that way to protect purchases. What do you do?"
 options:
   - text: "Keep the grant at 40 Tokens."
-    outcome: "In the published test, day-7 retention was higher with 80 and 120 Tokens than with 40 (6.9% and 7.7% higher, both statistically significant, both relative rises), and buying did not fall."
+    outcome: "In the published test, day-7 retention was higher with 80 and 120 Tokens than with 40 (6.9% and 7.7% higher, both statistically significant, both relative rises), and first purchases did not fall."
   - text: "Raise the grant to 80 or 120 Tokens."
-    outcome: "In the test, retention rose in both groups and buying did not fall. The share of players making a first purchase was about 8% and 4% higher, neither rise significant. First-purchase size was 14% higher (not significant) and 34.8% higher (significant). The authors say the best amount for retention probably lies in the 80 to 120 range."
+    outcome: "In the test, retention rose in both groups and first purchases did not fall. The share of players making a first purchase was about 8% and 4% higher (relative rises), neither significant. First-purchase size was 14% higher (not significant) and 34.8% higher (significant). The authors say the best amount for retention probably lies in the 80 to 120 range."
   - text: "Raise the grant far above 120 Tokens."
     outcome: "The test covered 40 to 120 Tokens only, so the lesson has nothing on larger grants. The authors say the best amount for retention probably lies somewhere in the 80 to 120 range."
 ```
@@ -56,13 +56,13 @@ options:
 
 A starting grant is not only a cost. It can keep players around.
 
-So when someone wants to cut the new-player grant to protect sales, [the one large published test](https://doi.org/10.1371/journal.pone.0186407) points the other way: a bigger grant kept more players, and buying did not fall. It is one game, so take it as a reason to run your own test, not as a rule (that advice is mine, not the paper's).
+So when someone wants to keep the new-player grant small to protect sales, [a large published test](https://doi.org/10.1371/journal.pone.0186407) points the other way: a bigger grant kept more players, and first purchases did not fall. It is one game, so take it as a reason to run your own test, not as a rule (that advice is mine, not the paper's).
 
 <!-- break -->
 
 The test. Nordeus staff and academic co-authors [split about 575,000 new Top Eleven players at random](https://doi.org/10.1371/journal.pone.0186407) into three equal groups. One group started with 40 Tokens, the default since late 2014. The others got 80 or 120. The test ran 28 days, one in-game season, and the paper is peer-reviewed.
 
-The 40-Token group is the control: every result below is a comparison with it.
+The 40-Token group is the control: every rise below is a comparison with it.
 
 ```check
 id: gd-econ/endowment/c1
@@ -72,7 +72,7 @@ options:
     why: "The control got 40, the fewest. The 80 and 120 groups got more."
   - text: "It is the comparison. Every lift is measured against it."
     correct: true
-    why: "The 40-Token group is the control, and the paper gives every result relative to it."
+    why: "The 40-Token group is the control, and the paper's Table 1 gives every result relative to it."
   - text: "It is the group the designers expected to do best."
     why: "It was the default since late 2014, and its job is to be the comparison, not a prediction."
 ```
@@ -81,7 +81,7 @@ options:
 
 More Tokens, more players still there a week later. [Day-7 retention](https://doi.org/10.1371/journal.pone.0186407) was 6.9% higher with 80 Tokens and 7.7% higher with 120.
 
-Both rises are statistically significant, which means they are unlikely to be chance alone. The 80 and 120 groups did not differ from each other. The paper's reading: going from 40 to 80 did much more than going from 80 to 120.
+Both rises are statistically significant, which means they are unlikely to be chance alone. The gap between the 80 and 120 groups was too small to tell from chance. The paper's reading: going from 40 to 80 did much more than going from 80 to 120.
 
 One thing to hold on to. These are relative rises, not percentage points: 6.9% higher than whatever the 40-Token group's retention was.
 
@@ -95,7 +95,7 @@ prompt: "Day-7 retention was 6.9% higher with 80 Tokens. Which reading is right?
 options:
   - text: "A relative lift. The paper prints no baseline rate, so percentage points cannot be given."
     correct: true
-    why: "The paper gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
+    why: "Table 1 gives every result as an index with the 40-Token control set to 100, so 6.9% is a relative lift."
   - text: "Retention rose by 6.9 percentage points."
     why: "A rise in percentage points needs the baseline retention rate, and the paper prints none."
 ```
@@ -104,15 +104,15 @@ options:
 
 Did free Tokens replace bought ones? The test found no sign of it.
 
-[The share of players making a first real-money purchase](https://doi.org/10.1371/journal.pone.0186407) on a given day was about 8% higher with 80 Tokens and about 4% higher with 120. Neither rise is statistically significant, so either could be chance. Read it as "no drop found", not as "a proven rise".
+[The share of players making a first real-money purchase](https://doi.org/10.1371/journal.pone.0186407) on a given day was about 8% higher with 80 Tokens and about 4% higher with 120 (relative rises again, not percentage points). Neither rise is statistically significant, so either could be chance. Read it as "no drop found", not as "a proven rise".
 
 ```sure
-The p-values are 0.054 for 80 Tokens and 0.197 for 120, and the paper itself says the daily conversion effects are not statistically significant. Its text gives 4.3% for the 120-Token group where [its Table 2](https://doi.org/10.1371/journal.pone.0186407) gives 4.0%, which is why this lesson says "about 4%". These are relative rises too.
+The p-values are 0.054 for 80 Tokens and 0.197 for 120, and the paper itself says the daily conversion effects are not statistically significant. Its text gives 4.3% for the 120-Token group where [its Table 2](https://doi.org/10.1371/journal.pone.0186407) gives 4.0%, which is why this lesson says "about 4%".
 ```
 
 <!-- break -->
 
-Players who did buy spent more the first time. [The size of the first purchase](https://doi.org/10.1371/journal.pone.0186407) was 14% higher with 80 Tokens and 34.8% higher with 120.
+With 120 Tokens, players who did buy spent more the first time. [The size of the first purchase](https://doi.org/10.1371/journal.pone.0186407) was 14% higher with 80 Tokens and 34.8% higher with 120.
 
 Only the 34.8% is statistically significant. The 14% is not, so it could be chance.
 
@@ -168,7 +168,7 @@ options:
 
 <!-- break -->
 
-What the test does support: more free currency at the start, more players still there a week later, and no drop in buying.
+What the test does support: more free currency at the start, more players still there a week later, and no drop in first purchases.
 
 How much to give? [The authors](https://doi.org/10.1371/journal.pone.0186407) say they cannot pin down the best amount for retention, only that it probably lies somewhere in the 80 to 120 range.
 
