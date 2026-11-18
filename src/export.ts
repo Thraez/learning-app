@@ -1,7 +1,7 @@
 // Builds the export file. The schema is documented in docs/export-schema.md; change both together
 // and raise EXPORT_SCHEMA_VERSION on any change that breaks a reader.
 
-import type { Assignments, Attempt, Session, Settings } from './store';
+import type { Assignments, Attempt, Response, Session, Settings } from './store';
 import type { CourseData } from './types';
 import { computeSchedules, stateName } from './scheduler';
 
@@ -15,6 +15,7 @@ export function buildExport(
   now = new Date(),
   assignments: Assignments = {},
   settings: Settings | null = null,
+  responses: readonly Response[] = [],
 ) {
   const known = new Map<string, { courseId: string; parentId: string; type: string }>();
   for (const c of data.courses) {
@@ -91,6 +92,7 @@ export function buildExport(
       .sort((a, b) => a.startedAt.localeCompare(b.startedAt)),
     assignments,
     settings,
+    responses: [...responses].sort((a, b) => a.at.localeCompare(b.at)).map((r) => ({ id: r.id, at: r.at, session: r.session, value: r.value })),
     items,
   };
 }

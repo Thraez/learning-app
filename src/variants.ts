@@ -3,8 +3,9 @@
 // them off in Settings; whole-app settings stay at their default until changed.
 
 import type { Item, Lesson } from './types';
+import { FLOW_DEFAULT, asFlow, isFlow, type Flow } from './flows';
 import {
-  getAssignments, getSettings, nowIso, saveAssignments,
+  getAssignments, getSettings, nowIso, saveAssignments, saveSettings,
   type Assignments, type Settings, type VariantMap,
 } from './store';
 
@@ -59,7 +60,23 @@ export function activeWhole(s: Settings, now = new Date()): VariantMap {
   const out: VariantMap = {};
   const e6 = s.whole.E6;
   if (e6 && e6.value in REVIEW_SIZES && e6.value !== E6_DEFAULT && !(e6.until && localDay(now) > e6.until)) out.E6 = e6.value;
+  // F, the lesson flow: recorded on each session like E6, and only when it differs from Classic.
+  const f = s.whole.F;
+  if (f && isFlow(f.value) && f.value !== FLOW_DEFAULT && !(f.until && localDay(now) > f.until)) out.F = f.value;
   return out;
+}
+
+/** The flow in force now. A missing, expired or unknown stored value is Classic. */
+export function currentFlow(s: Settings, now = new Date()): Flow {
+  return asFlow(activeWhole(s, now).F);
+}
+
+/** Stores the flow as the whole-app setting F. Existing `since` is kept when the value does not change. */
+export function setFlow(value: Flow) {
+  const s = getSettings();
+  const prev = s.whole.F;
+  s.whole.F = { value, since: prev && prev.value === value ? prev.since : nowIso(), until: null };
+  saveSettings(s);
 }
 
 export function reviewCap(s: Settings, now = new Date()): number {
