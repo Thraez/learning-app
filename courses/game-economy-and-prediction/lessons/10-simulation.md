@@ -4,6 +4,7 @@ course: gd-econ
 title: Simulating an economy before it is built
 order: 10
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Dormans (2011). Simulating Mechanics to Study Emergence in Games. AIIDE 2011 workshop, AAAI Technical Report WS-11-19. DOI 10.1609/aiide.v7i3.12477."
     url: https://doi.org/10.1609/aiide.v7i3.12477

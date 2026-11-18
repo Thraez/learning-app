@@ -4,6 +4,7 @@ course: gd-econ
 title: Target the players an offer changes, not the ones most likely to leave
 order: 8
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Ascarza (2018). Retention Futility: Targeting High-Risk Customers Might Be Ineffective. Journal of Marketing Research 55(1), 80-98. DOI 10.1509/jmr.16.0163."
     url: https://doi.org/10.1509/jmr.16.0163

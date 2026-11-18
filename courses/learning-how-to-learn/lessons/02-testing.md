@@ -4,6 +4,7 @@ course: learn
 title: A practice test beats a second read, and the answer matters
 order: 2
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Rowland (2014). The Effect of Testing Versus Restudy on Retention: A Meta-Analytic Review of the Testing Effect. Psychological Bulletin 140(6), 1432 to 1463."
     url: https://doi.org/10.1037/a0037559

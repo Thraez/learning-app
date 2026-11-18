@@ -4,6 +4,7 @@ course: learn
 title: The best gap depends on when you need it
 order: 3
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Cepeda, Vul, Rohrer, Wixted, Pashler (2008). Spacing Effects in Learning: A Temporal Ridgeline of Optimal Retention. Psychological Science 19(11), 1095 to 1102."
     url: https://doi.org/10.1111/j.1467-9280.2008.02209.x

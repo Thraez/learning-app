@@ -34,3 +34,14 @@ How far the source was read: Runge, Gao, Garcin, Faltings 2014, abstract only, f
 | Sources and grades | "Two casual games, one kind of gift, tested in one of the games" | Abstract | matches | "two casual social games"; "an A/B test on one of the games, using free in-game currency". The one-studio claim is gone. Rechecked 2026-11-16. |
 | Sources and grades | Zivic et al. 2017, full text read for lesson 1 (publisher PDF); grade A, tier 1; used only for the Top Eleven comparison | `zivic2017.txt` | matches | The cached text is the PLOS ONE printable PDF; the paper is peer-reviewed: title page has "Received: May 10, 2017", "Accepted: September 29, 2017" and a named academic editor. Added 2026-11-16. |
 | Sources and grades | "I found few other published tests of retention offers in games (my search, grade C), so this result can't be generalised far" | none | inference | Now labelled as the writer's search, grade C; the second half follows from the one-game test. Rechecked 2026-11-16. |
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Runge 2014 | read: abstract only, OpenAlex record | Ledger opening lines | matches | Ledger: abstract only, from the OpenAlex record (runge2014.txt); IEEE Xplore refuses automated fetches. |
+| front matter, Runge 2014 | caveat: Abstract only; effect sizes, sample sizes and game names not seen. | Ledger opening lines and Sources and grades | matches | Ledger: the full paper is closed and every claim rests on the abstract alone. The lesson says effect sizes, sample sizes per arm and game names are not given. |
+| front matter, Runge 2014 | corrected note and Sources and grades sentence: abstract read from the OpenAlex record, IEEE Xplore not opened | Ledger opening lines | matches | Replaces 'read on IEEE Xplore', which the ledger contradicted (Xplore refuses automated fetches). Now consistent. |
+| front matter, Zivic 2017 | read: full text, publisher PDF | Ledger 06 and ledger 01 openings | matches | Ledger 01: PLOS ONE printable PDF, all 14 pages. Ledger 06 confirms the cached text is that PDF. |
+| front matter, Zivic 2017 | caveat: Used here only for one comparison sentence. | Ledger 06 rows 'Sources and grades, Zivic' and the Top Eleven row | matches | Only the Top Eleven day-7 retention sentence uses it. |

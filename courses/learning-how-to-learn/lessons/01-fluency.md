@@ -4,6 +4,7 @@ course: learn
 title: What feels like learning and what is
 order: 1
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Bjork, Dunlosky, Kornell (2013). Self-Regulated Learning: Beliefs, Techniques, and Illusions. Annual Review of Psychology 64, 417 to 444."
     url: https://doi.org/10.1146/annurev-psych-113011-143823

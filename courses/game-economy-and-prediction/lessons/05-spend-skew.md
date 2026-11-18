@@ -4,6 +4,7 @@ course: gd-econ
 title: Spend is mostly zero and very concentrated
 order: 5
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Close, Spicer, Nicklin, Uther, Lloyd, Lloyd (2021). Secondary analysis of loot box data: Are high-spending whales wealthy gamers or problem gamblers? Addictive Behaviors 117, 106851. DOI 10.1016/j.addbeh.2021.106851."
     url: https://doi.org/10.1016/j.addbeh.2021.106851

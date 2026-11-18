@@ -4,6 +4,7 @@ course: gd-econ
 title: Spend prediction and vulnerable players
 order: 12
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Zendle, Cairns (2018). Video game loot boxes are linked to problem gambling: Results of a large-scale survey. PLOS ONE 13(11): e0206767."
     url: https://doi.org/10.1371/journal.pone.0206767

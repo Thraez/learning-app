@@ -4,6 +4,7 @@ course: gd-econ
 title: The clustering method shapes the segments
 order: 7
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Drachen, Thurau, Sifa, Bauckhage (2014). A Comparison of Methods for Player Clustering via Behavioral Telemetry. arXiv:1407.3950."
     url: https://arxiv.org/abs/1407.3950

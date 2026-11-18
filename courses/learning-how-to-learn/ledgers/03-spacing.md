@@ -64,3 +64,15 @@ How far each source was read. Cepeda et al. 2008: the published abstract from th
 | Sources and grades | Setting a gap for your own deadline and multi-review schedules are inference | Lesson | inference | Labelled grade C. |
 
 Counts: 51 matches, 0 differs, 0 not in source, 0 could not open, 5 inference. No fix required. Optional: the "3 months" option noted above. The "uncorrected" wording was tightened and its rows rechecked on 2026-11-16.
+
+Recheck 2026-11-18: the front matter fields `read` and `caveat` and the corrected notes, by a fresh context that did not write them.
+
+| Where | Claim | Source and place | Verdict | Note |
+|---|---|---|---|---|
+| front matter, diff | Lesson body, headings and item IDs unchanged in e2c3a5a; `checked` removed | git diff d4ce597 e2c3a5a for this lesson | matches | Only front matter lines and the Sources and grades text changed. No heading or item ID differs. |
+| front matter, Cepeda 2008 | read: abstract and in-press manuscript | Ledger opening lines | matches | Ledger: Crossref abstract plus the eScholarship in-press manuscript; the publisher page was not opened. |
+| front matter, Cepeda 2008 | caveat: One online experiment; the best gaps are the best of those tested. | Rows 'More than 1,350 adults in an online study' and 'Best tested gaps 1, 11, 21 and 21 days' | matches | Ledger: online panel, 1354 subjects; the manuscript says 'the optimal gaps (of those included in the study)'. 'One experiment' is not stated in those words in the ledger, but its rows describe a single study. |
+| front matter, Latimier 2021 | read: abstract and appendix only | Ledger opening lines | matches | Ledger: published abstract and Appendix 1 on the Springer page; body paywalled. |
+| front matter, Latimier 2021 | caveat: A meta-analysis; the paywalled body was not read. | Ledger opening lines | matches | Same as the ledger. |
+| front matter, Latimier 2020 | read: full text, OSF preprint | Ledger opening lines | matches | Ledger: authors' March 2020 Word file on OSF. |
+| front matter, Latimier 2020 | caveat: Preprint, not peer-reviewed; some figures differ from the published version. | Front matter rows for the preprint cite and note | matches | Ledger: posted 2020-03-05, tier 2; g = 0.032 against 0.034 in the published abstract. |

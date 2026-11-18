@@ -4,6 +4,7 @@ course: gd-econ
 title: Telemetry shows where design effort goes unused
 order: 3
 status: draft
+checked: 2026-11-18
 sources:
   - cite: "Hullett, Nagappan, Schuh, Hopson (2012). Empirical analysis of user data in game software development. ESEM 2012, ACM-IEEE International Symposium on Empirical Software Engineering and Measurement. DOI 10.1145/2372251.2372265."
     url: https://doi.org/10.1145/2372251.2372265
