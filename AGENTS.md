@@ -85,7 +85,10 @@ errors that the writer's own source pass had missed. The steps, in order:
    a check block is a screen of its own.
 
 A ledger quotes papers, so it follows rule 1 like every other file: rewrite a range such as "5 to 9" in words.
-Not built: a dead-link check on pull requests. The build checks that a link is present and `https`, not that it opens.
+The build checks that a source link is present and `https`. Whether it opens is checked on every pull request by
+`scripts/check-links.mjs` (`npm run links`), for the `url` of each source in the front matter only, not for links in
+the lesson text. It fails on a 404 or 410 and lists blocked or timed-out links apart, without failing. A `doi.org` link
+passes when the DOI is registered; the publisher's page behind it is not fetched.
 
 ## Folder layout
 
@@ -104,7 +107,8 @@ Not built: a dead-link check on pull requests. The build checks that a link is p
 | `test/` | parser tests against the real course files, scheduler and export tests |
 | `docs/export-schema.md` | the export file format; change it with `src/export.ts` |
 | `public/` | web manifest and icons (`npm run icons` redraws the icons) |
-| `.github/workflows/pages.yml` | tests and builds every PR; deploys `main` to GitHub Pages |
+| `scripts/check-links.mjs` | the dead-link check for source links; runs on pull requests, not in `npm test` |
+| `.github/workflows/pages.yml` | tests and builds every PR and checks its source links; deploys `main` to GitHub Pages |
 
 ## Building the app
 
