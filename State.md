@@ -11,7 +11,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
 ## Where it stands
 
 - Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main`. PRs #1 to #12 and
-  #14 to #16 are merged; #13 was closed as superseded by #15.
+  #14 to #21 are merged; #13 was closed as superseded by #15.
 - App: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load, installable. Course
   list, lessons, placement quiz with a "where to start" summary, review sessions, self-marking, Progress (late recall
   at 14+ days), Export as JSON (`docs/export-schema.md`, schema 2 extended), restore from an export that only adds.
@@ -44,7 +44,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
     finish card are laid out again. Screens fade in over 0.2 s unless the phone asks for reduced motion. The bottom
     nav is on every top-level screen. Fixed: About overflowing sideways, the nav clipping at 360 px, Export's
     buttons outside their row, and Home offering the placement quiz to a course with a finished lesson.
-  - **A reason to return** (19 Nov, this change): `src/` only, no lesson text and no new stored data. Home opens
+  - **A reason to return** (#18, 19 Nov): `src/` only, no lesson text and no new stored data. Home opens
     on a Today card: the reviews due now in each course, then one new lesson from the course studied last, and a
     line for what was done today. Every item has a stage from its own answers: New, Read, Answered, then right
     after a gap of a day, a week, two weeks. A miss sends it back to Answered. The stages show from the first
@@ -52,15 +52,15 @@ Claude can revise the course. The goal is learning that lasts weeks.
     one row per lesson, one mark per item, and "Explained" when the last answer to each why and scenario question
     was marked right. No streaks, points or day counts. The rules are `stageOf`, `courseMap` and `todayPlan` in
     `src/scheduler.ts`.
-  - **Dead-link check** (19 Nov, this change): every pull request opens the `url` of each source in the lesson
+  - **Dead-link check** (#19, 19 Nov): every pull request opens the `url` of each source in the lesson
     front matter (`scripts/check-links.mjs`, `npm run links`). A 404 or 410 fails the PR; a blocked or timed-out
     link is listed apart and does not. Links inside lesson text are not checked, and a `doi.org` link is judged by
     whether the DOI is registered, not by the publisher's page.
-  - **Visual tests** (19 Nov, this change): `test/visuals.test.ts`, ten tests. Of the 13 tests dropped with PR #13,
+  - **Visual tests** (#20, 19 Nov): `test/visuals.test.ts`, ten tests. Of the 13 tests dropped with PR #13,
     two were for a setting (L15) that no longer exists and six for block parsing that `test/flows.test.ts` covers
     now. The rest are back: the gap timeline's geometry and wording, and the spacing lesson's four rows. New: every
     visual block in both courses draws as one SVG with a description and stays inside its 320-wide frame.
-  - **Course-level check** (19 Nov, this change): a ledger proves a lesson matches its paper, not that the paper
+  - **Course-level check** (#21, 19 Nov): a ledger proves a lesson matches its paper, not that the paper
     is typical. For each lesson's main finding, a fresh context searched for reviews, replications and contrary
     results and wrote `courses/<course-folder>/ledgers/course-check.md`. Course 1: five findings stand alone
     (endowment, sinks, content usage, segments, simulation) and seven are supported, most with a qualifier. Course
@@ -98,9 +98,12 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 - A Classic lesson was not walked to its end after the design pass, and lessons 6 to 12 were not walked at all.
 
 - The course check read almost every outside source at the abstract only, and its "stands alone" verdicts rest on
-  title scans of citing papers. The orchestrator sampled seven cited abstracts through OpenAlex and all matched;
-  the figures the reports took from full texts (Yang 2021's 0.321, Higham 2022's d = 0.705, Palmer 2025) were not
-  rechecked. Yang 2021 was read from a third-party copy. Each report ends with its own "Could not open" list.
+  title scans of citing papers. The orchestrator sampled cited abstracts through OpenAlex. Course 1: five abstracts, every
+  figure the report gives from them matched. Course 2: three abstracts matched on design and study counts only. The
+  two course 2 findings that contradict a lesson (Yang 2021: a significant 0.321 on untested material, and no
+  recall over recognition difference) come from a full text the report read on a third-party copy; the orchestrator
+  could not open that text, so both are the report's claims, unconfirmed. Higham 2022's d = 0.705 and Palmer 2025
+  were not rechecked either. Each report ends with its own "Could not open" list.
 
 ## Lesson edits from the course check
 
