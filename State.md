@@ -56,6 +56,10 @@ Claude can revise the course. The goal is learning that lasts weeks.
     front matter (`scripts/check-links.mjs`, `npm run links`). A 404 or 410 fails the PR; a blocked or timed-out
     link is listed apart and does not. Links inside lesson text are not checked, and a `doi.org` link is judged by
     whether the DOI is registered, not by the publisher's page.
+  - **Visual tests** (19 Nov, this change): `test/visuals.test.ts`, ten tests. Of the 13 tests dropped with PR #13,
+    two were for a setting (L15) that no longer exists and six for block parsing that `test/flows.test.ts` covers
+    now. The rest are back: the gap timeline's geometry and wording, and the spacing lesson's four rows. New: every
+    visual block in both courses draws as one SVG with a description and stays inside its 320-wide frame.
 - Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
   Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
   lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
