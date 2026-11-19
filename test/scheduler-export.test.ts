@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { resolve } from 'node:path';
 import { parseCourses } from '../src/build/parse-courses';
-import { computeSchedules, courseProgress, dueItems, scheduledItemIds } from '../src/scheduler';
+import { computeSchedules, courseMap, courseProgress, dueItems, scheduledItemIds, stageOf, todayPlan } from '../src/scheduler';
 import { buildExport, EXPORT_SCHEMA_VERSION } from '../src/export';
-import type { Attempt, Mark, Mode } from '../src/store';
+import type { Attempt, Mark, Mode, Session } from '../src/store';
 
 const data = parseCourses(resolve(import.meta.dirname, '../courses'));
 const course = data.courses.find((c) => c.id === 'gd-econ')!;
@@ -96,5 +96,81 @@ describe('export', () => {
     expect(gone.inCurrentBuild).toBe(false);
     expect(out.courses[0].lessons.length).toBeGreaterThanOrEqual(6);
     expect(JSON.parse(JSON.stringify(out))).toEqual(out);
+  });
+});
+
+describe('stages, the map and the today plan', () => {
+  const t0 = new Date('2026-11-16T12:00:00Z');
+  const at = (days: number) => new Date(t0.getTime() + days * DAY);
+  const R1 = 'gd-econ/endowment/r1';
+  const session = (kind: Session['kind'], courseId: string, targetId: string, when: Date): Session => ({
+    sessionId: Math.random().toString(36), kind, courseId, courseVersion: '0', targetId, startedAt: when.toISOString(),
+    endedAt: when.toISOString(), completed: true, variant: 'default', appBuild: 'test',
+  });
+
+  it('moves an item up only on a right answer after a gap, and back on a miss', () => {
+    expect(stageOf([])).toBe('new');
+    expect(stageOf([attempt(R1, t0, 'right')])).toBe('answered');
+    expect(stageOf([attempt(R1, t0, 'wrong'), attempt(R1, at(3), 'right', 'review')])).toBe('day');
+    expect(stageOf([attempt(R1, t0, 'right'), attempt(R1, at(3), 'right', 'review'), attempt(R1, at(11), 'right', 'review')])).toBe('week');
+    expect(stageOf([attempt(R1, t0, 'right'), attempt(R1, at(15), 'right', 'review')])).toBe('late');
+    // Partly holds the stage; wrong resets it.
+    expect(stageOf([attempt(R1, t0, 'right'), attempt(R1, at(8), 'right', 'review'), attempt(R1, at(20), 'partly', 'review')])).toBe('week');
+    expect(stageOf([attempt(R1, t0, 'right'), attempt(R1, at(8), 'right', 'review'), attempt(R1, at(20), 'wrong', 'review')])).toBe('answered');
+  });
+
+  it('keeps a read exposure apart from an answer', () => {
+    const read: Attempt = { ...attempt(R1, t0, 'right'), exposure: 'read', mark: null };
+    expect(stageOf([read])).toBe('read');
+    // A right answer three days after the read is a real gap.
+    expect(stageOf([read, attempt(R1, at(3), 'right', 'review')])).toBe('day');
+  });
+
+  it('counts every scheduled item once and calls a lesson explained on its why and scenario answers', () => {
+    const lesson = course.lessons.find((l) => l.id === 'gd-econ/endowment')!;
+    const items = lesson.blocks.flatMap((b) => (b.kind === 'item' && b.item.type !== 'open' ? [b.item] : []));
+    const explain = items.filter((i) => i.type !== 'recall');
+    expect(explain.length).toBeGreaterThan(0);
+    const fresh = courseMap(course, []);
+    expect(fresh.counts.new).toBe(scheduledItemIds(course).length);
+    expect(fresh.explained).toBe(0);
+    expect(fresh.lessons[0].started).toBe(false);
+    const some = explain.map((i) => attempt(i.id, t0, 'right', 'lesson', i.type));
+    const map = courseMap(course, some);
+    const row = map.lessons.find((l) => l.lessonId === lesson.id)!;
+    expect(row.explained).toBe(true);
+    expect(row.right).toBe(explain.length);
+    expect(map.counts.answered).toBe(explain.length);
+    expect(Object.values(map.counts).reduce((a, b) => a + b, 0)).toBe(scheduledItemIds(course).length);
+    // A later miss on one of them takes the lesson off the list.
+    const missed = courseMap(course, [...some, attempt(explain[0].id, at(3), 'wrong', 'review', explain[0].type)]);
+    expect(missed.explained).toBe(0);
+  });
+
+  it('plans nothing before the first session, then a review and the next lesson of the course studied last', () => {
+    const all = data.courses;
+    const dayStart = at(6).getTime() - DAY / 2;
+    const empty = todayPlan(all, [], [], 10, dayStart, at(6));
+    expect(empty).toMatchObject({ started: false, next: null, reviews: [], reviewedToday: 0, lessonsToday: [] });
+
+    const attempts = ['r1', 'r2', 'r3'].map((r) => attempt(`gd-econ/endowment/${r}`, t0, 'right'));
+    const sessions = [session('lesson', 'gd-econ', 'gd-econ/endowment', t0)];
+    const sameDay = todayPlan(all, attempts, sessions, 10, t0.getTime() - DAY / 2, t0);
+    expect(sameDay.reviews).toEqual([]);
+    expect(sameDay.lessonsToday).toEqual(['gd-econ/endowment']);
+    expect(sameDay.nextDue!.getTime()).toBeGreaterThan(t0.getTime());
+    expect(sameDay.next).toEqual({ courseId: 'gd-econ', lessonId: course.lessons[1].id });
+
+    const later = todayPlan(all, attempts, sessions, 2, dayStart, at(6));
+    expect(later.reviews).toEqual([{ courseId: 'gd-econ', count: 2 }]);
+    expect(later.nextDue).toBeNull();
+    expect(later.lessonsToday).toEqual([]);
+
+    const reviewed = [...attempts, attempt('gd-econ/endowment/r1', at(6), 'right', 'review')];
+    expect(todayPlan(all, reviewed, sessions, 10, dayStart, at(6)).reviewedToday).toBe(1);
+
+    // A session in the other course moves the next lesson there.
+    const other = [...sessions, session('placement', 'learn', 'learn/placement', at(5))];
+    expect(todayPlan(all, attempts, other, 10, dayStart, at(6)).next!.courseId).toBe('learn');
   });
 });

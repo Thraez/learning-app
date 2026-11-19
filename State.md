@@ -36,7 +36,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
     carried over from the old text. All were fixed and the fixes rechecked by further fresh contexts, up to four
     rounds for lesson 3. All four lessons carry `checked: 2026-11-18` again. Lessons 5 to 12 carry `checked: 2026-11-18` from
     the earlier pass that day, under the looser bar, so expect the same kind of findings when they are rewritten.
-  - **Design pass** (19 Nov, this change): one look for the whole app, in `src/` only; no lesson text changed. Each
+  - **Design pass** (#17, 19 Nov): one look for the whole app, in `src/` only; no lesson text changed. Each
     course has its own accent colour (set by course id in `src/main.ts`, values in `src/style.css`), headings use a
     serif system font, and nothing is loaded from the network. A lesson shows a segmented progress bar next to the
     count and shrinks its title after the first screen. Right and wrong carry an icon and a tint, the slider and the
@@ -44,6 +44,14 @@ Claude can revise the course. The goal is learning that lasts weeks.
     finish card are laid out again. Screens fade in over 0.2 s unless the phone asks for reduced motion. The bottom
     nav is on every top-level screen. Fixed: About overflowing sideways, the nav clipping at 360 px, Export's
     buttons outside their row, and Home offering the placement quiz to a course with a finished lesson.
+  - **A reason to return** (19 Nov, this change): `src/` only, no lesson text and no new stored data. Home opens
+    on a Today card: the reviews due now in each course, then one new lesson from the course studied last, and a
+    line for what was done today. Every item has a stage from its own answers: New, Read, Answered, then right
+    after a gap of a day, a week, two weeks. A miss sends it back to Answered. The stages show from the first
+    lesson as counts on Home and Progress, and a finished review says how many items moved. Progress has a map:
+    one row per lesson, one mark per item, and "Explained" when the last answer to each why and scenario question
+    was marked right. No streaks, points or day counts. The rules are `stageOf`, `courseMap` and `todayPlan` in
+    `src/scheduler.ts`.
 - Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
   Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
   lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
@@ -70,21 +78,22 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
   the Public Interest, Current Directions in Psychological Science.
 - Lesson styles and the design pass were walked in a desktop Chromium at 375 px (and the nav at 360 and 320 px),
   never on a phone and never in Safari. The serif heading font differs by phone, since it is whatever the phone has.
+- The Today card, stages and map were walked the same way, with the clock moved 6 and then 36 days on. Not walked:
+  two courses with reviews due at once, the Read stage's look, and a real phone. The stage marks use
+  `conic-gradient`, untested in Safari.
 - A Classic lesson was not walked to its end after the design pass, and lessons 6 to 12 were not walked at all.
 
 ## Waiting on the user
 
 1. Redo lessons 1 to 4 of course 1 in the new text and say whether they read better than before.
 
-## Next (the map the user saw on 18 Nov; the order since 19 Nov is M3, M4, M5)
+## Next (the map the user saw on 18 Nov; M1 to M3 are done, M4 and M5 remain)
 
-- M3: the "today" card, the knowledge map and items shown maturing from day one. M4: the plain style for the other
-  13 lessons, after the user says whether lessons 1 to 4 read better. M5: a course-level check for reviews,
-  replications and contrary results, then the debts under "Could not verify".
+- M4: the plain style for the other 13 lessons, after the user says whether lessons 1 to 4 read better. M5: a
+  course-level check for reviews, replications and contrary results, then the debts under "Could not verify".
 - Not decided: Stepped, Predict first and Case first have no "try the missed items again" step; Classic and reviews do.
 
 - Blocks and the new text style for the other 13 lessons (course 1 lessons 5 to 12, course 2 lessons 1, 2, 4, 5).
-- A "today" card and a visible knowledge map on the home screen; items shown maturing from day one.
 - An interest interview with the user: `Workspace/Learning/Interest Profile.md` is mostly blank.
 - Course 2 lessons 6 to 12, written in the new style from the start.
 - First export and the first course revision from it. A real phone check.

@@ -9,7 +9,7 @@
 // counts as a first rating of Good, so the item enters review like a correctly recalled one.
 
 import { fsrs, createEmptyCard, Rating, type Card, type Grade, type State } from 'ts-fsrs';
-import { isRead, type Attempt, type Mark } from './store';
+import { isRead, type Attempt, type Mark, type Session } from './store';
 import type { Course, ItemType } from './types';
 
 const f = fsrs({ enable_short_term: false, enable_fuzz: false });
@@ -151,5 +151,134 @@ export function courseProgress(
       lateAnswers === 0 && earliestFirst !== null && earliestFirst + LATE_DAYS * DAY > now.getTime()
         ? new Date(earliestFirst + LATE_DAYS * DAY)
         : null,
+  };
+}
+
+// ---- Stages (what each item has been through) and the knowledge map ----
+//
+// A stage says what has happened, never what will: the longest gap an item was answered right
+// across. It comes from the answers alone, not from the FSRS card, because a read exposure moves
+// the card but is not an answer. A miss sends the item back to "answered".
+
+export const STAGES = ['new', 'read', 'answered', 'day', 'week', 'late'] as const;
+export type Stage = (typeof STAGES)[number];
+export const WEEK_DAYS = 7;
+
+/** Stage of one item from its lesson and review attempts, oldest first. */
+export function stageOf(list: readonly Attempt[]): Stage {
+  let gap = 0;
+  let answered = false;
+  for (let i = 0; i < list.length; i++) {
+    const a = list[i];
+    if (isRead(a) || !a.mark) continue;
+    answered = true;
+    if (a.mark === 'wrong') gap = 0;
+    else if (a.mark === 'right' && i > 0) {
+      gap = Math.max(gap, new Date(a.markedAt).getTime() - new Date(list[i - 1].markedAt).getTime());
+    }
+  }
+  if (!answered) return list.length ? 'read' : 'new';
+  if (gap >= LATE_DAYS * DAY) return 'late';
+  if (gap >= WEEK_DAYS * DAY) return 'week';
+  if (gap >= DAY) return 'day';
+  return 'answered';
+}
+
+/** Stage of every item that has a lesson or review attempt. An item not in the map is "new". */
+export function itemStages(attempts: readonly Attempt[]): Map<string, Stage> {
+  const out = new Map<string, Stage>();
+  for (const [id, list] of schedulingAttempts(attempts)) out.set(id, stageOf(list));
+  return out;
+}
+
+export interface LessonMap {
+  lessonId: string;
+  items: { id: string; stage: Stage }[];
+  /** Items whose latest answer was marked right. */
+  right: number;
+  started: boolean;
+  /** The latest answer to every why and scenario item was marked right (every item, if the lesson has neither). */
+  explained: boolean;
+}
+
+export interface CourseMap {
+  lessons: LessonMap[];
+  counts: Record<Stage, number>;
+  explained: number;
+}
+
+export function courseMap(course: Course, attempts: readonly Attempt[]): CourseMap {
+  const by = schedulingAttempts(attempts);
+  const counts: Record<Stage, number> = { new: 0, read: 0, answered: 0, day: 0, week: 0, late: 0 };
+  const lessons: LessonMap[] = [];
+  for (const l of course.lessons) {
+    if (l.status === 'retired') continue;
+    const all = l.blocks.flatMap((b) => (b.kind === 'item' && SCHEDULED_TYPES.includes(b.item.type) ? [b.item] : []));
+    const lastRight = (id: string) => (by.get(id) ?? []).filter((a) => !isRead(a) && a.mark).at(-1)?.mark === 'right';
+    const items = all.map((it) => ({ id: it.id, stage: stageOf(by.get(it.id) ?? []) }));
+    for (const it of items) counts[it.stage]++;
+    const explain = all.filter((it) => it.type !== 'recall');
+    const need = explain.length ? explain : all;
+    lessons.push({
+      lessonId: l.id,
+      items,
+      right: all.filter((it) => lastRight(it.id)).length,
+      started: items.some((it) => it.stage !== 'new'),
+      explained: need.length > 0 && need.every((it) => lastRight(it.id)),
+    });
+  }
+  return { lessons, counts, explained: lessons.filter((l) => l.explained).length };
+}
+
+// ---- Today: a short review, then one new lesson ----
+
+export interface TodayPlan {
+  /** Courses with items due, and how many the review session will serve (the cap applied). */
+  reviews: { courseId: string; count: number }[];
+  /** The next unfinished lesson of the course studied last. Null before the first session, or when none is left. */
+  next: { courseId: string; lessonId: string } | null;
+  /** False until the first session of any kind. */
+  started: boolean;
+  reviewedToday: number;
+  lessonsToday: string[];
+  /** Earliest coming review over all courses, when nothing is due now. */
+  nextDue: Date | null;
+}
+
+export function todayPlan(
+  courses: readonly Course[],
+  attempts: readonly Attempt[],
+  sessions: readonly Session[],
+  cap: number,
+  dayStart: number,
+  now = new Date(),
+): TodayPlan {
+  const schedules = computeSchedules(attempts);
+  const reviews: TodayPlan['reviews'] = [];
+  let nd: Date | null = null;
+  for (const c of courses) {
+    const due = dueItems(c, schedules, now).length;
+    if (due) reviews.push({ courseId: c.id, count: Math.min(due, cap) });
+    const d = nextDue(c, schedules, now);
+    if (d && (!nd || d < nd)) nd = d;
+  }
+  const finished = new Set(sessions.filter((s) => s.kind === 'lesson' && s.completed).map((s) => s.targetId));
+  const last = [...sessions].sort((a, b) => a.startedAt.localeCompare(b.startedAt)).at(-1);
+  let next: TodayPlan['next'] = null;
+  if (last) {
+    const order = [...courses].sort((a, b) => Number(b.id === last.courseId) - Number(a.id === last.courseId));
+    for (const c of order) {
+      const l = c.lessons.find((x) => x.status !== 'retired' && !finished.has(x.id));
+      if (l) { next = { courseId: c.id, lessonId: l.id }; break; }
+    }
+  }
+  const today = (iso: string | null) => !!iso && new Date(iso).getTime() >= dayStart;
+  return {
+    reviews,
+    next,
+    started: !!last,
+    reviewedToday: attempts.filter((a) => a.mode === 'review' && !isRead(a) && today(a.markedAt)).length,
+    lessonsToday: [...new Set(sessions.filter((s) => s.kind === 'lesson' && s.completed && today(s.endedAt)).map((s) => s.targetId))],
+    nextDue: reviews.length ? null : nd,
   };
 }
