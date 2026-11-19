@@ -67,10 +67,22 @@ function lastCompleted(kind: SessionKind, targetId: string): Date | null {
   return s.length ? new Date(s[s.length - 1].endedAt!) : null;
 }
 
-function page(title: string, back?: { href: string; label: string }): HTMLElement {
+/** A course's accent, by course id. A course not listed here keeps the base navy. The values are in style.css. */
+const THEME: Record<string, string> = { 'gd-econ': 'violet', learn: 'petrol' };
+const themeOf = (courseId: string) => THEME[courseId] ?? '';
+
+/** A row of segments, one per unit: filled where `isDone`, with the one at `now` (if given) half lit. Decoration only. */
+function segBar(total: number, isDone: (k: number) => boolean, now = -1): HTMLElement {
+  const bar = el('div', { class: 'seg-bar', 'aria-hidden': 'true' });
+  for (let k = 0; k < total; k++) bar.append(el('span', { class: `seg${isDone(k) ? ' on' : k === now ? ' now' : ''}` }));
+  return bar;
+}
+
+function page(title: string, back?: { href: string; label: string }, courseId = ''): HTMLElement {
   app.innerHTML = '';
   window.scrollTo(0, 0);
   const main = el('main');
+  if (themeOf(courseId)) main.dataset.theme = themeOf(courseId);
   if (back) main.append(el('a', { href: back.href, class: 'back' }, `&larr; ${esc(back.label)}`));
   main.append(el('h1', {}, esc(title)));
   app.append(main);
@@ -281,26 +293,30 @@ function home() {
   const finished = finishedLessonIds();
   if (!courses.length) main.append(el('p', {}, 'No courses in this build.'));
   for (const c of courses) {
-    const box = el('section', { class: 'card' });
+    const box = el('section', { class: 'card course' });
+    if (themeOf(c.id)) box.dataset.theme = themeOf(c.id);
     box.append(el('h2', {}, `<a href="${route('course', c.id)}">${esc(c.title)}</a>`));
+    const live = c.lessons.filter((l) => l.status !== 'retired');
+    const doneHere = live.filter((l) => finished.has(l.id)).length;
+    box.append(segBar(live.length, (k) => finished.has(live[k].id)));
+    box.append(el('p', { class: 'muted small' }, `${doneHere} of ${live.length} lessons finished. <a href="${route('course', c.id)}">All lessons</a>`));
     const due = dueItems(c, schedules);
     if (due.length) {
       const n = Math.min(due.length, reviewCap(getSettings()));
       box.append(el('p', {}, `<a class="button primary" href="${route('review', c.id)}">Review ${n} item${n === 1 ? '' : 's'}</a>`));
     } else {
       const nd = nextDue(c, schedules);
-      box.append(el('p', { class: 'muted' }, nd ? `Nothing to review now. Next review ${fmtDay(nd)}.` : 'Nothing to review yet. Items join the review list when you answer them in a lesson.'));
+      box.append(el('p', { class: 'muted small' }, nd ? `Nothing to review now. Next review ${fmtDay(nd)}.` : 'Nothing to review yet. Items join the review list when you answer them in a lesson.'));
     }
     const next = c.lessons.find((l) => l.status !== 'retired' && !finished.has(l.id));
-    if (c.placement && !lastCompleted('placement', c.placement.id)) {
+    if (c.placement && !doneHere && !lastCompleted('placement', c.placement.id)) {
       box.append(el('p', {}, `Not started? <a href="${route('placement', c.placement.id)}">Take the placement quiz</a> first.`));
     }
-    if (next) box.append(el('p', {}, `Next lesson: <a href="${route('lesson', next.id)}">${next.order}. ${esc(next.title)}</a>`));
-    box.append(el('p', { class: 'muted small' }, `${finished.size ? [...finished].filter((id) => c.lessons.some((l) => l.id === id)).length : 0} of ${c.lessons.length} lessons finished. <a href="${route('course', c.id)}">All lessons</a>`));
+    if (next) box.append(el('a', { class: 'next-lesson', href: route('lesson', next.id) }, `<span><small>Next lesson</small>${next.order}. ${esc(next.title)}</span>`));
     main.append(box);
   }
   main.append(flowCard());
-  main.append(nav());
+  main.append(nav('#/'));
 }
 
 /** Home card: the current lesson style, and a one-tap switch to another. */
@@ -326,27 +342,39 @@ function flowCard(): HTMLElement {
   return box;
 }
 
-function nav(): HTMLElement {
-  const n = el('nav', { class: 'bottom' });
-  n.innerHTML = `<a href="#/">Courses</a><a href="#/progress">Progress</a><a href="#/export">Export</a><a href="#/settings">Settings</a><a href="#/about">About</a>`;
+/** Icons for the bottom nav: 24 px line drawings, no text inside, so the link's name is its label alone. */
+const NAV: [href: string, label: string, icon: string][] = [
+  ['#/', 'Courses', '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>'],
+  ['#/progress', 'Progress', '<path d="M5 21V11M12 21V4M19 21v-7"/>'],
+  ['#/export', 'Export', '<path d="M12 15V3M7 8l5-5 5 5M4 15v5h16v-5"/>'],
+  ['#/settings', 'Settings', '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>'],
+  ['#/about', 'About', '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>'],
+];
+
+/** The bottom nav, on every top-level screen. `here` is the hash of the screen it sits on. */
+function nav(here: string): HTMLElement {
+  const n = el('nav', { class: 'bottom', 'aria-label': 'Main' });
+  n.innerHTML = NAV.map(([href, label, icon]) =>
+    `<a href="${href}"${href === here ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${icon}</svg>${label}</a>`).join('');
   return n;
 }
 
 function courseScreen(id: string) {
   const c = courses.find((x) => x.id === id);
   if (!c) return notFound();
-  const main = page(c.title, { href: '#/', label: 'Courses' });
+  const main = page(c.title, { href: '#/', label: 'Courses' }, c.id);
   main.append(el('p', { class: 'muted small' }, `Version ${esc(c.version)}, ${esc(c.status)}`));
   const finished = finishedLessonIds();
   const list = el('ol', { class: 'lessons' });
   if (c.placement) {
     const d = lastCompleted('placement', c.placement.id);
-    list.append(el('li', { class: 'placement' }, `<a href="${route('placement', c.placement.id)}">${esc(c.placement.title)}</a> <span class="muted small">${d ? `taken ${fmtDate(d)}` : ''}</span>`));
+    list.append(el('li', { class: `placement${d ? ' is-done' : ''}` }, `<span class="num" aria-hidden="true"><span>?</span></span><a href="${route('placement', c.placement.id)}">${esc(c.placement.title)}</a><span class="muted small">${d ? `taken ${fmtDate(d)}` : ''}</span>`));
   }
   for (const l of c.lessons) {
     if (l.status === 'retired') continue;
     const d = lastCompleted('lesson', l.id);
-    list.append(el('li', {}, `<a href="${route('lesson', l.id)}">${l.order}. ${esc(l.title)}</a> <span class="muted small">${finished.has(l.id) && d ? `finished ${fmtDate(d)}` : ''}</span>`));
+    const isDone = finished.has(l.id) && !!d;
+    list.append(el('li', isDone ? { class: 'is-done' } : {}, `<span class="num" aria-hidden="true"><span>${l.order}</span></span><a href="${route('lesson', l.id)}">${l.order}. ${esc(l.title)}</a><span class="muted small">${isDone ? `finished ${fmtDate(d!)}` : ''}</span>`));
   }
   main.append(el('h2', {}, 'Lessons'), list);
   const details = el('details', { class: 'course-page' });
@@ -360,7 +388,7 @@ function courseScreen(id: string) {
  * Missed items come back once at the end of the session.
  */
 function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesson | Placement, title: string) {
-  const main = page(title, { href: route('course', course.id), label: course.title });
+  const main = page(title, { href: route('course', course.id), label: course.title }, course.id);
   const run = new Run(kind, course, target.id);
   const mode: Mode = kind;
   // Lessons may run in a flow other than Classic; placement always runs as Classic.
@@ -404,6 +432,7 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
       },
       trust: () => trustStrip(target as Lesson),
       appeal: () => appealCard(run),
+      segBar,
     });
     return;
   }
@@ -442,7 +471,7 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
     run.finish();
     if (kind === 'placement') placementSummary(main, course, target as Placement, run);
     else {
-      const end = el('div', { class: 'card end' }, `<p>Lesson finished. ${run.marked} answer${run.marked === 1 ? '' : 's'} saved.</p><p>Its recall, why and scenario items now come back for review on later days.</p>`);
+      const end = el('div', { class: 'card end' }, `<h2>Lesson finished</h2><p>${run.marked} answer${run.marked === 1 ? '' : 's'} saved.</p><p>Its recall, why and scenario items now come back for review on later days.</p>`);
       end.append(appealCard(run), el('p', {}, '<a href="#/">Back to courses</a>'));
       main.append(end);
     }
@@ -489,7 +518,7 @@ function placementSummary(main: HTMLElement, course: Course, p: Placement, run: 
 function reviewScreen(courseId: string) {
   const c = courses.find((x) => x.id === courseId);
   if (!c) return notFound();
-  const main = page(`Review: ${c.title}`, { href: '#/', label: 'Courses' });
+  const main = page(`Review: ${c.title}`, { href: '#/', label: 'Courses' }, c.id);
   const queue = dueItems(c, computeSchedules(getAttempts())).slice(0, reviewCap(getSettings()));
   if (!queue.length) {
     main.append(el('p', {}, 'Nothing is due. <a href="#/">Back to courses</a>'));
@@ -499,8 +528,10 @@ function reviewScreen(courseId: string) {
   for (const l of new Set(queue.map((id) => findItem(id)?.lesson).filter((l): l is Lesson => !!l))) ensureLessonAssignments(l, ['L11']);
   const run = new Run('review', c, '');
   const total = queue.length;
-  const counter = el('p', { class: 'muted small' });
-  main.append(counter);
+  const counter = el('p', { class: 'muted small flow-count', role: 'status' });
+  const progress = el('div', { class: 'flow-progress' });
+  progress.append(counter);
+  main.append(progress);
   const holder = el('div');
   main.append(holder);
   let n = 0;
@@ -510,13 +541,15 @@ function reviewScreen(courseId: string) {
     if (!id) {
       if (run.missed.length) {
         holder.innerHTML = '';
-        counter.textContent = '';
+        progress.remove();
         return retryMissed(holder, run, end);
       }
       return end();
     }
     n++;
     counter.textContent = `${n} of ${total}`;
+    progress.querySelector('.seg-bar')?.remove();
+    progress.prepend(segBar(total, (k) => k < n - 1, n - 1));
     const found = findItem(id);
     if (!found) return next();
     holder.innerHTML = '';
@@ -533,8 +566,8 @@ function reviewScreen(courseId: string) {
     run.finish();
     const nd = nextDue(c, computeSchedules(getAttempts()));
     holder.innerHTML = '';
-    counter.textContent = '';
-    const endCard = el('div', { class: 'card end' }, `<p>Review finished. ${total} item${total === 1 ? '' : 's'}.</p>${nd ? `<p class="muted">Next review ${fmtDay(nd)}.</p>` : ''}`);
+    progress.remove();
+    const endCard = el('div', { class: 'card end' }, `<h2>Review finished</h2><p>${total} item${total === 1 ? '' : 's'}.</p>${nd ? `<p class="muted">Next review ${fmtDay(nd)}.</p>` : ''}`);
     endCard.append(appealCard(run), el('p', {}, '<a href="#/">Back to courses</a>'));
     holder.append(endCard);
   };
@@ -548,27 +581,31 @@ function progressScreen() {
   const attempts = getAttempts();
   for (const c of courses) {
     const p = courseProgress(c, attempts, finished);
-    const box = el('section', { class: 'card' });
+    const box = el('section', { class: 'card course' });
+    if (themeOf(c.id)) box.dataset.theme = themeOf(c.id);
     box.append(el('h2', {}, esc(c.title)));
     const late = p.late.score === null
       ? (p.lateStartsOn ? `No item is two weeks old yet. The first reaches two weeks on ${fmtDate(p.lateStartsOn)}.` : p.itemsStarted ? 'No answers two weeks after first sight yet.' : 'Starts two weeks after your first lesson.')
       : `${Math.round(p.late.score * 100)}% over ${p.late.answers} answer${p.late.answers === 1 ? '' : 's'} on ${p.late.items} item${p.late.items === 1 ? '' : 's'}.`;
-    box.append(el('dl', {}, `
-      <dt>Lessons finished</dt><dd>${p.lessonsFinished} of ${p.lessonsTotal}</dd>
-      <dt>Items learned</dt><dd>${p.itemsLearned} of ${p.itemsTotal}${p.itemsPartly ? `, ${p.itemsPartly} partly` : ''}</dd>
-      <dt>Items not yet answered</dt><dd>${p.itemsTotal - p.itemsStarted}</dd>
-      <dt>Late recall (${LATE_DAYS}+ days)</dt><dd>${late}</dd>`));
+    const tile = (n: string, label: string) => `<div class="tile"><span class="tile-n">${n}</span><span class="tile-l">${label}</span></div>`;
+    box.append(el('div', { class: 'tiles' },
+      tile(`${p.lessonsFinished} <small>of ${p.lessonsTotal}</small>`, 'Lessons finished')
+      + tile(`${p.itemsLearned} <small>of ${p.itemsTotal}</small>`, `Items learned${p.itemsPartly ? `, ${p.itemsPartly} partly` : ''}`)
+      + tile(String(p.itemsTotal - p.itemsStarted), 'Items not yet answered')));
+    box.append(el('p', { class: 'small' }, `<strong>Late recall (${LATE_DAYS}+ days).</strong> ${late}`));
     // Per lesson: learned of total.
     const sched = new Map<string, Mark>();
     for (const a of attempts) if ((a.mode === 'lesson' || a.mode === 'review') && !isRead(a) && a.mark) sched.set(a.itemId, a.mark);
     const rows = c.lessons.filter((l) => l.status !== 'retired').map((l) => {
       const ids = l.blocks.flatMap((b) => (b.kind === 'item' && b.item.type !== 'open' ? [b.item.id] : []));
       const right = ids.filter((id) => sched.get(id) === 'right').length;
-      return `<li>${l.order}. ${esc(l.title)}: <span class="muted">${right} of ${ids.length} learned</span></li>`;
+      const pct = ids.length ? Math.round((right / ids.length) * 100) : 0;
+      return `<li><div class="meter-head"><span>${l.order}. ${esc(l.title)}</span><span class="muted">${right} of ${ids.length} learned</span></div><div class="meter" aria-hidden="true"><span style="width:${pct}%"></span></div></li>`;
     });
-    box.append(el('ul', { class: 'small' }, rows.join('')));
+    box.append(el('ul', { class: 'lesson-meters' }, rows.join('')));
     main.append(box);
   }
+  main.append(nav('#/progress'));
 }
 
 function exportScreen() {
@@ -593,8 +630,11 @@ function exportScreen() {
     downloadExport(json, name);
     status.textContent = `Saved ${name}.`;
   };
-  main.append(el('div', { class: 'row' }), share, ' ', dl, status);
+  const row = el('div', { class: 'row' });
+  row.append(share, dl);
+  main.append(row, status);
   main.append(el('p', { class: 'muted small' }, 'Lost your answers? <a href="#/settings">Restore from an export file</a> in Settings.'));
+  main.append(nav('#/export'));
 }
 
 function settingsScreen() {
@@ -677,7 +717,7 @@ function settingsScreen() {
     file.value = '';
   };
   main.append(file, status);
-  main.append(nav());
+  main.append(nav('#/settings'));
 }
 
 function aboutScreen() {
@@ -703,6 +743,7 @@ function aboutScreen() {
     const d = document.getElementById('persist');
     if (d) d.textContent = p ? 'kept (the browser will not clear it on its own)' : 'not marked as kept yet; installing the app usually fixes this';
   })();
+  main.append(nav('#/about'));
 }
 
 function notFound() {

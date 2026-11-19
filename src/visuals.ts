@@ -1,7 +1,7 @@
 // Visuals: pictures drawn from the data in a lesson's "```visual" block. Inline SVG, no library and
 // no network, so they work offline. A picture restates figures the lesson text already gives; it
 // never adds a number of its own. Each is a viewBox 320 wide, so on a 375 px phone it scales to
-// the column and the 12 px text stays near 13 px. The `text` field is the accessible description.
+// the column and the 14 px text stays near 14 px. The `text` field is the accessible description.
 //
 // The geometry and wording are plain functions so they can be tested without a browser.
 
@@ -10,7 +10,7 @@ import type { BarRow, GapRow, SpanRow, Visual } from './types';
 type Of<K extends Visual['kind']> = Extract<Visual, { kind: K }>;
 
 const W = 320;
-const LINE = 15; // one line of 12 px text
+const LINE = 17; // one line of 14 px text
 
 export const escAttr = (s: string) =>
   s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
@@ -35,10 +35,10 @@ const f1 = (n: number) => String(Math.round(n * 10) / 10);
 
 // ---- gap-timeline ----
 
-const GH = 96;
+const GH = 100;
 const GL = 16;
 const GR = W - 16;
-const GY = 48;
+const GY = 52;
 
 const days = (n: number) => `${n} ${n === 1 ? 'day' : 'days'}`;
 
@@ -63,11 +63,11 @@ export function gapTimelineSvg(row: GapRow): string {
     + `<circle class="vis-dot" cx="${p.study}" cy="${GY}" r="5"/>`
     + `<circle class="vis-dot vis-review" cx="${r}" cy="${GY}" r="5"/>`
     + `<circle class="vis-dot" cx="${p.test}" cy="${GY}" r="5"/>`
-    + `<text x="${p.study}" y="${GY - 26}">Study</text>`
+    + `<text x="${p.study}" y="${GY - 30}">Study</text>`
     + `<text class="vis-strong" x="${p.study}" y="${GY - 12}">gap: ${days(row.gap)}</text>`
-    + `<text x="${p.test}" y="${GY - 26}" text-anchor="end">Test</text>`
+    + `<text x="${p.test}" y="${GY - 30}" text-anchor="end">Test</text>`
     + `<text x="${p.test}" y="${GY - 12}" text-anchor="end">delay: ${days(row.delay)}</text>`
-    + `<text x="${r}" y="${GY + 24}">Review</text>`
+    + `<text x="${r}" y="${GY + 26}">Review</text>`
     + `</svg>`;
 }
 
@@ -95,8 +95,8 @@ export function barsSvg(v: Of<'bars'>): string {
   let y = 6;
   let body = '';
   for (const r of v.rows) {
-    const label = wrap(r.label, 44);
-    body += lines(BL, y + 11, label);
+    const label = wrap(r.label, 38);
+    body += lines(BL, y + 12, label);
     y += label.length * LINE + 2;
     const mid = y + 8;
     const xv = x(r.value);
@@ -111,8 +111,8 @@ export function barsSvg(v: Of<'bars'>): string {
     body += `<text class="vis-strong" x="${BR + 8}" y="${mid + 4}">${escAttr(barValue(v.unit, r.value))}</text>`;
     y += 20;
     if (r.note) {
-      const note = wrap(r.note, 52);
-      body += lines(BL, y + 8, note, 'vis-note');
+      const note = wrap(r.note, 44);
+      body += lines(BL, y + 9, note, 'vis-note');
       y += note.length * LINE;
     }
     y += 12;
@@ -143,10 +143,10 @@ export function dotGridSvg(v: Of<'dot-grid'>): string {
     body += `<circle class="${k < v.marked ? 'vis-dot' : 'vis-dot-off'}" cx="${cx}" cy="${cy}" r="${r}"/>`;
   }
   let y = rows * gap + r + 20;
-  const marked = wrap(`${v.marked} ${v.markedLabel}`, 40);
+  const marked = wrap(`${v.marked} ${v.markedLabel}`, 36);
   body += `<circle class="vis-dot" cx="14" cy="${y - 4}" r="5"/>` + lines(28, y, marked);
   y += marked.length * LINE + 6;
-  const rest = wrap(v.restLabel, 40);
+  const rest = wrap(v.restLabel, 36);
   body += `<circle class="vis-dot-off" cx="14" cy="${y - 4}" r="5"/>` + lines(28, y, rest);
   y += rest.length * LINE + 4;
   return svgOpen(y, v) + body + '</svg>';
@@ -166,8 +166,8 @@ export function spansSvg(v: Of<'spans'>): string {
   let y = 6;
   let body = '';
   for (const r of v.rows as SpanRow[]) {
-    const label = wrap(r.label, 44);
-    body += lines(SL, y + 11, label);
+    const label = wrap(r.label, 38);
+    body += lines(SL, y + 12, label);
     y += label.length * LINE + 2;
     const mid = y + 7;
     const a = x(r.from);
@@ -178,8 +178,8 @@ export function spansSvg(v: Of<'spans'>): string {
     else body += `<line class="vis-stop" x1="${f1(b)}" y1="${mid - 8}" x2="${f1(b)}" y2="${mid + 8}"/>`;
     y += 20;
     if (r.note) {
-      const note = wrap(r.note, 52);
-      body += lines(SL, y + 8, note, 'vis-note');
+      const note = wrap(r.note, 44);
+      body += lines(SL, y + 9, note, 'vis-note');
       y += note.length * LINE;
     }
     y += 12;
