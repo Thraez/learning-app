@@ -530,6 +530,7 @@ function reviewScreen(courseId: string) {
   const total = queue.length;
   const counter = el('p', { class: 'muted small flow-count', role: 'status' });
   const progress = el('div', { class: 'flow-progress' });
+  progress.append(counter);
   main.append(progress);
   const holder = el('div');
   main.append(holder);
@@ -547,7 +548,8 @@ function reviewScreen(courseId: string) {
     }
     n++;
     counter.textContent = `${n} of ${total}`;
-    progress.replaceChildren(segBar(total, (k) => k < n - 1, n - 1), counter);
+    progress.querySelector('.seg-bar')?.remove();
+    progress.prepend(segBar(total, (k) => k < n - 1, n - 1));
     const found = findItem(id);
     if (!found) return next();
     holder.innerHTML = '';

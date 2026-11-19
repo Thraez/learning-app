@@ -38,6 +38,7 @@ export function flowScreen(d: FlowDeps) {
   const stage = el('div', { class: 'flow-stage', tabindex: '-1' });
   const next = el('button', { type: 'button', class: 'primary flow-next' }, 'Next');
   const progress = el('div', { class: 'flow-progress' });
+  progress.append(count);
   d.main.append(progress, stage, next);
 
   let n = 0;
@@ -47,7 +48,9 @@ export function flowScreen(d: FlowDeps) {
     stage.innerHTML = '';
     if (n === 0) stage.append(d.trust());
     count.textContent = `${n + 1} of ${total}`;
-    progress.replaceChildren(d.segBar(total, (k) => k < n, n), count);
+    // Only the bar is swapped: the count stays in place so its role="status" text is still announced.
+    progress.querySelector('.seg-bar')?.remove();
+    progress.prepend(d.segBar(total, (k) => k < n, n));
     // After the first screen the title steps back, so the screen's own text leads.
     d.main.classList.toggle('is-deep', n > 0);
     next.textContent = n === total - 1 ? 'Finish' : 'Next';
