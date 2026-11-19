@@ -101,6 +101,7 @@ passes when the DOI is registered; the publisher's page behind it is not fetched
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
 | `courses/<course-folder>/ledgers/NN-<slug>.md` | the claim ledger for the lesson of the same name; the app does not read it |
+| `courses/<course-folder>/ledgers/course-check.md` | the course-level check: for each lesson's main finding, the reviews, replications and contrary results a fresh context found, and whether the finding stands alone. A pointer to sources, never a source itself |
 | `src/` | the app: `main.ts` (screens), `flows.ts` and `flow-screen.ts` (the one-screen-at-a-time lesson flows), `visuals.ts` (pictures drawn from lesson data), `trust.ts` (check date and source lines), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress, item stages, the Today plan), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
 | `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
 | `src/sw-template.js` | service worker; the build fills in the file list |

@@ -60,6 +60,12 @@ Claude can revise the course. The goal is learning that lasts weeks.
     two were for a setting (L15) that no longer exists and six for block parsing that `test/flows.test.ts` covers
     now. The rest are back: the gap timeline's geometry and wording, and the spacing lesson's four rows. New: every
     visual block in both courses draws as one SVG with a description and stays inside its 320-wide frame.
+  - **Course-level check** (19 Nov, this change): a ledger proves a lesson matches its paper, not that the paper
+    is typical. For each lesson's main finding, a fresh context searched for reviews, replications and contrary
+    results and wrote `courses/<course-folder>/ledgers/course-check.md`. Course 1: five findings stand alone
+    (endowment, sinks, content usage, segments, simulation) and seven are supported, most with a qualifier. Course
+    2: all five are supported, each with a limit. No lesson text changed; the edits the reports call for are listed
+    under "Lesson edits from the course check" below.
 - Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
   Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
   lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
@@ -91,14 +97,58 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
   `conic-gradient`, untested in Safari.
 - A Classic lesson was not walked to its end after the design pass, and lessons 6 to 12 were not walked at all.
 
+- The course check read almost every outside source at the abstract only, and its "stands alone" verdicts rest on
+  title scans of citing papers. The orchestrator sampled seven cited abstracts through OpenAlex and all matched;
+  the figures the reports took from full texts (Yang 2021's 0.321, Higham 2022's d = 0.705, Palmer 2025) were not
+  rechecked. Yang 2021 was read from a third-party copy. Each report ends with its own "Could not open" list.
+
+## Lesson edits from the course check
+
+Not made yet. They go in with the M4 rewrite of each lesson, since an edit to a factual sentence removes `checked`
+and M4 rewrites the same files. Each new sentence needs its source opened and a ledger row from a fresh checker;
+the report is a pointer to the source, never the source itself.
+
+Course 1 (`courses/game-economy-and-prediction/ledgers/course-check.md`):
+
+- 01 endowment: say no replication of a starting-grant test was found, so this is one test in one game.
+- 02 sinks: say no other study of a sink's effect on prices was found and the preprint has no peer-reviewed version.
+- 03 content usage: say no study of content usage in another game was found.
+- 04 churn time: none.
+- 05 spend skew: add that a study of 2,873 mobile games found spend concentration ranging from near uniform to
+  extreme, so one game's figure, the 2% whale figure included, does not carry over.
+- 06 predict vs act: say the free-currency null is one A/B test with no replication found, while a tested difficulty
+  change in another game did raise retention.
+- 07 segments: say the comparison has not been repeated by another group.
+- 08 uplift: say uplift is not always better: a theory preprint finds conditions where targeting by risk wins, and a
+  profit study adds that customer value and offer cost matter.
+- 09 survival: say the model rankings come from single games.
+- 10 simulation: say no study comparing such a simulation with real play was found.
+- 11 EOMM: say later independent work points the same way, but EOMM's own figures remain simulation only.
+- 12 vulnerable: say income also predicts loot box spend in one reanalysis, the link did not replicate in a Chinese
+  sample, and the sources are cross-sectional self-report.
+
+Course 2 (`courses/learning-how-to-learn/ledgers/course-check.md`):
+
+- 01 fluency: say beliefs about what works, not only the feel of fluency, drive the misjudgments, and that the
+  interleaving benefit shown with paintings reversed for words in a meta-analysis.
+- 02 testing: say the recall over recognition advantage comes from mostly lab studies, and a classroom meta-analysis
+  of 222 studies found no difference between recall and recognition quizzes.
+- 03 spacing: may add that an independent classroom study found the same direction; the exact gaps have no outside
+  replication.
+- 04 relearning: say the evidence is nearly all from one lab, which found only a small gain for math procedures,
+  and the one independent classroom study compared relearning with restudy, not with one-session drilling.
+- 05 transfer: add the classroom meta-analysis's significant result for untested material, against the
+  not-significant figure the lesson quotes.
+
 ## Waiting on the user
 
 1. Redo lessons 1 to 4 of course 1 in the new text and say whether they read better than before.
 
 ## Next (the map the user saw on 18 Nov; M1 to M3 are done, M4 and M5 remain)
 
-- M4: the plain style for the other 13 lessons, after the user says whether lessons 1 to 4 read better. M5: a
-  course-level check for reviews, replications and contrary results, then the debts under "Could not verify".
+- M4: the plain style for the other 13 lessons, after the user says whether lessons 1 to 4 read better, with the
+  lesson edits from the course check. M5 done so far: the dead-link check, the course-level check, the visual
+  tests. M5 left: the debts under "Could not verify" and course 2 lessons 6 to 12.
 - Not decided: Stepped, Predict first and Case first have no "try the missed items again" step; Classic and reviews do.
 
 - Blocks and the new text style for the other 13 lessons (course 1 lessons 5 to 12, course 2 lessons 1, 2, 4, 5).
