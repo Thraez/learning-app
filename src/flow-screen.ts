@@ -20,6 +20,8 @@ export interface FlowDeps {
   answeredCard(item: Item): { card: HTMLElement; mark: Mark | null } | null;
   trust(): HTMLElement;
   appeal(): HTMLElement;
+  /** A row of `total` segments, filled where `isDone`, half lit at `now`. */
+  segBar(total: number, isDone: (k: number) => boolean, now?: number): HTMLElement;
 }
 
 /** The decimals a step needs, so 0.5 shows "6.5" and 1 shows "7". */
@@ -35,7 +37,8 @@ export function flowScreen(d: FlowDeps) {
   const count = el('p', { class: 'muted small flow-count', role: 'status' });
   const stage = el('div', { class: 'flow-stage', tabindex: '-1' });
   const next = el('button', { type: 'button', class: 'primary flow-next' }, 'Next');
-  d.main.append(count, stage, next);
+  const progress = el('div', { class: 'flow-progress' });
+  d.main.append(progress, stage, next);
 
   let n = 0;
 
@@ -44,6 +47,9 @@ export function flowScreen(d: FlowDeps) {
     stage.innerHTML = '';
     if (n === 0) stage.append(d.trust());
     count.textContent = `${n + 1} of ${total}`;
+    progress.replaceChildren(d.segBar(total, (k) => k < n, n), count);
+    // After the first screen the title steps back, so the screen's own text leads.
+    d.main.classList.toggle('is-deep', n > 0);
     next.textContent = n === total - 1 ? 'Finish' : 'Next';
     const lock = renderScreen(s, stage, d, marks, () => { next.disabled = false; });
     next.disabled = lock;
@@ -57,15 +63,17 @@ export function flowScreen(d: FlowDeps) {
 
   const finish = () => {
     stage.innerHTML = '';
-    count.remove();
+    progress.remove();
     next.remove();
+    d.main.classList.add('is-deep');
     d.run.finish();
     const tally = { right: 0, partly: 0, wrong: 0, read: 0 };
     for (const m of marks.values()) { if (m === null) tally.read++; else tally[m]++; }
-    const parts = [`${tally.right} right`, `${tally.partly} partly`, `${tally.wrong} wrong`];
     const end = el('div', { class: 'card end' });
-    end.append(el('p', {}, `Lesson finished. ${d.run.marked} answer${d.run.marked === 1 ? '' : 's'} saved.`));
-    end.append(el('p', {}, `Marks: ${parts.join(', ')}${tally.read ? `. Read, not asked: ${tally.read}` : ''}.`));
+    end.append(el('h2', {}, 'Lesson finished'));
+    end.append(el('div', { class: 'tiles', role: 'group', 'aria-label': 'Your marks' }, (['right', 'partly', 'wrong'] as const)
+      .map((m) => `<div class="tile tile-${m}"><span class="tile-n">${tally[m]}</span><span class="tile-l">${m}</span></div>`).join('')));
+    end.append(el('p', {}, `${d.run.marked} answer${d.run.marked === 1 ? '' : 's'} saved${tally.read ? `. Read, not asked: ${tally.read}` : ''}.`));
     end.append(el('p', {}, 'Its recall, why and scenario items now come back for review on later days.'));
     end.append(d.appeal(), el('p', {}, '<a href="#/">Back to courses</a>'));
     stage.append(end);
@@ -123,6 +131,7 @@ function renderCheck(s: Extract<Screen, { kind: 'check' }>, stage: HTMLElement, 
         else if (k === idx) x.classList.add('is-wrong');
       });
       const right = c.options.find((x) => x.correct)!;
+      feedback.classList.add(o.correct ? 'is-right' : 'is-wrong');
       feedback.append(el('p', { class: o.correct ? 'marked marked-right' : 'marked marked-wrong' }, o.correct ? 'Right.' : 'Not quite.'));
       feedback.append(el('p', {}, esc(o.why)));
       if (!o.correct) feedback.append(el('p', {}, `<strong>The right answer:</strong> ${esc(right.text)} ${esc(right.why)}`));
@@ -159,8 +168,9 @@ function renderPredict(s: Extract<Screen, { kind: 'predict' }>, stage: HTMLEleme
     respond(d, p.id, guess);
     slider.disabled = true;
     commit.remove();
-    reveal.append(el('p', {}, `<strong>Your guess:</strong> ${esc(fmt(guess))}`));
-    reveal.append(el('p', {}, `<strong>The figure:</strong> ${esc(p.answerText)}`));
+    reveal.append(el('div', { class: 'predict-pair' },
+      `<div class="tile"><span class="tile-l">Your guess</span>${esc(fmt(guess))}</div>`
+      + `<div class="tile is-figure"><span class="tile-l">The figure</span>${esc(p.answerText)}</div>`));
     reveal.append(el('p', {}, esc(p.reveal)));
     if (s.visual) reveal.append(renderVisual(s.visual));
     unlock();
