@@ -20,7 +20,10 @@ import {
 import { parseExportFile, restoreExport } from './restore';
 import { placementResult } from './placement';
 import { trustView, type SourceView } from './trust';
-import { computeSchedules, courseProgress, dueItems, nextDue, LATE_DAYS } from './scheduler';
+import {
+  computeSchedules, courseMap, courseProgress, dueItems, itemStages, nextDue, todayPlan, LATE_DAYS, STAGES,
+  type CourseMap, type Stage,
+} from './scheduler';
 import { buildExport, deliverExport, downloadExport, exportFileName } from './export';
 
 declare const __BUILD_ID__: string;
@@ -76,6 +79,16 @@ function segBar(total: number, isDone: (k: number) => boolean, now = -1): HTMLEl
   const bar = el('div', { class: 'seg-bar', 'aria-hidden': 'true' });
   for (let k = 0; k < total; k++) bar.append(el('span', { class: `seg${isDone(k) ? ' on' : k === now ? ' now' : ''}` }));
   return bar;
+}
+
+/** The stages an item moves through. A label says what happened: the longest gap it was answered right across. */
+const STAGE_LABEL: Record<Stage, string> = { new: 'New', read: 'Read', answered: 'Answered', day: '1 day+', week: '1 week+', late: '2 weeks+' };
+const pip = (stage: Stage) => `<span class="pip s-${stage}" aria-hidden="true"></span>`;
+
+/** Item counts by stage, with their marks. "Read" shows only when an item sits there. */
+function ladder(counts: CourseMap['counts']): HTMLElement {
+  return el('ul', { class: 'ladder' }, STAGES.filter((st) => st !== 'read' || counts.read)
+    .map((st) => `<li>${pip(st)}<strong>${counts[st]}</strong> ${STAGE_LABEL[st]}</li>`).join(''));
 }
 
 function page(title: string, back?: { href: string; label: string }, courseId = ''): HTMLElement {
@@ -287,11 +300,48 @@ function appealCard(run: Run): HTMLElement {
 
 // ---------- screens ----------
 
+/** Home's first card: what is due now, then one new lesson. Built from the answers and sessions on the phone. */
+function todayCard(): HTMLElement {
+  const plan = todayPlan(courses, getAttempts(), getSessions(), reviewCap(getSettings()), startOfDay(new Date()));
+  const box = el('section', { class: 'card today' });
+  box.append(el('h2', {}, 'Today'));
+  const title = (id: string) => esc(courses.find((c) => c.id === id)?.title ?? '');
+  const done: string[] = [];
+  if (plan.reviewedToday) done.push(`${plan.reviewedToday} item${plan.reviewedToday === 1 ? '' : 's'} reviewed`);
+  for (const id of plan.lessonsToday) {
+    const f = findLesson(id);
+    if (f) done.push(`lesson ${f.lesson.order} of ${esc(f.course.title)} finished`);
+  }
+  if (done.length) box.append(el('p', { class: 'today-done small' }, `Done today: ${done.join(', ')}.`));
+  for (const r of plan.reviews) {
+    const row = el('div', { class: 'today-row' });
+    if (themeOf(r.courseId)) row.dataset.theme = themeOf(r.courseId);
+    row.append(el('a', { class: 'button primary', href: route('review', r.courseId) }, `Review ${r.count} item${r.count === 1 ? '' : 's'}`), el('span', { class: 'muted small' }, title(r.courseId)));
+    box.append(row);
+  }
+  if (!plan.started) {
+    box.append(el('p', {}, 'Nothing here yet. Pick a course below: its placement quiz shows where to start, or go straight to lesson 1.'));
+  } else if (!plan.reviews.length) {
+    box.append(el('p', { class: 'muted small' }, plan.nextDue ? `Nothing to review now. Next review ${fmtDay(plan.nextDue)}.` : 'Nothing to review yet. Items join the review list when you answer them in a lesson.'));
+  }
+  if (plan.next) {
+    const f = findLesson(plan.next.lessonId)!;
+    const label = plan.lessonsToday.length ? 'Another lesson' : plan.reviews.length ? 'Then one new lesson' : 'One new lesson';
+    const a = el('a', { class: 'next-lesson', href: route('lesson', f.lesson.id) }, `<span><small>${label}</small>${f.lesson.order}. ${esc(f.lesson.title)}</span>`);
+    if (themeOf(f.course.id)) a.dataset.theme = themeOf(f.course.id);
+    box.append(a);
+  }
+  box.dataset.next = plan.next?.courseId ?? '';
+  return box;
+}
+
 function home() {
   const main = page('Learning');
-  const schedules = computeSchedules(getAttempts());
   const finished = finishedLessonIds();
+  const attempts = getAttempts();
   if (!courses.length) main.append(el('p', {}, 'No courses in this build.'));
+  const today = todayCard();
+  if (courses.length) main.append(today);
   for (const c of courses) {
     const box = el('section', { class: 'card course' });
     if (themeOf(c.id)) box.dataset.theme = themeOf(c.id);
@@ -300,19 +350,17 @@ function home() {
     const doneHere = live.filter((l) => finished.has(l.id)).length;
     box.append(segBar(live.length, (k) => finished.has(live[k].id)));
     box.append(el('p', { class: 'muted small' }, `${doneHere} of ${live.length} lessons finished. <a href="${route('course', c.id)}">All lessons</a>`));
-    const due = dueItems(c, schedules);
-    if (due.length) {
-      const n = Math.min(due.length, reviewCap(getSettings()));
-      box.append(el('p', {}, `<a class="button primary" href="${route('review', c.id)}">Review ${n} item${n === 1 ? '' : 's'}</a>`));
-    } else {
-      const nd = nextDue(c, schedules);
-      box.append(el('p', { class: 'muted small' }, nd ? `Nothing to review now. Next review ${fmtDay(nd)}.` : 'Nothing to review yet. Items join the review list when you answer them in a lesson.'));
+    const map = courseMap(c, attempts);
+    if (map.lessons.some((l) => l.started)) {
+      box.append(ladder(map.counts));
+      box.append(el('p', { class: 'muted small' }, `${map.explained} of ${map.lessons.length} lessons explained. <a href="#/progress">The map</a>`));
     }
-    const next = c.lessons.find((l) => l.status !== 'retired' && !finished.has(l.id));
+    const next = live.find((l) => !finished.has(l.id));
     if (c.placement && !doneHere && !lastCompleted('placement', c.placement.id)) {
       box.append(el('p', {}, `Not started? <a href="${route('placement', c.placement.id)}">Take the placement quiz</a> first.`));
     }
-    if (next) box.append(el('a', { class: 'next-lesson', href: route('lesson', next.id) }, `<span><small>Next lesson</small>${next.order}. ${esc(next.title)}</span>`));
+    // The course whose next lesson is on the Today card does not repeat it here.
+    if (next && today.dataset.next !== c.id) box.append(el('a', { class: 'next-lesson', href: route('lesson', next.id) }, `<span><small>Next lesson</small>${next.order}. ${esc(next.title)}</span>`));
     main.append(box);
   }
   main.append(flowCard());
@@ -528,6 +576,8 @@ function reviewScreen(courseId: string) {
   for (const l of new Set(queue.map((id) => findItem(id)?.lesson).filter((l): l is Lesson => !!l))) ensureLessonAssignments(l, ['L11']);
   const run = new Run('review', c, '');
   const total = queue.length;
+  const asked = [...queue];
+  const before = itemStages(getAttempts());
   const counter = el('p', { class: 'muted small flow-count', role: 'status' });
   const progress = el('div', { class: 'flow-progress' });
   progress.append(counter);
@@ -567,7 +617,12 @@ function reviewScreen(courseId: string) {
     const nd = nextDue(c, computeSchedules(getAttempts()));
     holder.innerHTML = '';
     progress.remove();
-    const endCard = el('div', { class: 'card end' }, `<h2>Review finished</h2><p>${total} item${total === 1 ? '' : 's'}.</p>${nd ? `<p class="muted">Next review ${fmtDay(nd)}.</p>` : ''}`);
+    const after = itemStages(getAttempts());
+    const rank = (m: Map<string, Stage>, id: string) => STAGES.indexOf(m.get(id) ?? 'new');
+    const up = asked.filter((id) => rank(after, id) > rank(before, id)).length;
+    const back = asked.filter((id) => rank(after, id) < rank(before, id)).length;
+    const moved = [up ? `${up} moved up a stage` : '', back ? `${back} went back to Answered` : ''].filter(Boolean).join(', ');
+    const endCard = el('div', { class: 'card end' }, `<h2>Review finished</h2><p>${total} item${total === 1 ? '' : 's'}${moved ? `: ${moved}` : ''}.</p>${nd ? `<p class="muted">Next review ${fmtDay(nd)}.</p>` : ''}`);
     endCard.append(appealCard(run), el('p', {}, '<a href="#/">Back to courses</a>'));
     holder.append(endCard);
   };
@@ -577,10 +632,12 @@ function reviewScreen(courseId: string) {
 function progressScreen() {
   const main = page('Progress', { href: '#/', label: 'Courses' });
   main.append(el('p', { class: 'muted' }, `What you can recall, not how often you open the app. "Learned" means your last answer to the item was right. Late recall counts answers given ${LATE_DAYS} or more days after you first answered the item.`));
+  main.append(el('p', { class: 'muted small' }, 'Each mark below is one item. It fills as you answer the item right after a longer gap: a day, a week, two weeks. A miss sends it back to Answered. A lesson counts as explained when your last answer to each of its why and scenario questions was marked right, and the marking is yours.'));
   const finished = finishedLessonIds();
   const attempts = getAttempts();
   for (const c of courses) {
     const p = courseProgress(c, attempts, finished);
+    const map = courseMap(c, attempts);
     const box = el('section', { class: 'card course' });
     if (themeOf(c.id)) box.dataset.theme = themeOf(c.id);
     box.append(el('h2', {}, esc(c.title)));
@@ -591,18 +648,18 @@ function progressScreen() {
     box.append(el('div', { class: 'tiles' },
       tile(`${p.lessonsFinished} <small>of ${p.lessonsTotal}</small>`, 'Lessons finished')
       + tile(`${p.itemsLearned} <small>of ${p.itemsTotal}</small>`, `Items learned${p.itemsPartly ? `, ${p.itemsPartly} partly` : ''}`)
-      + tile(String(p.itemsTotal - p.itemsStarted), 'Items not yet answered')));
+      + tile(`${map.explained} <small>of ${map.lessons.length}</small>`, 'Lessons explained')));
+    box.append(ladder(map.counts));
     box.append(el('p', { class: 'small' }, `<strong>Late recall (${LATE_DAYS}+ days).</strong> ${late}`));
-    // Per lesson: learned of total.
-    const sched = new Map<string, Mark>();
-    for (const a of attempts) if ((a.mode === 'lesson' || a.mode === 'review') && !isRead(a) && a.mark) sched.set(a.itemId, a.mark);
-    const rows = c.lessons.filter((l) => l.status !== 'retired').map((l) => {
-      const ids = l.blocks.flatMap((b) => (b.kind === 'item' && b.item.type !== 'open' ? [b.item.id] : []));
-      const right = ids.filter((id) => sched.get(id) === 'right').length;
-      const pct = ids.length ? Math.round((right / ids.length) * 100) : 0;
-      return `<li><div class="meter-head"><span>${l.order}. ${esc(l.title)}</span><span class="muted">${right} of ${ids.length} learned</span></div><div class="meter" aria-hidden="true"><span style="width:${pct}%"></span></div></li>`;
+    // The map: one row per lesson, one mark per item.
+    const rows = map.lessons.map((m) => {
+      const l = c.lessons.find((x) => x.id === m.lessonId)!;
+      const said = STAGES.filter((st) => m.items.some((it) => it.stage === st)).map((st) => `${m.items.filter((it) => it.stage === st).length} ${STAGE_LABEL[st]}`).join(', ');
+      const status = m.explained ? '<span class="ok">Explained</span>' : `<span class="muted">${m.started ? `${m.right} of ${m.items.length} right` : 'Not started'}</span>`;
+      return `<li><div class="meter-head"><a href="${route('lesson', l.id)}">${l.order}. ${esc(l.title)}</a>${status}</div><div class="pips" role="img" aria-label="${m.items.length} items: ${said}">${m.items.map((it) => pip(it.stage)).join('')}</div></li>`;
     });
-    box.append(el('ul', { class: 'lesson-meters' }, rows.join('')));
+    box.append(el('h3', {}, 'What you can explain'));
+    box.append(el('ul', { class: 'lesson-meters kmap' }, rows.join('')));
     main.append(box);
   }
   main.append(nav('#/progress'));

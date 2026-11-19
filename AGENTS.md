@@ -98,7 +98,7 @@ Not built: a dead-link check on pull requests. The build checks that a link is p
 | `courses/<course-folder>/placement-quiz.md` | placement quiz, each item mapped to a lesson |
 | `courses/<course-folder>/lessons/NN-<slug>.md` | one lesson per file; the `NN` prefix is reading order only, the ID is in the front matter |
 | `courses/<course-folder>/ledgers/NN-<slug>.md` | the claim ledger for the lesson of the same name; the app does not read it |
-| `src/` | the app: `main.ts` (screens), `flows.ts` and `flow-screen.ts` (the one-screen-at-a-time lesson flows), `visuals.ts` (pictures drawn from lesson data), `trust.ts` (check date and source lines), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
+| `src/` | the app: `main.ts` (screens), `flows.ts` and `flow-screen.ts` (the one-screen-at-a-time lesson flows), `visuals.ts` (pictures drawn from lesson data), `trust.ts` (check date and source lines), `store.ts` (answers on the phone), `scheduler.ts` (review schedule, progress, item stages, the Today plan), `variants.ts` (experiments, whole-app settings), `placement.ts` (placement result), `export.ts`, `restore.ts` |
 | `src/build/parse-courses.ts` | build-time parser that turns `courses/` into app data |
 | `src/sw-template.js` | service worker; the build fills in the file list |
 | `test/` | parser tests against the real course files, scheduler and export tests |

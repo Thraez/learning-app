@@ -237,6 +237,30 @@ ul.lesson-meters li { padding: 0.45rem 0; border-top: 1px solid var(--line); fon
 .meter-head .muted { white-space: nowrap; }
 .meter { height: 5px; border-radius: 3px; background: var(--line); margin-top: 0.3rem; overflow: hidden; }
 .meter > span { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.meter-head a { text-decoration: none; color: var(--fg); }
+.meter-head .ok { color: var(--right); font-weight: 600; white-space: nowrap; }
+.meter-head .ok::before {
+  content: ""; display: inline-block; width: 0.95em; height: 0.95em; margin-right: 0.2em; vertical-align: -0.12em; background: currentColor;
+  -webkit-mask: var(--i-check) center / contain no-repeat; mask: var(--i-check) center / contain no-repeat;
+}
+.card h3 { font-size: 1rem; margin: 1.1rem 0 0; }
+ul.lesson-meters.kmap { margin-top: 0.4rem; }
+/* One mark per item. The fill is the stage, so the meaning does not rest on colour. */
+.pip { display: inline-block; flex: none; width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid var(--accent); }
+.pip.s-new { border: 1.5px dashed var(--muted); }
+.pip.s-read { border-color: var(--muted); }
+.pip.s-answered { background: radial-gradient(circle, var(--accent) 0 28%, transparent 33%); }
+.pip.s-day { background: conic-gradient(var(--accent) 33.4%, transparent 0); }
+.pip.s-week { background: conic-gradient(var(--accent) 66.7%, transparent 0); }
+.pip.s-late { background: var(--accent); }
+.pips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.4rem; }
+.ladder { list-style: none; padding: 0; margin: 0.7rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); gap: 0.3rem 0.6rem; font-size: 0.8rem; color: var(--muted); }
+.ladder li { display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
+.ladder strong { color: var(--fg); }
+.today { border-top: 4px solid var(--accent); }
+.today [data-theme] { --tint: color-mix(in srgb, var(--accent) 9%, var(--card)); }
+.today-row { display: flex; align-items: center; gap: 0.7rem; margin: 0.6rem 0; flex-wrap: wrap; }
+.today-done { color: var(--right); font-weight: 600; }
 label.switch { display: flex; gap: 0.6rem; align-items: flex-start; }
 label.switch input { flex: none; margin-top: 0.2rem; }
 .end h2 { margin-top: 0.15rem; }
