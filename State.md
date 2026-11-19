@@ -52,6 +52,10 @@ Claude can revise the course. The goal is learning that lasts weeks.
     one row per lesson, one mark per item, and "Explained" when the last answer to each why and scenario question
     was marked right. No streaks, points or day counts. The rules are `stageOf`, `courseMap` and `todayPlan` in
     `src/scheduler.ts`.
+  - **Dead-link check** (19 Nov, this change): every pull request opens the `url` of each source in the lesson
+    front matter (`scripts/check-links.mjs`, `npm run links`). A 404 or 410 fails the PR; a blocked or timed-out
+    link is listed apart and does not. Links inside lesson text are not checked, and a `doi.org` link is judged by
+    whether the DOI is registered, not by the publisher's page.
 - Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
   Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
   lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
@@ -97,7 +101,6 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 - An interest interview with the user: `Workspace/Learning/Interest Profile.md` is mostly blank.
 - Course 2 lessons 6 to 12, written in the new style from the start.
 - First export and the first course revision from it. A real phone check.
-- A dead-link check on pull requests is not built; the build checks only that a link is present and `https`.
 
 ## Open questions
 
