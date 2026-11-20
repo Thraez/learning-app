@@ -71,7 +71,7 @@ A churn model correctly flags the players most likely to quit next week. Marketi
 
 <details>
 <summary>Model answer</summary>
-Being likely to leave and being moved by a gift are different things. Some flagged players will leave whatever you do and some would have stayed anyway, and the model ranks only how likely each is to leave. Whether the gift changes anything needs its own test (my summary, grade C). In one published A/B test, giving out free in-game currency did not significantly change churn or spending. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
+Being likely to leave and being moved by a gift are different things. Some flagged players will leave whatever you do and some would have stayed anyway, and the model ranks only how likely each is to leave. Whether the gift changes anything needs its own test (my summary, grade C). In one published A/B test, giving out free in-game currency did not significantly change the churn rate or monetization. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
 </details>
 
 ### gd-econ/placement/p14 · scenario

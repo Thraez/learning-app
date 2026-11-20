@@ -172,7 +172,7 @@ The paper's outcomes were logging in the next day and playing more games over th
 
 <!-- break -->
 
-How does this fit lesson 6? There, free currency in an A/B test had no significant effect on churn or spending.
+How does this fit lesson 6? There, free currency in an A/B test had no significant effect on the churn rate or monetization.
 
 One possible reading, mine and untested (grade C): an average over everyone can hide a group that does respond. The lesson 6 study does not report such a group.
 
