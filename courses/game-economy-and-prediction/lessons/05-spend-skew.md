@@ -23,10 +23,10 @@ sources:
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
     url: https://doi.org/10.1109/BigData.2018.8622151
     grade: A
-    tier: 1
+    tier: 2
     read: "full text, arXiv copy"
-    caveat: "The 2% and 50% whale figure is stated without the count behind it."
-    note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without the count behind it
+    caveat: "In the IEEE Big Data 2018 proceedings, but its review was not confirmed; the 2% and 50% whale figure has no count behind it."
+    note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without the count behind it; tier 2 because the paper is not on the conference's list of accepted main-conference papers and the session it came through was not found
   - cite: "Zendle, Flick, Deterding, Cutting, Petrovskaya, Drachen (2023). The Many Faces of Monetisation: Understanding the Diversity and Extremity of Player Spending in Mobile Games via Massive-scale Transactional Analysis. ACM Games: Research and Practice 1(1), 1-28. DOI 10.1145/3582927."
     url: https://doi.org/10.1145/3582927
     grade: A
@@ -104,14 +104,14 @@ options:
 
 <!-- break -->
 
-A second figure comes from one studio. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) worked at Yokozuna Data, a Keywords Studio, and studied the mobile role-playing game Age of Ishtaria.
+A second figure comes from one studio. [Chen and colleagues](https://doi.org/10.1109/BigData.2018.8622151) worked at Yokozuna Data, a Keywords Studio, and studied the mobile role-playing game Age of Ishtaria. Treat the paper as not peer-reviewed: I could not confirm how it was reviewed.
 
 They write that whales, the top spenders, are "around 2%" of all players and "may provide up to 50%" of a game's revenue.
 
 The paper states no player total and no whale count behind the 2%, and does not say how it was arrived at. So treat it as the authors' statement (grade B).
 
 ```sure
-The paper sets its whale line from the first months of data: players are sorted by what they spent in a given month, and the line is drawn where cumulative spend reaches 50% of the total revenue. It repeats this for a number of months and averages the thresholds. No table gives how many whales there were. Figure 3 plots numbers of paying users and whales by lifetime value, but the paper does not connect it to the 2%. The paper was published at IEEE Big Data 2018; I read the full text as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799).
+The paper sets its whale line from the first months of data: players are sorted by what they spent in a given month, and the line is drawn where cumulative spend reaches 50% of the total revenue. It repeats this for a number of months and averages the thresholds. No table gives how many whales there were. Figure 3 plots numbers of paying users and whales by lifetime value, but the paper does not connect it to the 2%. Crossref lists the paper in the IEEE Big Data 2018 proceedings, and I read the full text as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799). The conference says it reviews papers single-blind, but this paper is not on its list of accepted main-conference papers. So it probably came in through a workshop or other session, which I could not find, and I could not confirm its review.
 ```
 
 <!-- break -->
@@ -243,8 +243,8 @@ Deep neural networks against parametric models such as Pareto/NBD. The neural ne
 
 - [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed record, through Europe PMC). Grade A, tier 1. The top 5% and $100 figures are from the abstract. The "under $20" line is the abstract's background, not a pooled result.
 - [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract only, read through the OpenAlex record of the publisher abstract. Grade A for the abstract, tier 1. The AAAI page and PDF sit behind a bot check, so the paper's own share of paying players, which game or games the data came from and whether the second model was fitted on payers only are not given.
-- [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI as the published version. Grade A, tier 1 for the method and results. Grade B for the "around 2%, up to 50%" whale figure, which the paper states without the count behind it.
+- [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI as the published version. Grade A for the method and results. Grade B for the "around 2%, up to 50%" whale figure, which the paper states without the count behind it. Tier 2: Crossref lists it in the IEEE Big Data 2018 proceedings at pages 2134 to 2140, but it is not on the conference's list of accepted main-conference papers, and the session it came through and that session's review were not found.
 - [Zendle et al. 2023, ACM Games: Research and Practice](https://doi.org/10.1145/3582927), abstract of the published version read from the OpenAlex record. Grade A for the abstract's claims only. Tier 1 as an article in an ACM journal, but I could not open the journal's own statement of its review process, so that tier is not confirmed. The full text was not read.
 - Cut: the Swrve press release figures from the earlier draft. A vendor press release can't carry a fact under this course's standard.
-- Tier 1 for all four sources rests on the venue alone: a journal (Close, Zendle) or a conference proceedings (Sifa at AIIDE, Chen at IEEE Big Data), as listed at Crossref. I did not open any venue's own statement of its review process.
+- Tier 1 for Close and Sifa rests on each venue's general statement about its papers, opened by a checker in archived copies: the Addictive Behaviors guide for authors calls it a peer-reviewed journal, and the AIIDE 2015 call for papers asks for research papers for double blind review, with this paper on the conference's accepted list. Neither statement names the paper.
 - The three concentration figures count different groups: loot box buyers in surveys (Close), all players as one studio states it (Chen), and spenders in transaction records (Zendle). They are not comparable with each other.
