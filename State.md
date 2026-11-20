@@ -11,7 +11,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
 ## Where it stands
 
 - Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main`. PRs #1 to #12 and
-  #14 to #22 are merged; #13 was closed as superseded by #15.
+  #14 to #23 are merged; #13 was closed as superseded by #15.
 - App: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load, installable. Course
   list, lessons, placement quiz with a "where to start" summary, review sessions, self-marking, Progress (late recall
   at 14+ days), Export as JSON (`docs/export-schema.md`, schema 2 extended), restore from an export that only adds.
@@ -60,7 +60,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
     two were for a setting (L15) that no longer exists and six for block parsing that `test/flows.test.ts` covers
     now. The rest are back: the gap timeline's geometry and wording, and the spacing lesson's four rows. New: every
     visual block in both courses draws as one SVG with a description and stays inside its 320-wide frame.
-  - **Missed items come back in every lesson style** (20 Nov, this change, the user's yes): Stepped, Predict first
+  - **Missed items come back in every lesson style** (#22, 20 Nov, the user's yes): Stepped, Predict first
     and Case first now ask each item marked wrong once more before the lesson ends, as Classic and reviews do.
   - **Course-level check** (#21, 19 Nov): a ledger proves a lesson matches its paper, not that the paper
     is typical. For each lesson's main finding, a fresh context searched for reviews, replications and contrary
@@ -68,7 +68,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
     (endowment, sinks, content usage, segments, simulation) and seven are supported, most with a qualifier. Course
     2: all five are supported, each with a limit. No lesson text changed; the edits the reports call for are listed
     under "Lesson edits from the course check" below.
-  - **M4 part 1, lessons 5 to 8** (#22, 20 Nov): the user typed "please resume your work" to the top
+  - **M4 part 1, lessons 5 to 8** (#23, 20 Nov): the user typed "please resume your work" to the top
     orchestrator, which is the go-ahead for M4 but not a verdict on lessons 1 to 4. Course 1 lessons 5 to 8 are
     rewritten in the plain style: one idea per screen, the designer's takeaway first and labelled as the lesson's
     own, audit detail behind the "How sure is this?" tap, with check, decide, predict, points and one visual block
