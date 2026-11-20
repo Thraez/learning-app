@@ -1,7 +1,7 @@
 ---
 id: gd-econ/spend-skew
 course: gd-econ
-title: Spend is mostly zero and often very concentrated
+title: Spend is mostly zero and can be very concentrated
 order: 5
 status: draft
 sources:
@@ -17,7 +17,7 @@ sources:
     grade: A
     tier: 1
     read: "abstract only, OpenAlex copy"
-    caveat: "Abstract only; game, share of payers and method details not seen."
+    caveat: "Abstract only; games, share of payers and method details not seen."
     note: abstract only (the publisher abstract, read through the OpenAlex record); the AAAI page and PDF sit behind a bot check
   - cite: "Chen, Guitart, Fernández del Río, Periáñez (2018). Customer Lifetime Value in Video Games Using Deep Learning and Parametric Models. IEEE Big Data 2018, pp. 2134-2140. DOI 10.1109/BigData.2018.8622151. Read as arXiv:1811.12799."
     url: https://doi.org/10.1109/BigData.2018.8622151
@@ -25,7 +25,7 @@ sources:
     tier: 1
     read: "full text, arXiv copy"
     caveat: "The 2% and 50% whale figure is stated without the count behind it."
-    note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without data
+    note: full text read on arXiv; B for the 2% and 50% figure, which the paper states without the count behind it
   - cite: "Zendle, Flick, Deterding, Cutting, Petrovskaya, Drachen (2023). The Many Faces of Monetisation: Understanding the Diversity and Extremity of Player Spending in Mobile Games via Massive-scale Transactional Analysis. ACM Games: Research and Practice 1(1), 1-28. DOI 10.1145/3582927."
     url: https://doi.org/10.1145/3582927
     grade: A
@@ -35,7 +35,7 @@ sources:
     note: abstract of the published version, read from the OpenAlex record; the ACM page refused automated access, so the full text and the journal's statement of its review process were not opened
 ---
 
-# Lesson 5: Spend is mostly zero and often very concentrated
+# Lesson 5: Spend is mostly zero and can be very concentrated
 
 ## Opening question
 
@@ -57,7 +57,7 @@ max: 500
 step: 10
 answer: 100
 answer_text: "Over $100 a month."
-reveal: "The abstract puts the top 5% of spenders at over $100 a month, against a typical monthly spend it calls modest, under $20. These are self-reported survey answers about loot boxes only, not sales records."
+reveal: "The abstract puts the top 5% of spenders at over $100 a month, against a typical monthly spend that the abstract's introduction calls modest, under $20, as background and not as a result of the pooled data. These are self-reported survey answers about loot boxes only, not sales records."
 covers: gd-econ/spend-skew/r2
 ```
 
@@ -107,10 +107,10 @@ A second figure comes from one studio. [Chen and colleagues](https://doi.org/10.
 
 They write that whales, the top spenders, are "around 2%" of all players and "may provide up to 50%" of a game's revenue.
 
-The paper shows no count behind the 2%. So it is the authors' statement, not a measured result (grade B).
+The paper states no player total and no whale count behind the 2%, and does not say how it was arrived at. So treat it as the authors' statement (grade B).
 
 ```sure
-The paper sets its whale line from the first months of data: players are sorted by what they spent in a given month, and the line is drawn where cumulative spend reaches 50% of the total revenue. It repeats this for a number of months and averages the thresholds. No table gives how many whales there were. The paper was published at IEEE Big Data 2018; I read the full text as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799).
+The paper sets its whale line from the first months of data: players are sorted by what they spent in a given month, and the line is drawn where cumulative spend reaches 50% of the total revenue. It repeats this for a number of months and averages the thresholds. No table gives how many whales there were. Figure 3 plots numbers of paying users and whales by lifetime value, but the paper does not connect it to the 2%. The paper was published at IEEE Big Data 2018; I read the full text as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799).
 ```
 
 <!-- break -->
@@ -142,14 +142,14 @@ options:
 
 <!-- break -->
 
-One paper models purchases in two steps.
+One paper uses two models for purchases.
 
 [Sifa and colleagues](https://doi.org/10.1609/aiide.v11i1.12788) used a dataset of 100,000 players and built two models. A classifier predicts whether a purchase will occur. A regression predicts the number of purchases a user will make.
 
 Both are presented within a decision and regression tree framework, for building rules a company can act on. The paper is in the AIIDE 2015 proceedings.
 
 ```sure
-I read only the abstract of the Sifa paper, through the OpenAlex record. The AAAI page and PDF sit behind a bot check. So I did not see which game it used, what share of its players paid, or whether the second model was fitted on payers only. The abstract's first sentence is where "only a small fraction of the players makes any purchases" comes from.
+I read only the abstract of the Sifa paper, through the OpenAlex record. The AAAI page and PDF sit behind a bot check. So I did not see which game or games the data came from, what share of its players paid, or whether the second model was fitted on payers only. The abstract's first sentence is where "only a small fraction of the players makes any purchases" comes from.
 ```
 
 ```check
@@ -241,8 +241,9 @@ Deep neural networks against parametric models such as Pareto/NBD. The neural ne
 ## Sources and grades
 
 - [Close et al. 2021, Addictive Behaviors](https://doi.org/10.1016/j.addbeh.2021.106851), abstract of the published version read (PubMed record, through Europe PMC). Grade A, tier 1. The top 5% and $100 figures are from the abstract. The "under $20" line is the abstract's background, not a pooled result.
-- [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract only, read through the OpenAlex record of the publisher abstract. Grade A for the abstract, tier 1. The AAAI page and PDF sit behind a bot check, so the paper's own share of paying players, which game it used and whether the second model was fitted on payers only are not given.
+- [Sifa et al. 2015, AIIDE](https://doi.org/10.1609/aiide.v11i1.12788), abstract only, read through the OpenAlex record of the publisher abstract. Grade A for the abstract, tier 1. The AAAI page and PDF sit behind a bot check, so the paper's own share of paying players, which game or games the data came from and whether the second model was fitted on payers only are not given.
 - [Chen et al. 2018, IEEE Big Data](https://doi.org/10.1109/BigData.2018.8622151), full text read as [arXiv:1811.12799](https://arxiv.org/abs/1811.12799), which lists this DOI as the published version. Grade A, tier 1 for the method and results. Grade B for the "around 2%, up to 50%" whale figure, which the paper states without the count behind it.
 - [Zendle et al. 2023, ACM Games: Research and Practice](https://doi.org/10.1145/3582927), abstract of the published version read from the OpenAlex record. Grade A for the abstract's claims only. Tier 1 as an article in an ACM journal, but I could not open the journal's own statement of its review process, so that tier is not confirmed. The full text was not read.
 - Cut: the Swrve press release figures from the earlier draft. A vendor press release can't carry a fact under this course's standard.
+- Tier 1 for all four sources rests on the venue alone: a journal (Close, Zendle) or a conference proceedings (Sifa at AIIDE, Chen at IEEE Big Data), as listed at Crossref. I did not open any venue's own statement of its review process.
 - The three concentration figures count different groups: loot box buyers in surveys (Close), all players as one studio states it (Chen), and spenders in transaction records (Zendle). They are not comparable with each other.
