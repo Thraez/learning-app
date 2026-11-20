@@ -63,7 +63,7 @@ Assumed known from your degree and work: what F2P is, retention cohorts (D1, D7)
 | 5 | [Spend is mostly zero and often very concentrated](lessons/05-spend-skew.md) | Close et al. 2021; Sifa et al. 2015; Chen et al. 2018 | A abstract; A abstract; A | 1 |
 | 6 | [Predicting who leaves is not knowing what keeps them](lessons/06-predict-vs-act.md) | Runge et al. 2014, CIG | A abstract | 1 |
 | 7 | [The clustering method shapes the segments](lessons/07-segments.md) | Drachen et al. 2014, arXiv; Drachen et al. 2012, CIG | A; A abstract | 2; 1 |
-| 8 | [Target the players an offer changes, not the ones most likely to leave](lessons/08-uplift.md) | Ascarza 2018; Gutierrez and Gérardy 2017; Wei et al. 2024 | A abstract; A; A | 1; 2; 2 |
+| 8 | [Who does an offer change? Targeting by response and by churn risk](lessons/08-uplift.md) | Ascarza 2018; Gutierrez and Gérardy 2017; Wei et al. 2024 | A abstract; A; A | 1; 2; 2 |
 | 9 | [Survival curves for churn and lifetime value](lessons/09-survival.md) | Viljanen et al. 2018; Periáñez et al. 2016; Chen et al. 2018 | A | 1 |
 | 10 | [Simulating an economy before it is built](lessons/10-simulation.md) | Dormans 2011, AAAI workshop | A | 2 |
 | 11 | [Matchmaking tuned for engagement](lessons/11-eomm.md) | Chen et al. 2017 (EOMM), WWW | A | 1 |
