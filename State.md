@@ -60,6 +60,8 @@ Claude can revise the course. The goal is learning that lasts weeks.
     two were for a setting (L15) that no longer exists and six for block parsing that `test/flows.test.ts` covers
     now. The rest are back: the gap timeline's geometry and wording, and the spacing lesson's four rows. New: every
     visual block in both courses draws as one SVG with a description and stays inside its 320-wide frame.
+  - **Missed items come back in every lesson style** (20 Nov, this change, the user's yes): Stepped, Predict first
+    and Case first now ask each item marked wrong once more before the lesson ends, as Classic and reviews do.
   - **Course-level check** (#21, 19 Nov): a ledger proves a lesson matches its paper, not that the paper
     is typical. For each lesson's main finding, a fresh context searched for reviews, replications and contrary
     results and wrote `courses/<course-folder>/ledgers/course-check.md`. Course 1: five findings stand alone
@@ -173,7 +175,6 @@ Course 2 (`courses/learning-how-to-learn/ledgers/course-check.md`):
   lessons 5 to 8) is done. Part 2 is course 1 lessons 9 to 12, part 3 is course 2 lessons 1 to 5, one PR each.
   The plain style is the working choice until the user says whether lessons 1 to 4 read better. M5 done so far: the dead-link check, the course-level check, the visual
   tests. M5 left: the debts under "Could not verify" and course 2 lessons 6 to 12.
-- Not decided: Stepped, Predict first and Case first have no "try the missed items again" step; Classic and reviews do.
 
 - Blocks and the new text style for the other 9 lessons (course 1 lessons 9 to 12, course 2 lessons 1 to 5).
 - An interest interview with the user: `Workspace/Learning/Interest Profile.md` is mostly blank.

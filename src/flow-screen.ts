@@ -14,6 +14,10 @@ export interface FlowDeps {
   lesson: Lesson;
   flow: Flow;
   run: { ensure(): string; finish(): void; marked: number };
+  /** How many items were marked wrong and wait for a second try. */
+  missedCount(): number;
+  /** Asks each missed item once more inside `holder`, then calls `then`. */
+  retryMissed(holder: HTMLElement, then: () => void): void;
   /** The item card; `afterAnswer` runs once the answer is shown, before the marks. */
   itemCard(item: Item, onMarked: (m: Mark | null) => void, afterAnswer?: (card: HTMLElement) => void): HTMLElement;
   /** The item shown as answered, when an unfinished session already holds its answer. */
@@ -53,15 +57,25 @@ export function flowScreen(d: FlowDeps) {
     progress.prepend(d.segBar(total, (k) => k < n, n));
     // After the first screen the title steps back, so the screen's own text leads.
     d.main.classList.toggle('is-deep', n > 0);
-    next.textContent = n === total - 1 ? 'Finish' : 'Next';
-    const lock = renderScreen(s, stage, d, marks, () => { next.disabled = false; });
+    // The last screen is often an item, so the label is set again once that item is marked.
+    const label = () => { next.textContent = n < total - 1 ? 'Next' : d.missedCount() ? 'Try the missed items again' : 'Finish'; };
+    label();
+    const lock = renderScreen(s, stage, d, marks, () => { label(); next.disabled = false; });
     next.disabled = lock;
     window.scrollTo(0, 0);
     stage.focus({ preventScroll: true });
   };
 
   next.onclick = () => {
-    if (n + 1 < total) { n++; show(); } else finish();
+    if (n + 1 < total) { n++; show(); return; }
+    if (!d.missedCount()) return finish();
+    // Missed items come back once before the lesson ends, as in Classic and in reviews.
+    stage.innerHTML = '';
+    progress.remove();
+    next.remove();
+    d.main.classList.add('is-deep');
+    window.scrollTo(0, 0);
+    d.retryMissed(stage, finish);
   };
 
   const finish = () => {

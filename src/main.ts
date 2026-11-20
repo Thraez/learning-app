@@ -473,7 +473,12 @@ function studyScreen(kind: 'lesson' | 'placement', course: Course, target: Lesso
   if (flow !== 'classic') {
     flowScreen({
       main, lesson: target as Lesson, flow, run,
-      itemCard: (item, onMarked, afterAnswer) => itemCard(item, run, mode, '', onMarked, afterAnswer),
+      itemCard: (item, onMarked, afterAnswer) => itemCard(item, run, mode, '', (m) => {
+        if (m === 'wrong' && item.type !== 'open') run.missed.push(item);
+        onMarked(m);
+      }, afterAnswer),
+      missedCount: () => run.missed.length,
+      retryMissed: (holder, then) => retryMissed(holder, run, then),
       answeredCard: (item) => {
         const a = prior.get(item.id);
         return a ? { card: answeredCard(item, a), mark: a.mark } : null;
