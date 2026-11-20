@@ -4,6 +4,7 @@ course: gd-econ
 title: Who does an offer change? Targeting by response and by churn risk
 order: 8
 status: draft
+checked: 2026-11-20
 sources:
   - cite: "Ascarza (2018). Retention Futility: Targeting High-Risk Customers Might Be Ineffective. Journal of Marketing Research 55(1), 80-98. DOI 10.1509/jmr.16.0163."
     url: https://doi.org/10.1509/jmr.16.0163

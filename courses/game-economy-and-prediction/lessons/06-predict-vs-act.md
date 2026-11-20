@@ -4,6 +4,7 @@ course: gd-econ
 title: Predicting who leaves is not knowing what keeps them
 order: 6
 status: draft
+checked: 2026-11-20
 sources:
   - cite: "Runge, Gao, Garcin, Faltings (2014). Churn prediction for high-value players in casual social games. IEEE CIG 2014. DOI 10.1109/CIG.2014.6932875."
     url: https://doi.org/10.1109/CIG.2014.6932875

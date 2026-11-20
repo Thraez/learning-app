@@ -1,6 +1,6 @@
 # State
 
-**Updated:** 2026-11-19
+**Updated:** 2026-11-20
 
 ## Goal
 
@@ -11,7 +11,7 @@ Claude can revise the course. The goal is learning that lasts weeks.
 ## Where it stands
 
 - Repo `Thraez/learning-app`, public. Live at https://thraez.github.io/learning-app/ from `main`. PRs #1 to #12 and
-  #14 to #21 are merged; #13 was closed as superseded by #15.
+  #14 to #22 are merged; #13 was closed as superseded by #15.
 - App: Vite and TypeScript, no UI framework, `ts-fsrs` for reviews. Offline after the first load, installable. Course
   list, lessons, placement quiz with a "where to start" summary, review sessions, self-marking, Progress (late recall
   at 14+ days), Export as JSON (`docs/export-schema.md`, schema 2 extended), restore from an export that only adds.
@@ -66,9 +66,21 @@ Claude can revise the course. The goal is learning that lasts weeks.
     (endowment, sinks, content usage, segments, simulation) and seven are supported, most with a qualifier. Course
     2: all five are supported, each with a limit. No lesson text changed; the edits the reports call for are listed
     under "Lesson edits from the course check" below.
-- Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.6.
-  Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 4 carry the interactive blocks and the new text;
-  lessons 5 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
+  - **M4 part 1, lessons 5 to 8** (#22, 20 Nov): the user typed "please resume your work" to the top
+    orchestrator, which is the go-ahead for M4 but not a verdict on lessons 1 to 4. Course 1 lessons 5 to 8 are
+    rewritten in the plain style: one idea per screen, the designer's takeaway first and labelled as the lesson's
+    own, audit detail behind the "How sure is this?" tap, with check, decide, predict, points and one visual block
+    (course 0.3.7). The four course-check edits are in, each from its opened source. Three fresh rounds checked
+    the text. Round one read each whole lesson and found 19, 21, 18 and 38 wordings that said more than the
+    sources. Round two read each whole lesson again after the fixes and found 6, 1, 5 and 4. Round three read
+    only the last fixes. All four lessons carry `checked: 2026-11-20`. Two titles changed because the old ones
+    claimed more than the sources: lesson 5 is "Spend is mostly zero and can be very concentrated", lesson 8 is
+    "Who does an offer change? Targeting by response and by churn risk". The clustering paper in lesson 7 is now
+    tier 1: the FDG 2013 site lists it at pages 245 to 252 and its call for papers says peer-reviewed, with
+    double-blind submissions. Placement answers for lessons 6, 7 and 8 were brought in line. No item ID changed.
+- Course 1, `status: draft`: `courses/game-economy-and-prediction/`, 12 lessons and a placement quiz, version 0.3.7.
+  Every lesson has a claim ledger under `ledgers/`. Lessons 1 to 8 carry the interactive blocks and the new text;
+  lessons 9 to 12 are in the older style and run as Stepped with their prose split at paragraphs.
 - Course 2, `status: draft`: `courses/learning-how-to-learn/`, id `learn`. Lessons 1 to 5 written and checked, 12
   planned, a 14-item placement quiz. Only lesson 3 carries the interactive blocks.
 - Private learner state (interest profile, exports) lives in the private vault at `Workspace/Learning/`, never here.
@@ -86,8 +98,16 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 ## Could not verify
 
 - Full texts not opened, so the lessons claim only what the abstracts say: Sifa 2015, Runge 2014, Drachen 2012,
-  Ascarza 2018, Hadiji 2014, Close 2021 (course 1); Dunlosky 2013, Rawson 2022, the body of Latimier 2021 (course 2).
-- Drachen 2014 (course 1, lesson 7) stays tier 2: the FDG 2013 conference pages would not open.
+  Ascarza 2018, Hadiji 2014, Close 2021, and new on 20 Nov Zendle 2023, Li 2021 and Lemmens and Gupta 2020
+  (course 1); Dunlosky 2013, Rawson 2022, the body of Latimier 2021 (course 2). Verhelst 2023 (lesson 8) was read
+  at the abstract, introduction and section 2.2 only.
+- Tier 1 in lessons 5 and 6 rests on the venue alone (a journal or a conference proceedings at Crossref); no
+  venue's own review statement was opened, and the lessons say so. That includes the Zendle 2023 journal, whose
+  ACM page refused automated access.
+- Lesson 5: a checker read Chen 2018's Figure 3 off a log axis and could not square its whale counts with "around
+  2% of all players". The lesson only says the paper does not connect the figure to the 2%; nobody has settled it.
+- M4 part 1: only lesson 5 was walked in the preview (Stepped, 375 px, 16 screens, no console error), and that was
+  before the wording fixes. Lessons 6 to 8 were not walked. Predict first and Case first were not walked for any.
 - Three review journals in course 2 are "tier 1 unverified": Annual Review of Psychology, Psychological Science in
   the Public Interest, Current Directions in Psychological Science.
 - Lesson styles and the design pass were walked in a desktop Chromium at 375 px (and the nav at 360 and 320 px),
@@ -95,7 +115,7 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 - The Today card, stages and map were walked the same way, with the clock moved 6 and then 36 days on. Not walked:
   two courses with reviews due at once, the Read stage's look, and a real phone. The stage marks use
   `conic-gradient`, untested in Safari.
-- A Classic lesson was not walked to its end after the design pass, and lessons 6 to 12 were not walked at all.
+- A Classic lesson was not walked to its end after the design pass, and lessons 9 to 12 were not walked at all.
 
 - The course check read almost every outside source at the abstract only, and its "stands alone" verdicts rest on
   title scans of citing papers. The orchestrator sampled cited abstracts through OpenAlex. Course 1: five abstracts, every
@@ -107,8 +127,8 @@ Each is recorded where it applies (`AGENTS.md`, the course pages' change logs); 
 
 ## Lesson edits from the course check
 
-Not made yet. They go in with the M4 rewrite of each lesson, since an edit to a factual sentence removes `checked`
-and M4 rewrites the same files. Each new sentence needs its source opened and a ledger row from a fresh checker;
+Made for course 1 lessons 5 to 8 on 20 Nov (M4 part 1); the rest are not made yet. They go in with the M4 rewrite
+of each lesson, since an edit to a factual sentence removes `checked` and M4 rewrites the same files. Each new sentence needs its source opened and a ledger row from a fresh checker;
 the report is a pointer to the source, never the source itself.
 
 Course 1 (`courses/game-economy-and-prediction/ledgers/course-check.md`):
@@ -117,12 +137,12 @@ Course 1 (`courses/game-economy-and-prediction/ledgers/course-check.md`):
 - 02 sinks: say no other study of a sink's effect on prices was found and the preprint has no peer-reviewed version.
 - 03 content usage: say no study of content usage in another game was found.
 - 04 churn time: none.
-- 05 spend skew: add that a study of 2,873 mobile games found spend concentration ranging from near uniform to
+- 05 spend skew (done 20 Nov): add that a study of 2,873 mobile games found spend concentration ranging from near uniform to
   extreme, so one game's figure, the 2% whale figure included, does not carry over.
-- 06 predict vs act: say the free-currency null is one A/B test with no replication found, while a tested difficulty
+- 06 predict vs act (done 20 Nov): say the free-currency null is one A/B test with no replication found, while a tested difficulty
   change in another game did raise retention.
-- 07 segments: say the comparison has not been repeated by another group.
-- 08 uplift: say uplift is not always better: a theory preprint finds conditions where targeting by risk wins, and a
+- 07 segments (done 20 Nov): say the comparison has not been repeated by another group.
+- 08 uplift (done 20 Nov): say uplift is not always better: a theory preprint finds conditions where targeting by risk wins, and a
   profit study adds that customer value and offer cost matter.
 - 09 survival: say the model rankings come from single games.
 - 10 simulation: say no study comparing such a simulation with real play was found.
@@ -149,12 +169,13 @@ Course 2 (`courses/learning-how-to-learn/ledgers/course-check.md`):
 
 ## Next (the map the user saw on 18 Nov; M1 to M3 are done, M4 and M5 remain)
 
-- M4: the plain style for the other 13 lessons, after the user says whether lessons 1 to 4 read better, with the
-  lesson edits from the course check. M5 done so far: the dead-link check, the course-level check, the visual
+- M4: the plain style for the other lessons, with the lesson edits from the course check. Part 1 (course 1
+  lessons 5 to 8) is done. Part 2 is course 1 lessons 9 to 12, part 3 is course 2 lessons 1 to 5, one PR each.
+  The plain style is the working choice until the user says whether lessons 1 to 4 read better. M5 done so far: the dead-link check, the course-level check, the visual
   tests. M5 left: the debts under "Could not verify" and course 2 lessons 6 to 12.
 - Not decided: Stepped, Predict first and Case first have no "try the missed items again" step; Classic and reviews do.
 
-- Blocks and the new text style for the other 13 lessons (course 1 lessons 5 to 12, course 2 lessons 1, 2, 4, 5).
+- Blocks and the new text style for the other 9 lessons (course 1 lessons 9 to 12, course 2 lessons 1 to 5).
 - An interest interview with the user: `Workspace/Learning/Interest Profile.md` is mostly blank.
 - Course 2 lessons 6 to 12, written in the new style from the start.
 - First export and the first course revision from it. A real phone check.
