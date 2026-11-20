@@ -89,7 +89,7 @@ A retention offer can fail to keep a player. Could it also do harm, by pushing o
 
 <details>
 <summary>Model answer</summary>
-It is possible in principle, though the lesson has no measured case of it. A review of uplift modelling defines the "sleeping dog": someone who churns when given the treatment and does not churn without it. So the players worth an offer are the ones whose outcome the offer improves, and estimating that relies on a randomized experiment in which some players get the offer and some don't. That sleeping dogs are a reason risk-based targeting can backfire is my link, grade C. I could not confirm the review's own peer review. Source: [Gutierrez and Gérardy 2017](https://proceedings.mlr.press/v67/gutierrez17a.html). Lesson 8.
+It is possible in principle, though the lesson has no measured case of it. A review of uplift modelling defines the "sleeping dog": someone who churns when given the treatment and does not churn without it. So, by my reasoning (grade C), the players worth an offer are the ones whose outcome the offer improves. The review says estimating uplift relies on a randomized experiment in which some players get the offer and some don't. That sleeping dogs are a reason risk-based targeting can backfire is my link, grade C. I could not confirm the review's own peer review. Source: [Gutierrez and Gérardy 2017](https://proceedings.mlr.press/v67/gutierrez17a.html). Lesson 8.
 </details>
 
 ### gd-econ/placement/p16 · why

@@ -18,7 +18,7 @@ sources:
     tier: 2
     read: "full text, PMLR PDF"
     caveat: "A literature review; the paper does not say how it was reviewed."
-    note: conference proceedings; the paper does not say how it was reviewed, so it is not counted as peer-reviewed; both authors give addresses at Dataiku, a software company
+    note: conference proceedings; the paper does not say how it was reviewed, so it is not counted as peer-reviewed; both authors give Dataiku email addresses
   - cite: "Wei, Qiu, Li, Sun, Li (2024). Multi-Treatment Multi-Task Uplift Modeling for Enhancing User Growth. arXiv:2408.12803."
     url: https://arxiv.org/abs/2408.12803
     grade: A
@@ -71,7 +71,7 @@ options:
 
 My reasoning (grade C): a retention offer is worth giving to a player only if it changes what that player does. Churn risk does not measure that.
 
-The measure for it is uplift: the player's outcome with the offer minus their outcome without it.
+The measure for it is [uplift](https://proceedings.mlr.press/v67/gutierrez17a.html): the player's outcome with the offer minus their outcome without it.
 
 For a designer, still my reasoning: ask "who does this offer change?" as well as "who is about to leave?".
 
@@ -98,10 +98,10 @@ How is such a model built and judged?
 
 A simple method, often used as a baseline, is the two-model approach. Train one model on the players who got the offer and one on those who did not, then subtract their predictions.
 
-No single player's uplift can be observed. So most of the uplift literature judges these models on groups, for example by deciles or uplift curves.
+No single player's uplift can be observed. So most of the uplift literature judges these models on groups, for example by deciles or uplift curves ([the same review](https://proceedings.mlr.press/v67/gutierrez17a.html)).
 
 ```sure
-The review is a literature review in conference proceedings (PMLR volume 67), read in full from the PMLR PDF. The paper does not say how it was reviewed, so the lesson does not count it as peer-reviewed. Both authors give addresses at Dataiku, a software company. The review also says the two-model approach is easy to implement but can be surpassed by other methods.
+The review is a literature review in conference proceedings (PMLR volume 67), read in full from the PMLR PDF. The paper does not say how it was reviewed, so the lesson does not count it as peer-reviewed. Both authors give Dataiku email addresses. The review also says the two-model approach is easy to implement but can be surpassed by other methods.
 ```
 
 <!-- break -->
@@ -193,7 +193,7 @@ points:
   - "The team picked players for a reason, so the gifted and non-gifted groups differed before the gift."
   - "Any difference in outcome mixes the gift's effect with those prior differences."
   - "Random assignment makes the two groups alike on average, so the difference is the gift's effect."
-  - "This account of selection bias is the lesson's reasoning, grade C; the review states only that uplift modelling relies on randomized experiments."
+  - "The gift example is the lesson's reasoning, grade C; the review states that uplift modelling relies on randomized experiments."
 ```
 
 ## Scenario
