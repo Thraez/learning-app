@@ -71,7 +71,7 @@ A churn model correctly flags the players most likely to quit next week. Marketi
 
 <details>
 <summary>Model answer</summary>
-Being likely to leave and being moved by a gift are different things. Some flagged players will leave whatever you do and some would have stayed anyway, and the model ranks only how likely each is to leave. Whether the gift changes anything needs its own test (my summary, grade C). In one published A/B test, giving out free in-game currency did not significantly change churn or spending. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
+Being likely to leave and being moved by a gift are different things. Some flagged players will leave whatever you do and some would have stayed anyway, and the model ranks only how likely each is to leave. Whether the gift changes anything needs its own test (my summary, grade C). In one published A/B test, giving out free in-game currency did not significantly change the churn rate or monetization. Source: [Runge et al. 2014](https://doi.org/10.1109/CIG.2014.6932875). Lesson 6.
 </details>
 
 ### gd-econ/placement/p14 · scenario
@@ -80,7 +80,7 @@ Two analysts cluster the same player data. One reports four player types, the ot
 
 <details>
 <summary>Answer</summary>
-Not necessarily. Different clustering methods give different answers from the same data, and the number of groups is a judgment call, since these methods have no objective cutoff. On the same World of Warcraft data, k-means gave profiles so similar that they were hard to label, while archetypal analysis gave clearly different ones. So segments describe the analysis as well as the players (my reading, grade C). The paper is on arXiv and names a conference whose review process I could not confirm, so treat it as not peer-reviewed. Source: [Drachen et al. 2014](https://arxiv.org/abs/1407.3950). Lesson 7.
+Not necessarily. Different clustering methods can give different answers from the same data; in one comparison they did. The number of groups is a judgment call, since these methods usually have no objective cutoff. On the same World of Warcraft data, k-means gave profiles that were, with one exception, so similar that they were hard to label, while archetypal analysis gave profiles that differed more. So segments describe the analysis as well as the players (my reading, grade C). The copy read is on arXiv; the conference it names lists the paper, and its call for papers says the conference presents peer-reviewed papers. It is one game and two variables. Source: [Drachen et al. 2013](https://arxiv.org/abs/1407.3950). Lesson 7.
 </details>
 
 ### gd-econ/placement/p15 · why
@@ -89,7 +89,7 @@ A retention offer can fail to keep a player. Could it also do harm, by pushing o
 
 <details>
 <summary>Model answer</summary>
-It is possible in principle, though the lesson has no measured case of it. A review of uplift modelling defines the "sleeping dog": a customer who churns because they were contacted and would have stayed otherwise. So the players worth an offer are the ones whose outcome the offer improves, and estimating that relies on a randomized experiment in which some players get the offer and some don't. That sleeping dogs are a reason risk-based targeting can backfire is my link, grade C. I could not confirm the review's own peer review. Source: [Gutierrez and Gérardy 2017](https://proceedings.mlr.press/v67/gutierrez17a.html). Lesson 8.
+It is possible in principle, though the lesson has no measured case of it. A review of uplift modelling defines the "sleeping dog": someone who churns when given the treatment and does not churn without it. So, by my reasoning (grade C), the players worth an offer are the ones whose outcome the offer improves. The review says estimating uplift relies on a randomized experiment in which some players get the offer and some don't. That sleeping dogs are a reason risk-based targeting can backfire is my link, grade C. I could not confirm the review's own peer review. Source: [Gutierrez and Gérardy 2017](https://proceedings.mlr.press/v67/gutierrez17a.html). Lesson 8.
 </details>
 
 ### gd-econ/placement/p16 · why
