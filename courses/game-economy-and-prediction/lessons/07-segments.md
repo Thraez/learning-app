@@ -9,7 +9,7 @@ sources:
     url: https://arxiv.org/abs/1407.3950
     grade: A
     tier: 1
-    read: "full text, arXiv copy and conference copy"
+    read: "full text, arXiv copy"
     caveat: "One game, two variables; not repeated by another group that this course found."
     note: arXiv comment says Foundations of Digital Games 2013; the conference site (http only, so the link here is the arXiv copy) lists the paper at pages 245 to 252 and carries a copy; the conference's call for papers says it presents peer-reviewed papers and asks for anonymized submissions for double-blind review, which is its statement about its papers in general; one author, Drachen, is listed as a track chair of that conference
   - cite: "Drachen, Sifa, Bauckhage, Thurau (2012). Guns, swords and data: Clustering of player behavior in computer games in the wild. IEEE CIG 2012, pp. 163-170. DOI 10.1109/CIG.2012.6374152."
@@ -154,7 +154,7 @@ Your team wants to send different offers to "player types". The analyst's deck s
 
 <details>
 <summary>Explained answer</summary>
-Ask how the number of segments was picked, whether another method or another number gives similar groups, and whether each profile is a behaviour the game actually allows. Ask to see real players near each centroid, not just the average, and check how far apart the centroids are on the features that matter for the offer. If the segments shift a lot with the method or the count, the names describe the analysis more than the players. Most of the questions follow from the paper; the ones about another number of groups and about the offer are mine, and turning them into a checklist is my suggestion, grade C.
+Ask how the number of segments was picked, whether another method or another number gives similar groups, and whether each profile is a behaviour the game actually allows. Ask to see real players near each centroid, not just the average, and check how far apart the centroids are on the features that matter for the offer. If the segments shift a lot with the method or the count, the names describe the analysis more than the players. Most of the questions follow from the paper; the ones about another number of groups and about the offer, and the conclusion in the last sentence before this one, are mine, and turning them into a checklist is my suggestion, grade C.
 </details>
 
 ```points
@@ -199,4 +199,4 @@ The authors picked eight by weighing variance explained against a useful number 
 
 - [Drachen et al., arXiv:1407.3950](https://arxiv.org/abs/1407.3950), full text read (arXiv PDF). Grade A for the dataset, the method comparison and the k = 8 choice, all checked against the text. Tier 1: its arXiv note names Foundations of Digital Games 2013, and the conference site lists the paper at pages 245 to 252 and carries a copy. The conference's call for papers says it presents peer-reviewed papers and asks for anonymized submissions for double-blind review. That is the conference's statement about its papers in general. Crossref has no record of the paper, the conference site is http only, so the link is the arXiv copy, and one author, Drachen, is listed as a track chair there.
 - [Drachen et al. 2012, IEEE CIG](https://doi.org/10.1109/CIG.2012.6374152), abstract read from the OpenAlex record; I did not open IEEE Xplore. Grade A for the abstract's claims only, tier 1. I did not see its segments or figures, so this lesson gives none.
-- The 2014 comparison uses one game and two variables; the 2012 paper covers two games. Both are by the same group. The search for a comparison by another group was this course's own (the course-level check of 2026-11-19, by titles and abstracts), grade C, so "none found" is not "none exists".
+- The 2013 comparison (arXiv copy posted 2014) uses one game and two variables; the 2012 paper covers two games. Both are by the same group. The search for a comparison by another group was this course's own (the course-level check of 2026-11-19, by titles and abstracts), grade C, so "none found" is not "none exists".

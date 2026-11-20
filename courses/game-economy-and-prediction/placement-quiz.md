@@ -80,7 +80,7 @@ Two analysts cluster the same player data. One reports four player types, the ot
 
 <details>
 <summary>Answer</summary>
-Not necessarily. Different clustering methods give different answers from the same data, and the number of groups is a judgment call, since these methods have no objective cutoff. On the same World of Warcraft data, k-means gave profiles that were, with one exception, so similar that they were hard to label, while archetypal analysis gave profiles that differed more. So segments describe the analysis as well as the players (my reading, grade C). The copy read is on arXiv; the conference it names lists the paper, and its call for papers says the conference presents peer-reviewed papers. It is one game and two variables. Source: [Drachen et al. 2014](https://arxiv.org/abs/1407.3950). Lesson 7.
+Not necessarily. Different clustering methods can give different answers from the same data; in one comparison they did. The number of groups is a judgment call, since these methods usually have no objective cutoff. On the same World of Warcraft data, k-means gave profiles that were, with one exception, so similar that they were hard to label, while archetypal analysis gave profiles that differed more. So segments describe the analysis as well as the players (my reading, grade C). The copy read is on arXiv; the conference it names lists the paper, and its call for papers says the conference presents peer-reviewed papers. It is one game and two variables. Source: [Drachen et al. 2013](https://arxiv.org/abs/1407.3950). Lesson 7.
 </details>
 
 ### gd-econ/placement/p15 · why

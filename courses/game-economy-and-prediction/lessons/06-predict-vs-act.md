@@ -129,7 +129,7 @@ In [one puzzle game](https://doi.org/10.1145/3447548.3467277), Li and colleagues
 
 <!-- break -->
 
-My reasoning, grade C: these are three tests of different levers and, as far as I can tell, in three games, so they cannot be compared head to head. Li's abstract does not say which players were tested.
+My reasoning, grade C: these are three tests in, as far as I can tell, three games. Two gave out free currency, but at different moments: Runge's as an incentive to stay, Top Eleven's as a bigger starting grant for new players. The third changed difficulty. So they cannot be compared head to head. Li's abstract does not say which players were tested.
 
 Still my reasoning: together they are the case for testing each intervention on the group you will use it on. A lever that worked elsewhere has not been shown to work for your players.
 
