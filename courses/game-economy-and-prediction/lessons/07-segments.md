@@ -31,7 +31,7 @@ sources:
 
 <details>
 <summary>Answer</summary>
-Something else. K-means describes each group by its average player, and here those averages came out similar. A method that looks for extreme players instead gave clearly different profiles on the same data.
+Something else. K-means describes each group by its average player, and here those averages came out similar. A method that looks for extreme players instead gave profiles that differed more from each other, on the same data.
 </details>
 
 ```decide
